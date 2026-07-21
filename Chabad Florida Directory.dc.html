@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics="">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<script>
+(function(){
+  var FALLBACK = 'assets/logo-flame.png';
+  function checkAndBind(slot){
+    var img = slot.shadowRoot && slot.shadowRoot.querySelector('img');
+    if (!img || slot._fbBound) return;
+    slot._fbBound = true;
+    function fail(){
+      if (slot.hasAttribute('data-fallback-applied')) return;
+      slot.setAttribute('data-fallback-applied', '');
+      slot.setAttribute('src', FALLBACK);
+    }
+    img.addEventListener('error', fail);
+    if (img.getAttribute('src') && img.complete && img.naturalWidth === 0) fail();
+  }
+  function scan(){ document.querySelectorAll('image-slot').forEach(checkAndBind); }
+  document.addEventListener('DOMContentLoaded', scan);
+  window.addEventListener('load', scan);
+  setInterval(scan, 500);
+  new MutationObserver(scan).observe(document.documentElement, { childList: true, subtree: true });
+})();
+</script>
+<style>
+  body{margin:0;background:#f7f4ee;font-family:Archivo,system-ui,sans-serif;-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
+  a{color:inherit;text-decoration:none}
+  .nav-toggle{display:none;flex-direction:column;gap:5px;width:26px;background:none;border:none;cursor:pointer;padding:4px}
+  .nav-toggle span{display:block;height:2px;background:#1f2320;border-radius:2px}
+  .nav-links{display:flex}
+  @media (max-width:860px){
+    .nav-links{display:none !important}
+    .nav-toggle{display:flex}
+  }
+  image-slot::part(ring){display:none}
+  image-slot::part(frame){background:#fff}
+  image-slot::part(image){object-fit:contain}
+</style>
+</helmet>
+
+<div style="max-width:1600px;margin:0 auto;background:#fff">
+
+  <div style="position:relative">
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px clamp(20px,5vw,64px);border-bottom:1px solid rgba(20,20,20,.08)">
+      <div style="display:flex;align-items:center;gap:12px">
+        <img src="assets/logo-flame.png" alt="Chabad on Campus Florida" style="width:34px;height:34px;object-fit:contain">
+        <div style="font-weight:800;font-size:18px;color:#1f2320">Chabad on Campus <span style="color:#000000">Florida</span></div>
+      </div>
+      <div class="nav-links" style="flex-wrap:wrap;gap:24px;font-size:14.5px;font-weight:600;color:#3a3c38;align-items:center">
+        <a href="Chabad Florida Home.dc.html#about">About</a><a href="#directory">Directory</a>
+        <a href="#directory" style="padding:10px 22px;background:#2474ae;color:#fff">Our Centers</a>
+      </div>
+      <button class="nav-toggle" onClick="{{ toggleMenu }}" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <sc-if value="{{ menuOpen }}">
+      <div style="position:absolute;top:100%;left:0;right:0;background:#fff;border-bottom:1px solid rgba(20,20,20,.08);box-shadow:0 12px 24px rgba(0,0,0,.08);z-index:20;display:flex;flex-direction:column;padding:8px clamp(20px,5vw,64px) 20px;gap:4px">
+        <a href="Chabad Florida Home.dc.html#about" onClick="{{ toggleMenu }}" style="padding:14px 0;font-weight:600;font-size:15.5px;color:#1f2320;border-bottom:1px solid rgba(20,20,20,.06)">About</a>
+        <a href="#directory" onClick="{{ toggleMenu }}" style="padding:14px 0;font-weight:600;font-size:15.5px;color:#1f2320;border-bottom:1px solid rgba(20,20,20,.06)">Directory</a>
+        <a href="#directory" onClick="{{ toggleMenu }}" style="margin-top:12px;padding:14px 0;text-align:center;font-weight:700;font-size:15px;background:#2474ae;color:#fff">Our Centers</a>
+      </div>
+    </sc-if>
+  </div>
+
+  <div style="padding:clamp(50px,8vw,96px) clamp(20px,5vw,64px) clamp(40px,6vw,64px);background:#2474ae;text-align:center">
+    <h1 style="font-size:clamp(34px,5vw,56px);line-height:1.12;margin:0 0 20px;color:#fff;font-weight:800;letter-spacing:-.02em;text-wrap:pretty">Find your <span style="color:#ffc70b">Chabad Center</span></h1>
+    <p style="font-size:clamp(16px,1.6vw,19px);line-height:1.6;color:#eaf3fa;max-width:620px;margin:0 auto">Serving over 26,000 Jewish students on over 25 campuses throughout Florida.</p>
+  </div>
+
+  <div id="directory" style="padding:clamp(40px,7vw,64px) clamp(20px,5vw,64px) clamp(60px,10vw,110px);scroll-margin-top:80px">
+
+    <div style="display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-bottom:12px">
+      <div style="position:relative;flex:1;min-width:240px">
+        <input value="{{ query }}" onChange="{{ onQueryChange }}" placeholder="Search by school, city, or rabbi..." style="width:100%;box-sizing:border-box;padding:14px 18px;border:1px solid rgba(20,20,20,.15);font-family:Archivo,sans-serif;font-size:15px;color:#1f2320;background:#faf8f3">
+      </div><div style="font-size:13.5px;color:#8a8c85;font-weight:600;white-space:nowrap">{{ resultCount }} chapters</div>
+      
+    </div>
+
+    <sc-if value="{{ noResults }}">
+      <div style="padding:60px 20px;text-align:center;color:#8a8c85;font-size:15px">No chapters match "{{ query }}".</div>
+    </sc-if>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:26px;margin-top:28px">
+      <sc-for list="{{ filtered }}" as="c" hint-placeholder-count="12">
+        <div style="background:#fff;border:1px solid rgba(20,20,20,.1);display:flex;flex-direction:column">
+          <div style="padding:22px;display:flex;flex-direction:column;gap:12px;flex:1">
+            <div style="display:flex;align-items:center;gap:14px">
+              <image-slot id="{{ c.slotId }}" shape="rounded" radius="8" fit="contain" placeholder="Logo" src="{{ c.logo }}" style="width:56px;height:56px;flex-shrink:0"></image-slot>
+              <div>
+                <div style="font-weight:700;font-size:17px;color:#1f2320;line-height:1.25">{{ c.school }}</div>
+                <div style="font-size:13px;color:#8a8c85;margin-top:3px">{{ c.city }}, FL</div>
+              </div>
+            </div>
+            <div style="font-size:13px;color:#1f2320;font-weight:600">{{ c.main }}</div>
+            <sc-if value="{{ c.hasAdditional }}">
+              <div style="font-size:12.5px;color:#8a8c85;line-height:1.6">Also serving: {{ c.additionalText }}</div>
+            </sc-if>
+            <div style="font-size:13.5px;color:#54564f;line-height:1.6">{{ c.rabbi }}</div>
+            <div style="display:flex;gap:10px;margin-top:auto;padding-top:8px">
+              <a href="{{ c.url }}" style="flex:1;text-align:center;padding:12px 16px;background:#2474ae;color:#fff;font-weight:700;font-size:13.5px">Website</a>
+              <a href="{{ c.donateUrl }}" style="flex:1;text-align:center;padding:12px 16px;background:#ffc70b;color:#1f2320;font-weight:700;font-size:13.5px">Donate</a>
+            </div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <div style="padding:56px clamp(20px,5vw,64px) 40px;background:#17181b;color:#c7c8c2;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:40px;font-size:13.5px">
+    <div>
+      <div style="font-weight:700;color:#fff;font-size:15px;margin-bottom:14px">Chabad on Campus Florida</div>
+      <div style="line-height:1.7;color:#9a9c96">A regional initiative of Chabad on Campus International.</div>
+    </div>
+    <div>
+      <div style="font-weight:700;color:#fff;margin-bottom:12px">Menu</div>
+      <div style="display:flex;flex-direction:column;gap:8px;color:#9a9c96">
+        <a href="Chabad Florida Home.dc.html">Home</a><a href="#directory">Directory</a><a href="Chabad Florida Home.dc.html#about">About</a>
+      </div>
+    </div>
+  </div>
+  <div style="padding:20px clamp(20px,5vw,64px);background:#17181b;color:#7a7c76;font-size:12.5px;border-top:1px solid rgba(255,255,255,.08);display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between">
+    <span>© 2026 Chabad on Campus Florida</span><span>Registered 501(c)(3)</span>
+  </div>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const RAW = [
+  {school:"Chabad at UF", main:"University of Florida", city:"Gainesville", rabbi:"Rabbi Berl & Chanie Goldman, Rabbi Aaron & Pessie Notik", url:"https://jewishgator.com/", additional:["Santa Fe College"], logo:"https://jewishgator.com/wp-content/uploads/2026/06/jg_logo_official.png.webp"},
+  {school:"Chabad of FSU", main:"Florida State University", city:"Tallahassee", rabbi:"Rabbi Schneur Zalman & Chanie Oirechman, Rabbi Ari & Rivky Oirechman", url:"https://www.chabadtallahassee.com/", additional:["Tallahassee Community College","FAMU","Keiser University"], logo:"https://b313e8803f7a4150a884-6e0b076a1e92e31c40be44f466689c50.ssl.cf5.rackcdn.com/images/loginid152483/ee0bb1a766a6bc135914d762f0422863_1607978957.jpg"},
+  {school:"Chabad at UCF", main:"University of Central Florida", city:"Orlando", rabbi:"Rabbi Chaim & Rivkie Lipskier", url:"https://www.jewishucf.com/", additional:["Valencia College"], logo:"https://www.jewishucf.com/uploads/8/8/4/6/8846385/4574522.png"},
+  {school:"Chabad at UNF", main:"University of North Florida", city:"Jacksonville", rabbi:"Rabbi Shmuli & Chana Novack", url:"https://www.chabadunf.com/", additional:["Jacksonville University","Florida State College at Jacksonville"], logo:"https://static.wixstatic.com/media/572ca4_daeeeac7cf704331b2e868822de89ee2~mv2.png"},
+  {school:"Chabad at USF", main:"University of South Florida", city:"Tampa", rabbi:"Rabbi Pinny & Chava Backman, Rabbi Yehuda & Devo Tanenbaum", url:"https://www.usfchabad.com/", additional:[], logo:"https://w2.chabad.org/media/images/1203/Ehvj12033885.png"},
+  {school:"Chabad at UT", main:"University of Tampa", city:"Tampa", rabbi:"Rabbi Levi & Chana Rivkin", url:"https://www.chabadut.org/", additional:[], logo:"https://static.wixstatic.com/media/50a04c_45131bf7139b41ed836d6cb7a4c8e571~mv2.png"},
+  {school:"Chabad at UM", main:"University of Miami", city:"Coral Gables", rabbi:"Rabbi Mendy & Henchi Fellig", url:"https://uchabad.com/", additional:[], logo:"https://uchabad.com/wp-content/uploads/2020/11/Chabad-University-of-Miami-Logo.png"},
+  {school:"UChabad Undergrad", main:"University of Miami (Undergraduate)", city:"Coral Gables", rabbi:"Rabbi Shmuly & Mushka Lipskier", url:"https://uchabadundergrad.com/", additional:[], logo:"https://static.wixstatic.com/media/b2c4a9_dfebf6fd1f654236b65a1834d77ee886~mv2.png"},
+  {school:"Chabad at FIU", main:"Florida International University", city:"Miami", rabbi:"Rabbi Berel & Henny Garelik", url:"https://www.jewishfiu.com/", additional:[], logo:"https://w2.chabad.org/media/images/1167/jFig11672068.png"},
+  {school:"Chabad at FAU", main:"Florida Atlantic University", city:"Boca Raton", rabbi:"Rabbi Boruch Shmuel & Rivka Rochel Liberow", url:"https://www.chabadstudentcenter.org/", additional:["Lynn University","Palm Beach State College"], logo:"https://scontent-mia3-1.xx.fbcdn.net/v/t39.30808-6/519465562_1169313781891256_4196621724542208344_n.jpg"},
+  {school:"Chabad at NSU", main:"Nova Southeastern University", city:"Davie", rabbi:"Rabbi Aryeh & Etty Schwartz", url:"https://www.jewishnsu.com/", additional:["Broward College"], logo:"https://w2.chabad.org/media/images/1277/IKHy12774949.png"},
+  {school:"Chabad at FGCU", main:"Florida Gulf Coast University", city:"Fort Myers", rabbi:"Rabbi Mendel & Shternie Gordon", url:"https://www.chabadfgcu.com/", additional:[], logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRa-rmdrJnI7FHsOO0fKGGU-wcJh9mJHYvZE_iCihO0AMCa_d07f46MFe2W&s=10"},
+  {school:"Chabad at MDC", main:"Miami Dade College", city:"Miami", rabbi:"Rabbi Chaim & Deenie Lipskar", url:"https://www.jewishdowntown.net/", additional:[], logo:"https://w2.chabad.org/media/images/1098/vnqE10985897.png"},
+  {school:"Chabad at Rollins College", main:"Rollins College", city:"Winter Park", rabbi:"Rabbi Shmuli & Chayala Sasonkin", url:"https://www.winterparkjewishstudent.com/", additional:[], logo:"https://scontent-mia3-3.cdninstagram.com/v/t51.2885-19/304892714_1116234545648816_7930088464367194043_n.jpg"}
+].map((c,i) => ({
+  ...c,
+  slotId: 'logo-' + i,
+  donateUrl: c.url + 'donate',
+  hasAdditional: c.additional.length > 0,
+  additionalText: c.additional.join(', ')
+}));
+
+class Component extends DCLogic {
+  state = { menuOpen: false, query: '' };
+  renderVals() {
+    const q = this.state.query.trim().toLowerCase();
+    const filtered = q
+      ? RAW.filter(c => (c.school + ' ' + c.city + ' ' + c.rabbi).toLowerCase().includes(q))
+      : RAW;
+    return {
+      menuOpen: this.state.menuOpen,
+      toggleMenu: () => this.setState(s => ({ menuOpen: !s.menuOpen })),
+      query: this.state.query,
+      onQueryChange: e => this.setState({ query: e.target.value }),
+      filtered,
+      resultCount: filtered.length,
+      noResults: filtered.length === 0
+    };
+  }
+}
+</script>
+</body>
+</html>
