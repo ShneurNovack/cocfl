@@ -84,12 +84,12 @@
     <div style="display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-bottom:12px">
       <div style="position:relative;flex:1;min-width:240px">
         <input value="{{ query }}" onChange="{{ onQueryChange }}" placeholder="Search by school, city, or rabbi..." style="width:100%;box-sizing:border-box;padding:14px 18px;border:1px solid rgba(20,20,20,.15);font-family:Archivo,sans-serif;font-size:15px;color:#1f2320;background:#faf8f3">
-      </div><div style="font-size:13.5px;color:#8a8c85;font-weight:600;white-space:nowrap">{{ resultCount }} chapters</div>
+      </div><div style="font-size:13.5px;color:#8a8c85;font-weight:600;white-space:nowrap">{{ resultCount }} centers</div>
       
     </div>
 
     <sc-if value="{{ noResults }}">
-      <div style="padding:60px 20px;text-align:center;color:#8a8c85;font-size:15px">No chapters match "{{ query }}".</div>
+      <div style="padding:60px 20px;text-align:center;color:#8a8c85;font-size:15px">No centers match "{{ query }}".</div>
     </sc-if>
 
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:26px;margin-top:28px">
