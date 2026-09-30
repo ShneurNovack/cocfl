@@ -15,3 +15,10 @@
 
 /*.webp
   Cache-Control: public, max-age=2592000
+
+# Keep preview and pages.dev copies out of search results
+https://:subdomain.cocfl.pages.dev/*
+  X-Robots-Tag: noindex
+
+https://cocfl.pages.dev/*
+  X-Robots-Tag: noindex
