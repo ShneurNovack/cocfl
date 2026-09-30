@@ -18,18 +18,19 @@ const itemList = {
   itemListElement: sorted.map((c, i) => ({ '@type': 'ListItem', position: i + 1, url: `${SITE.url}${c.url}`, name: `Chabad at ${c.primaryCampus.name}` })),
 };
 const slides = [
+  { key: 'fp-havdalah-crowd', alt: 'Students, rabbis and families singing together at Havdalah during the Florida Pegisha' },
+  { key: 'fp-group', alt: 'Four students in Florida Pegisha shirts smiling together' },
+  { key: 'fl-dinner', alt: 'A long table of students at a holiday dinner at Chabad UF' },
+  { key: 'fp-havdalah-candle', alt: 'A student holding a lit Havdalah candle at the Florida Pegisha' },
   { key: 'florida-pegisha-students', alt: 'Florida college students together at the Florida Pegisha Shabbaton' },
-  { key: 'students-friends', alt: 'Jewish college students smiling together at a Chabad on Campus event' },
-  { key: 'shabbat-candles', alt: 'Students lighting Shabbat candles together' },
-  { key: 'pizza-friends', alt: 'Friends sharing pizza at a Chabad on Campus event' },
 ].map((s) => ({ ...s, ...img(s.key) }));
 
 const tabs = [
-  { id: 'shabbat', icon: 'Flame', label: 'Shabbat', title: 'Friday night, there is a seat for you', text: 'Candles, challah, a home-cooked dinner and a table full of friends. You never need an invitation.', image: 'shabbat-candles', alt: 'Students lighting Shabbat candles together', href: '/jewish-life-on-campus/shabbat/', link: 'Shabbat on campus' },
-  { id: 'holidays', icon: 'PartyPopper', label: 'Holidays', title: 'Every Jewish holiday, together', text: 'High Holiday services and dinners, a sukkah near campus, menorah lightings, Purim and Passover Seders.', image: 'tefillin', alt: 'A student putting on tefillin with a rabbi', href: '/jewish-life-on-campus/jewish-holidays/', link: 'Jewish holidays in college' },
-  { id: 'learning', icon: 'BookOpen', label: 'Learning', title: 'Big questions welcome', text: 'Classes over pizza, JewishU courses, the Sinai Scholars fellowship or a one-on-one with the rabbi.', image: 'sinai-study-pair', alt: 'A rabbi learning with two students', href: '/programs/', link: 'Explore programs' },
-  { id: 'travel', icon: 'Plane', label: 'Trips', title: 'Go places with your campus crew', text: 'The Florida Pegisha weekend with students from across the state, Birthright Israel with Chabad, and the International Pegisha in New York.', image: 'pegisha-brooklyn-bridge', alt: 'Students on the Brooklyn Bridge during Pegisha', href: '/programs/florida-pegisha/', link: 'Florida Pegisha' },
-  { id: 'home', icon: 'HeartHandshake', label: 'A home', title: 'Family, when you are far from yours', text: 'Chicken soup when you are sick, a quiet place to study, and people who know your name.', image: 'friends-outdoors', alt: 'Students standing together outside a Chabad House', href: '/about/', link: 'About Chabad on Campus' },
+  { id: 'shabbat', icon: 'Flame', label: 'Shabbat', title: 'Friday night, there is a seat for you', text: 'Candles, challah, a home-cooked dinner and a table full of friends. You never need an invitation.', image: 'fl-shabbat', alt: 'Students around a long dinner table at Chabad UF', href: '/jewish-life-on-campus/shabbat/', link: 'Shabbat on campus' },
+  { id: 'holidays', icon: 'PartyPopper', label: 'Holidays', title: 'Every Jewish holiday, together', text: 'High Holiday services and dinners, a sukkah near campus, menorah lightings, Purim and Passover Seders.', image: 'fl-chanukah', alt: 'Students at Chabad at UCF gathered around a giant menorah for Chanukah', href: '/jewish-life-on-campus/jewish-holidays/', link: 'Jewish holidays in college' },
+  { id: 'learning', icon: 'BookOpen', label: 'Learning', title: 'Big questions welcome', text: 'Classes over pizza, JewishU courses, the Sinai Scholars fellowship or a one-on-one with the rabbi.', image: 'fl-study', alt: 'FSU students learning together with a text at the Chabad House', href: '/programs/', link: 'Explore programs' },
+  { id: 'travel', icon: 'Plane', label: 'Trips', title: 'Go places with your campus crew', text: 'The Florida Pegisha weekend with students from across the state, Birthright Israel with Chabad, and the International Pegisha in New York.', image: 'fp-rebbetzin', alt: 'A rebbetzin leading a workshop for students at the Florida Pegisha', href: '/programs/florida-pegisha/', link: 'Florida Pegisha' },
+  { id: 'home', icon: 'HeartHandshake', label: 'A home', title: 'Family, when you are far from yours', text: 'Chicken soup when you are sick, a quiet place to study, and people who know your name.', image: 'fl-friends', alt: 'Friends smiling together at Chabad UF', href: '/about/', link: 'About Chabad on Campus' },
 ];
 const values = [
   { icon: 'DoorOpen', title: 'Every Jewish student', text: 'Whatever your background, you belong here.' },
