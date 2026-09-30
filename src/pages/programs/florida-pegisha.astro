@@ -1,76 +1,84 @@
 ---
-// Florida Pegisha: the statewide Shabbaton and Chabad on Campus Florida's
-// signature initiative. This page has its own look (maroon, gold and cream,
-// taken from the Pegisha shirts and flyer) instead of the site's blue theme.
+// Florida Pegisha: statewide Shabbaton. Uses the site's fonts and section rhythm,
+// with Pegisha's own plum, gold and coral colors (from chabadoncampus.org/pegisha).
 import Base from '../../layouts/Base.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import SchoolSearch from '../../components/SchoolSearch.astro';
 import CenterLogo from '../../components/CenterLogo.astro';
+import Faq from '../../components/Faq.astro';
 import Icon from '../../components/Icon.astro';
 import { programBySlug } from '../../data/programs';
 import { centers } from '../../lib/centers';
 import { SITE, img } from '../../lib/site';
-import wdthFont from '@fontsource-variable/archivo/files/archivo-latin-wdth-normal.woff2?url';
 
 const p = programBySlug['florida-pegisha'];
 const path = '/programs/florida-pegisha/';
-const REGISTER = 'https://pegishaflorida.com/';
 const crumbs = [
   { name: 'Programs', href: '/programs/' },
   { name: 'Florida Pegisha', href: path },
 ];
+const hero = img('fp-havdalah-crowd');
+const closerImg = img('fp-havdalah-candle');
 
-const slides = [
-  { key: 'fp-havdalah-candle', alt: 'A student holding a lit Havdalah candle as students in Florida Pegisha shirts sing behind her' },
-  { key: 'fp-group', alt: 'Four smiling students in Florida Pegisha 2026 shirts' },
-  { key: 'fp-havdalah-crowd', alt: 'Students, rabbis and families singing together at Havdalah during the Florida Pegisha' },
-].map((s) => ({ ...s, ...img(s.key) }));
-
-const words = ['Shabbat', 'Friends', 'Every campus', 'Music', 'Havdalah', 'Big questions', 'Great food', 'One weekend', 'Orlando'];
+const features = [
+  { icon: 'Flame', title: 'A Shabbat like no other', text: 'Let us come together with song, dance and delicious kosher food as we welcome Shabbat into our lives.' },
+  { icon: 'Sparkles', title: 'Good vibes, positive energy', text: 'Are JEW ready for a weekend packed with new friends from Tallahassee to Miami and Jewish energy that will fire up your soul?' },
+  { icon: 'Users', title: 'The whole state in one room', text: 'Every campus, one weekend. Meet the students who make Jewish life happen all across Florida.' },
+];
 
 const expect = [
-  { icon: 'UtensilsCrossed', title: 'Eat and shmooze', text: 'Shabbat dinner and lunch with the whole state at one long table. Nobody leaves hungry.' },
-  { icon: 'MessagesSquare', title: 'Learn and grow', text: 'Workshops and honest conversations with rabbis, rebbetzins and students who ask good questions.' },
-  { icon: 'Flame', title: 'A full Shabbat', text: 'From candle lighting to Havdalah. For many students, it is the first complete Shabbat of their lives.' },
-  { icon: 'Users', title: 'Meet the whole state', text: 'Gainesville, Tallahassee, Orlando, Tampa, Miami, Boca, Fort Myers and more, all in one room.' },
-  { icon: 'Music', title: 'Sing and dance', text: 'Havdalah with hundreds of voices, then music and dancing that goes late into Saturday night.' },
-  { icon: 'Bus', title: 'Travel with your crew', text: 'You come with friends from your own Chabad House, and leave with friends from every other one.' },
-];
+  { title: 'Eat and shmooze', key: 'fp-group' },
+  { title: 'Learn and grow', key: 'fp-rebbetzin' },
+  { title: 'Hands-on workshops', key: 'fp-workshop' },
+  { title: 'Mega Havdalah', key: 'fp-havdalah-candle' },
+  { title: 'Sing and dance', key: 'florida-pegisha-students' },
+  { title: 'Pegisha swag', key: 'fp-shirts' },
+].map((e) => ({ ...e, ...img(e.key) }));
 
 const days = [
   {
-    day: 'Friday',
-    title: 'Arrive and welcome Shabbat',
-    items: ['Travel to Orlando with your campus group', 'Check in and grab your Florida Pegisha shirt', 'Candle lighting as Shabbat begins', 'Shabbat services', 'Friday night dinner with every campus', 'Late-night hangouts and conversation'],
+    id: 'friday',
+    label: 'Friday',
+    items: [
+      { t: 'Arrival and check-in', s: 'Grab your welcome bag and find your people' },
+      { t: 'Pegisha kickoff: snacks and shmooze', s: 'Meet students from every campus' },
+      { t: 'Shabbat candle lighting' },
+      { t: 'Lively Kabbalat Shabbat services' },
+      { t: 'Shabbat dinner', s: 'The whole state around one table' },
+      { t: 'Farbrengen and late-night hangouts' },
+    ],
   },
   {
-    day: 'Shabbat',
-    title: 'A day to slow down',
-    items: ['Morning services and kiddush', 'Shabbat lunch', 'Workshops and discussions', 'Free time with old and new friends', 'Seudah shlishit, the third Shabbat meal'],
+    id: 'shabbat',
+    label: 'Shabbat',
+    items: [
+      { t: 'Lively Shabbat morning services' },
+      { t: 'Kiddush and Shabbat lunch' },
+      { t: 'Engaging workshops and sessions' },
+      { t: 'Social time', s: 'Hang out, relax and make new friends' },
+      { t: 'Seudah shlishit', s: 'The third Shabbat meal, with song' },
+    ],
   },
   {
-    day: 'Saturday night',
-    title: 'Havdalah and celebration',
-    items: ['Havdalah with the whole state', 'Live music and dancing', 'A Motzei Shabbat party to close out the weekend'],
+    id: 'motzei',
+    label: 'Saturday night',
+    items: [
+      { t: 'Florida Pegisha shirts', s: "Suit up in this year's shirt" },
+      { t: 'Mega Havdalah', s: 'Hundreds of voices saying goodbye to Shabbat' },
+      { t: 'Live music and dancing' },
+      { t: 'The Pegisha vibe', s: 'A Motzei Shabbat celebration to close out the weekend' },
+    ],
   },
 ];
 
 const gallery = [
-  { key: 'fp-havdalah-crowd', alt: 'Students and families singing at Havdalah', cls: 'g-wide' },
+  { key: 'fp-havdalah-crowd', alt: 'Students and families singing at Havdalah', cls: 'big' },
   { key: 'fp-workshop', alt: 'A student taking part in a hands-on workshop', cls: '' },
-  { key: 'fp-shirts', alt: 'A stack of Florida Pegisha 2026 shirts', cls: '' },
+  { key: 'fp-shirts', alt: 'A stack of Florida Pegisha shirts', cls: '' },
   { key: 'fp-rebbetzin', alt: 'A rebbetzin leading a workshop for students', cls: '' },
   { key: 'fp-group', alt: 'Students in Florida Pegisha shirts', cls: '' },
 ].map((g) => ({ ...g, ...img(g.key) }));
 
-const faqs = [
-  ...p.faqs,
-  { q: 'Where is it held?', a: 'The 2026 Florida Pegisha took place in Orlando, right in the middle of the state, so every campus can get there. Your Chabad House will share the location for the next one.' },
-  { q: 'What should I bring?', a: 'Nice clothes for Shabbat, something comfortable for Saturday night, and whatever you need for the weekend. Meals are taken care of. Your Chabad House will send a packing list before you go.' },
-  { q: 'Can I register on my own?', a: `You can start at <a href="${REGISTER}" rel="noopener">pegishaflorida.com</a>, but it is best to connect with your campus Chabad House too, since you will travel and room with your campus group.` },
-];
-
-const flyer = img('fp-flyer');
 const ld = [
   {
     '@context': 'https://schema.org',
@@ -80,110 +88,110 @@ const ld = [
     description: p.metaDescription,
     isPartOf: { '@id': `${SITE.url}/#website` },
     about: { '@type': 'Thing', name: 'Florida Pegisha Shabbaton' },
-    primaryImageOfPage: { '@type': 'ImageObject', url: `${SITE.url}${slides[1].src}` },
+    primaryImageOfPage: { '@type': 'ImageObject', url: `${SITE.url}${hero.src}` },
   },
   {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a.replace(/<[^>]+>/g, '') } })),
+    mainEntity: p.faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a.replace(/<[^>]+>/g, '') } })),
   },
 ];
 ---
-<Base title={p.metaTitle} description={p.metaDescription} path={path} breadcrumbs={crumbs} jsonLd={ld} ogImage={slides[1].src}>
-  <Fragment set:html={`<style>@font-face{font-family:'Archivo Wide';font-style:normal;font-display:swap;font-weight:100 900;font-stretch:62% 125%;src:url(${wdthFont}) format('woff2')}</style>`} />
-  <link rel="preload" href={wdthFont} as="font" type="font/woff2" crossorigin />
-  <div class="fp">
-    <!-- HERO -->
+<Base title={p.metaTitle} description={p.metaDescription} path={path} breadcrumbs={crumbs} jsonLd={ld} ogImage={img('fp-group').src}>
+  <div class="pg">
     <section class="hero">
-      <div class="hero-text">
-        <div class="hero-in">
-          <Breadcrumbs items={crumbs} />
-          <h1><img class="logo" src="/images/pegisha-statewide.webp" alt="Florida Pegisha" width="720" height="588" /></h1>
-          <p class="sub">The statewide Shabbaton weekend for Jewish college students.</p>
-          <div class="acts">
-            <a class="b b-gold" href={REGISTER} rel="noopener">Register <Icon name="ArrowUpRight" size={20} /></a>
-            <a class="b b-line" href="#weekend">See the weekend</a>
-          </div>
-        </div>
-      </div>
-      <div class="hero-media" data-fps>
-        {slides.map((s, i) => (
-          <img class:list={['slide', i === 0 && 'on']} src={s.src} srcset={s.srcset} sizes="(max-width: 980px) 100vw, 55vw" width={s.width} height={s.height} alt={s.alt} loading={i === 0 ? 'eager' : 'lazy'} fetchpriority={i === 0 ? 'high' : undefined} decoding="async" />
-        ))}
-        <div class="bars" role="group" aria-label="Choose a photo">
-          {slides.map((_, i) => <button type="button" aria-label={`Photo ${i + 1}`} aria-pressed={i === 0 ? 'true' : 'false'} data-bar={i}><span></span></button>)}
-        </div>
+      <img class="bg" src={hero.src} srcset={hero.srcset} sizes="100vw" width={hero.width} height={hero.height} alt="" fetchpriority="high" decoding="async" />
+      <div class="wrap hin">
+        <Breadcrumbs items={crumbs} />
+        <h1><img class="logo" src="/images/pegisha-statewide.webp" alt="Florida Pegisha" width="720" height="588" /></h1>
+        <p class="when">Date TBA / Florida</p>
+        <a class="btn pbtn-line" href="#details">Registration opens soon</a>
       </div>
     </section>
 
-    <!-- TICKER -->
-    <div class="ticker" aria-hidden="true">
-      <div class="track">
-        {[0, 1].map(() => <span class="run">{words.map((w) => <><span>{w}</span><img src="/flame.webp" alt="" width="22" height="22" /></>)}</span>)}
-      </div>
-    </div>
-
-    <!-- INTRO -->
-    <section class="intro">
-      <div class="fpw">
-        <h2 class="huge reveal">Every campus.<br /><span>One Shabbat.</span></h2>
-        <div class="intro-copy reveal" style="--d:120ms">
-          <p class="big">Pegisha means "encounter" in Hebrew. Once a year, the Chabad on Campus centers across Florida bring their students together for a weekend that feels like the whole state is sitting at one Shabbat table.</p>
-          <p>The Florida Pegisha is the signature project of Chabad on Campus Florida, the joint initiative of Florida's independently run Chabad Houses. It is where a freshman from Gainesville meets a senior from Boca, where students who have never kept a full Shabbat find out how good one can feel, and where a lot of lasting friendships begin.</p>
-        </div>
-      </div>
-      <dl class="facts fpw reveal">
-        <div><dt>Where</dt><dd>Orlando, in 2026</dd></div>
-        <div><dt>When</dt><dd>Spring semester</dd></div>
-        <div><dt>Who</dt><dd>Jewish students at any Florida college</dd></div>
-        <div><dt>Cost</dt><dd>Heavily subsidized</dd></div>
-      </dl>
-    </section>
-
-    <!-- WHAT TO EXPECT -->
-    <section class="expect">
-      <div class="fpw">
-        <h2 class="h2 reveal">What to expect</h2>
-        <div class="tiles">
-          {expect.map((e, i) => (
-            <div class="tile reveal" style={`--d:${(i % 3) * 90}ms`}>
-              <span class="ic"><Icon name={e.icon} size={30} /></span>
-              <h3>{e.title}</h3>
-              <p>{e.text}</p>
+    <section class="section">
+      <div class="wrap">
+        <p class="intro reveal">Experience an unforgettable Shabbat weekend with Jewish students from every campus across Florida.</p>
+        <div class="feats">
+          {features.map((f, i) => (
+            <div class="feat reveal" style={`--d:${i * 100}ms`}>
+              <span class="fic"><Icon name={f.icon} size={30} /></span>
+              <h2>{f.title}</h2>
+              <p>{f.text}</p>
             </div>
           ))}
         </div>
       </div>
     </section>
 
-    <!-- WEEKEND -->
-    <section class="weekend" id="weekend">
-      <div class="fpw">
-        <div class="wk-head reveal">
-          <h2 class="h2">The weekend</h2>
-          <p>A taste of what the weekend looks like. Details change a little every year.</p>
+    <section class="section band-soft">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <h2>What to expect</h2>
+          <p class="lead">Get ready for a weekend you will be talking about all semester.</p>
         </div>
-        <div class="daytabs" role="tablist" aria-label="Weekend schedule">
-          {days.map((d, i) => <button role="tab" id={`dt-${i}`} aria-controls={`dp-${i}`} aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1}><span class="n">{String(i + 1).padStart(2, '0')}</span>{d.day}</button>)}
+        <div class="xgrid">
+          {expect.map((e, i) => (
+            <figure class="xt reveal" style={`--d:${(i % 3) * 80}ms`}>
+              <img src={`/images/${e.key}-640.webp`} srcset={e.srcset} sizes="(max-width: 700px) 100vw, 33vw" width={e.width} height={e.height} alt="" loading="lazy" decoding="async" />
+              <figcaption>{e.title}</figcaption>
+            </figure>
+          ))}
         </div>
-        {days.map((d, i) => (
-          <div class="daypanel" role="tabpanel" id={`dp-${i}`} aria-labelledby={`dt-${i}`} hidden={i !== 0}>
-            <h3>{d.title}</h3>
-            <ol>{d.items.map((it) => <li>{it}</li>)}</ol>
-          </div>
-        ))}
       </div>
     </section>
 
-    <!-- GALLERY -->
-    <section class="gallery">
-      <div class="fpw">
-        <div class="gal-head reveal">
-          <h2 class="h2">Florida Pegisha 2026</h2>
-          <p>Moments from last spring in Orlando.</p>
+    <div class="goldband"><div class="wrap"><p>One state. One Shabbat. One unforgettable weekend.</p></div></div>
+
+    <section class="section" id="schedule">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <h2>Sample itinerary</h2>
+          <p class="lead">Celebrate, discover, learn and dance.</p>
+        </div>
+        <div class="dtabs" role="tablist" aria-label="Weekend schedule">
+          {days.map((d, i) => <button role="tab" id={`t-${d.id}`} aria-controls={`p-${d.id}`} aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1}>{d.label}</button>)}
+        </div>
+        {days.map((d, i) => (
+          <ol class="tl" role="tabpanel" id={`p-${d.id}`} aria-labelledby={`t-${d.id}`} hidden={i !== 0}>
+            {d.items.map((it, n) => (
+              <li>
+                <span class="num">{String(n + 1).padStart(2, '0')}</span>
+                <span class="tt"><strong>{it.t}</strong>{it.s && <small>{it.s}</small>}</span>
+              </li>
+            ))}
+          </ol>
+        ))}
+        <p class="note">This is a general schedule. Times and details may vary from year to year.</p>
+      </div>
+    </section>
+
+    <section class="section band-soft" id="details">
+      <div class="wrap">
+        <div class="card-d reveal">
+          <div class="cd-left">
+            <h2>Florida Pegisha</h2>
+            <p>Florida Pegisha is more than an event. It is a weekend where Jewish students from every corner of the state come together, celebrate Shabbat in a big way and walk away with friends for life. Your unforgettable weekend awaits!</p>
+            <p class="closed"><Icon name="Clock" size={20} /> Registration for this year's Florida Pegisha is not open yet.</p>
+          </div>
+          <dl class="cd-right">
+            <div><dt>Weekend of</dt><dd>Friday to Saturday night</dd><dd class="tba">Date TBA</dd></div>
+            <div><dt>Location</dt><dd>Florida</dd><dd class="tba">Location TBA</dd></div>
+            <div class="stay"><dt>Stay in the loop</dt><dd>Your campus Chabad House will share registration details as soon as they are ready.</dd>
+              <dd class="ss-wrap"><SchoolSearch id="fp-search" size="md" label="Find your Chabad House" showLabel={false} /></dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <h2>#FloridaPegisha memories</h2>
         </div>
         <div class="gal">
-          {gallery.map((g, i) => (
+          {gallery.map((g) => (
             <button type="button" class:list={['shot', g.cls]} data-full={g.src} data-alt={g.alt} aria-label={`View photo: ${g.alt}`}>
               <img src={`/images/${g.key}-640.webp`} srcset={g.srcset} sizes="(max-width: 700px) 100vw, 50vw" width={g.width} height={g.height} alt={g.alt} loading="lazy" decoding="async" />
             </button>
@@ -196,106 +204,42 @@ const ld = [
       </dialog>
     </section>
 
-    <!-- CAMPUSES -->
-    <section class="campuses">
-      <div class="fpw">
-        <div class="cp-head reveal">
-          <h2 class="h2">Students come from all of these</h2>
-          <p>Every Chabad on Campus center in Florida is part of the Florida Pegisha.</p>
+    <section class="section band-soft">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <h2>Every Florida campus is invited</h2>
+          <p class="lead">Students come with their own Chabad House. Find yours.</p>
         </div>
         <ul class="logos">
           {centers.map((c) => (
-            <li><a href={c.url}><CenterLogo center={c} size={60} /><span>{c.primaryCampus.name}</span></a></li>
+            <li><a href={c.url}><CenterLogo center={c} size={56} /><span>{c.primaryCampus.name}</span></a></li>
           ))}
         </ul>
       </div>
     </section>
 
-    <!-- JOIN -->
-    <section class="join" id="join">
-      <div class="fpw join-grid">
-        <div class="reveal">
-          <h2 class="h2">Save your spot</h2>
-          <ol class="steps">
-            <li><strong>Find your Chabad House</strong><span>Every Florida Chabad on Campus center brings a group.</span></li>
-            <li><strong>Talk to your rabbi and rebbetzin</strong><span>They will share the dates, the price for your campus and how your group is traveling.</span></li>
-            <li><strong>Register</strong><span>Sign up at pegishaflorida.com and get ready for the weekend.</span></li>
-          </ol>
-          <a class="b b-maroon" href={REGISTER} rel="noopener">Register at pegishaflorida.com <Icon name="ArrowUpRight" size={20} /></a>
+    <section class="section">
+      <div class="wrap narrow">
+        <div class="sec-head reveal">
+          <h2>Frequently asked questions</h2>
         </div>
-        <div class="join-side reveal" style="--d:120ms">
-          <div class="finder">
-            <h3>Find your Chabad House</h3>
-            <SchoolSearch id="fp-search" size="md" label="Your school" showLabel={false} />
-          </div>
-          <figure class="flyer">
-            <img src={flyer.src} srcset={flyer.srcset} sizes="(max-width: 980px) 90vw, 420px" width={flyer.width} height={flyer.height} alt="The Florida Pegisha 2026 flyer: statewide Shabbaton weekend in Orlando, April 17 and 18, 2026, with logos of the participating Chabad centers" loading="lazy" />
-            <figcaption>The 2026 flyer</figcaption>
-          </figure>
-        </div>
+        <Faq items={p.faqs} open />
       </div>
     </section>
 
-    <!-- FAQ -->
-    <section class="faqs">
-      <div class="fpw faq-grid">
-        <h2 class="h2 reveal">Questions</h2>
-        <div class="qa">
-          {faqs.map((f, i) => (
-            <details open={i === 0}>
-              <summary>{f.q}<Icon name="Plus" size={22} class="pl" /></summary>
-              <p set:html={f.a} />
-            </details>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <!-- INTERNATIONAL -->
-    <section class="intl">
-      <a class="fpw intl-row" href="/programs/pegisha/">
-        <img src="/images/pegisha-wordmark.webp" alt="" width="600" height="185" loading="lazy" />
-        <div>
-          <h2>Want an even bigger Shabbat?</h2>
-          <p>Each fall, the International Pegisha brings students from around the world to Crown Heights, Brooklyn. Florida students go with their own Chabad House.</p>
-        </div>
-        <span class="go">International Pegisha <Icon name="ArrowRight" size={22} /></span>
-      </a>
-    </section>
-
-    <!-- FINAL -->
-    <section class="final">
-      <img class="wm" src="/flame.webp" alt="" width="512" height="512" loading="lazy" />
-      <div class="fpw">
-        <h2>See you at the<br /><span>Florida Pegisha</span></h2>
-        <div class="acts">
-          <a class="b b-gold" href={REGISTER} rel="noopener">Register <Icon name="ArrowUpRight" size={20} /></a>
-          <a class="b b-line" href="/campuses/">Find your Chabad House</a>
-        </div>
+    <section class="closer">
+      <img class="bg" src={closerImg.src} srcset={closerImg.srcset} sizes="100vw" width={closerImg.width} height={closerImg.height} alt="" loading="lazy" />
+      <div class="wrap cin">
+        <img class="logo-sm" src="/images/pegisha-statewide.webp" alt="" width="720" height="588" loading="lazy" />
+        <p>Registration opens soon. Stay tuned!</p>
+        <a class="btn pbtn-gold" href="/campuses/">Find your Chabad House <Icon name="ArrowRight" size={20} /></a>
       </div>
     </section>
   </div>
 </Base>
 
 <script>
-  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  // hero slideshow
-  const slides = Array.from(document.querySelectorAll<HTMLImageElement>('[data-fps] .slide'));
-  const bars = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-bar]'));
-  let cur = 0;
-  let timer: number | undefined;
-  const show = (n: number) => {
-    cur = (n + slides.length) % slides.length;
-    slides.forEach((s, i) => s.classList.toggle('on', i === cur));
-    bars.forEach((b, i) => b.setAttribute('aria-pressed', String(i === cur)));
-  };
-  const auto = () => { if (!reduce) { clearInterval(timer); timer = window.setInterval(() => show(cur + 1), 5500); } };
-  bars.forEach((b, i) => b.addEventListener('click', () => { show(i); auto(); }));
-  auto();
-
-  // weekend tabs
-  const tabs = Array.from(document.querySelectorAll<HTMLButtonElement>('.daytabs [role=tab]'));
+  const tabs = Array.from(document.querySelectorAll<HTMLButtonElement>('.dtabs [role=tab]'));
   const select = (t: HTMLButtonElement) => {
     tabs.forEach((x) => {
       const on = x === t;
@@ -312,197 +256,116 @@ const ld = [
     });
   });
 
-  // gallery lightbox
   const lb = document.querySelector<HTMLDialogElement>('.lb')!;
   const lbImg = lb.querySelector('img')!;
   document.querySelectorAll<HTMLButtonElement>('.shot').forEach((b) =>
-    b.addEventListener('click', () => {
-      lbImg.src = b.dataset.full!;
-      lbImg.alt = b.dataset.alt!;
-      lb.showModal();
-    }),
+    b.addEventListener('click', () => { lbImg.src = b.dataset.full!; lbImg.alt = b.dataset.alt!; lb.showModal(); }),
   );
   lb.querySelector('.lb-x')!.addEventListener('click', () => lb.close());
   lb.addEventListener('click', (e) => { if (e.target === lb) lb.close(); });
 </script>
 
 <style>
-  .fp {
-    --m: #7c1a2e;
-    --m-deep: #4b0f1c;
-    --m-ink: #2a0810;
-    --g: #ffc70b;
-    --cr: #fbf3e4;
-    --cr-2: #f4e8d2;
-    --tx: #2a0810;
-    --in: min(1320px, 100% - 2 * clamp(20px, 5vw, 72px));
-    color: var(--tx);
-    background: var(--cr);
-    overflow: hidden;
+  .pg {
+    --plum: #330b2f;
+    --pgold: #ffc600;
+    --coral: #ff6b6b;
+    --soft: #f6f3f6;
   }
-  .fpw { width: var(--in); margin-inline: auto; }
-  .fp :global(h1), .fp :global(h2), .fp h3 { font-family: 'Archivo Wide', var(--font); font-stretch: 125%; letter-spacing: -0.01em; }
+  .pg h2 { color: var(--plum); }
+  .band-soft { background: var(--soft); }
+  .btn.pbtn-line { border: 2px solid var(--pgold); color: var(--pgold); background: transparent; }
+  .btn.pbtn-line:hover { background: var(--pgold); color: var(--plum); }
+  .btn.pbtn-gold { background: var(--pgold); color: var(--plum); }
+  .btn.pbtn-gold:hover { background: #fff; }
 
-  /* buttons */
-  .b { display: inline-flex; align-items: center; gap: 10px; padding: 18px 28px; font: 800 1rem/1.1 var(--font); text-decoration: none; border: 2px solid transparent; transition: background 0.2s, color 0.2s, border-color 0.2s; }
-  .b :global(.icon) { transition: transform 0.2s var(--ease); }
-  .b:hover :global(.icon) { transform: translate(3px, -3px); }
-  .b-gold { background: var(--g); color: var(--m-ink); }
-  .b-gold:hover { background: #fff; }
-  .b-line { border-color: rgba(255, 255, 255, 0.55); color: #fff; }
-  .b-line:hover { border-color: var(--g); color: var(--g); }
-  .b-maroon { background: var(--m); color: #fff; }
-  .b-maroon:hover { background: var(--m-ink); }
-  .acts { display: flex; flex-wrap: wrap; gap: 12px; }
+  /* hero: full-bleed photo, flat plum overlay, logo centered */
+  .hero { position: relative; min-height: clamp(560px, 86vh, 820px); display: flex; align-items: center; background: var(--plum); text-align: center; }
+  .hero .bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .hero::after { content: ''; position: absolute; inset: 0; background: rgba(51, 11, 47, 0.78); }
+  .hin { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; padding-block: clamp(64px, 9vw, 120px); }
+  .hin :global(.crumbs) { justify-content: center; margin-bottom: clamp(24px, 4vw, 48px); }
+  .hin :global(.crumbs), .hin :global(.crumbs a) { color: #e9d3e6; }
+  .hero h1 { margin: 0 0 28px; line-height: 0; }
+  .logo { width: min(78vw, 460px); height: auto; }
+  .when { color: var(--pgold); font-weight: 800; font-size: 1rem; letter-spacing: 0.08em; text-transform: uppercase; margin: 0 0 32px; }
 
-  /* hero */
-  .hero { display: grid; grid-template-columns: minmax(0, 46fr) minmax(0, 54fr); min-height: clamp(600px, 88vh, 880px); background: var(--m); }
-  @media (max-width: 980px) { .hero { grid-template-columns: minmax(0, 1fr); } }
-  .hero-text { display: flex; align-items: center; padding: clamp(48px, 7vw, 104px) clamp(20px, 5vw, 72px); color: #fff; }
-  .hero-in { max-width: 560px; margin-left: auto; width: 100%; }
-  @media (max-width: 980px) { .hero-in { margin: 0; } }
-  .hero-in :global(.crumbs), .hero-in :global(.crumbs a) { color: #f3c9d1; }
-  h1 { margin: 40px 0 28px; line-height: 0; }
-  .logo { display: block; width: min(100%, 440px); height: auto; }
-  .sub { font-size: clamp(1.15rem, 1.6vw, 1.35rem); color: #f7dfe4; margin: 0 0 40px; max-width: 30ch; line-height: 1.5; }
-  .hero-media { position: relative; min-height: 380px; background: var(--m-deep); }
-  .slide { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1.1s ease; }
-  .slide.on { opacity: 1; }
-  .bars { position: absolute; left: 28px; right: 28px; bottom: 26px; display: flex; gap: 8px; }
-  .bars button { flex: 1; max-width: 90px; height: 24px; background: none; border: 0; padding: 0; cursor: pointer; display: flex; align-items: center; }
-  .bars span { display: block; width: 100%; height: 4px; background: rgba(255, 255, 255, 0.45); transition: background 0.3s; }
-  .bars button[aria-pressed='true'] span { background: var(--g); }
+  /* intro + features */
+  .intro { font-size: clamp(1.35rem, 2.4vw, 2rem); font-weight: 700; line-height: 1.35; color: var(--plum); text-align: center; max-width: 30ch; margin: 0 auto clamp(56px, 7vw, 88px); }
+  .feats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(32px, 5vw, 72px); }
+  @media (max-width: 860px) { .feats { grid-template-columns: minmax(0, 1fr); } }
+  .feat { text-align: center; }
+  .fic { display: inline-grid; place-items: center; width: 72px; height: 72px; background: var(--plum); color: var(--pgold); margin-bottom: 22px; }
+  .feat h2 { font-size: 1.45rem; margin: 0 0 10px; }
+  .feat p { margin: 0 auto; color: var(--ink-2); max-width: 34ch; }
 
-  /* ticker */
-  .ticker { background: var(--g); overflow: hidden; border-block: 2px solid var(--m-ink); }
-  .track { display: flex; width: max-content; animation: tick 38s linear infinite; }
-  @media (prefers-reduced-motion: reduce) { .track { animation: none; } }
-  @keyframes tick { to { transform: translateX(-50%); } }
-  .run { display: flex; align-items: center; }
-  .run span { font: 900 clamp(1.1rem, 2vw, 1.5rem)/1 'Archivo Wide', var(--font); font-stretch: 125%; text-transform: uppercase; color: var(--m-ink); padding: 20px 26px; white-space: nowrap; }
-  .run img { width: 22px; height: 22px; filter: brightness(0) saturate(100%) invert(10%) sepia(40%) saturate(3000%) hue-rotate(330deg); }
+  /* what to expect */
+  .xgrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+  @media (max-width: 860px) { .xgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 520px) { .xgrid { grid-template-columns: minmax(0, 1fr); } }
+  .xt { position: relative; margin: 0; aspect-ratio: 4 / 3; overflow: hidden; background: var(--plum); }
+  .xt img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s var(--ease); }
+  .xt::after { content: ''; position: absolute; inset: 0; background: rgba(51, 11, 47, 0.45); transition: background 0.3s; }
+  .xt:hover img { transform: scale(1.05); }
+  .xt:hover::after { background: rgba(51, 11, 47, 0.25); }
+  .xt figcaption { position: absolute; inset: 0; z-index: 1; display: grid; place-items: center; color: #fff; font-weight: 800; font-size: clamp(1.1rem, 1.8vw, 1.4rem); text-transform: uppercase; letter-spacing: 0.04em; text-align: center; padding: 16px; }
 
-  /* intro */
-  .intro { padding: clamp(88px, 12vw, 160px) 0 clamp(64px, 8vw, 112px); }
-  .intro > .fpw:first-child { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(36px, 6vw, 104px); align-items: start; }
-  @media (max-width: 900px) { .intro > .fpw:first-child { grid-template-columns: minmax(0, 1fr); } }
-  .huge { font-size: clamp(2.6rem, 5.6vw, 5rem); line-height: 0.98; margin: 0; font-weight: 900; color: var(--m-ink); }
-  .huge span { color: var(--m); }
-  .intro-copy .big { font-size: clamp(1.2rem, 1.7vw, 1.45rem); line-height: 1.55; color: var(--m-ink); margin-top: 0; }
-  .intro-copy p { color: #5b3a40; }
-  .facts { margin-top: clamp(56px, 7vw, 96px); display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 3px solid var(--m-ink); }
-  @media (max-width: 900px) { .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-  .facts div { padding: 22px 20px 0 0; }
-  .facts dt { font-size: 0.9rem; font-weight: 800; color: var(--m); margin-bottom: 6px; }
-  .facts dd { margin: 0; font: 800 clamp(1.1rem, 1.6vw, 1.35rem)/1.25 var(--font); color: var(--m-ink); }
+  .goldband { background: var(--pgold); padding: clamp(40px, 5vw, 64px) 0; text-align: center; }
+  .goldband p { margin: 0; font-size: clamp(1.4rem, 3vw, 2.2rem); font-weight: 800; color: var(--plum); line-height: 1.2; }
 
-  /* expect */
-  .expect { background: var(--m-deep); color: #fff; padding: clamp(88px, 11vw, 150px) 0; }
-  .h2 { font-size: clamp(2.2rem, 4.4vw, 3.8rem); line-height: 1; font-weight: 900; margin: 0 0 clamp(40px, 5vw, 64px); }
-  .expect .h2 { color: #fff; }
-  .tiles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid rgba(255, 255, 255, 0.2); border-left: 1px solid rgba(255, 255, 255, 0.2); }
-  @media (max-width: 900px) { .tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-  @media (max-width: 580px) { .tiles { grid-template-columns: minmax(0, 1fr); } }
-  .tile { padding: clamp(28px, 3.5vw, 44px); border-right: 1px solid rgba(255, 255, 255, 0.2); border-bottom: 1px solid rgba(255, 255, 255, 0.2); transition: background 0.25s; }
-  .tile:hover { background: var(--m); }
-  .ic { display: grid; place-items: center; width: 60px; height: 60px; background: var(--g); color: var(--m-ink); margin-bottom: 26px; }
-  .tile h3 { font-size: 1.35rem; margin: 0 0 10px; color: #fff; }
-  .tile p { margin: 0; color: #eccbd2; }
+  /* itinerary */
+  .dtabs { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: clamp(32px, 4vw, 48px); }
+  .dtabs button { font: 800 1rem var(--font); text-transform: uppercase; letter-spacing: 0.05em; padding: 14px 26px; border: 2px solid var(--plum); background: #fff; color: var(--plum); cursor: pointer; transition: background 0.2s, color 0.2s, border-color 0.2s; }
+  .dtabs button:hover { background: var(--soft); }
+  .dtabs button[aria-selected='true'] { background: var(--coral); border-color: var(--coral); color: #fff; }
+  .tl { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); gap: 12px; }
+  .tl[hidden] { display: none; }
+  .tl li { display: flex; flex-direction: column; gap: 18px; padding: 26px 24px 28px; background: #fff; border: 2px solid #eadfe8; border-top: 6px solid var(--plum); transition: border-color 0.2s; }
+  .tl li:hover { border-color: var(--coral); }
+  .num { font-size: 2.4rem; font-weight: 850; line-height: 1; color: var(--coral); }
+  .tt strong { display: block; font-size: 1.2rem; line-height: 1.3; color: var(--plum); }
+  .tt small { display: block; margin-top: 6px; color: var(--muted); font-size: 0.95rem; line-height: 1.5; }
+  .note { margin: 24px 0 0; font-size: 0.93rem; color: var(--muted); font-style: italic; }
 
-  /* weekend */
-  .weekend { padding: clamp(88px, 11vw, 150px) 0; }
-  .wk-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 12px 40px; margin-bottom: clamp(32px, 4vw, 48px); }
-  .wk-head .h2 { margin: 0; color: var(--m-ink); }
-  .wk-head p { margin: 0; color: #6a4a50; max-width: 38ch; }
-  .daytabs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-bottom: 3px solid var(--m-ink); }
-  .daytabs button { font: 850 clamp(1rem, 2vw, 1.5rem)/1.1 'Archivo Wide', var(--font); font-stretch: 125%; text-align: left; padding: 22px 20px; border: 0; background: transparent; color: #8a6a70; cursor: pointer; display: flex; flex-direction: column; gap: 10px; transition: background 0.2s, color 0.2s; }
-  .daytabs .n { font: 800 0.85rem var(--font); font-stretch: 100%; }
-  .daytabs button:hover { color: var(--m); }
-  .daytabs button[aria-selected='true'] { background: var(--m); color: #fff; }
-  .daypanel { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: 24px clamp(40px, 6vw, 96px); padding: clamp(36px, 5vw, 64px) 0 0; }
-  @media (max-width: 800px) { .daypanel { grid-template-columns: minmax(0, 1fr); } }
-  .daypanel[hidden] { display: none; }
-  .daypanel h3 { font-size: clamp(1.6rem, 2.8vw, 2.4rem); line-height: 1.05; margin: 0; color: var(--m); }
-  .daypanel ol { list-style: none; counter-reset: i; padding: 0; margin: 0; }
-  .daypanel li { counter-increment: i; display: flex; gap: 20px; align-items: baseline; padding: 16px 0; border-bottom: 1px solid rgba(42, 8, 16, 0.14); font-size: 1.12rem; font-weight: 600; }
-  .daypanel li::before { content: counter(i, decimal-leading-zero); font-weight: 800; font-size: 0.85rem; color: var(--m); min-width: 24px; }
+  /* details card */
+  .card-d { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); background: #fff; border: 2px solid #eadfe8; }
+  @media (max-width: 900px) { .card-d { grid-template-columns: minmax(0, 1fr); } }
+  .cd-left { padding: clamp(32px, 5vw, 64px); }
+  .pg .cd-left h2 { color: var(--coral); margin-bottom: 20px; }
+  .cd-left p { color: var(--ink-2); }
+  .cd-left p.closed { display: flex; gap: 10px; align-items: flex-start; margin-top: 28px; padding: 18px 20px; background: var(--soft); color: var(--plum); font-weight: 750; border-left: 4px solid var(--coral); }
+  .closed :global(.icon) { flex-shrink: 0; margin-top: 3px; color: var(--coral); }
+  .cd-right { margin: 0; padding: clamp(32px, 5vw, 64px); background: var(--plum); color: #fff; display: grid; gap: 30px; align-content: start; }
+  .cd-right dt { font-size: 0.85rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--coral); margin-bottom: 6px; }
+  .cd-right dd { margin: 0; font-size: 1.35rem; font-weight: 800; color: #fff; }
+  .cd-right dd.tba { font-size: 1rem; font-weight: 600; color: var(--pgold); margin-top: 2px; }
+  .cd-right .stay dd { font-size: 1rem; font-weight: 500; color: #e9d3e6; }
+  .stay .ss-wrap { margin-top: 16px; }
+  .stay :global(.ss-field) { border-color: #fff; }
 
   /* gallery */
-  .gallery { background: var(--cr-2); padding: clamp(88px, 11vw, 150px) 0; }
-  .gal-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 12px 40px; margin-bottom: clamp(32px, 4vw, 48px); }
-  .gal-head .h2 { margin: 0; color: var(--m-ink); }
-  .gal-head p { margin: 0; color: #6a4a50; }
-  .gal { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-rows: clamp(150px, 17vw, 250px); gap: 10px; }
-  @media (max-width: 700px) { .gal { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: 42vw; } }
-  .shot { padding: 0; border: 0; background: var(--m-deep); cursor: zoom-in; overflow: hidden; display: block; }
-  .shot.g-wide { grid-column: span 2; grid-row: span 2; }
-  .shot img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.8s var(--ease), opacity 0.3s; }
+  .gal { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-rows: clamp(140px, 16vw, 240px); gap: 10px; }
+  @media (max-width: 700px) { .gal { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: 40vw; } }
+  .shot { padding: 0; border: 0; background: var(--plum); cursor: zoom-in; overflow: hidden; display: block; }
+  .shot.big { grid-column: span 2; grid-row: span 2; }
+  .shot img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.7s var(--ease); }
   .shot:hover img { transform: scale(1.05); }
-  .shot:focus-visible { outline: 4px solid var(--g); outline-offset: 2px; }
+  .shot:focus-visible { outline: 4px solid var(--pgold); outline-offset: 2px; }
   .lb { border: 0; padding: 0; background: transparent; max-width: min(1280px, 94vw); max-height: 92vh; }
-  .lb::backdrop { background: rgba(20, 3, 8, 0.92); }
+  .lb::backdrop { background: rgba(51, 11, 47, 0.94); }
   .lb img { display: block; max-width: 100%; max-height: 92vh; }
-  .lb-x { position: fixed; top: 18px; right: 18px; width: 52px; height: 52px; border: 0; background: var(--g); color: var(--m-ink); cursor: pointer; display: grid; place-items: center; }
+  .lb-x { position: fixed; top: 18px; right: 18px; width: 52px; height: 52px; border: 0; background: var(--pgold); color: var(--plum); cursor: pointer; display: grid; place-items: center; }
 
   /* campuses */
-  .campuses { padding: clamp(88px, 11vw, 150px) 0; }
-  .cp-head { margin-bottom: clamp(32px, 4vw, 48px); }
-  .cp-head .h2 { margin: 0 0 14px; color: var(--m-ink); }
-  .cp-head p { margin: 0; color: #6a4a50; font-size: 1.15rem; }
-  .logos { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr)); border-top: 3px solid var(--m-ink); }
-  .logos li { border-bottom: 1px solid rgba(42, 8, 16, 0.14); }
-  .logos a { display: flex; align-items: center; gap: 16px; padding: 18px 16px 18px 0; text-decoration: none; color: var(--m-ink); font-weight: 750; line-height: 1.3; transition: color 0.2s, background 0.2s, padding 0.2s; }
-  .logos a:hover { color: var(--m); background: #fff; padding-left: 12px; }
+  .logos { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr)); gap: 10px; }
+  .logos a { display: flex; align-items: center; gap: 14px; padding: 16px; height: 100%; background: #fff; border: 2px solid transparent; text-decoration: none; color: var(--plum); font-weight: 750; line-height: 1.3; transition: border-color 0.2s; }
+  .logos a:hover { border-color: var(--coral); }
 
-  /* join */
-  .join { background: #fff; padding: clamp(88px, 11vw, 150px) 0; }
-  .join-grid { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: clamp(48px, 7vw, 112px); align-items: start; }
-  @media (max-width: 980px) { .join-grid { grid-template-columns: minmax(0, 1fr); } }
-  .join .h2 { color: var(--m-ink); }
-  .steps { list-style: none; counter-reset: s; padding: 0; margin: 0 0 44px; display: grid; gap: 30px; }
-  .steps li { counter-increment: s; display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 4px 22px; }
-  .steps li::before { content: counter(s); grid-row: span 2; width: 64px; height: 64px; display: grid; place-items: center; background: var(--g); color: var(--m-ink); font: 900 1.6rem 'Archivo Wide', var(--font); font-stretch: 125%; }
-  .steps strong { font-size: 1.25rem; color: var(--m-ink); padding-top: 6px; }
-  .steps span { color: #6a4a50; }
-  .join-side { display: grid; gap: 28px; }
-  .finder { background: var(--cr); padding: clamp(24px, 3vw, 36px); display: grid; gap: 16px; }
-  .finder h3 { margin: 0; font-size: 1.3rem; color: var(--m-ink); }
-  .finder :global(.ss-field) { border-color: var(--m-ink); }
-  .finder :global(.ss .btn) { background: var(--m); color: #fff; }
-  .flyer { margin: 0; max-width: 420px; }
-  .flyer img { width: 100%; height: auto; display: block; }
-  .flyer figcaption { font-size: 0.9rem; color: #6a4a50; margin-top: 10px; font-weight: 600; }
-
-  /* faq */
-  .faqs { background: var(--cr); padding: clamp(88px, 11vw, 150px) 0; }
-  .faq-grid { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: clamp(32px, 6vw, 96px); align-items: start; }
-  @media (max-width: 900px) { .faq-grid { grid-template-columns: minmax(0, 1fr); } }
-  .faq-grid .h2 { color: var(--m-ink); }
-  .qa { border-top: 3px solid var(--m-ink); }
-  .qa details { border-bottom: 1px solid rgba(42, 8, 16, 0.18); }
-  .qa summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; gap: 24px; align-items: center; padding: 24px 0; font-weight: 800; font-size: 1.15rem; color: var(--m-ink); }
-  .qa summary::-webkit-details-marker { display: none; }
-  .qa summary:hover { color: var(--m); }
-  .qa summary :global(.pl) { flex-shrink: 0; color: var(--m); transition: transform 0.25s var(--ease); }
-  .qa details[open] summary :global(.pl) { transform: rotate(45deg); }
-  .qa p { margin: 0 0 26px; color: #5b3a40; max-width: 62ch; }
-  .qa p :global(a) { color: var(--m); font-weight: 700; }
-
-  /* international */
-  .intl { background: var(--m-ink); }
-  .intl-row { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 24px clamp(32px, 5vw, 72px); align-items: center; padding: clamp(48px, 6vw, 80px) 0; text-decoration: none; color: #fff; }
-  @media (max-width: 900px) { .intl-row { grid-template-columns: minmax(0, 1fr); } }
-  .intl-row img { width: clamp(180px, 20vw, 260px); height: auto; }
-  .intl-row h2 { color: #fff; font-size: clamp(1.4rem, 2.2vw, 1.9rem); margin: 0 0 8px; }
-  .intl-row p { margin: 0; color: #e5bcc5; max-width: 60ch; }
-  .go { display: inline-flex; align-items: center; gap: 10px; font-weight: 800; color: var(--g); white-space: nowrap; }
-  .go :global(.icon) { transition: transform 0.2s var(--ease); }
-  .intl-row:hover .go :global(.icon) { transform: translateX(6px); }
-
-  /* final */
-  .final { position: relative; background: var(--m); padding: clamp(96px, 13vw, 180px) 0; overflow: hidden; }
-  .final .wm { position: absolute; right: -80px; top: 50%; translate: 0 -50%; width: clamp(320px, 40vw, 560px); height: auto; opacity: 0.16; pointer-events: none; }
-  .final .fpw { position: relative; }
-  .final h2 { color: #fff; font-size: clamp(2.6rem, 6vw, 5.2rem); line-height: 0.98; font-weight: 900; margin: 0 0 44px; text-transform: uppercase; }
-  .final h2 span { color: var(--g); }
+  /* closer */
+  .closer { position: relative; padding: clamp(88px, 12vw, 160px) 0; text-align: center; background: var(--plum); }
+  .closer .bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .closer::after { content: ''; position: absolute; inset: 0; background: rgba(51, 11, 47, 0.85); }
+  .cin { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; }
+  .logo-sm { width: min(60vw, 260px); height: auto; margin-bottom: 28px; }
+  .cin p { color: #fff; font-size: clamp(1.3rem, 2.4vw, 1.8rem); font-weight: 800; margin: 0 0 32px; }
 </style>
