@@ -14,8 +14,8 @@ const cats = [
   { name: 'Care & Home', icon: 'HeartHandshake', text: 'Chicken soup when you are sick and a mezuzah for your door.' },
 ] as const;
 const anchor = (s: string) => s.toLowerCase().replace(/[^a-z]+/g, '-');
-const hero = img('pegisha-group');
-const side = img('pegisha-welcome');
+const hero = img('fl-group');
+const side = img('fl-gators');
 const ld = [
   {
     '@context': 'https://schema.org',
@@ -80,7 +80,7 @@ const ld = [
         <p class="lead">Your rabbi and rebbetzin will sign you up, answer your questions and often travel with you.</p>
         <a class="btn btn-blue" href="/campuses/">Find your Chabad House <Icon name="ArrowRight" size={20} /></a>
       </div>
-      <div class="photo sp"><img src={side.src} srcset={side.srcset} sizes="(max-width: 900px) 100vw, 50vw" width={side.width} height={side.height} alt="A Welcome to Pegisha banner over a street in Crown Heights, Brooklyn" loading="lazy" /></div>
+      <div class="photo sp"><img src={side.src} srcset={side.srcset} sizes="(max-width: 900px) 100vw, 50vw" width={side.width} height={side.height} alt="Chabad UF students gathered under the Jewish Student Center tent on campus" loading="lazy" /></div>
     </div>
   </section>
 

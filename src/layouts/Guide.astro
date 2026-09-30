@@ -18,7 +18,7 @@ interface Props {
   jsonLd?: object[];
   wide?: boolean;
 }
-const { title, metaTitle, description, path, lead, image = 'students-friends', imageAlt = '', crumbs, jsonLd = [], wide = false } = Astro.props;
+const { title, metaTitle, description, path, lead, image = 'fl-friends', imageAlt = '', crumbs, jsonLd = [], wide = false } = Astro.props;
 const hero = img(image);
 const others = GUIDES.filter((g) => g.href !== path);
 const articleLd = {

@@ -13,9 +13,9 @@ import { SITE, TESTIMONIALS, img } from '../lib/site';
 
 const path = '/support/';
 const crumbs = [{ name: 'Support', href: path }];
-const hero = img('shabbat-candles');
+const hero = img('fl-support');
 const story = TESTIMONIALS.find((t) => t.center === 'unf') || TESTIMONIALS[0];
-const storyImg = img('students-friends');
+const storyImg = img('fl-story');
 
 const trust = [
   { icon: 'HandHeart', title: 'Straight to the center you choose', text: 'Your gift goes directly to that Chabad House, not to a middleman.' },
@@ -23,10 +23,10 @@ const trust = [
   { icon: 'ShieldCheck', title: 'Secure giving', text: 'You give on the Chabad House’s own donation page.' },
 ];
 const impact = [
-  { key: 'shabbat-candles', title: 'A seat at the Shabbat table', text: 'You set the table every Friday night for any student who walks in.' },
-  { key: 'tefillin', title: 'Every holiday, away from home', text: 'You make sure no student spends Rosh Hashanah or Passover alone.' },
-  { key: 'friends-outdoors', title: 'Soup when they are sick', text: 'You send homemade chicken soup to a student in bed with the flu.' },
-  { key: 'sinai-study-pair', title: 'Room for big questions', text: 'You open the door to learning, mentorship and honest conversation.' },
+  { key: 'fl-dinner', title: 'A seat at the Shabbat table', text: 'You set the table every Friday night for any student who walks in.' },
+  { key: 'fl-sukkah', title: 'Every holiday, away from home', text: 'You make sure no student spends Rosh Hashanah or Passover alone.' },
+  { key: 'fl-soup', title: 'Soup when they are sick', text: 'You send homemade chicken soup to a student in bed with the flu.' },
+  { key: 'fl-study', title: 'Room for big questions', text: 'You open the door to learning, mentorship and honest conversation.' },
 ].map((x) => ({ ...x, ...img(x.key) }));
 const who = [
   { icon: 'HeartHandshake', title: 'Parents', text: 'Thank the people who look after your child, and make sure they are there for the next student too.' },
@@ -63,7 +63,7 @@ const ld = [
         </div>
       </div>
     </div>
-    <div class="smedia"><img src={hero.src} srcset={hero.srcset} sizes="(max-width: 960px) 100vw, 50vw" width={hero.width} height={hero.height} alt="Students lighting Shabbat candles together at a Chabad House" fetchpriority="high" /></div>
+    <div class="smedia"><img src={hero.src} srcset={hero.srcset} sizes="(max-width: 960px) 100vw, 50vw" width={hero.width} height={hero.height} alt="FSU students around the Shabbat table at the Chabad House" fetchpriority="high" /></div>
   </section>
 
   <section class="trust">
@@ -95,7 +95,7 @@ const ld = [
   </section>
 
   <section class="story band-night">
-    <div class="st-media"><img src={storyImg.src} srcset={storyImg.srcset} sizes="(max-width: 960px) 100vw, 45vw" width={storyImg.width} height={storyImg.height} alt="Jewish college students smiling together at a Chabad House" loading="lazy" /></div>
+    <div class="st-media"><img src={storyImg.src} srcset={storyImg.srcset} sizes="(max-width: 960px) 100vw, 45vw" width={storyImg.width} height={storyImg.height} alt="Friends smiling together at Chabad UF" loading="lazy" /></div>
     <div class="st-text">
       <figure class="reveal">
         <Icon name="Quote" size={48} class="qm" />

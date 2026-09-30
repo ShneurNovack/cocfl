@@ -8,7 +8,7 @@ import { stats, centers } from '../lib/centers';
 import { SITE, TESTIMONIALS, img } from '../lib/site';
 const sorted = centers; // original site order
 const crumbs = [{ name: 'About', href: '/about/' }];
-const hero = img('rabbi-students');
+const hero = img('fl-about');
 const rebbe = img('the-rebbe');
 const ld = [
   {
@@ -40,7 +40,7 @@ const pillars = [
         <p class="lead">{stats.centers} Chabad Houses. {stats.campuses} campuses. One family.</p>
       </div>
     </div>
-    <div class="amedia"><img src={hero.src} srcset={hero.srcset} sizes="(max-width: 960px) 100vw, 55vw" width={hero.width} height={hero.height} alt="A Chabad rabbi learning with college students around a table" fetchpriority="high" /></div>
+    <div class="amedia"><img src={hero.src} srcset={hero.srcset} sizes="(max-width: 960px) 100vw, 55vw" width={hero.width} height={hero.height} alt="Students from Chabad at the University of Miami together outside" fetchpriority="high" /></div>
   </section>
 
   <section class="section">
