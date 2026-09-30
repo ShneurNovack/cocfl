@@ -13,7 +13,7 @@ export type Program = {
   slug: string;
   name: string;
   shortName: string;
-  category: 'Learning' | 'Shabbatons' | 'Travel & Israel';
+  category: 'Learning' | 'Shabbatons' | 'Travel & Israel' | 'Care & Home';
   tagline: string;
   metaTitle: string;
   metaDescription: string;
@@ -374,6 +374,88 @@ export const programs: Program[] = [
     related: ['birthright-israel', 'florida-pegisha', 'pegisha'],
   },
 
+  {
+    slug: 'soup-delivery',
+    name: 'Soup Delivery',
+    shortName: 'Soup Delivery',
+    category: 'Care & Home',
+    tagline: 'Feeling sick? Homemade chicken soup, delivered to your door by your Chabad House.',
+    metaTitle: 'Chicken Soup Delivery for Sick College Students | Chabad on Campus Florida',
+    metaDescription:
+      'Under the weather at college? Florida Chabad Houses deliver homemade chicken soup to students who are sick. Here is how to request a delivery from your campus Chabad.',
+    image: 'friends-outdoors',
+    imageAlt: 'College students together outside a Chabad House',
+    audience: 'Any student who is feeling sick, stressed or just far from home.',
+    format: 'A delivery of homemade chicken soup, straight to your dorm or apartment.',
+    cost: 'Free.',
+    intro: [
+      'There is a reason they call it Jewish penicillin. When you are sick and far from home, nothing hits quite like a bowl of homemade chicken soup, and your Chabad House is happy to bring it to you.',
+      'Just let your rabbi or rebbetzin know you are not feeling well. They will get a container of warm soup to your door, often with a little something extra and a lot of get-well wishes.',
+    ],
+    sections: [
+      {
+        h2: 'How it works',
+        body: ['Text, call or message your campus Chabad House and tell them where you are. Friends and roommates can request a delivery for someone else, too. Parents often reach out on behalf of a sick student who is too tired to ask.'],
+      },
+      {
+        h2: 'More than soup',
+        body: ['A delivery is a small reminder that someone nearby is looking out for you. If you need more than soup, whether that is a ride, a kosher meal or someone to talk to, just ask.'],
+      },
+    ],
+    faqs: [
+      { q: 'How do I get soup delivered?', a: 'Contact your campus Chabad House by text, phone or social media and let them know where you are. <a href="/campuses/">Find your Chabad House</a>.' },
+      { q: 'Does it cost anything?', a: 'No. Soup deliveries are a free gift from your Chabad House.' },
+      { q: 'Can a parent request soup for their child?', a: 'Yes. Parents often reach out when their child is sick. Contact the Chabad House at your child\'s school directly.' },
+      { q: 'Is the soup kosher?', a: 'Yes. It is made in your Chabad House\'s kosher kitchen.' },
+    ],
+    offeredAt: 'all',
+    offeredAtNote: 'Reach out to your campus Chabad House to request a delivery.',
+    officialLinks: [],
+    related: ['mezuzah-loans', 'jewishu', 'florida-pegisha'],
+  },
+  {
+    slug: 'mezuzah-loans',
+    name: 'Mezuzah Loans',
+    shortName: 'Mezuzah Loans',
+    category: 'Care & Home',
+    tagline: 'Borrow a kosher mezuzah for your dorm or apartment door, free for the school year.',
+    metaTitle: 'Free Mezuzah Loans for College Dorms | Chabad on Campus Florida',
+    metaDescription:
+      'Put a kosher mezuzah on your dorm or apartment door. Florida Chabad Houses lend mezuzahs to Jewish college students for the school year and help put them up.',
+    image: 'tefillin',
+    imageAlt: 'A rabbi helping a college student with a Jewish ritual',
+    audience: 'Jewish students living in a dorm, apartment or house near campus.',
+    format: 'A kosher mezuzah on loan for the year, with help putting it up.',
+    cost: 'Free to borrow.',
+    intro: [
+      'A mezuzah on your door turns a dorm room into a Jewish home. It is one of the most recognizable Jewish symbols, and it reminds everyone who walks through the door of what matters most.',
+      'Your Chabad House can lend you a kosher mezuzah for the school year and help you put it up, with a blessing and usually a l\'chaim.',
+    ],
+    sections: [
+      {
+        h2: 'Why a real mezuzah matters',
+        body: ['The case is just the cover. What makes a mezuzah kosher is the handwritten parchment scroll inside, written by a trained scribe. Many store-bought cases have no kosher scroll, or none at all. A loaned mezuzah from your Chabad House comes with a kosher scroll.'],
+      },
+      {
+        h2: 'Putting it up',
+        body: ['The mezuzah goes on the right side of the doorway as you walk in, in the upper third of the doorpost, tilted toward the inside. Your rabbi will be happy to come by, help you hang it and say the blessing with you. Removable mounting works for most dorms.'],
+      },
+      {
+        h2: 'At the end of the year',
+        body: ['When you move out, bring the mezuzah back to your Chabad House so the next student can use it, or ask about buying your own to take with you.'],
+      },
+    ],
+    faqs: [
+      { q: 'How do I borrow a mezuzah?', a: 'Reach out to your campus Chabad House and let them know where you are living. <a href="/campuses/">Find your Chabad House</a>.' },
+      { q: 'Does it cost anything?', a: 'Borrowing a mezuzah for the school year is free.' },
+      { q: 'Is a mezuzah allowed in my dorm?', a: 'Many universities allow mezuzahs on dorm doors, and removable mounting avoids damage. If you are unsure, your Chabad House can help you check with housing.' },
+      { q: 'What if I already have a mezuzah case?', a: 'Bring it by. Your Chabad House can check whether it has a kosher scroll inside and help you get one if it does not.' },
+    ],
+    offeredAt: 'all',
+    offeredAtNote: 'Reach out to your campus Chabad House to borrow a mezuzah.',
+    officialLinks: [],
+    related: ['soup-delivery', 'jewishu', 'florida-pegisha'],
+  },
 ];
 
 export const programBySlug = Object.fromEntries(programs.map((p) => [p.slug, p]));

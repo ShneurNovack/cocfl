@@ -3,16 +3,20 @@ import { programs } from '../data/programs';
 import { SITE } from '../lib/site';
 import { GUIDES } from '../data/guides';
 import Icon from './Icon.astro';
+import SocialIcon from './SocialIcon.astro';
 const year = new Date().getFullYear();
 ---
 <footer class="site-footer">
-  <img class="wm" src="/flame.webp" alt="" width="96" height="96" loading="lazy" />
+  <img class="wm" src="/flame.png" alt="" width="96" height="96" loading="lazy" />
   <div class="wrap cols">
     <div class="about">
-      <a href="/" class="brand"><img class="mk" src="/flame.webp" alt="" width="36" height="36" loading="lazy" /> Chabad on Campus Florida</a>
+      <a href="/" class="brand"><img class="mk" src="/flame.png" alt="" width="36" height="36" loading="lazy" /> Chabad on Campus Florida</a>
       <p>A joint initiative of the Chabad on Campus centers across Florida, each one independently run by its own rabbi and rebbetzin.</p>
-      <a class="btn btn-gold" href="/campuses/"><Icon name="MapPin" size={18} /> Find Chabad at your school</a>
-      <div><a class="support" href="/support/"><Icon name="Heart" size={18} /> Support your local Chabad</a></div>
+      <div class="fbtns">
+        <a class="btn btn-gold" href="/campuses/"><Icon name="MapPin" size={18} /> Find Chabad at your school</a>
+        <a class="btn fsup" href="/support/"><Icon name="Heart" size={18} /> Support your local Chabad</a>
+      </div>
+      <a class="ig" href={SITE.instagram} rel="noopener" aria-label="Chabad on Campus Florida on Instagram"><SocialIcon type="Instagram" size={20} /> @chabadoncampusfl</a>
     </div>
     <div>
       <nav aria-label="Programs">
@@ -33,7 +37,6 @@ const year = new Date().getFullYear();
   </div>
   <div class="wrap"><div class="legal">
     <span>&copy; {year} Chabad on Campus Florida</span>
-    <span>Center details are refreshed daily.</span>
   </div></div>
 </footer>
 
@@ -43,10 +46,14 @@ const year = new Date().getFullYear();
   .mk { width: 36px; height: 36px; }
   .site-footer a { color: #e3eff8; text-decoration: none; }
   .site-footer a:hover { color: var(--gold); text-decoration: underline; }
-  .site-footer .btn-gold { color: var(--ink); margin-top: 8px; }
+  .fbtns { display: grid; gap: 10px; justify-items: stretch; max-width: 300px; margin-top: 8px; }
+  .fbtns .btn { justify-content: flex-start; padding: 16px 22px; }
+  .site-footer .btn-gold { color: var(--ink); }
+  .site-footer .fsup { border: 2px solid rgba(255, 255, 255, 0.5); color: #fff; background: transparent; }
+  .site-footer .fsup:hover { border-color: var(--gold); color: var(--gold); text-decoration: none; }
+  .ig { display: inline-flex; align-items: center; gap: 10px; margin-top: 22px; font-weight: 700; }
   .site-footer .btn-gold:hover { background: #fff; color: var(--blue-ink); text-decoration: none; }
   .site-footer .btn-gold:hover :global(.icon) { transform: none; }
-  .support { display: inline-flex; align-items: center; gap: 8px; margin-top: 18px; font-weight: 700; }
   .cols { display: grid; gap: 40px; grid-template-columns: 1.4fr 1fr 1fr; }
   @media (max-width: 1000px) { .cols { grid-template-columns: 1fr 1fr; } }
   @media (max-width: 560px) { .cols { grid-template-columns: minmax(0, 1fr); } }

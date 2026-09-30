@@ -2,14 +2,14 @@
 import { NAV } from '../lib/site';
 import Icon from './Icon.astro';
 const current = Astro.url.pathname;
-const isActive = (href: string) => (href === '/' ? current === '/' : current.startsWith(href) && !(href === '/programs/' && current.startsWith('/programs/florida-pegisha/')));
+const isActive = (href: string) => (href === '/' ? current === '/' : current.startsWith(href));
 // Logo lockup: 'stacked' | 'divider' | 'lockup'
 const BRAND = 'stacked';
 ---
 <header class="site-header">
   <div class="bar wrap">
     <a href="/" class:list={['brand', `brand-${BRAND}`]} aria-label="Chabad on Campus Florida home">
-      <img class="flame" src="/flame.webp" alt="" width="40" height="40" />
+      <img class="flame" src="/flame.png" alt="" width="40" height="40" />
       <span class="name"><span class="l1">Chabad on Campus</span> <span class="l2">Florida</span></span>
     </a>
     <nav class="nav-desktop" aria-label="Main">

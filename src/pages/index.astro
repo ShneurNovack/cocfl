@@ -23,7 +23,6 @@ const slides = [
   { key: 'shabbat-candles', alt: 'Students lighting Shabbat candles together' },
   { key: 'pizza-friends', alt: 'Friends sharing pizza at a Chabad on Campus event' },
 ].map((s) => ({ ...s, ...img(s.key) }));
-const fp = img('fp-havdalah-candle');
 
 const tabs = [
   { id: 'shabbat', icon: 'Flame', label: 'Shabbat', title: 'Friday night, there is a seat for you', text: 'Candles, challah, a home-cooked dinner and a table full of friends. You never need an invitation.', image: 'shabbat-candles', alt: 'Students lighting Shabbat candles together', href: '/jewish-life-on-campus/shabbat/', link: 'Shabbat on campus' },
@@ -91,17 +90,6 @@ const values = [
             </li>
           ))}
         </ul>
-      </div>
-    </div>
-  </section>
-
-  <section class="fp">
-    <div class="fp-media"><img src={fp.src} srcset={fp.srcset} sizes="(max-width: 960px) 100vw, 55vw" width={fp.width} height={fp.height} alt="A student holding a lit Havdalah candle at the Florida Pegisha" loading="lazy" decoding="async" /></div>
-    <div class="fp-text band-night">
-      <div class="fp-in reveal">
-        <h2>Florida Pegisha</h2>
-        <p>Our biggest weekend of the year: one Shabbat with Jewish students from every Florida campus. Travel with your Chabad House, meet the whole state, and come home with friends from Tallahassee to Miami.</p>
-        <a class="btn btn-gold" href="/programs/florida-pegisha/">Discover the Florida Pegisha <Icon name="ArrowRight" size={20} /></a>
       </div>
     </div>
   </section>
@@ -353,12 +341,4 @@ const values = [
   .duo-card h2 { font-size: clamp(1.7rem, 2.8vw, 2.2rem); margin: 16px 0 0; }
   .duo-card p { color: var(--ink-2); margin: 0; font-size: 1.1rem; max-width: 36ch; }
   .duo-card .textlink { margin-top: 12px; color: var(--blue); }
-  .fp { display: grid; grid-template-columns: minmax(0, 55fr) minmax(0, 45fr); min-height: clamp(460px, 62vh, 620px); }
-  @media (max-width: 960px) { .fp { grid-template-columns: minmax(0, 1fr); } }
-  .fp-media { position: relative; min-height: 320px; background: var(--blue-night); }
-  .fp-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-  .fp-text { display: flex; align-items: center; padding: clamp(48px, 7vw, 96px) var(--gutter); }
-  .fp-in { max-width: 520px; }
-  .fp-in h2 { color: #fff; font-size: clamp(2.4rem, 4.8vw, 3.8rem); margin: 0 0 18px; }
-  .fp-in p { color: #cfe2f0; font-size: 1.15rem; margin: 0 0 32px; }
 </style>

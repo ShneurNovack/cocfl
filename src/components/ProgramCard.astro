@@ -6,7 +6,7 @@ interface Props { program: Program; headingLevel?: 'h2' | 'h3' }
 const { program: p, headingLevel = 'h3' } = Astro.props;
 const H = headingLevel;
 const i = img(p.image);
-const catIcon: Record<string, string> = { Learning: 'BookOpen', Shabbatons: 'Flame', 'Travel & Israel': 'Plane' };
+const catIcon: Record<string, string> = { Learning: 'BookOpen', Shabbatons: 'Flame', 'Travel & Israel': 'Plane', 'Care & Home': 'HeartHandshake' };
 ---
 <article class="pcard" data-cat={p.category}>
   <div class="thumb">
@@ -28,6 +28,7 @@ const catIcon: Record<string, string> = { Learning: 'BookOpen', Shabbatons: 'Fla
   .cat { position: absolute; left: 0; bottom: 0; display: inline-flex; align-items: center; gap: 6px; background: #fff; color: var(--blue-ink); font-size: 0.8rem; font-weight: 750; padding: 8px 14px; }
   [data-cat='Shabbatons'] .cat { background: var(--gold); color: var(--ink); }
   [data-cat='Travel & Israel'] .cat { background: var(--blue); color: #fff; }
+  [data-cat='Care & Home'] .cat { background: var(--blue-night); color: #fff; }
   .body { padding: 24px 24px 26px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
   .body h2, .body h3 { font-size: 1.3rem; margin: 0; }
   .body a { color: var(--ink); text-decoration: none; }

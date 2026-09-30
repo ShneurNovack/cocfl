@@ -11,11 +11,11 @@ const cats = [
   { name: 'Learning', icon: 'BookOpen', text: 'Courses and fellowships taught at your campus Chabad House.' },
   { name: 'Shabbatons', icon: 'Flame', text: 'Weekends with Jewish students from many campuses: the Florida Pegisha and the International Pegisha.' },
   { name: 'Travel & Israel', icon: 'Plane', text: 'Birthright with your campus Chabad and heritage trips.' },
+  { name: 'Care & Home', icon: 'HeartHandshake', text: 'Chicken soup when you are sick and a mezuzah for your door.' },
 ] as const;
 const anchor = (s: string) => s.toLowerCase().replace(/[^a-z]+/g, '-');
 const hero = img('pegisha-group');
 const side = img('pegisha-welcome');
-const fpi = img('fp-group');
 const ld = [
   {
     '@context': 'https://schema.org',
@@ -31,7 +31,7 @@ const ld = [
 ---
 <Base
   title="Programs for Jewish College Students in Florida"
-  description="The Florida Pegisha, JewishU, Sinai Scholars, Birthright Israel, the International Pegisha, Your Israel and Living Links: Chabad on Campus programs for Florida students."
+  description="Florida Pegisha, JewishU, Sinai Scholars, Birthright Israel, International Pegisha, Your Israel, Living Links, soup delivery and mezuzah loans: Chabad on Campus programs for Florida students."
   path="/programs/"
   breadcrumbs={[{ name: 'Programs', href: '/programs/' }]}
   jsonLd={ld}
@@ -44,19 +44,6 @@ const ld = [
         <h1>Learn, travel and grow</h1>
         <p class="lead">Programs for Florida students, run through your local Chabad House.</p>
       </div>
-    </div>
-  </section>
-
-  <section class="feat">
-    <div class="wrap">
-      <a class="fcard" href="/programs/florida-pegisha/">
-        <div class="photo fimg"><img src={fpi.src} srcset={fpi.srcset} sizes="(max-width: 900px) 100vw, 50vw" width={fpi.width} height={fpi.height} alt="Florida college students at the Florida Pegisha" loading="lazy" /></div>
-        <div class="ft">
-          <h2>Florida Pegisha</h2>
-          <p class="lead">One Shabbat weekend with Jewish students from every Florida campus.</p>
-          <span class="textlink">Discover the Florida Pegisha <Icon name="ArrowRight" size={20} /></span>
-        </div>
-      </a>
     </div>
   </section>
 
@@ -107,15 +94,7 @@ const ld = [
   .box { max-width: 680px; padding: clamp(36px, 5vw, 64px); }
   .box h1 { margin-bottom: 16px; }
   .box .lead { margin: 0; }
-  .feat { padding: clamp(56px, 7vw, 96px) 0 0; }
-  .fcard { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); background: var(--blue-night); color: #fff; text-decoration: none; }
-  @media (max-width: 900px) { .fcard { grid-template-columns: minmax(0, 1fr); } }
-  .fimg { aspect-ratio: 4 / 3; }
-  .ft { padding: clamp(32px, 5vw, 72px); align-self: center; }
-  .ft h2 { color: #fff; font-size: clamp(2.2rem, 4vw, 3.2rem); margin: 0 0 14px; }
-  .ft .lead { color: #cfe2f0; margin-bottom: 28px; }
-  .ft .textlink { color: var(--gold); }
-  .catnav { border-bottom: 2px solid var(--ink); margin-top: clamp(40px, 5vw, 64px); }
+  .catnav { border-bottom: 2px solid var(--ink); }
   .cn { display: flex; flex-wrap: wrap; }
   .cn a { display: inline-flex; align-items: center; gap: 10px; padding: 22px 28px 22px 0; margin-right: 12px; font-weight: 750; font-size: 1.05rem; text-decoration: none; color: var(--ink); }
   .cn a:hover { color: var(--blue); }

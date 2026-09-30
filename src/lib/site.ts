@@ -6,6 +6,7 @@ export const SITE = {
     'Chabad on Campus Florida connects Jewish college students with Chabad Houses at universities across Florida: Shabbat dinners, Jewish holidays, kosher food, learning, Israel trips and a home away from home.',
   ogImage: '/images/florida-pegisha-students-1280.webp',
   locale: 'en_US',
+  instagram: 'https://www.instagram.com/chabadoncampusfl/',
   // Organization-reported figures kept from the original site. Edit here.
   reported: {
     students: '26,000',
@@ -34,7 +35,6 @@ export const TESTIMONIALS = [
 export const NAV = [
   { href: '/campuses/', label: 'Find Your Campus' },
   { href: '/programs/', label: 'Programs' },
-  { href: '/programs/florida-pegisha/', label: 'Florida Pegisha' },
   { href: '/jewish-life-on-campus/', label: 'Jewish Life' },
   { href: '/parents/', label: 'Parents' },
   { href: '/about/', label: 'About' },

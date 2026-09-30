@@ -5,9 +5,8 @@ import CenterLogo from '../../components/CenterLogo.astro';
 import Icon from '../../components/Icon.astro';
 import FloridaMap from '../../components/FloridaMap.astro';
 import SocialIcon from '../../components/SocialIcon.astro';
-import CenterCard from '../../components/CenterCard.astro';
 import CtaBand from '../../components/CtaBand.astro';
-import { centers, nearbyCenters, withThe, distanceText, stateAbbr, KOSHER_KEYS, type Center } from '../../lib/centers';
+import { centers, withThe, distanceText, stateAbbr, KOSHER_KEYS, type Center } from '../../lib/centers';
 import { SITE } from '../../lib/site';
 
 export function getStaticPaths() {
@@ -22,7 +21,6 @@ const pThe = withThe(pName);
 const abbr = P.abbr;
 const short = abbr || pName;
 const others = c.otherCampuses;
-const nearby = nearbyCenters(c, 3);
 const sameSchool: Center[] = centers.filter((x) => x.id !== c.id && (x.primaryCampus.name.startsWith(pName.split(' (')[0]) || pName.startsWith(x.primaryCampus.name.split(' (')[0])));
 const dist = distanceText(P.distance);
 const cityState = `${c.city}, ${stateAbbr(c.address?.state ?? null)}`;
@@ -50,7 +48,7 @@ const AMENITY_ICON: Record<string, string> = {
   'Shabbat and holidays minyan': 'Flame',
   'Daily minyan': 'Sunrise',
 };
-const PROGRAM_ICON: Record<string, string> = { jewishu: 'GraduationCap', 'sinai-scholars': 'BookOpen', 'birthright-israel': 'Plane', pegisha: 'Flame', 'your-israel': 'Globe', 'living-links': 'Landmark', 'florida-pegisha': 'Sun' };
+const PROGRAM_ICON: Record<string, string> = { jewishu: 'GraduationCap', 'sinai-scholars': 'BookOpen', 'birthright-israel': 'Plane', pegisha: 'Flame', 'your-israel': 'Globe', 'living-links': 'Landmark', 'florida-pegisha': 'Sun', 'soup-delivery': 'Soup', 'mezuzah-loans': 'DoorOpen' };
 const always = [
   { icon: 'Flame', label: 'Shabbat dinners' },
   { icon: 'PartyPopper', label: 'Holiday celebrations' },
@@ -118,7 +116,8 @@ const crumbs = [
 ];
 
 // ---- Q&A (unique per center, rendered as content, not FAQ schema) ----
-const qa: { q: string; a: string }[] = [];
+const esc = (t: string) => t.replace(/[&<>"]/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[ch]!);
+const qa: { q: string; a: string; html?: boolean }[] = [];
 qa.push({
   q: `Is there a Chabad at ${pThe}?`,
   a: `Yes. ${c.officialName} is the Chabad on Campus center for Jewish students at ${pThe}${others.length ? `, and it also serves ${campusList(others)}` : ''}.${c.directorsLine ? ` It is led by ${c.directorsLine}.` : ''}`,
@@ -136,6 +135,17 @@ if (kosher.length) {
 } else {
   qa.push({ q: `Is there kosher food at ${short}?`, a: `Kosher options change from year to year. ${c.officialName} is the best place to ask about kosher meals, Shabbat food and Passover arrangements near ${pThe}.` });
 }
+if (c.directorsLine) {
+  qa.push({
+    q: `Who runs Chabad at ${short}?`,
+    a: `${c.officialName} is independently operated by ${c.directorsLine}. As shluchim, emissaries of the Lubavitcher Rebbe, they have made ${pThe} their home and its Jewish students their family.`,
+  });
+}
+qa.push({
+  q: `Who funds Chabad at ${short}?`,
+  html: true,
+  a: `${esc(c.officialName)} is independently funded, powered by the generosity of parents, alumni and friends who believe in Jewish life at ${esc(pThe)}. It does not receive major funding from any international organization, which means every Shabbat dinner, holiday celebration and class here is made possible by people who care.${c.donateUrl ? ` <a href="${esc(c.donateUrl)}" rel="noopener">Support ${esc(c.officialName)}</a>.` : ''}`,
+});
 if (others.length) qa.push({ q: `Which other schools does ${c.officialName} serve?`, a: `Besides ${pThe}, ${c.officialName} welcomes students from ${campusList(others)}.` });
 qa.push({
   q: `How do I get involved with Chabad at ${short}?`,
@@ -147,7 +157,7 @@ qa.push({
     {heroBg ? (
       <div class="bg"><img src={heroBg} srcset={c.image!.srcset} sizes="100vw" width={c.image!.width} height={c.image!.height} alt="" fetchpriority="high" decoding="async" /></div>
     ) : (
-      <img class="bgmark" src="/flame.webp" alt="" width="96" height="96" />
+      <img class="bgmark" src="/flame.png" alt="" width="96" height="96" />
     )}
     <div class="wrap hero-in">
       <Breadcrumbs items={crumbs} />
@@ -244,14 +254,44 @@ qa.push({
 
       <section class="panel reveal">
         <div class="ph"><span class="bubble gold"><Icon name="GraduationCap" size={24} /></span><h2>{c.campuses.length > 1 ? 'Campuses served' : 'Campus served'}</h2></div>
-        <ul class="campuses">
-          {c.campuses.map((x) => (
-            <li id={x.anchor}>
-              <span class="cn">{x.name}{x.abbr && <em>{x.abbr}</em>}</span>
-              <span class="cd">{x.primary ? 'Main campus' : 'Also welcome'}{distanceText(x.distance, x.primary ? 'campus' : x.abbr || 'campus') ? ` · ${distanceText(x.distance, x.primary ? 'campus' : x.abbr || 'campus')}` : ''}</span>
-            </li>
-          ))}
-        </ul>
+        <div class="campuses">
+          {c.campuses.map((x, i) => {
+            const dt = distanceText(x.distance, x.primary ? 'campus' : x.abbr || 'campus');
+            const inf = x.info;
+            const rows = inf ? [
+              inf.publicInstitution !== null && { icon: 'Landmark', k: 'Type', v: inf.publicInstitution ? 'Public' : 'Private' },
+              inf.levels.length > 0 && { icon: 'GraduationCap', k: 'Degrees', v: inf.levels.map((l) => (l === 'Grad' ? 'Graduate' : 'Undergraduate')).sort().reverse().join(' & ') },
+              inf.undergrad && { icon: 'Users', k: 'Undergraduates', v: inf.undergrad.toLocaleString('en-US') },
+              inf.grad && { icon: 'Users', k: 'Graduate students', v: inf.grad.toLocaleString('en-US') },
+              inf.jewishUndergrad && { icon: 'Star', k: 'Jewish undergraduates', v: `About ${inf.jewishUndergrad.toLocaleString('en-US')}` },
+              inf.jewishGrad && { icon: 'Star', k: 'Jewish graduate students', v: `About ${inf.jewishGrad.toLocaleString('en-US')}` },
+              dt && { icon: 'Navigation', k: 'Chabad House', v: dt.charAt(0).toUpperCase() + dt.slice(1) },
+            ].filter(Boolean) as { icon: string; k: string; v: string }[] : [];
+            return (
+              <details id={x.anchor} class="cinfo" open={i === 0 && c.campuses.length === 1}>
+                <summary>
+                  <span class="cn">{x.name}{x.abbr && <em>{x.abbr}</em>}</span>
+                  <span class="cd">{x.primary ? 'Main campus' : 'Also welcome'}</span>
+                  <Icon name="ChevronDown" size={22} class="chev" />
+                </summary>
+                <div class="cbody">
+                  <h3 class="ctitle">Campus information</h3>
+                  {rows.length > 0 ? (
+                    <dl class="cgrid">
+                      {rows.map((r) => <div><dt><Icon name={r.icon} size={18} /> {r.k}</dt><dd>{r.v}</dd></div>)}
+                    </dl>
+                  ) : (
+                    <p class="muted">Ask {c.officialName} about Jewish life at {withThe(x.name)}.</p>
+                  )}
+                  {inf && inf.studentLife.length > 0 && (
+                    <p class="slife"><strong>Jewish life on campus:</strong> {inf.studentLife.join(', ')}</p>
+                  )}
+                  {x.website && <a class="textlink" href={x.website} rel="noopener">{x.name} website <Icon name="ArrowUpRight" size={18} /></a>}
+                </div>
+              </details>
+            );
+          })}
+        </div>
       </section>
 
       <section class="panel reveal">
@@ -260,7 +300,7 @@ qa.push({
           {qa.map((item) => (
             <details>
               <summary>{item.q}</summary>
-              <div class="answer"><p>{item.a}</p></div>
+              <div class="answer">{item.html ? <p set:html={item.a} /> : <p>{item.a}</p>}</div>
             </details>
           ))}
         </div>
@@ -283,22 +323,12 @@ qa.push({
           </div>
         )}
         {c.website && <a class="btn btn-gold full" href={c.website} rel="noopener">Visit their website <Icon name="ArrowUpRight" size={20} /></a>}
-        {c.donateUrl && <a class="btn btn-ghost full" href={c.donateUrl} rel="noopener">Support {c.officialName}</a>}
+        {c.donateUrl && <a class="btn btn-white full" href={c.donateUrl} rel="noopener"><Icon name="Heart" size={20} /> Support {c.officialName}</a>}
       </div>
       {c.location && <div class="minimap"><FloridaMap highlight={c.id} compact /></div>}
-      <p class="small muted note">{c.hasApi ? 'Details from the Chabad on Campus directory, checked daily.' : 'Details maintained by Chabad on Campus Florida.'}</p>
     </aside>
   </div>
 
-  <section class="section band-cream">
-    <div class="wrap">
-      <h2 class="nh">Chabad near {short}</h2>
-      <div class="grid grid-3">
-        {nearby.map((n) => <CenterCard center={n} compact headingLevel="h3" />)}
-      </div>
-      <p class="all"><a class="textlink" href="/campuses/">See every Chabad on Campus center in Florida <Icon name="ArrowRight" size={20} /></a></p>
-    </div>
-  </section>
 
   <CtaBand
     title={`Heading to ${short}?`}
@@ -307,6 +337,15 @@ qa.push({
     secondary={{ href: '/parents/', label: 'For parents' }}
   />
 </Base>
+
+<script>
+  const openHash = () => {
+    const el = location.hash ? document.getElementById(decodeURIComponent(location.hash.slice(1))) : null;
+    if (el instanceof HTMLDetailsElement) el.open = true;
+  };
+  openHash();
+  addEventListener('hashchange', openHash);
+</script>
 
 <style>
   .chero { position: relative; overflow: hidden; background: var(--blue-night); color: #fff; padding: clamp(40px, 6vw, 72px) 0 clamp(64px, 9vw, 120px); }
@@ -366,9 +405,23 @@ qa.push({
   .pl small { color: var(--ink-2); font-size: 0.93rem; }
   .progs a > :global(.icon) { color: var(--blue); flex-shrink: 0; }
 
-  .campuses { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
-  .campuses li { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 18px; padding: 20px 22px; background: var(--blue-wash); border-left: 6px solid var(--blue); scroll-margin-top: 150px; }
-  .campuses li:target { background: var(--gold-wash); border-left-color: var(--gold); }
+  .campuses { display: grid; gap: 12px; }
+  .cinfo { background: var(--blue-wash); border-left: 6px solid var(--blue); scroll-margin-top: 150px; }
+  .cinfo:target, .cinfo[open] { border-left-color: var(--gold); }
+  .cinfo summary { list-style: none; cursor: pointer; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 18px; padding: 20px 56px 20px 22px; position: relative; }
+  .cinfo summary::-webkit-details-marker { display: none; }
+  .cinfo summary:hover .cn { color: var(--blue); }
+  .cinfo summary .cd { margin-left: auto; }
+  .cinfo :global(.chev) { position: absolute; right: 20px; top: 50%; translate: 0 -50%; color: var(--blue); transition: rotate 0.25s var(--ease); }
+  .cinfo[open] :global(.chev) { rotate: 180deg; }
+  .cbody { padding: 4px 22px 24px; display: grid; gap: 16px; justify-items: start; }
+  .ctitle { font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-2); margin: 0; }
+  .cgrid { margin: 0; width: 100%; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr)); border-top: 1px solid var(--line-strong); border-left: 1px solid var(--line-strong); }
+  .cgrid div { background: #fff; padding: 14px 16px; border-right: 1px solid var(--line-strong); border-bottom: 1px solid var(--line-strong); }
+  .cgrid dt { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: var(--muted); font-weight: 650; }
+  .cgrid dt :global(.icon) { color: var(--blue); }
+  .cgrid dd { margin: 4px 0 0; font-weight: 800; font-size: 1.05rem; }
+  .slife { margin: 0; font-size: 0.97rem; color: var(--ink-2); }
   .cn { font-weight: 750; font-size: 1.08rem; }
   .cn em { font-style: normal; color: var(--blue); margin-left: 8px; }
   .cd { color: var(--ink-2); font-size: 0.93rem; }
@@ -389,6 +442,4 @@ qa.push({
   .minimap { border: 2px solid var(--line); padding: 20px; background: #fff; }
   @media (max-width: 1000px) { .minimap { display: none; } }
   .note { margin: 0; }
-  .nh { margin-bottom: 36px; }
-  .all { margin: 36px 0 0; }
 </style>

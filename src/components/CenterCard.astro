@@ -11,7 +11,7 @@ const bg = c.image ? c.image.src.replace('-w1280', '-w640') : null;
 ---
 <article class:list={['ccard', compact && 'compact']} data-center={c.id} data-search={c.searchText} data-primary={`${c.primaryCampus.name}|${c.primaryCampus.abbr || ''}`}>
   <div class:list={['cover', !bg && 'nobg']}>
-    {bg ? <img src={bg} alt="" loading="lazy" decoding="async" /> : <img class="fl" src="/flame.webp" alt="" loading="lazy" width="96" height="96" />}
+    {bg ? <img src={bg} alt="" loading="lazy" decoding="async" /> : <img class="fl" src="/flame.png" alt="" loading="lazy" width="96" height="96" />}
   </div>
   <div class="logo"><CenterLogo center={c} size={68} /></div>
   <div class="body">

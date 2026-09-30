@@ -1,20 +1,37 @@
 ---
+// Support page. Built around donation-page research: one clear action up top
+// (pick a center, give), "you" language, a single student's story, tangible
+// impact instead of statistics, donor identity (parents, alumni, friends) and
+// clear trust signals. Every gift goes to the center's own donation page.
 import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import SchoolSearch from '../components/SchoolSearch.astro';
 import CenterLogo from '../components/CenterLogo.astro';
 import Icon from '../components/Icon.astro';
-import CtaBand from '../components/CtaBand.astro';
 import { centers } from '../lib/centers';
-import { SITE, img } from '../lib/site';
+import { SITE, TESTIMONIALS, img } from '../lib/site';
 
 const path = '/support/';
 const crumbs = [{ name: 'Support', href: path }];
 const hero = img('shabbat-candles');
-const gives = [
-  { icon: 'UtensilsCrossed', title: 'Shabbat dinners', text: 'A warm, home-cooked meal every Friday night for any student who walks in.' },
-  { icon: 'PartyPopper', title: 'Every holiday', text: 'High Holiday services, a sukkah by campus, Chanukah, Purim and Passover Seders.' },
-  { icon: 'HeartHandshake', title: 'Someone to call', text: 'A rabbi and rebbetzin who are there for students on the good days and the hard ones.' },
+const story = TESTIMONIALS.find((t) => t.center === 'unf') || TESTIMONIALS[0];
+const storyImg = img('students-friends');
+
+const trust = [
+  { icon: 'HandHeart', title: 'Straight to the center you choose', text: 'Your gift goes directly to that Chabad House, not to a middleman.' },
+  { icon: 'Building2', title: 'Independently run and funded', text: 'Each Chabad House is powered by parents, alumni and friends like you.' },
+  { icon: 'ShieldCheck', title: 'Secure giving', text: 'You give on the Chabad House’s own donation page.' },
+];
+const impact = [
+  { key: 'shabbat-candles', title: 'A seat at the Shabbat table', text: 'You set the table every Friday night for any student who walks in.' },
+  { key: 'tefillin', title: 'Every holiday, away from home', text: 'You make sure no student spends Rosh Hashanah or Passover alone.' },
+  { key: 'friends-outdoors', title: 'Soup when they are sick', text: 'You send homemade chicken soup to a student in bed with the flu.' },
+  { key: 'sinai-study-pair', title: 'Room for big questions', text: 'You open the door to learning, mentorship and honest conversation.' },
+].map((x) => ({ ...x, ...img(x.key) }));
+const who = [
+  { icon: 'HeartHandshake', title: 'Parents', text: 'Thank the people who look after your child, and make sure they are there for the next student too.' },
+  { icon: 'GraduationCap', title: 'Alumni', text: 'Remember the Friday nights that made college feel like home? Pay it forward to the class behind you.' },
+  { icon: 'Sprout', title: 'Friends of Jewish life', text: 'Invest in the next generation of Jewish leaders, one campus at a time.' },
 ];
 const ld = [
   {
@@ -29,7 +46,7 @@ const ld = [
 ---
 <Base
   title="Support Chabad on Campus in Florida"
-  description="Support the Chabad on Campus center at your school, or the one your child calls home. Find any Florida Chabad House and give directly to it."
+  description="Give a Jewish student a home away from home. Choose any Florida Chabad on Campus center and give directly to it: your school, your child's school or your alma mater."
   path={path}
   breadcrumbs={crumbs}
   jsonLd={ld}
@@ -38,48 +55,84 @@ const ld = [
     <div class="stext band-blue">
       <div class="sin">
         <Breadcrumbs items={crumbs} />
-        <h1>Support your local Chabad on Campus</h1>
-        <p class="lead">Give to the Chabad House closest to your heart: your own campus, or the one your child calls home.</p>
+        <h1>Give a Jewish student a home away from home</h1>
+        <p class="lead">Every Chabad House in Florida is powered by people like you. Choose the one closest to your heart, and your gift goes straight to them.</p>
+        <div class="pick" id="give-top">
+          <SchoolSearch id="give" size="lg" mode="donate" label="Choose a Chabad House" showLabel={false} placeholder="Search by school or Chabad House" />
+          <p class="hint">Start typing, or click the box to see every Florida Chabad House.</p>
+        </div>
       </div>
     </div>
-    <div class="smedia"><img src={hero.src} srcset={hero.srcset} sizes="(max-width: 960px) 100vw, 55vw" width={hero.width} height={hero.height} alt="Students lighting Shabbat candles together at a Chabad House" fetchpriority="high" /></div>
+    <div class="smedia"><img src={hero.src} srcset={hero.srcset} sizes="(max-width: 960px) 100vw, 50vw" width={hero.width} height={hero.height} alt="Students lighting Shabbat candles together at a Chabad House" fetchpriority="high" /></div>
   </section>
 
-  <section class="pick band-gold">
-    <div class="wrap pk">
-      <div>
-        <h2>Choose a Chabad House</h2>
-        <p>Search for a school or pick from the list. Your gift goes straight to that center.</p>
-      </div>
-      <SchoolSearch id="give" size="lg" mode="donate" label="Choose a Chabad House" showLabel={false} placeholder="Search" />
+  <section class="trust">
+    <div class="wrap tr">
+      {trust.map((t) => (
+        <div>
+          <Icon name={t.icon} size={28} />
+          <span><strong>{t.title}</strong>{t.text}</span>
+        </div>
+      ))}
     </div>
   </section>
 
   <section class="section">
     <div class="wrap">
       <div class="sec-head reveal">
-        <h2>Where your support goes</h2>
-        <p class="lead">Every Chabad House in Florida is independently run and supported by people like you.</p>
+        <h2>What your gift makes possible</h2>
+        <p class="lead">No dues, no membership, no student turned away. That only works because of you.</p>
       </div>
-      <div class="gives">
-        {gives.map((g, i) => (
+      <div class="imp">
+        {impact.map((x, i) => (
+          <figure class="reveal" style={`--d:${i * 80}ms`}>
+            <div class="photo"><img src={`/images/${x.key}-640.webp`} srcset={x.srcset} sizes="(max-width: 700px) 100vw, 25vw" width={x.width} height={x.height} alt="" loading="lazy" decoding="async" /></div>
+            <figcaption><strong>{x.title}</strong><span>{x.text}</span></figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="story band-night">
+    <div class="st-media"><img src={storyImg.src} srcset={storyImg.srcset} sizes="(max-width: 960px) 100vw, 45vw" width={storyImg.width} height={storyImg.height} alt="Jewish college students smiling together at a Chabad House" loading="lazy" /></div>
+    <div class="st-text">
+      <figure class="reveal">
+        <Icon name="Quote" size={48} class="qm" />
+        <blockquote>{story.quote}</blockquote>
+        <figcaption><strong>{story.name}</strong><span>{story.school}</span></figcaption>
+      </figure>
+      <p class="after">Stories like this happen at every Chabad House in Florida, every week. You can be part of the next one.</p>
+    </div>
+  </section>
+
+  <section class="section band-cream">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <h2>Who gives</h2>
+      </div>
+      <div class="who">
+        {who.map((w, i) => (
           <div class="reveal" style={`--d:${i * 100}ms`}>
-            <span class="bubble lg gold"><Icon name={g.icon} size={30} /></span>
-            <h3>{g.title}</h3>
-            <p>{g.text}</p>
+            <span class="bubble lg gold"><Icon name={w.icon} size={30} /></span>
+            <h3>{w.title}</h3>
+            <p>{w.text}</p>
           </div>
         ))}
       </div>
     </div>
   </section>
 
-  <section class="section band-cream">
+  <section class="section">
     <div class="wrap">
-      <h2 class="lh">Every Florida Chabad House</h2>
+      <div class="sec-head reveal">
+        <h2>Give to any Florida Chabad House</h2>
+        <p class="lead">Each button opens that Chabad House's own donation page.</p>
+      </div>
       <ul class="dlist">
         {centers.map((c) => (
           <li>
-            <a class="who" href={c.url}>
+            <a class="who-c" href={c.url}>
               <CenterLogo center={c} size={52} />
               <span><strong>{c.primaryCampus.name}</strong><small>{c.officialName} · {c.city}</small></span>
             </a>
@@ -92,40 +145,76 @@ const ld = [
     </div>
   </section>
 
-  <CtaBand title="Know a student heading to a Florida college?" text="Help them find their Chabad House before the semester starts." />
+  <section class="final band-gold">
+    <div class="wrap fin">
+      <h2>Every gift keeps a Shabbat table set.</h2>
+      <a class="btn btn-blue" href="#give-top"><Icon name="Heart" size={20} /> Choose a Chabad House</a>
+    </div>
+  </section>
 </Base>
 
 <style>
-  .shero { display: grid; grid-template-columns: minmax(0, 48fr) minmax(0, 52fr); min-height: clamp(440px, 60vh, 600px); }
+  .shero { display: grid; grid-template-columns: minmax(0, 55fr) minmax(0, 45fr); min-height: clamp(520px, 72vh, 700px); }
   @media (max-width: 960px) { .shero { grid-template-columns: minmax(0, 1fr); } }
-  .stext { display: flex; align-items: center; padding: clamp(48px, 7vw, 96px) var(--gutter); }
-  .sin { max-width: 560px; margin-left: auto; width: 100%; }
+  .stext { display: flex; align-items: center; padding: clamp(48px, 7vw, 104px) var(--gutter); }
+  .sin { max-width: 640px; margin-left: auto; width: 100%; }
   @media (max-width: 960px) { .sin { margin: 0; } }
   .stext h1 { margin-bottom: 22px; }
-  .stext .lead { margin: 0; max-width: 36ch; }
+  .stext .lead { margin: 0 0 clamp(32px, 4vw, 44px); max-width: 44ch; }
+  .pick :global(.ss) { max-width: none; }
+  .pick :global(.ss-field) { border-color: #fff; }
+  .pick :global(.ss .btn) { background: var(--gold); color: var(--ink); }
+  .pick :global(.ss .btn:hover) { background: #fff; }
+  .hint { margin: 12px 0 0; font-size: 0.93rem; color: #cfe2f0; }
   .smedia { position: relative; min-height: 300px; background: var(--blue-night); }
   .smedia img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 
-  .pick { padding: clamp(56px, 7vw, 96px) 0; }
-  .pk { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 32px clamp(40px, 6vw, 96px); align-items: center; }
-  @media (max-width: 900px) { .pk { grid-template-columns: minmax(0, 1fr); } }
-  .pk h2 { margin-bottom: 10px; }
-  .pk p { margin: 0; color: var(--ink); font-size: 1.1rem; }
-  .pk :global(.ss) { max-width: none; }
+  .trust { border-bottom: 1px solid var(--line-strong); }
+  .tr { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  @media (max-width: 860px) { .tr { grid-template-columns: minmax(0, 1fr); } }
+  .tr > div { display: flex; gap: 16px; align-items: flex-start; padding: 30px 28px 30px 0; }
+  @media (min-width: 861px) { .tr > div + div { padding-left: 28px; border-left: 1px solid var(--line-strong); } }
+  @media (max-width: 860px) { .tr > div + div { border-top: 1px solid var(--line-strong); } }
+  .tr :global(.icon) { color: var(--blue); flex-shrink: 0; margin-top: 2px; }
+  .tr strong { display: block; font-size: 1.05rem; margin-bottom: 2px; }
+  .tr span { color: var(--ink-2); font-size: 0.97rem; line-height: 1.55; }
 
-  .gives { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(32px, 5vw, 72px); }
-  @media (max-width: 860px) { .gives { grid-template-columns: minmax(0, 1fr); } }
-  .gives h3 { font-size: 1.35rem; margin: 22px 0 8px; }
-  .gives p { margin: 0; color: var(--ink-2); }
+  .imp { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(20px, 2.5vw, 32px); }
+  @media (max-width: 1000px) { .imp { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 560px) { .imp { grid-template-columns: minmax(0, 1fr); } }
+  .imp figure { margin: 0; }
+  .imp .photo { aspect-ratio: 4 / 3; margin-bottom: 18px; }
+  .imp figcaption strong { display: block; font-size: 1.2rem; line-height: 1.3; margin-bottom: 6px; }
+  .imp figcaption span { color: var(--ink-2); }
 
-  .lh { margin-bottom: 32px; }
+  .story { display: grid; grid-template-columns: minmax(0, 45fr) minmax(0, 55fr); min-height: 520px; }
+  @media (max-width: 960px) { .story { grid-template-columns: minmax(0, 1fr); } }
+  .st-media { position: relative; min-height: 300px; }
+  .st-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .st-text { display: flex; flex-direction: column; justify-content: center; padding: clamp(48px, 7vw, 104px) var(--gutter); max-width: 760px; }
+  .st-text figure { margin: 0 0 36px; }
+  .st-text :global(.qm) { color: var(--gold); margin-bottom: 20px; }
+  .st-text blockquote { margin: 0 0 24px; font-size: clamp(1.3rem, 2.2vw, 1.75rem); line-height: 1.45; font-weight: 600; color: #fff; }
+  .st-text figcaption strong { display: block; color: var(--gold); }
+  .st-text figcaption span { color: #cfe2f0; }
+  .after { margin: 0; padding-top: 28px; border-top: 1px solid rgba(255, 255, 255, 0.2); color: #e3eff8; font-size: 1.1rem; }
+
+  .who { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(32px, 5vw, 72px); }
+  @media (max-width: 860px) { .who { grid-template-columns: minmax(0, 1fr); } }
+  .who h3 { font-size: 1.4rem; margin: 22px 0 8px; }
+  .who p { margin: 0; color: var(--ink-2); }
+
   .dlist { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 2px solid var(--ink); }
   @media (max-width: 860px) { .dlist { grid-template-columns: minmax(0, 1fr); } }
   .dlist li { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 0; border-bottom: 1px solid var(--line-strong); }
   @media (min-width: 861px) { .dlist li:nth-child(odd) { padding-right: 32px; } .dlist li:nth-child(even) { padding-left: 32px; border-left: 1px solid var(--line-strong); } }
-  .who { display: flex; align-items: center; gap: 14px; min-width: 0; text-decoration: none; color: var(--ink); }
-  .who strong { display: block; line-height: 1.25; }
-  .who small { display: block; color: var(--muted); font-size: 0.88rem; line-height: 1.4; }
-  .who:hover strong { color: var(--blue); }
+  .who-c { display: flex; align-items: center; gap: 14px; min-width: 0; text-decoration: none; color: var(--ink); }
+  .who-c strong { display: block; line-height: 1.25; }
+  .who-c small { display: block; color: var(--muted); font-size: 0.88rem; line-height: 1.4; }
+  .who-c:hover strong { color: var(--blue); }
   .give { flex-shrink: 0; padding: 11px 16px; font-size: 0.93rem; }
+
+  .final { padding: clamp(64px, 9vw, 112px) 0; }
+  .fin { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 28px; }
+  .fin h2 { margin: 0; max-width: 20ch; }
 </style>
