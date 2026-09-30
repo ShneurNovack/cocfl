@@ -2,13 +2,15 @@
 import { NAV } from '../lib/site';
 import Icon from './Icon.astro';
 const current = Astro.url.pathname;
-const isActive = (href: string) => (href === '/' ? current === '/' : current.startsWith(href));
+const isActive = (href: string) => (href === '/' ? current === '/' : current.startsWith(href) && !(href === '/programs/' && current.startsWith('/programs/florida-pegisha/')));
+// Logo lockup: 'stacked' | 'divider' | 'lockup'
+const BRAND = 'stacked';
 ---
 <header class="site-header">
   <div class="bar wrap">
-    <a href="/" class="brand" aria-label="Chabad on Campus Florida home">
-      <span class="mark"><img src="/flame.webp" alt="" width="26" height="26" /></span>
-      <span class="name">Chabad on Campus <strong>Florida</strong></span>
+    <a href="/" class:list={['brand', `brand-${BRAND}`]} aria-label="Chabad on Campus Florida home">
+      <img class="flame" src="/flame.webp" alt="" width="40" height="40" />
+      <span class="name"><span class="l1">Chabad on Campus</span> <span class="l2">Florida</span></span>
     </a>
     <nav class="nav-desktop" aria-label="Main">
       {NAV.slice(1).map((n) => <a href={n.href} aria-current={isActive(n.href) ? 'page' : undefined}>{n.label}</a>)}
@@ -28,11 +30,22 @@ const isActive = (href: string) => (href === '/' ? current === '/' : current.sta
 <style>
   .site-header { position: sticky; top: 0; z-index: 50; background: #fff; border-bottom: 1px solid var(--line); }
   .bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 74px; }
-  .brand { display: flex; align-items: center; gap: 11px; text-decoration: none; color: var(--ink); font-size: 1.08rem; font-weight: 600; letter-spacing: -0.01em; }
-  .brand strong { font-weight: 850; color: var(--blue); }
-  .mark { width: 44px; height: 44px; background: var(--blue); display: grid; place-items: center; transition: background 0.2s; }
-  .brand:hover .mark { background: var(--blue-ink); }
+  .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--ink); letter-spacing: -0.01em; flex-shrink: 0; }
+  .flame { width: 40px; height: 40px; flex-shrink: 0; transition: transform 0.3s var(--ease); }
+  .brand:hover .flame { transform: scale(1.06); }
+  .l2 { color: var(--blue); }
+  /* A: two stacked lines */
+  .brand-stacked .name { display: flex; flex-direction: column; line-height: 1.08; font-weight: 800; font-size: 1.12rem; }
+  /* B: flame, thin rule, one line */
+  .brand-divider { gap: 14px; }
+  .brand-divider .flame { width: 34px; height: 34px; }
+  .brand-divider .name { padding-left: 14px; border-left: 2px solid var(--line-strong); font-size: 1.12rem; font-weight: 800; line-height: 34px; }
+  /* C: small line over a big "Florida" */
+  .brand-lockup .name { display: flex; flex-direction: column; line-height: 1; }
+  .brand-lockup .l1 { font-size: 0.74rem; font-weight: 750; text-transform: uppercase; letter-spacing: 0.12em; color: var(--ink-2); margin-bottom: 3px; }
+  .brand-lockup .l2 { font-size: 1.65rem; font-weight: 850; letter-spacing: -0.02em; }
   .nav-desktop { display: flex; align-items: center; gap: 4px; font-weight: 650; font-size: 0.95rem; }
+  .nav-desktop a { white-space: nowrap; }
   .nav-desktop a:not(.btn) { color: var(--ink-2); text-decoration: none; padding: 10px 14px; transition: background 0.2s, color 0.2s; }
   .nav-desktop a:not(.btn):hover { background: var(--blue-wash); color: var(--blue); }
   .nav-desktop a[aria-current='page']:not(.btn) { box-shadow: inset 0 -3px 0 var(--gold); color: var(--ink); }
@@ -48,8 +61,8 @@ const isActive = (href: string) => (href === '/' ? current === '/' : current.sta
   @keyframes drop { from { opacity: 0; transform: translateY(-8px); } }
   .nav-mobile nav a { display: flex; align-items: center; justify-content: space-between; padding: 18px 4px; border-bottom: 1px solid var(--line); color: var(--ink); text-decoration: none; font-weight: 750; font-size: 1.25rem; }
   .nav-mobile nav a:hover, .nav-mobile nav a[aria-current='page'] { background: var(--blue-wash); color: var(--blue); }
-  .nav-mobile .m-cta { background: var(--blue); color: #fff; justify-content: flex-start; gap: 10px; margin-bottom: 10px; padding: 18px 16px; border: 0; }
-  .nav-mobile .m-cta:hover { background: var(--blue-deep); color: #fff; }
-  @media (max-width: 940px) { .nav-desktop { display: none; } .nav-mobile { display: block; } }
-  @media (max-width: 400px) { .brand .name { font-size: 0.95rem; } }
+  .nav-mobile nav a.m-cta { background: var(--blue); color: #fff; justify-content: flex-start; gap: 10px; margin-bottom: 10px; padding: 18px 16px; border: 0; }
+  .nav-mobile nav a.m-cta:hover, .nav-mobile nav a.m-cta:active { background: var(--blue-deep); color: #fff; }
+  @media (max-width: 1180px) { .nav-desktop { display: none; } .nav-mobile { display: block; } }
+  @media (max-width: 400px) { .brand-stacked .name, .brand-divider .name { font-size: 1rem; } }
 </style>

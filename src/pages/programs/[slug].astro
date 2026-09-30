@@ -10,7 +10,7 @@ import { programs, programBySlug, type Program } from '../../data/programs';
 import { SITE, img } from '../../lib/site';
 
 export function getStaticPaths() {
-  return programs.map((p) => ({ params: { slug: p.slug }, props: { program: p } }));
+  return programs.filter((p) => !p.custom).map((p) => ({ params: { slug: p.slug }, props: { program: p } }));
 }
 interface Props { program: Program }
 const { program: p } = Astro.props;
@@ -68,7 +68,7 @@ const glance = [
   <section class="section">
     <div class="wrap body">
       <div class="prose">
-        {p.intro.map((t, i) => <p class:list={[i === 0 && 'lead']}>{t}</p>)}
+        {p.intro.map((t, i) => <p class:list={[i === 0 && 'lead']} set:html={t} />)}
         {p.sections.map((s) => (
           <>
             <h2>{s.h2}</h2>

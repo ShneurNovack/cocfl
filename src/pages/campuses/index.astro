@@ -9,7 +9,7 @@ import Icon from '../../components/Icon.astro';
 import { SITE } from '../../lib/site';
 
 const colleges = allColleges();
-const sorted = [...centers].sort((a, b) => a.primaryCampus.name.localeCompare(b.primaryCampus.name));
+const sorted = centers; // original site order
 const ld = [
   {
     '@context': 'https://schema.org',
@@ -40,7 +40,7 @@ const ld = [
       <div class="search" role="search">
         <label for="q" class="visually-hidden">Search Florida campuses</label>
         <Icon name="Search" size={24} class="si" />
-        <input id="q" type="search" placeholder="Search by school, city or rabbi" autocomplete="off" spellcheck="false" />
+        <input id="q" type="search" placeholder="Search" autocomplete="off" spellcheck="false" />
       </div>
     </div>
   </section>
@@ -60,7 +60,7 @@ const ld = [
       </div>
       <div class="empty" id="empty" hidden>
         <h2>No Florida center matches &ldquo;<span id="empty-q"></span>&rdquo;</h2>
-        <p>Try the school's full name or its abbreviation, or browse the list of every Florida college below. Chabad also serves many campuses through local Chabad centers that are not listed here. The <a href="https://chabadoncampus.org/" rel="noopener">Chabad on Campus International directory</a> covers more than 950 campuses worldwide.</p>
+        <p>Try the school's full name or its abbreviation, or browse the list of every Florida college below.</p>
         <button type="button" class="btn btn-blue" id="clear">Show all Florida centers</button>
       </div>
     </div>

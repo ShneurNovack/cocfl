@@ -11,3 +11,12 @@
 /find                   /campuses/  301
 /programs/birthright    /programs/birthright-israel/  301
 /programs/sinai-scholars-society  /programs/sinai-scholars/  301
+# Removed pages
+/jewish-life-on-campus/choosing-a-college   /jewish-life-on-campus/  301
+/jewish-life-on-campus/choosing-a-college/  /jewish-life-on-campus/  301
+/programs/study-away-grant   /programs/  301
+/programs/study-away-grant/  /programs/  301
+/donate      /support/  301
+/donate/     /support/  301
+/programs/florida-regional-pegisha   /programs/florida-pegisha/  301
+/programs/florida-regional-pegisha/  /programs/florida-pegisha/  301

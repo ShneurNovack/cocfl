@@ -1,0 +1,232 @@
+---
+// Florida Pegisha: the statewide Shabbaton and Chabad on Campus Florida's
+// signature initiative. Hand-designed page (not the shared program template).
+import Base from '../../layouts/Base.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import SchoolSearch from '../../components/SchoolSearch.astro';
+import CenterLogo from '../../components/CenterLogo.astro';
+import Faq from '../../components/Faq.astro';
+import Icon from '../../components/Icon.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { programBySlug } from '../../data/programs';
+import { centers } from '../../lib/centers';
+import { SITE, img } from '../../lib/site';
+
+const p = programBySlug['florida-pegisha'];
+const path = '/programs/florida-pegisha/';
+const hero = img('florida-pegisha-students');
+const intl = img('pegisha-brooklyn-bridge');
+const crumbs = [
+  { name: 'Programs', href: '/programs/' },
+  { name: 'Florida Pegisha', href: path },
+];
+
+const weekend = [
+  { icon: 'Bus', when: 'Friday', title: 'Arrive together', text: 'Travel in with your campus crew, meet students from every corner of Florida, and light candles as Shabbat begins.' },
+  { icon: 'UtensilsCrossed', when: 'Friday night', title: 'Shabbat dinner', text: 'One long table, a lot of singing, great food and conversations that go late into the night.' },
+  { icon: 'MessagesSquare', when: 'Shabbat day', title: 'Workshops and big questions', text: 'Uplifting services, fascinating workshops and honest discussions, with plenty of time to just hang out.' },
+  { icon: 'Music', when: 'Saturday night', title: 'Havdalah and celebration', text: 'Shabbat ends with Havdalah, and the weekend turns into music, dancing and a party.' },
+];
+const why = [
+  { icon: 'MapPin', title: 'Every Florida campus', text: 'Tallahassee to Miami, all in one place for one weekend.' },
+  { icon: 'Flame', title: 'A full Shabbat', text: 'For many students, their first complete Shabbat from start to finish.' },
+  { icon: 'Users', title: 'Your campus crew', text: 'You travel with friends from your own Chabad House.' },
+  { icon: 'Tag', title: 'Made affordable', text: 'Heavily subsidized, so cost is never the reason to miss it.' },
+];
+const steps = [
+  { title: 'Find your Chabad House', text: 'Every Florida Chabad on Campus center brings a group.' },
+  { title: 'Ask your rabbi and rebbetzin', text: 'They will tell you the dates, the price for your campus and how your group is traveling.' },
+  { title: 'Save your spot', text: 'Register through your Chabad House and get ready for the weekend.' },
+];
+
+const ld = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: p.metaTitle,
+    url: `${SITE.url}${path}`,
+    description: p.metaDescription,
+    isPartOf: { '@id': `${SITE.url}/#website` },
+    about: { '@type': 'Thing', name: 'Florida Pegisha Shabbaton' },
+    primaryImageOfPage: { '@type': 'ImageObject', url: `${SITE.url}${hero.src}` },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: p.faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a.replace(/<[^>]+>/g, '') } })),
+  },
+];
+---
+<Base title={p.metaTitle} description={p.metaDescription} path={path} breadcrumbs={crumbs} jsonLd={ld} ogImage={hero.src}>
+  <section class="fhero">
+    <img class="bg" src={hero.src} srcset={hero.srcset} sizes="100vw" width={hero.width} height={hero.height} alt={p.imageAlt} fetchpriority="high" decoding="async" />
+    <div class="wrap">
+      <div class="fbox">
+        <Breadcrumbs items={crumbs} />
+        <h1>Florida Pegisha</h1>
+        <p class="lead">One Shabbat weekend with Jewish students from every Florida campus.</p>
+        <div class="btn-row">
+          <a class="btn btn-blue" href="#join">How to join <Icon name="ArrowRight" size={20} /></a>
+          <a class="btn btn-ghost" href="#weekend">The weekend</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap intro">
+      <h2 class="big reveal">Every campus.<br />One Shabbat.</h2>
+      <div class="reveal" style="--d:120ms">
+        <p class="lead">Pegisha means "encounter" in Hebrew. Once a year, the Chabad on Campus centers across Florida bring their students together for a weekend that feels like the whole state is sitting at one Shabbat table.</p>
+        <p>The Florida Pegisha is the signature project of Chabad on Campus Florida, the joint initiative of Florida's independently run Chabad Houses. It is where a freshman from Gainesville meets a senior from Boca, where students who have never kept a full Shabbat find out how good one can feel, and where a lot of lasting friendships begin.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section band-night" id="weekend">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <h2>The weekend</h2>
+        <p class="lead">Friday through Sunday, from the first candle to the last song.</p>
+      </div>
+      <ol class="days">
+        {weekend.map((d, i) => (
+          <li class="reveal" style={`--d:${i * 100}ms`}>
+            <span class="num">{String(i + 1).padStart(2, '0')}</span>
+            <Icon name={d.icon} size={34} class="di" />
+            <span class="when">{d.when}</span>
+            <h3>{d.title}</h3>
+            <p>{d.text}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section band-gold">
+    <div class="wrap why">
+      {why.map((w, i) => (
+        <div class="reveal" style={`--d:${i * 90}ms`}>
+          <span class="bubble lg white"><Icon name={w.icon} size={30} /></span>
+          <h3>{w.title}</h3>
+          <p>{w.text}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <h2>Students come from all of these</h2>
+        <p class="lead">Every Chabad on Campus center in Florida is part of the Florida Pegisha.</p>
+      </div>
+      <ul class="logos">
+        {centers.map((c, i) => (
+          <li class="reveal" style={`--d:${Math.min(i, 10) * 40}ms`}>
+            <a href={c.url}>
+              <CenterLogo center={c} size={56} />
+              <span>{c.primaryCampus.name}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section band-wash" id="join">
+    <div class="wrap join">
+      <div class="reveal">
+        <h2>How to join</h2>
+        <ol class="steps">
+          {steps.map((s) => <li><strong>{s.title}</strong><span>{s.text}</span></li>)}
+        </ol>
+      </div>
+      <div class="jbox reveal" style="--d:120ms">
+        <span class="bubble lg gold"><Icon name="MapPin" size={30} /></span>
+        <h3>Start with your Chabad House</h3>
+        <SchoolSearch id="fp-search" size="md" label="Find your Chabad House" />
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap narrow">
+      <h2 class="fh">Questions about the Florida Pegisha</h2>
+      <Faq items={p.faqs} open />
+    </div>
+  </section>
+
+  <section class="section band-cream">
+    <div class="wrap">
+      <a class="intl" href="/programs/pegisha/">
+        <div class="photo ip"><img src={intl.src} srcset={intl.srcset} sizes="(max-width: 900px) 100vw, 50vw" width={intl.width} height={intl.height} alt="Students walking across the Brooklyn Bridge during the International Pegisha" loading="lazy" /></div>
+        <div class="it">
+          <h2>Want an even bigger Shabbat?</h2>
+          <p class="lead">Each fall, the International Pegisha brings students from around the world to Crown Heights, Brooklyn. Florida students go with their own Chabad House.</p>
+          <span class="textlink">About the International Pegisha <Icon name="ArrowRight" size={20} /></span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <CtaBand title="See you at the Florida Pegisha" text="Find your campus and ask your rabbi and rebbetzin about this year's weekend." />
+</Base>
+
+<style>
+  .fhero { position: relative; min-height: clamp(560px, 82vh, 820px); display: flex; align-items: flex-end; background: var(--blue-night); }
+  .fhero .bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
+  .fhero .wrap { position: relative; width: 100%; }
+  .fbox { background: var(--gold); max-width: 640px; padding: clamp(36px, 5vw, 64px); }
+  .fbox :global(.crumbs a), .fbox :global(.crumbs) { color: var(--ink); }
+  .flogo { height: 72px; width: auto; margin: 8px 0 22px; background: #fff; padding: 8px 12px; }
+  .fbox h1 { margin: 24px 0 16px; font-size: clamp(2.8rem, 6vw, 4.6rem); line-height: 1; }
+  .fbox .lead { margin: 0 0 32px; color: var(--ink); max-width: 30ch; }
+  .fbox .btn-ghost:hover { background: var(--ink); color: var(--gold); }
+
+  .intro { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(32px, 6vw, 96px); align-items: start; }
+  @media (max-width: 900px) { .intro { grid-template-columns: minmax(0, 1fr); } }
+  .big { font-size: clamp(2.6rem, 5.4vw, 4.4rem); line-height: 1.02; margin: 0; }
+  .intro .lead { color: var(--ink); margin-top: 0; }
+
+  .days { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid rgba(255, 255, 255, 0.18); }
+  @media (max-width: 1000px) { .days { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 600px) { .days { grid-template-columns: minmax(0, 1fr); } }
+  .days li { position: relative; padding: 36px 32px 40px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.18); }
+  @media (min-width: 1001px) { .days li + li { padding-left: 32px; border-left: 1px solid rgba(255, 255, 255, 0.18); } }
+  .num { display: block; font-size: 0.9rem; font-weight: 800; color: #8fb0c7; margin-bottom: 20px; }
+  .days :global(.di) { color: var(--gold); display: block; margin-bottom: 18px; }
+  .when { display: block; color: var(--gold); font-weight: 750; font-size: 0.95rem; margin-bottom: 6px; }
+  .days h3 { color: #fff; font-size: 1.35rem; margin: 0 0 10px; }
+  .days p { margin: 0; color: #cfe2f0; }
+
+  .why { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(28px, 4vw, 56px); }
+  @media (max-width: 1000px) { .why { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 560px) { .why { grid-template-columns: minmax(0, 1fr); } }
+  .why h3 { font-size: 1.3rem; margin: 22px 0 8px; }
+  .why p { margin: 0; color: var(--ink); }
+
+  .logos { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr)); border-top: 1px solid var(--line-strong); border-left: 1px solid var(--line-strong); }
+  .logos li { border-right: 1px solid var(--line-strong); border-bottom: 1px solid var(--line-strong); }
+  .logos a { display: flex; align-items: center; gap: 14px; padding: 18px; height: 100%; text-decoration: none; color: var(--ink); font-weight: 700; line-height: 1.3; transition: background 0.2s; }
+  .logos a:hover { background: var(--gold-wash); color: var(--blue); }
+
+  .join { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(40px, 6vw, 96px); align-items: start; }
+  @media (max-width: 900px) { .join { grid-template-columns: minmax(0, 1fr); } }
+  .steps { list-style: none; counter-reset: s; padding: 0; margin: 32px 0 0; display: grid; gap: 28px; }
+  .steps li { counter-increment: s; display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 4px 18px; }
+  .steps li::before { content: counter(s); grid-row: span 2; width: 56px; height: 56px; display: grid; place-items: center; background: var(--blue); color: #fff; font-weight: 800; font-size: 1.3rem; }
+  .steps strong { font-size: 1.2rem; }
+  .steps span { color: var(--ink-2); }
+  .jbox { background: #fff; border: 2px solid var(--ink); padding: clamp(28px, 4vw, 44px); display: grid; gap: 18px; }
+  .jbox h3 { font-size: 1.5rem; margin: 4px 0 0; }
+
+  .fh { margin-bottom: 36px; }
+  .intl { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); background: #fff; border: 2px solid var(--line); text-decoration: none; color: var(--ink); transition: border-color 0.2s; }
+  .intl:hover { border-color: var(--blue); }
+  @media (max-width: 900px) { .intl { grid-template-columns: minmax(0, 1fr); } }
+  .ip { aspect-ratio: 4 / 3; }
+  .it { padding: clamp(28px, 5vw, 64px); align-self: center; }
+  .it h2 { margin-bottom: 16px; }
+  .it .lead { margin-bottom: 24px; }
+</style>

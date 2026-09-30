@@ -2,7 +2,7 @@
 import Guide from '../../layouts/Guide.astro';
 import { centers } from '../../lib/centers';
 const path = '/jewish-life-on-campus/kosher-food/';
-const sorted = [...centers].sort((a, b) => a.primaryCampus.name.localeCompare(b.primaryCampus.name));
+const sorted = centers; // original site order
 ---
 <Guide
   title="Kosher food on campus"

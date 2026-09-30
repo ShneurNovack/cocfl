@@ -6,7 +6,7 @@ import CtaBand from '../components/CtaBand.astro';
 import Icon from '../components/Icon.astro';
 import { stats, centers } from '../lib/centers';
 import { SITE, TESTIMONIALS, img } from '../lib/site';
-const sorted = [...centers].sort((a, b) => a.primaryCampus.name.localeCompare(b.primaryCampus.name));
+const sorted = centers; // original site order
 const crumbs = [{ name: 'About', href: '/about/' }];
 const hero = img('rabbi-students');
 const rebbe = img('the-rebbe');
@@ -21,13 +21,13 @@ const ld = [
 ];
 const pillars = [
   { icon: 'Eye', title: 'Our vision', text: 'We champion robust Jewish life and learning on college campuses in Florida, and seek a future where every Jewish student has a deeper affinity, connection and understanding of their faith, heritage and identity.' },
-  { icon: 'Handshake', title: 'What we do', text: 'Chabad on Campus Florida brings the state’s Chabad Houses together to share resources, run statewide programs like the Florida Regional Pegisha, and make it easy for every student and parent to find Jewish life at their school.' },
+  { icon: 'Handshake', title: 'What we do together', text: 'Florida’s Chabad Houses team up through Chabad on Campus Florida to run shared projects like the Florida Pegisha, and to make it easy for every student and parent to find Jewish life at their school.' },
   { icon: 'Heart', title: 'How we do it', text: 'Every Chabad House is led by a husband and wife who open their home to students. No dues, no membership and no judgment, just a warm table and people who care.' },
 ];
 ---
 <Base
   title="About Chabad on Campus Florida"
-  description="Chabad on Campus Florida is a statewide network of Chabad Houses serving Jewish students at 25+ Florida colleges. What Chabad on Campus is, our mission and history."
+  description="Chabad on Campus Florida is a joint initiative of the independently run Chabad on Campus centers serving Jewish students at 25+ Florida colleges. Our mission and history."
   path="/about/"
   breadcrumbs={crumbs}
   jsonLd={ld}
@@ -48,6 +48,14 @@ const pillars = [
       <h2>What is Chabad on Campus?</h2>
       <p class="lead">Chabad on Campus is a network of Chabad Houses on and near more than 950 college campuses around the world, where Jewish students of every background can find a home away from home.</p>
       <p>Each Chabad House is directed by a husband and wife, known as <em>shluchim</em>, emissaries of the Lubavitcher Rebbe, Rabbi Menachem M. Schneerson. They move to a college town, open their home to students, and build Jewish life around them: Shabbat dinners, holidays, classes, trips and a lot of personal attention. Research on Chabad on Campus has found that almost 90 percent of participants do not come from Orthodox homes.</p>
+    </div>
+  </section>
+
+  <section class="section band-wash">
+    <div class="wrap narrow">
+      <h2>A joint initiative, not a head office</h2>
+      <p class="lead">Chabad on Campus Florida is a joint initiative of the Chabad on Campus centers across the state. It is not a governing organization.</p>
+      <p>Every Chabad House in Florida is independently run by its own rabbi and rebbetzin, who know their campus and their students best. Chabad on Campus Florida is how those centers work together: sharing ideas, bringing students from every campus together at the <a href="/programs/florida-pegisha/">Florida Pegisha</a>, and helping every Jewish student in the state find the Chabad House nearest them.</p>
     </div>
   </section>
 
@@ -73,7 +81,6 @@ const pillars = [
           <li><strong>1969</strong><span>Chabad opens its first campus center at UCLA, welcoming every Jewish student regardless of background.</span></li>
           <li><strong>Today</strong><span>Chabad Houses serve students on more than 950 campuses worldwide, including {stats.campuses} in Florida.</span></li>
         </ol>
-        <p class="muted">Chabad on Campus Florida is part of <a href={SITE.parent.url} rel="noopener">Chabad on Campus International</a>.</p>
       </div>
     </div>
   </section>
@@ -94,7 +101,7 @@ const pillars = [
 
   <section class="section">
     <div class="wrap">
-      <h2 class="ch">Our centers</h2>
+      <h2 class="ch">The centers behind Chabad on Campus Florida</h2>
       <div class="grid grid-3">{sorted.map((c) => <CenterCard center={c} compact />)}</div>
     </div>
   </section>

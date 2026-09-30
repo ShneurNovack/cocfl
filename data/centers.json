@@ -159,7 +159,8 @@
         "directors": "Rabbi Levi & Chana Rivkin",
         "website": "https://www.chabadut.org/",
         "logo": "https://static.wixstatic.com/media/50a04c_45131bf7139b41ed836d6cb7a4c8e571~mv2.png",
-        "additionalCampuses": []
+        "additionalCampuses": [],
+        "donateUrl": "https://www.chabadut.org/donate"
       }
     },
     {
@@ -368,7 +369,8 @@
         "location": {
           "lat": 25.7776,
           "lng": -80.1906
-        }
+        },
+        "donateUrl": "https://www.jewishdowntown.net/4970020"
       }
     },
     {

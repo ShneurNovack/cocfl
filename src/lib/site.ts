@@ -13,7 +13,6 @@ export const SITE = {
     engagements: '127k',
     engagementsYear: '2025',
   },
-  parent: { name: 'Chabad on Campus International', url: 'https://chabadoncampus.org/' },
 };
 
 export const TESTIMONIALS = [
@@ -35,9 +34,11 @@ export const TESTIMONIALS = [
 export const NAV = [
   { href: '/campuses/', label: 'Find Your Campus' },
   { href: '/programs/', label: 'Programs' },
+  { href: '/programs/florida-pegisha/', label: 'Florida Pegisha' },
   { href: '/jewish-life-on-campus/', label: 'Jewish Life' },
   { href: '/parents/', label: 'Parents' },
   { href: '/about/', label: 'About' },
+  { href: '/support/', label: 'Support' },
 ];
 
 import sizes from './image-sizes.json';

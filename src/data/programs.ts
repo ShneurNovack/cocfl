@@ -28,11 +28,44 @@ export type Program = {
   faqs: Faq[];
   offeredAt: `api:${string}` | 'all' | string[];
   offeredAtNote: string;
+  /** Has its own hand-designed page instead of the shared program template. */
+  custom?: boolean;
   officialLinks: { label: string; href: string }[];
   related: string[];
 };
 
 export const programs: Program[] = [
+  {
+    slug: 'florida-pegisha',
+    name: 'Florida Pegisha',
+    shortName: 'Florida Pegisha',
+    category: 'Shabbatons',
+    custom: true,
+    tagline: 'One Shabbat weekend. Jewish students from every Florida campus. Our biggest weekend of the year.',
+    metaTitle: 'Florida Pegisha: Statewide Shabbaton for Jewish College Students',
+    metaDescription:
+      'The Florida Pegisha brings Jewish college students from campuses across Florida together for one Shabbat weekend of food, music, learning and friendship. Register through your Chabad House.',
+    logo: '/images/logo-pegisha.webp',
+    image: 'florida-pegisha-students',
+    imageAlt: 'Florida college students in matching Florida Pegisha shirts at the statewide Shabbaton',
+    audience: 'Jewish students at any Florida college, from every background.',
+    format: 'A statewide Shabbat weekend, Friday through Sunday.',
+    cost: 'Heavily subsidized. Your Chabad House will share the price for your campus.',
+    intro: [],
+    sections: [],
+    faqs: [
+      { q: 'Who can come to the Florida Pegisha?', a: 'Any Jewish college student in Florida, whatever your background or level of observance. Most students come with a group from their own campus Chabad House.' },
+      { q: 'How do I register?', a: 'Registration goes through your campus Chabad House. Reach out to your rabbi and rebbetzin and they will tell you when registration opens and how your group is traveling.' },
+      { q: 'How much does it cost?', a: 'The weekend is heavily subsidized so every student can come. Your Chabad House will tell you the price for your campus.' },
+      { q: 'Do I need to know anything about Shabbat?', a: 'Not at all. Many students experience their first full Shabbat at the Florida Pegisha. Everything is explained along the way, and nobody is keeping score.' },
+      { q: 'Can I come if I do not know anyone going?', a: 'Yes, and many students do. You will travel with your campus group, and the whole weekend is built around meeting people.' },
+      { q: 'Is this the same as the International Pegisha in New York?', a: 'No. The <a href="/programs/pegisha/">International Pegisha</a> gathers students from around the world in Crown Heights each fall. The Florida Pegisha is our own statewide weekend for Florida students.' },
+    ],
+    offeredAt: 'all',
+    offeredAtNote: 'Students at every Florida Chabad on Campus center can join the Florida Pegisha through their own Chabad House.',
+    officialLinks: [],
+    related: ['pegisha', 'jewishu', 'birthright-israel'],
+  },
   {
     slug: 'jewishu',
     name: 'JewishU',
@@ -85,7 +118,7 @@ export const programs: Program[] = [
       { label: 'JewishU.org', href: 'https://jewishu.org/' },
       { label: 'Find a JewishU location', href: 'https://jewishu.org/locations' },
     ],
-    related: ['sinai-scholars', 'your-israel', 'study-away-grant'],
+    related: ['sinai-scholars', 'your-israel', 'florida-pegisha'],
   },
   {
     slug: 'sinai-scholars',
@@ -103,7 +136,7 @@ export const programs: Program[] = [
     format: 'Eight two-hour classes over a semester, plus a Shabbat experience, a class retreat and a closing event.',
     cost: 'Free to join. Students who complete all requirements receive a stipend.',
     intro: [
-      'Sinai Scholars Society is a joint project of Chabad on Campus International and the Rohr Jewish Learning Institute. It brings a small, selective group of students together for an eight-week course in Jewish thought, taught at their campus Chabad House, and then connects them to a national community of Sinai Scholars.',
+      'Sinai Scholars Society is a joint project of Chabad on Campus and the Rohr Jewish Learning Institute. It brings a small, selective group of students together for an eight-week course in Jewish thought, taught at their campus Chabad House, and then connects them to a national community of Sinai Scholars.',
       'Students often describe it as the most meaningful class they took in college. The coursework is real, the discussions are honest, and the relationships built with classmates and instructors tend to last well beyond graduation.',
     ],
     sections: [
@@ -142,7 +175,7 @@ export const programs: Program[] = [
       { q: 'Is Sinai Scholars only for observant or knowledgeable students?', a: 'No. Acceptance is based on interest and motivation, not on how much you already know or how observant you are.' },
       { q: 'How much does Sinai Scholars cost?', a: 'Nothing. It is free to join, and students who finish all of the requirements receive a stipend.' },
       { q: 'When does Sinai Scholars run?', a: 'Each Chabad House schedules its own cohort, usually during the fall or spring semester. Contact your campus Chabad House for the next start date.' },
-      { q: 'Who runs Sinai Scholars?', a: 'Sinai Scholars Society is a joint project of Chabad on Campus International and the Rohr Jewish Learning Institute, taught locally by your campus Chabad House.' },
+      { q: 'Who runs Sinai Scholars?', a: 'Sinai Scholars Society is a joint project of Chabad on Campus and the Rohr Jewish Learning Institute, taught locally by your campus Chabad House.' },
     ],
     offeredAt: 'api:sinai-scholars',
     offeredAtNote: 'Florida centers enrolled in Sinai Scholars Society, updated daily from Chabad on Campus. Ask your Chabad House about the next cohort.',
@@ -157,7 +190,7 @@ export const programs: Program[] = [
     tagline: 'A free trip to Israel with your campus Chabad, and ways to go back and go deeper.',
     metaTitle: 'Birthright Israel with Chabad for Florida College Students',
     metaDescription:
-      'Go to Israel on Birthright with your Florida Chabad House, plus study programs and travel grants for going back. Eligibility, what to expect and FAQs.',
+      'Go to Israel on Birthright with your Florida Chabad House, plus study programs and heritage trips for going back. Eligibility, what to expect and FAQs.',
     image: 'pegisha-group',
     imageAlt: 'A large group of Jewish college students posing together on a Chabad on Campus trip',
     audience: 'Jewish young adults, generally ages 18 to 26, who meet Birthright Israel eligibility requirements.',
@@ -183,7 +216,7 @@ export const programs: Program[] = [
       {
         h2: 'After Birthright: going back and going deeper',
         body: [
-          'Birthright is often a beginning. Students who want more can study for a few weeks or a semester at Mayanot Institute in Jerusalem, join a Chabad on Campus heritage trip such as Living Links, or take the Your Israel course on campus to explore the ideas behind the headlines. Chabad on Campus also offers the Study Away Grant, which can subsidize travel to immersive Jewish learning programs, including up to $1,000 for programs in Israel.',
+          'Birthright is often a beginning. Students who want more can study for a few weeks or a semester at Mayanot Institute in Jerusalem, join a Chabad on Campus heritage trip such as Living Links, or take the Your Israel course on campus to explore the ideas behind the headlines.',
         ],
       },
       {
@@ -197,7 +230,7 @@ export const programs: Program[] = [
       { q: 'Is Birthright really free?', a: 'The trip itself is a gift for eligible participants. You usually pay a refundable deposit when you register and may need to cover optional extras.' },
       { q: 'Can I go on Birthright with my campus Chabad?', a: 'Many Florida Chabad Houses run their own Birthright groups. If your center does not have a group this season, they can connect you to another Chabad on Campus group.' },
       { q: 'When do Chabad Birthright trips leave?', a: 'Most campus groups travel during winter break or early summer. Registration typically opens a few months in advance.' },
-      { q: 'What if I already went to Israel?', a: 'You may not be eligible for Birthright, but there are other ways to go: study programs like Mayanot Institute, heritage trips, and the Chabad on Campus Study Away Grant.' },
+      { q: 'What if I already went to Israel?', a: 'You may not be eligible for Birthright, but there are other ways to go: study programs like Mayanot Institute and heritage trips like Living Links.' },
     ],
     offeredAt: ['uf', 'fsu', 'ucf', 'unf', 'um-undergrad'],
     offeredAtNote: 'Florida centers that have led their own Birthright groups. Students at every Florida Chabad House can join a Chabad trip.',
@@ -205,60 +238,54 @@ export const programs: Program[] = [
       { label: 'Birthright Israel eligibility', href: 'https://www.birthrightisrael.com/' },
       { label: 'Mayanot Israel', href: 'https://www.mayanot.com/' },
     ],
-    related: ['study-away-grant', 'your-israel', 'living-links'],
+    related: ['florida-pegisha', 'your-israel', 'living-links'],
   },
   {
     slug: 'pegisha',
-    name: 'Pegisha Shabbatons',
-    shortName: 'Pegisha',
+    name: 'International Pegisha',
+    shortName: 'International Pegisha',
     category: 'Shabbatons',
-    tagline: 'A Shabbat weekend with hundreds of Jewish students, in Florida and in New York.',
-    metaTitle: 'Pegisha Shabbatons: Florida Regional and NYC | Chabad on Campus',
+    tagline: 'A Shabbat weekend in Crown Heights with thousands of Jewish students from around the world.',
+    metaTitle: 'International Pegisha Shabbaton in Crown Heights | Chabad on Campus',
     metaDescription:
-      'Pegisha brings Jewish college students together for unforgettable Shabbat weekends. Learn about the Florida Regional Pegisha and Pegisha NYC in Crown Heights.',
+      'The International Pegisha brings Jewish college students from around the world to Crown Heights, Brooklyn for a Shabbat weekend. How Florida students can join.',
     logo: '/images/logo-pegisha.webp',
-    image: 'florida-pegisha-students',
-    imageAlt: 'Florida college students in matching Pegisha shirts at the Florida Regional Pegisha Shabbaton',
+    image: 'pegisha-brooklyn-bridge',
+    imageAlt: 'Jewish college students walking across the Brooklyn Bridge during the International Pegisha weekend',
     audience: 'Jewish college students of every background, registering through their campus Chabad House.',
-    format: 'A weekend Shabbaton: Friday through Sunday, with meals, programs, music and time to explore.',
+    format: 'A Shabbat weekend in Crown Heights, Brooklyn, Friday through Sunday, held each fall.',
     cost: 'Priced by each local group, often heavily subsidized. Ask your Chabad House.',
     intro: [
-      'Pegisha means "encounter" in Hebrew, and that is exactly what it is: a weekend where Jewish students from many campuses meet, celebrate Shabbat together and discover how big and joyful Jewish life can be.',
-      'Florida students have two ways to experience it. The Florida Regional Pegisha gathers Chabad on Campus students from across the state for a Shabbaton close to home, and Pegisha NYC brings students from around the world to Crown Heights, Brooklyn, the home of the Chabad movement.',
+      'Pegisha means "encounter" in Hebrew. Each fall, Jewish students from campuses around the world travel to Crown Heights, Brooklyn, the home of the Chabad movement, for one very big Shabbat together.',
+      'Florida students travel to the International Pegisha with their own campus Chabad House, so you go with friends and come home with many more. Closer to home, the <a href="/programs/florida-pegisha/">Florida Pegisha</a> brings students from across the state together each year.',
     ],
     sections: [
       {
-        h2: 'Florida Regional Pegisha',
+        h2: 'The weekend in Crown Heights',
         body: [
-          'The Florida Regional Pegisha is a statewide Shabbaton for students at Florida Chabad on Campus centers. It is a chance to meet Jewish students from other Florida schools, spend a full Shabbat together with great food, services, workshops and discussions, and end the weekend with music and celebration. The most recent Florida Regional Pegisha took place April 17 to 19, 2026. Students register through their own campus Chabad House.',
-        ],
-      },
-      {
-        h2: 'Pegisha NYC in Crown Heights',
-        body: [
-          'Pegisha NYC is an invitation-only Shabbat weekend in Crown Heights, Brooklyn, held each fall. Students typically arrive Friday, take a walking tour of the neighborhood, and spend Friday night at Shabbat dinners hosted by local families before a farbrengen. Shabbat day includes services, lunch and sessions, followed by a big Havdalah concert and a Saturday night social event. Sunday offers optional tours, including a visit to the Rebbe\'s resting place (the Ohel), a resource fair and a closing program.',
+          'Students typically arrive Friday, take a walking tour of the neighborhood, and spend Friday night at Shabbat dinners hosted by local families before a farbrengen. Shabbat day includes services, lunch and sessions, followed by a big Havdalah concert and a Saturday night social event. Sunday offers optional tours, including a visit to the Rebbe\'s resting place (the Ohel), a resource fair and a closing program.',
         ],
       },
       {
         h2: 'What students take home',
         body: [
-          'Most students come back from Pegisha with new friends from other campuses, a real taste of a full Shabbat, and a sense that they belong to something much larger than their own school. For many, it is the weekend that turns occasional Shabbat dinners into a real connection.',
+          'Most students come back with new friends from other campuses, a real taste of a full Shabbat, and a sense that they belong to something much larger than their own school. For many, it is the weekend that turns occasional Shabbat dinners into a real connection.',
         ],
       },
     ],
     faqs: [
-      { q: 'How do I register for Pegisha?', a: 'Registration goes through your campus Chabad House. Contact them to find out when registration opens for the next Florida Regional Pegisha or Pegisha NYC.' },
-      { q: 'Is there a fee for Pegisha?', a: 'Yes, but pricing is set by each local group and is usually heavily subsidized. Your Chabad House can tell you the cost for your campus.' },
-      { q: 'Are meals included?', a: 'Shabbat meals are included. For Pegisha NYC, meals from Friday night through Sunday lunch are provided; you may need your own lunch on Friday or dinner on Sunday.' },
+      { q: 'How do I register for the International Pegisha?', a: 'Registration goes through your campus Chabad House. Contact them to find out when registration opens and how your group is traveling.' },
+      { q: 'Is there a fee?', a: 'Yes, but pricing is set by each local group and is usually heavily subsidized. Your Chabad House can tell you the cost for your campus.' },
+      { q: 'Are meals included?', a: 'Meals from Friday night through Sunday lunch are provided; you may need your own lunch on Friday or dinner on Sunday.' },
       { q: 'Do I need to be observant to attend?', a: 'No. Pegisha is for Jewish students of every background, and many participants are experiencing a full Shabbat for the first time.' },
+      { q: 'How is this different from the Florida Pegisha?', a: 'The International Pegisha gathers students from around the world in New York. The <a href="/programs/florida-pegisha/">Florida Pegisha</a> is our own statewide Shabbaton for students at Florida schools, close to home.' },
     ],
     offeredAt: 'all',
-    offeredAtNote: 'Students at every Florida Chabad on Campus center can join the Florida Regional Pegisha and Pegisha NYC through their own Chabad House.',
+    offeredAtNote: 'Students at every Florida Chabad on Campus center can join the International Pegisha through their own Chabad House.',
     officialLinks: [
-      { label: 'Pegisha NYC', href: 'https://chabadoncampus.org/pegisha/' },
-      { label: 'Regional Pegisha', href: 'https://chabadoncampus.org/regional/' },
+      { label: 'Pegisha NYC on Chabad on Campus', href: 'https://chabadoncampus.org/pegisha/' },
     ],
-    related: ['birthright-israel', 'sinai-scholars', 'living-links'],
+    related: ['florida-pegisha', 'birthright-israel', 'living-links'],
   },
   {
     slug: 'your-israel',
@@ -289,7 +316,7 @@ export const programs: Program[] = [
       {
         h2: 'Where it leads',
         body: [
-          'Your Israel pairs naturally with an Israel trip. Students often take the course before or after Birthright, and some go on to study in Israel with support from the Chabad on Campus Study Away Grant.',
+          'Your Israel pairs naturally with an Israel trip. Students often take the course before or after Birthright, and some go on to study in Israel.',
         ],
       },
     ],
@@ -342,50 +369,9 @@ export const programs: Program[] = [
     offeredAt: 'all',
     offeredAtNote: 'Students at any Florida Chabad on Campus center can register for Living Links through their Chabad House.',
     officialLinks: [{ label: 'Chabad on Campus', href: 'https://chabadoncampus.org/' }],
-    related: ['birthright-israel', 'study-away-grant', 'pegisha'],
+    related: ['birthright-israel', 'florida-pegisha', 'pegisha'],
   },
-  {
-    slug: 'study-away-grant',
-    name: 'Study Away Grant',
-    shortName: 'Study Away Grant',
-    category: 'Travel & Israel',
-    tagline: 'Travel funding for immersive Jewish learning programs.',
-    metaTitle: 'Study Away Grant: Travel Funding for Jewish Learning Programs',
-    metaDescription:
-      'The Chabad on Campus Study Away Grant helps college students travel to immersive Jewish learning programs: up to $350 in North America and up to $1,000 for Israel.',
-    logo: '/images/logo-study-away-grant.webp',
-    image: 'sinai-workshop',
-    imageAlt: 'Students working together at a table during an immersive Jewish learning program',
-    audience: 'College students accepted to an eligible immersive Jewish learning program.',
-    format: 'A travel subsidy applied to an approved study program over a break or summer.',
-    cost: 'A grant, not a loan: up to $350 for travel within North America and up to $1,000 for travel to Israel.',
-    intro: [
-      'Semester breaks are a perfect time to spend a few weeks learning in an immersive Jewish environment. The Chabad on Campus Study Away Grant helps make that possible by subsidizing travel to a range of Jewish learning programs.',
-      'Grants cover up to $350 for travel within North America and up to $1,000 for travel to Israel, which puts programs like a winter or summer session at Mayanot Institute in Jerusalem within reach for many more students.',
-    ],
-    sections: [
-      {
-        h2: 'Who it is for',
-        body: [
-          'The grant is designed for students who have been connected to their campus Chabad and are ready for a deeper learning experience than a semester schedule allows. Your rabbi or rebbetzin can recommend programs that fit your level and interests.',
-        ],
-      },
-      {
-        h2: 'How to apply',
-        body: [
-          'Start with your campus Chabad House. They will help you choose a program, confirm that it is eligible, and apply for the grant through Chabad on Campus.',
-        ],
-      },
-    ],
-    faqs: [
-      { q: 'How much is the Study Away Grant?', a: 'Up to $350 for travel within North America and up to $1,000 for travel to Israel.' },
-      { q: 'Which programs qualify?', a: 'A variety of immersive Jewish learning programs qualify. Your Chabad House can help you find one and confirm eligibility.' },
-    ],
-    offeredAt: 'all',
-    offeredAtNote: 'Available to students connected to any Florida Chabad on Campus center.',
-    officialLinks: [{ label: 'Chabad on Campus', href: 'https://chabadoncampus.org/' }],
-    related: ['birthright-israel', 'jewishu', 'living-links'],
-  },
+
 ];
 
 export const programBySlug = Object.fromEntries(programs.map((p) => [p.slug, p]));

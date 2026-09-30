@@ -50,7 +50,7 @@ const AMENITY_ICON: Record<string, string> = {
   'Shabbat and holidays minyan': 'Flame',
   'Daily minyan': 'Sunrise',
 };
-const PROGRAM_ICON: Record<string, string> = { jewishu: 'GraduationCap', 'sinai-scholars': 'BookOpen', 'birthright-israel': 'Plane', pegisha: 'Flame', 'your-israel': 'Globe', 'living-links': 'Landmark', 'study-away-grant': 'Wallet' };
+const PROGRAM_ICON: Record<string, string> = { jewishu: 'GraduationCap', 'sinai-scholars': 'BookOpen', 'birthright-israel': 'Plane', pegisha: 'Flame', 'your-israel': 'Globe', 'living-links': 'Landmark', 'florida-pegisha': 'Sun' };
 const always = [
   { icon: 'Flame', label: 'Shabbat dinners' },
   { icon: 'PartyPopper', label: 'Holiday celebrations' },
@@ -101,7 +101,6 @@ const orgLd: any = {
   areaServed: c.campuses.map((x) => ({ '@type': 'CollegeOrUniversity', name: x.name, ...(x.website ? { url: x.website } : {}) })),
   ...(c.staff.length ? { employee: c.staff.map((s) => ({ '@type': 'Person', name: s.name, ...(s.title ? { honorificPrefix: s.title } : {}), ...(s.role ? { jobTitle: s.role } : {}) })) } : {}),
   sameAs: [c.website, ...c.social.map((s) => s.url)].filter(Boolean),
-  parentOrganization: { '@type': 'Organization', name: SITE.parent.name, url: SITE.parent.url },
   memberOf: { '@id': `${SITE.url}/#organization` },
 };
 const pageLd = {
@@ -197,7 +196,7 @@ qa.push({
           <ul class="staff">
             {c.staff.map((s) => (
               <li>
-                {s.photo ? <img src={s.photo.src} width={120} height={120} alt={`${s.title && /rabbi/i.test(s.title) ? 'Rabbi ' : ''}${s.name}`} loading="lazy" decoding="async" /> : <span class="nophoto" aria-hidden="true">{s.name.split(' ').map((w) => w[0]).slice(0, 2).join('')}</span>}
+                {s.photo ? <img src={s.photo.src} width={120} height={120} alt={`${s.title && /rabbi/i.test(s.title) ? 'Rabbi ' : ''}${s.name}`} loading="lazy" decoding="async" /> : <span class="nophoto" aria-hidden="true"></span>}
                 <strong>{s.title && /rabbi/i.test(s.title) ? 'Rabbi ' : ''}{s.name}</strong>
                 {s.role && <span>{s.role}</span>}
               </li>
@@ -287,7 +286,7 @@ qa.push({
         {c.donateUrl && <a class="btn btn-ghost full" href={c.donateUrl} rel="noopener">Support {c.officialName}</a>}
       </div>
       {c.location && <div class="minimap"><FloridaMap highlight={c.id} compact /></div>}
-      <p class="small muted note">{c.hasApi ? 'Details from Chabad on Campus International, checked daily.' : 'Details maintained by Chabad on Campus Florida.'}</p>
+      <p class="small muted note">{c.hasApi ? 'Details from the Chabad on Campus directory, checked daily.' : 'Details maintained by Chabad on Campus Florida.'}</p>
     </aside>
   </div>
 
@@ -348,7 +347,7 @@ qa.push({
   .staff { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 28px 20px; }
   .staff li { display: flex; flex-direction: column; gap: 4px; }
   .staff img, .nophoto { width: 100%; aspect-ratio: 1; object-fit: cover; background: var(--cream); margin-bottom: 10px; }
-  .nophoto { display: grid; place-items: center; font-weight: 800; font-size: 2rem; color: var(--blue); background: var(--blue-wash); }
+  .nophoto { display: block; background: #d9dcdf; }
   .staff strong { line-height: 1.3; }
   .staff span { font-size: 0.9rem; color: var(--muted); }
 

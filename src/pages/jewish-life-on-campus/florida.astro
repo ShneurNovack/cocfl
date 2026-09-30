@@ -7,7 +7,7 @@ import { SITE } from '../../lib/site';
 
 const path = '/jewish-life-on-campus/florida/';
 const colleges = allColleges();
-const sorted = [...centers].sort((a, b) => a.primaryCampus.name.localeCompare(b.primaryCampus.name));
+const sorted = centers; // original site order
 const ld = [
   {
     '@context': 'https://schema.org',
@@ -24,7 +24,7 @@ const ld = [
   path={path}
   lead={`${stats.campuses} campuses. ${stats.centers} Chabad Houses. From Tallahassee to Miami.`}
   image="florida-pegisha-students"
-  imageAlt="Jewish students from Florida colleges together at the Florida Regional Pegisha Shabbaton"
+  imageAlt="Jewish students from Florida colleges together at the Florida Pegisha Shabbaton"
   crumbs={[{ name: 'Jewish Life on Campus', href: '/jewish-life-on-campus/' }, { name: 'Florida', href: path }]}
   jsonLd={ld}
   wide
@@ -57,7 +57,7 @@ const ld = [
   </div>
 
   <h2>Beyond your own campus</h2>
-  <p>Florida's Chabad centers also bring students together across the state. The <a href="/programs/pegisha/">Florida Regional Pegisha</a> Shabbaton gathers students from many Florida schools for a weekend, and every student can join <a href="/programs/birthright-israel/">Birthright Israel with Chabad</a>, <a href="/programs/living-links/">Living Links</a> and the <a href="/programs/study-away-grant/">Study Away Grant</a>. Still choosing a school? Read <a href="/jewish-life-on-campus/choosing-a-college/">how to choose a college with Jewish life</a>.</p>
+  <p>Florida's Chabad centers also bring students together across the state. Each year the <a href="/programs/florida-pegisha/">Florida Pegisha</a> gathers students from every Florida campus for one Shabbat weekend, and every student can join <a href="/programs/birthright-israel/">Birthright Israel with Chabad</a>, the <a href="/programs/pegisha/">International Pegisha</a> in New York and <a href="/programs/living-links/">Living Links</a>.</p>
 </Guide>
 
 <style>

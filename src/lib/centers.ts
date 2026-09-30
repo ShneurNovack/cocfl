@@ -71,6 +71,18 @@ export type Center = {
   seoTitle: string | null;
 };
 
+/**
+ * Profile images on Chabad on Campus that are stock placeholders ("camera shy"
+ * graphics, generic avatars) rather than real photos. These render as a plain
+ * gray box instead. Add new ones here by their source URL.
+ */
+const PLACEHOLDER_PHOTOS = new Set([
+  'https://cocistorage.blob.core.windows.net/prod/profile/uwakn_d7QIZz~ImWmYaPNB.png',
+  'https://cocistorage.blob.core.windows.net/prod/profile/rRZ~XPKizVZohL1rRziOch.png',
+  'https://cocistorage.blob.core.windows.net/prod/profile/iUPe4KIcXP~~ahINEqvzwx.png',
+]);
+const isPlaceholderPhoto = (url: string | null | undefined) => !!url && PLACEHOLDER_PHOTOS.has(url);
+
 export const slugify = (s: string) =>
   s.toLowerCase().normalize('NFKD').replace(/[̀-ͯ]/g, '').replace(/&/g, ' and ').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
@@ -205,7 +217,7 @@ function build(): Center[] {
     for (const t of mealTiers) if (t !== firstTier) amenityMap.delete(t);
 
     const staff: Staff[] = d
-      ? d.staff.map((s: any) => ({ title: s.title, name: s.name, role: s.role, photo: s.photoLocal || null, primary: s.primary }))
+      ? d.staff.map((s: any) => ({ title: s.title, name: s.name, role: s.role, photo: isPlaceholderPhoto(s.photo) ? null : s.photoLocal || null, primary: s.primary }))
       : [];
     // group spouses together, rabbi first, directors' families first
     {
@@ -220,7 +232,7 @@ function build(): Center[] {
         (Number(!/rabbi/i.test(a.title || '')) - Number(!/rabbi/i.test(b.title || ''))));
     }
     const hasApi = !!d;
-    const officialName = d?.name || L.name;
+    const officialName = (d?.name || L.name).replace(/\s*[—–]\s*/g, ', ');
     const shortName = L.name;
 
     const programList = programs
@@ -256,7 +268,7 @@ function build(): Center[] {
       phone: d?.phone || L.phone || null,
       email: d?.email || L.email || null,
       website: d?.website || L.website || null,
-      donateUrl: d?.donateUrl || null,
+      donateUrl: d?.donateUrl || L.donateUrl || null,
       logo: d?.logoLocal || null,
       image: c.hideImage ? null : d?.imageLocal || null,
       staff,
@@ -284,11 +296,11 @@ export function centersByRegion() {
   }));
 }
 
-/** Every college served, alphabetized, pointing at the center that serves it. */
+/** Every college served, in directory order (each center's primary campus first). */
 export function allColleges() {
   const rows: { campus: Campus; center: Center }[] = [];
-  for (const center of centers) for (const campus of center.campuses) rows.push({ campus, center });
-  return rows.sort((a, b) => a.campus.name.localeCompare(b.campus.name));
+  for (const center of centers) for (const campus of [center.primaryCampus, ...center.otherCampuses]) rows.push({ campus, center });
+  return rows;
 }
 
 export function nearbyCenters(c: Center, n = 3): Center[] {

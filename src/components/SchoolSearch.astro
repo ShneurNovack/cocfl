@@ -4,31 +4,36 @@
 // Without JS it submits to /campuses/?q= which filters the directory.
 import { allColleges } from '../lib/centers';
 import Icon from './Icon.astro';
-interface Props { id?: string; placeholder?: string; label?: string; size?: 'lg' | 'md'; showLabel?: boolean }
-const { id = 'school-search', placeholder = 'Type your school: UF, FIU, Rollins...', label = 'Is there a Chabad at my school?', size = 'lg', showLabel = true } = Astro.props;
+// mode="donate": picking a school selects its Chabad House, and the button
+// opens that center's own donation page. The empty field lists every center.
+interface Props { id?: string; placeholder?: string; label?: string; size?: 'lg' | 'md'; showLabel?: boolean; mode?: 'visit' | 'donate'; button?: string }
+const { id = 'school-search', placeholder = 'Search', label = 'Is there a Chabad at my school?', size = 'lg', showLabel = true, mode = 'visit' } = Astro.props;
+const donate = mode === 'donate';
+const button = Astro.props.button ?? (donate ? 'Donate' : 'Find my Chabad');
 const items = allColleges().map((r) => ({
   n: r.campus.name,
   a: r.campus.abbr || '',
   c: r.center.officialName,
   city: r.center.city,
-  u: r.campus.primary ? r.center.url : `${r.center.url}#${r.campus.anchor}`,
+  u: donate ? r.center.donateUrl || r.center.website || r.center.url : r.campus.primary ? r.center.url : `${r.center.url}#${r.campus.anchor}`,
+  p: r.campus.primary ? 1 : 0,
   k: [r.campus.name, r.campus.abbr, r.center.officialName, r.center.shortName, r.center.city, ...r.center.aliases].join(' '),
   logo: r.center.logo?.src || '',
 }));
 ---
-<form class:list={['ss', `ss-${size}`]} action="/campuses/" method="get" role="search" data-ss={id}>
+<form class:list={['ss', `ss-${size}`, donate && 'ss-donate']} action="/campuses/" method="get" role="search" data-ss={id} data-mode={mode}>
   <label for={id} class:list={[!showLabel && 'visually-hidden']}>{label}</label>
   <div class="ss-field">
     <Icon name="Search" size={22} class="ss-icon" />
     <input id={id} name="q" type="search" placeholder={placeholder} autocomplete="off" spellcheck="false" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls={`${id}-list`} />
-    <button class="btn btn-gold" type="submit">Find my Chabad</button>
+    <button class:list={['btn', donate ? 'btn-blue' : 'btn-gold']} type="submit">{donate && <Icon name="Heart" size={20} />}{button}</button>
   </div>
   <ul class="ss-list" id={`${id}-list`} role="listbox" hidden></ul>
   <script type="application/json" data-ss-items set:html={JSON.stringify(items)} />
 </form>
 
 <script>
-  type Item = { n: string; a: string; c: string; city: string; u: string; k: string; logo: string };
+  type Item = { n: string; a: string; c: string; city: string; u: string; k: string; logo: string; p: number };
   const STOP = new Set(['the', 'of', 'at', 'chabad', 'in', 'a', 'and', 'on', 'campus']);
   const norm = (s: string) => s.toLowerCase().normalize('NFKD').replace(/[̀-ͯ]/g, '').replace(/&/g, ' and ').replace(/[@'’.]/g, '').replace(/[^a-z0-9]+/g, ' ').trim();
   const lev = (a: string, b: string) => {
@@ -44,8 +49,17 @@ const items = allColleges().map((r) => ({
     const list = form.querySelector('ul')!;
     const items: Item[] = JSON.parse(form.querySelector('[data-ss-items]')!.textContent!);
     const idx = items.map((it) => ({ it, words: norm(it.k).split(' '), name: norm(it.n), abbr: norm(it.a) }));
+    const donate = form.dataset.mode === 'donate';
     let active = -1;
     let results: Item[] = [];
+    let chosen: Item | null = null;
+    const pick = (it: Item) => {
+      chosen = it;
+      input.value = donate ? it.c : it.n;
+      list.hidden = true;
+      input.setAttribute('aria-expanded', 'false');
+      form.classList.add('has-pick');
+    };
 
     const score = (q: string, tokens: string[], x: (typeof idx)[number]) => {
       let s = 0;
@@ -68,12 +82,20 @@ const items = allColleges().map((r) => ({
     const render = () => {
       const q = norm(input.value);
       const tokens = q.split(' ').filter((t) => t && !STOP.has(t));
-      if (!tokens.length) { list.hidden = true; input.setAttribute('aria-expanded', 'false'); return; }
-      results = idx.map((x) => ({ x, s: score(q, tokens, x) })).filter((r) => r.s > 0).sort((a, b) => b.s - a.s).slice(0, 6).map((r) => r.x.it);
+      chosen = null;
+      form.classList.remove('has-pick');
+      if (!tokens.length && !donate) { list.hidden = true; input.setAttribute('aria-expanded', 'false'); return; }
+      results = !tokens.length
+        ? items.filter((it) => it.p)
+        : idx.map((x) => ({ x, s: score(q, tokens, x) })).filter((r) => r.s > 0).sort((a, b) => b.s - a.s).slice(0, donate ? 8 : 6).map((r) => r.x.it);
       active = results.length ? 0 : -1;
       list.innerHTML = results.length
         ? results.map((r, i) => `<li role="option" id="${form.dataset.ss}-o${i}" aria-selected="${i === active}"><a href="${r.u}">${r.logo ? `<img src="${r.logo}" alt="" width="36" height="36">` : '<span class="ph"></span>'}<span><strong>${esc(r.n)}${r.a ? ` <em>${esc(r.a)}</em>` : ''}</strong><small>${esc(r.c)} · ${esc(r.city)}</small></span></a></li>`).join('')
         : `<li class="none">No Florida campus matches yet. <a href="/campuses/">Browse every campus</a></li>`;
+      if (donate) list.querySelectorAll<HTMLAnchorElement>('li a[href]').forEach((a, i) => {
+        if (!results[i]) return;
+        a.addEventListener('click', (e) => { e.preventDefault(); pick(results[i]); });
+      });
       list.hidden = false;
       input.setAttribute('aria-expanded', 'true');
       input.setAttribute('aria-activedescendant', active >= 0 ? `${form.dataset.ss}-o0` : '');
@@ -85,13 +107,22 @@ const items = allColleges().map((r) => ({
       input.setAttribute('aria-activedescendant', `${form.dataset.ss}-o${active}`);
     };
     input.addEventListener('input', render);
-    input.addEventListener('focus', () => input.value && render());
+    input.addEventListener('focus', () => (input.value || donate) && !chosen && render());
+    if (donate) input.addEventListener('click', () => { if (list.hidden && !chosen) render(); });
     input.addEventListener('keydown', (e) => {
       if (e.key === 'ArrowDown') { e.preventDefault(); move(1); }
       else if (e.key === 'ArrowUp') { e.preventDefault(); move(-1); }
       else if (e.key === 'Escape') { list.hidden = true; }
+      else if (donate && e.key === 'Enter' && !list.hidden && results[active]) { e.preventDefault(); pick(results[active]); }
     });
     form.addEventListener('submit', (e) => {
+      if (donate) {
+        e.preventDefault();
+        const target = chosen || (!list.hidden && results[active]) || null;
+        if (target) window.open(target.u, '_blank', 'noopener');
+        else { render(); input.focus(); }
+        return;
+      }
       if (active >= 0 && results[active] && !list.hidden) { e.preventDefault(); location.href = results[active].u; }
     });
     document.addEventListener('click', (e) => { if (!form.contains(e.target as Node)) list.hidden = true; });
@@ -108,7 +139,8 @@ const items = allColleges().map((r) => ({
   .ss-field input:focus { outline: none; }
   .ss-field .btn { border: 0; padding: 0 26px; }
   .ss-md .ss-field input { padding: 15px 12px; font-size: 1.02rem; }
-  @container (max-width: 440px) { .ss-field .btn { padding: 0 18px; font-size: 0; gap: 0; } .ss-field .btn::after { content: 'Go'; font-size: 1rem; } }
+  @container (max-width: 440px) { .ss:not(.ss-donate) .ss-field .btn { padding: 0 18px; font-size: 0; gap: 0; } .ss:not(.ss-donate) .ss-field .btn::after { content: 'Go'; font-size: 1rem; } }
+  .ss-donate .ss-field .btn { padding: 0 22px; }
   .ss-list { position: absolute; z-index: 30; left: 0; right: 0; top: calc(100% - 2px); list-style: none; margin: 0; padding: 0; background: #fff; border: 2px solid var(--ink); max-height: 440px; overflow: auto; }
   .ss-list :global(li + li) { border-top: 1px solid var(--line); }
   .ss-list :global(li a) { display: flex; gap: 14px; align-items: center; padding: 14px 16px; text-decoration: none; color: var(--ink); }

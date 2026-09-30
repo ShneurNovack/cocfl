@@ -1,26 +1,19 @@
 ---
-import { centers } from '../lib/centers';
 import { programs } from '../data/programs';
 import { SITE } from '../lib/site';
 import { GUIDES } from '../data/guides';
 import Icon from './Icon.astro';
 const year = new Date().getFullYear();
-const sorted = [...centers].sort((a, b) => a.primaryCampus.name.localeCompare(b.primaryCampus.name));
 ---
 <footer class="site-footer">
   <img class="wm" src="/flame.webp" alt="" width="96" height="96" loading="lazy" />
   <div class="wrap cols">
     <div class="about">
-      <a href="/" class="brand"><span class="mk"><img src="/flame.webp" alt="" width="22" height="22" loading="lazy" /></span> Chabad on Campus Florida</a>
-      <p>A statewide network of Chabad on Campus centers welcoming Jewish students at universities and colleges across Florida, part of <a href={SITE.parent.url} rel="noopener">Chabad on Campus International</a>.</p>
+      <a href="/" class="brand"><img class="mk" src="/flame.webp" alt="" width="36" height="36" loading="lazy" /> Chabad on Campus Florida</a>
+      <p>A joint initiative of the Chabad on Campus centers across Florida, each one independently run by its own rabbi and rebbetzin.</p>
       <a class="btn btn-gold" href="/campuses/"><Icon name="MapPin" size={18} /> Find Chabad at your school</a>
+      <div><a class="support" href="/support/"><Icon name="Heart" size={18} /> Support your local Chabad</a></div>
     </div>
-    <nav aria-label="Florida campuses">
-      <h2>Chabad at Florida campuses</h2>
-      <ul>
-        {sorted.map((c) => <li><a href={c.url}>{c.primaryCampus.name}</a></li>)}
-      </ul>
-    </nav>
     <div>
       <nav aria-label="Programs">
         <h2>Programs</h2>
@@ -32,6 +25,7 @@ const sorted = [...centers].sort((a, b) => a.primaryCampus.name.localeCompare(b.
       <ul>
         {GUIDES.map((g) => <li><a href={g.href}>{g.nav}</a></li>)}
         <li><a href="/parents/">For parents</a></li>
+        <li><a href="/support/">Support a Chabad House</a></li>
         <li><a href="/faq/">Chabad on Campus FAQs</a></li>
         <li><a href="/about/">About Chabad on Campus Florida</a></li>
       </ul>
@@ -39,19 +33,21 @@ const sorted = [...centers].sort((a, b) => a.primaryCampus.name.localeCompare(b.
   </div>
   <div class="wrap"><div class="legal">
     <span>&copy; {year} Chabad on Campus Florida</span>
-    <span>Directory data provided by <a href="https://chabadoncampus.org/" rel="noopener">Chabad on Campus International</a> and refreshed daily.</span>
+    <span>Center details are refreshed daily.</span>
   </div></div>
 </footer>
 
 <style>
   .site-footer { background: var(--blue-night); color: #b8cddd; font-size: 0.93rem; padding-top: clamp(64px, 8vw, 96px); position: relative; overflow: hidden; }
   .wm { position: absolute; right: -40px; bottom: -40px; width: 360px; height: auto; opacity: 0.05; pointer-events: none; }
-  .mk { width: 38px; height: 38px; background: var(--blue); display: grid; place-items: center; }
+  .mk { width: 36px; height: 36px; }
   .site-footer a { color: #e3eff8; text-decoration: none; }
   .site-footer a:hover { color: var(--gold); text-decoration: underline; }
   .site-footer .btn-gold { color: var(--ink); margin-top: 8px; }
-  .site-footer .btn-gold:hover { color: var(--ink); text-decoration: none; }
-  .cols { display: grid; gap: 40px; grid-template-columns: 1.3fr 1fr 1fr 1fr; }
+  .site-footer .btn-gold:hover { background: #fff; color: var(--blue-ink); text-decoration: none; }
+  .site-footer .btn-gold:hover :global(.icon) { transform: none; }
+  .support { display: inline-flex; align-items: center; gap: 8px; margin-top: 18px; font-weight: 700; }
+  .cols { display: grid; gap: 40px; grid-template-columns: 1.4fr 1fr 1fr; }
   @media (max-width: 1000px) { .cols { grid-template-columns: 1fr 1fr; } }
   @media (max-width: 560px) { .cols { grid-template-columns: minmax(0, 1fr); } }
   .brand { display: inline-flex; align-items: center; gap: 10px; color: #fff; font-weight: 800; font-size: 1.05rem; margin-bottom: 14px; }

@@ -28,7 +28,7 @@ const faqs = [
     <li><strong>Holidays, celebrated.</strong> High Holiday services and meals, a sukkah, Chanukah, Purim and Passover Seders. See <a href="/jewish-life-on-campus/jewish-holidays/">Jewish holidays in college</a>.</li>
     <li><strong>Kosher food.</strong> Kosher Shabbat and holiday meals everywhere, and at many schools kosher meal plans or dining. See <a href="/jewish-life-on-campus/kosher-food/">kosher food at Florida colleges</a>.</li>
     <li><strong>Learning and growth.</strong> Courses like <a href="/programs/jewishu/">JewishU</a> and the <a href="/programs/sinai-scholars/">Sinai Scholars Society</a>, plus one-on-one time with the rabbi.</li>
-    <li><strong>Travel.</strong> <a href="/programs/birthright-israel/">Birthright Israel with Chabad</a>, <a href="/programs/pegisha/">Pegisha Shabbatons</a> and heritage trips.</li>
+    <li><strong>Travel.</strong> <a href="/programs/birthright-israel/">Birthright Israel with Chabad</a>, the statewide <a href="/programs/florida-pegisha/">Florida Pegisha</a> weekend, the <a href="/programs/pegisha/">International Pegisha</a> and heritage trips.</li>
     <li><strong>Support.</strong> A caring adult who notices when a student is struggling, visits when they are sick, and helps them find the right campus resources.</li>
   </ul>
 
@@ -45,12 +45,12 @@ const faqs = [
 
   <h2>Florida Chabad on Campus centers</h2>
   <ul class="cols">
-    {[...centers].sort((a, b) => a.primaryCampus.name.localeCompare(b.primaryCampus.name)).map((c) => <li><a href={c.url}>{c.primaryCampus.name}</a></li>)}
+    {centers.map((c) => <li><a href={c.url}>{c.primaryCampus.name}</a></li>)}
   </ul>
 
   <h2>Questions parents ask</h2>
   <Faq items={faqs} />
-  <p>Still choosing a school? Read <a href="/jewish-life-on-campus/choosing-a-college/">how to choose a college with Jewish life</a>.</p>
+  <p>Want to give back to the Chabad House that looks after your child? <a href="/support/">Support your local Chabad on Campus</a>.</p>
 </Guide>
 
 <style>
