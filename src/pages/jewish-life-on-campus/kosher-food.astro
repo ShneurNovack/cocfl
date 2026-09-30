@@ -1,61 +1,20 @@
 ---
 import Guide from '../../layouts/Guide.astro';
-import { centers, KOSHER_KEYS } from '../../lib/centers';
+import { centers } from '../../lib/centers';
 const path = '/jewish-life-on-campus/kosher-food/';
-const cols = [
-  { key: 'meal', label: 'Kosher meal plan', match: ['Full Kosher meal plan (3 meals a day)', 'Daily Kosher meal plan (1 meal a day)', 'Limited Kosher meal plan (1 or 2 meals a week)'] },
-  { key: 'dining', label: 'Kosher dining', match: ['Kosher restaurant', 'Kosher food truck'] },
-  { key: 'packaged', label: 'Packaged kosher food', match: ['Packaged kosher food'] },
-  { key: 'pesach', label: 'Passover meals', match: ['Kosher for Passover meal plan'] },
-];
-const rows = [...centers]
-  .sort((a, b) => a.primaryCampus.name.localeCompare(b.primaryCampus.name))
-  .map((c) => ({
-    c,
-    cells: cols.map((col) => {
-      const found = c.amenities.filter((a) => col.match.includes(a.key));
-      if (!found.length) return null;
-      const who = new Set<string>();
-      found.forEach((f) => { if (f.byChabad) who.add('Chabad'); if (f.onCampus) who.add('Campus'); });
-      return { label: found[0].label, who: [...who].join(' + ') };
-    }),
-  }));
-const withAny = rows.filter((r) => r.cells.some(Boolean));
-const noData = rows.filter((r) => !r.c.amenities.length);
+const sorted = [...centers].sort((a, b) => a.primaryCampus.name.localeCompare(b.primaryCampus.name));
 ---
 <Guide
   title="Kosher food on campus"
   metaTitle="Kosher Food on Campus at Florida Colleges & Universities"
-  description="Where to find kosher food at Florida universities: kosher meal plans, kosher dining and Passover meals through Chabad on Campus at UF, FSU, UCF, FIU, UM and more."
+  description="Kosher food in college: kosher meal plans, kosher dining, Shabbat meals and Passover through your Chabad on Campus House at Florida colleges and universities."
   path={path}
-  lead="Keeping kosher in college is more doable than most students expect. Here is what kosher food looks like on campus and what is available at Florida schools."
+  lead="Keeping kosher in college is easier than you think."
   image="pizza-friends"
   imageAlt="College students sharing kosher pizza at a Chabad on Campus event"
   crumbs={[{ name: 'Jewish Life on Campus', href: '/jewish-life-on-campus/' }, { name: 'Kosher Food', href: path }]}
-  wide
 >
   <p>Whether you keep strictly kosher, keep kosher at home, or just want a good kosher meal with friends once in a while, your campus Chabad House is the place to start. Chabad Houses keep kosher kitchens, host kosher Shabbat and holiday meals, and in many cases run kosher meal plans or kosher cafes for students. Some Florida universities also offer kosher options through campus dining.</p>
-
-  <h2>Kosher options at Florida colleges</h2>
-  <p>This table shows kosher food options reported to Chabad on Campus for the main campus served by each Florida center. "Chabad" means the option is provided by the Chabad House; "Campus" means it is offered by the university or another provider nearby. Options change from year to year, so confirm with the Chabad House before you plan around them.</p>
-  <div class="table-wrap">
-    <table class="k">
-      <thead>
-        <tr><th scope="col">School</th>{cols.map((c) => <th scope="col">{c.label}</th>)}</tr>
-      </thead>
-      <tbody>
-        {withAny.map((r) => (
-          <tr>
-            <th scope="row"><a href={r.c.url}>{r.c.primaryCampus.name}</a></th>
-            {r.cells.map((cell) => <td>{cell ? <><span class="dot" aria-hidden="true"></span>{cell.label}<span class="who">{cell.who}</span></> : <span class="none">Ask</span>}</td>)}
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  </div>
-  {noData.length > 0 && (
-    <p class="small muted">Kosher information is not yet reported for {noData.map((r, i) => <>{i > 0 && ', '}<a href={r.c.url}>{r.c.primaryCampus.name}</a></>)}. Contact the Chabad House directly.</p>
-  )}
 
   <h2>Types of kosher food you will find</h2>
   <ul>
@@ -64,6 +23,12 @@ const noData = rows.filter((r) => !r.c.amenities.length);
     <li><strong>Packaged kosher food.</strong> Many campus markets carry certified kosher packaged meals and snacks, which help on busy days.</li>
     <li><strong>Shabbat and holiday meals.</strong> Every Chabad House serves kosher Shabbat dinners and holiday meals, which for many students covers the most important meals of the week.</li>
     <li><strong>Kosher for Passover.</strong> Passover is the hardest week to eat kosher on a campus meal plan, so many Chabad Houses offer Passover meals for the whole holiday.</li>
+  </ul>
+
+  <h2>Ask your Chabad House</h2>
+  <p>Kosher options are different at every school and change from year to year. Each Chabad center's page lists what is available on that campus.</p>
+  <ul class="cols">
+    {sorted.map((c) => <li><a href={c.url}>Kosher food at {c.primaryCampus.abbr || c.primaryCampus.name}</a></li>)}
   </ul>
 
   <h2>Tips for keeping kosher in college</h2>
@@ -77,9 +42,6 @@ const noData = rows.filter((r) => !r.c.amenities.length);
 </Guide>
 
 <style>
-  .k td, .k th { vertical-align: top; }
-  .k td { min-width: 150px; }
-  .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--gold); margin-right: 6px; vertical-align: middle; }
-  .who { display: block; font-size: 0.8rem; color: var(--muted); margin-left: 14px; }
-  .none { color: var(--muted); font-size: 0.88rem; }
+  .cols { columns: 2; column-gap: 40px; }
+  @media (max-width: 600px) { .cols { columns: 1; } }
 </style>

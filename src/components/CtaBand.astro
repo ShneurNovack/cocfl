@@ -1,27 +1,40 @@
 ---
-interface Props { title?: string; text?: string; primary?: { href: string; label: string }; secondary?: { href: string; label: string } }
+import Icon from './Icon.astro';
+import SchoolSearch from './SchoolSearch.astro';
+interface Props { title?: string; text?: string; primary?: { href: string; label: string }; secondary?: { href: string; label: string }; search?: boolean }
 const {
   title = 'Is there a Chabad at your school?',
-  text = 'Search every Chabad on Campus center in Florida by university, abbreviation, city or rabbi.',
-  primary = { href: '/campuses/', label: 'Find your campus' },
+  text = "Type your school and we'll take you straight to your Chabad House.",
+  primary,
   secondary,
+  search = !primary,
 } = Astro.props;
+const sid = 'cta-' + Math.random().toString(36).slice(2, 7);
 ---
 <section class="cta band-blue">
+  <img class="mark" src="/flame.webp" alt="" width="96" height="96" loading="lazy" />
   <div class="wrap inner">
-    <div>
+    <div class="txt reveal">
       <h2>{title}</h2>
       <p>{text}</p>
     </div>
-    <div class="btn-row">
-      <a class="btn btn-gold" href={primary.href}>{primary.label}</a>
-      {secondary && <a class="btn btn-ghost" href={secondary.href}>{secondary.label}</a>}
+    <div class="act reveal" style="--d:120ms">
+      {search && <SchoolSearch id={sid} size="md" showLabel={false} />}
+      {(primary || secondary) && (
+        <div class="btn-row">
+          {primary && <a class="btn btn-gold" href={primary.href}>{primary.label} <Icon name="ArrowRight" size={20} /></a>}
+          {secondary && <a class="btn btn-ghost" href={secondary.href}>{secondary.label}</a>}
+        </div>
+      )}
     </div>
   </div>
 </section>
 <style>
-  .cta { padding: clamp(40px, 6vw, 64px) 0; }
-  .inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px; }
-  h2 { margin-bottom: 6px; }
-  p { margin: 0; color: #eaf3fa; max-width: 56ch; }
+  .cta { padding: clamp(80px, 11vw, 140px) 0; position: relative; overflow: hidden; }
+  .mark { position: absolute; right: -60px; top: 50%; translate: 0 -50%; width: 420px; height: auto; opacity: 0.1; pointer-events: none; }
+  .inner { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 40px 72px; align-items: center; }
+  @media (max-width: 900px) { .inner { grid-template-columns: minmax(0, 1fr); } }
+  h2 { color: #fff; margin-bottom: 14px; font-size: clamp(2rem, 3.8vw, 3rem); }
+  p { margin: 0; color: #e3eff8; font-size: 1.2rem; max-width: 40ch; }
+  .act { display: grid; gap: 16px; }
 </style>

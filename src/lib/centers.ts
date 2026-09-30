@@ -33,9 +33,6 @@ export type Campus = {
   abbr: string | null;
   primary: boolean;
   website: string | null;
-  jewishStudents: number | null;
-  undergrad: number | null;
-  publicInstitution: boolean | null;
   anchor: string;
   fromApi: boolean;
   distance?: string | null;
@@ -66,7 +63,6 @@ export type Center = {
   directorsLine: string;
   social: { type: string; url: string }[];
   amenities: Amenity[];
-  groups: string[];
   programs: { program: Program; confirmed: boolean }[];
   jewishU: { courses: number; currentCourses: number; locationUrl: string } | null;
   searchText: string;
@@ -90,11 +86,6 @@ const AMENITY_LABELS: Record<string, string> = {
   'Kosher for Passover meal plan': 'Kosher for Passover meals',
   'Shabbat and holidays minyan': 'Shabbat and holiday services',
   'Daily minyan': 'Daily minyan (prayer services)',
-};
-const GROUP_LABELS: Record<string, string> = {
-  'Israel Orgs': 'Israel student groups',
-  'Jewish Greek life': 'Jewish Greek life',
-  'Other Jewish student groups': 'Other Jewish student organizations',
 };
 export const KOSHER_KEYS = [
   'Full Kosher meal plan (3 meals a day)',
@@ -171,16 +162,12 @@ function build(): Center[] {
       campuses = d.campuses.map((cp: any) => {
         const o = overrides[String(cp.id)] || {};
         const name = (o.name || cp.name).trim();
-        const jewish = (cp.jewishUndergrad || 0) + (cp.jewishGrad || 0);
         return {
           id: cp.id,
           name,
           abbr: o.abbr !== undefined ? o.abbr || null : cleanAbbr(cp.nickname, name),
           primary: cp.primary,
           website: cp.website,
-          jewishStudents: jewish >= 50 ? jewish : null,
-          undergrad: cp.undergrad,
-          publicInstitution: cp.publicInstitution,
           anchor: slugify(name),
           fromApi: true,
           distance: cp.distance,
@@ -188,12 +175,12 @@ function build(): Center[] {
         } as Campus & { _raw: any };
       });
       for (const extra of c.extraCampuses || []) {
-        campuses.push({ id: slugify(extra.name), name: extra.name, abbr: extra.abbr || null, primary: false, website: null, jewishStudents: null, undergrad: null, publicInstitution: null, anchor: slugify(extra.name), fromApi: false });
+        campuses.push({ id: slugify(extra.name), name: extra.name, abbr: extra.abbr || null, primary: false, website: null, anchor: slugify(extra.name), fromApi: false });
       }
     } else {
       campuses = [
-        { id: slugify(L.school), name: L.school, abbr: (c.aliases || [])[0] || null, primary: true, website: null, jewishStudents: null, undergrad: null, publicInstitution: null, anchor: slugify(L.school), fromApi: false },
-        ...(L.additionalCampuses || []).map((n: string) => ({ id: slugify(n), name: n, abbr: null, primary: false, website: null, jewishStudents: null, undergrad: null, publicInstitution: null, anchor: slugify(n), fromApi: false })),
+        { id: slugify(L.school), name: L.school, abbr: (c.aliases || [])[0] || null, primary: true, website: null, anchor: slugify(L.school), fromApi: false },
+        ...(L.additionalCampuses || []).map((n: string) => ({ id: slugify(n), name: n, abbr: null, primary: false, website: null, anchor: slugify(n), fromApi: false })),
       ];
     }
     const primaryCampus = campuses.find((x) => x.primary) || campuses[0];
@@ -201,7 +188,6 @@ function build(): Center[] {
 
     // amenities from the primary campus (what the Chabad House and school offer)
     const amenityMap = new Map<string, Amenity>();
-    const groups = new Set<string>();
     const primaryRaw = (primaryCampus as any)._raw;
     for (const item of primaryRaw?.studentLife || []) {
       if (AMENITY_LABELS[item.name]) {
@@ -211,7 +197,7 @@ function build(): Center[] {
           byChabad: item.providers.includes('Chabad'),
           onCampus: item.providers.some((p: string) => p !== 'Chabad'),
         });
-      } else if (GROUP_LABELS[item.name]) groups.add(GROUP_LABELS[item.name]);
+      }
     }
     // collapse overlapping kosher meal plans to the most generous one
     const mealTiers = ['Full Kosher meal plan (3 meals a day)', 'Daily Kosher meal plan (1 meal a day)', 'Limited Kosher meal plan (1 or 2 meals a week)'];
@@ -266,7 +252,7 @@ function build(): Center[] {
       region: REGION_OF[c.id] || 'south',
       regionName: REGIONS[REGION_OF[c.id] || 'south'].name,
       address: d?.address ? { street: d.address.street, city: d.address.city, state: d.address.state, zip: d.address.zip } : null,
-      location: d?.location || null,
+      location: d?.location || L.location || null,
       phone: d?.phone || L.phone || null,
       email: d?.email || L.email || null,
       website: d?.website || L.website || null,
@@ -277,7 +263,6 @@ function build(): Center[] {
       directorsLine: directors,
       social: d?.social || [],
       amenities: [...amenityMap.values()],
-      groups: [...groups],
       programs: programList,
       jewishU: ju ? { courses: ju.courses || 0, currentCourses: ju.currentCourses || 0, locationUrl: `https://jewishu.org/locations/${ju.slug}` } : null,
       searchText,

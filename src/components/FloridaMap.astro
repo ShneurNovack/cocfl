@@ -1,0 +1,89 @@
+---
+// Interactive map of Florida with a pin for every Chabad on Campus center.
+import { centers } from '../lib/centers';
+import { FL_PATH, MAP_W, MAP_H, project } from '../lib/florida';
+interface Props { highlight?: string; compact?: boolean; showLabels?: boolean }
+const { highlight, compact = false, showLabels = true } = Astro.props;
+
+// spread pins that sit on top of each other (e.g. two centers at UM)
+const placed: { x: number; y: number }[] = [];
+const pins = centers
+  .filter((c) => c.location)
+  .map((c) => {
+    let { x, y } = project(c.location!.lat, c.location!.lng);
+    for (let tries = 0; tries < 8; tries++) {
+      const clash = placed.find((p) => Math.hypot(p.x - x, p.y - y) < 13);
+      if (!clash) break;
+      x += 11; y -= 4;
+    }
+    placed.push({ x, y });
+    return { c, x, y };
+  });
+---
+<div class:list={['flmap', compact && 'compact']} data-flmap>
+  <svg viewBox={`0 0 ${MAP_W} ${MAP_H}`} role="img" aria-labelledby="flmap-title">
+    <title id="flmap-title">Map of Chabad on Campus centers across Florida</title>
+    <path d={FL_PATH} class="land" />
+    {pins.map(({ c, x, y }) => (
+      <a href={c.url} class:list={['pin', highlight === c.id && 'on', highlight && highlight !== c.id && 'dim']} data-pin={c.id} aria-label={`${c.officialName}, ${c.primaryCampus.name}`}>
+        <circle class="pulse" cx={x} cy={y} r="9" />
+        <circle class="dot" cx={x} cy={y} r={highlight === c.id ? 10 : 7} />
+        {showLabels && !compact && <text x={x + 12} y={y + 4} class="lbl">{c.primaryCampus.abbr || c.primaryCampus.name.split(' ')[0]}</text>}
+      </a>
+    ))}
+  </svg>
+  <div class="tip" hidden>
+    <strong></strong>
+    <span></span>
+  </div>
+  <script type="application/json" data-pins set:html={JSON.stringify(Object.fromEntries(pins.map(({ c }) => [c.id, { n: `Chabad at ${c.primaryCampus.abbr || c.primaryCampus.name}`, s: `${c.officialName} · ${c.city}` }])))} />
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-flmap]').forEach((map) => {
+    const tip = map.querySelector<HTMLElement>('.tip')!;
+    const data = JSON.parse(map.querySelector('[data-pins]')!.textContent!);
+    const show = (pin: Element) => {
+      const d = data[(pin as HTMLElement).dataset.pin!];
+      const r = pin.querySelector('.dot')!.getBoundingClientRect();
+      const m = map.getBoundingClientRect();
+      tip.querySelector('strong')!.textContent = d.n;
+      tip.querySelector('span')!.textContent = d.s;
+      tip.hidden = false;
+      tip.style.left = `${r.left - m.left + r.width / 2}px`;
+      tip.style.top = `${r.top - m.top}px`;
+    };
+    map.querySelectorAll('.pin').forEach((pin) => {
+      pin.addEventListener('mouseenter', () => show(pin));
+      pin.addEventListener('focus', () => show(pin));
+      pin.addEventListener('mouseleave', () => (tip.hidden = true));
+      pin.addEventListener('blur', () => (tip.hidden = true));
+    });
+    // let other components highlight pins (e.g. directory cards)
+    map.addEventListener('highlight', ((e: CustomEvent) => {
+      map.querySelectorAll('.pin').forEach((p) => p.classList.toggle('hot', (p as HTMLElement).dataset.pin === e.detail));
+    }) as EventListener);
+  });
+</script>
+
+<style>
+  .flmap { position: relative; width: 100%; padding-right: 36px; }
+  svg { width: 100%; height: auto; display: block; overflow: visible; }
+  .land { fill: var(--blue-wash); stroke: var(--blue); stroke-width: 2; stroke-linejoin: round; }
+  .pin { cursor: pointer; outline: none; }
+  .dot { fill: var(--gold); stroke: #fff; stroke-width: 3; transition: r 0.2s var(--ease), fill 0.2s; }
+  .pulse { fill: var(--gold); opacity: 0; transform-box: fill-box; transform-origin: center; }
+  .pin:hover .dot, .pin:focus-visible .dot, .pin.hot .dot { r: 11; fill: var(--blue); }
+  .pin.on .dot { fill: var(--blue); r: 11; }
+  .pin.dim .dot { fill: #9fc4df; }
+  .lbl { font: 750 13px var(--font); fill: var(--blue-ink); paint-order: stroke; stroke: rgba(255, 255, 255, 0.85); stroke-width: 3px; pointer-events: none; }
+  @media (prefers-reduced-motion: no-preference) {
+    .pin:not(.dim) .pulse { animation: pulse 2.6s ease-out infinite; }
+    .pin.on .pulse { animation-duration: 1.8s; }
+  }
+  @keyframes pulse { 0% { opacity: 0.55; transform: scale(0.8); } 100% { opacity: 0; transform: scale(3.2); } }
+  .tip { position: absolute; transform: translate(-50%, calc(-100% - 14px)); background: var(--ink); color: #fff; padding: 10px 14px; pointer-events: none; white-space: nowrap; z-index: 5; }
+  .tip::after { content: ''; position: absolute; left: 50%; bottom: -6px; width: 12px; height: 12px; background: inherit; transform: translateX(-50%) rotate(45deg); }
+  .tip strong { display: block; font-size: 0.95rem; }
+  .tip span { font-size: 0.8rem; color: #d9dad4; }
+</style>

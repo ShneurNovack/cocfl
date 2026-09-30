@@ -1,27 +1,41 @@
 ---
 import Base from '../layouts/Base.astro';
-import CenterCard from '../components/CenterCard.astro';
+import CenterLogo from '../components/CenterLogo.astro';
 import ProgramCard from '../components/ProgramCard.astro';
-import Picture from '../components/Picture.astro';
-import { centers, centersByRegion, stats, allColleges } from '../lib/centers';
+import SchoolSearch from '../components/SchoolSearch.astro';
+import FloridaMap from '../components/FloridaMap.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Icon from '../components/Icon.astro';
+import { centers, stats } from '../lib/centers';
 import { programs } from '../data/programs';
-import { SITE, TESTIMONIALS } from '../lib/site';
+import { SITE, TESTIMONIALS, img } from '../lib/site';
 
-const regions = centersByRegion();
-const colleges = allColleges();
+const sorted = [...centers].sort((a, b) => a.primaryCampus.name.localeCompare(b.primaryCampus.name));
 const itemList = {
   '@context': 'https://schema.org',
   '@type': 'ItemList',
   name: 'Chabad on Campus centers in Florida',
-  itemListElement: centers.map((c, i) => ({ '@type': 'ListItem', position: i + 1, url: `${SITE.url}${c.url}`, name: `Chabad at ${c.primaryCampus.name}` })),
+  itemListElement: sorted.map((c, i) => ({ '@type': 'ListItem', position: i + 1, url: `${SITE.url}${c.url}`, name: `Chabad at ${c.primaryCampus.name}` })),
 };
-const offers = [
-  { title: 'Shabbat dinners every week', text: 'Home-cooked Friday night dinners with friends, open to every Jewish student.', href: '/jewish-life-on-campus/shabbat/', link: 'Shabbat on campus' },
-  { title: 'Every Jewish holiday, celebrated', text: 'High Holiday services, a sukkah on campus, Chanukah, Purim and Passover Seders.', href: '/jewish-life-on-campus/jewish-holidays/', link: 'Jewish holidays in college' },
-  { title: 'Kosher food', text: 'From weekly kosher meals to full meal plans and kosher dining, depending on your campus.', href: '/jewish-life-on-campus/kosher-food/', link: 'Kosher food on campus' },
-  { title: 'Learning your way', text: 'Short JewishU courses, the Sinai Scholars fellowship and one-on-one time with the rabbi.', href: '/programs/', link: 'Explore programs' },
-  { title: 'Israel and travel', text: 'Birthright with your campus Chabad, heritage trips and grants to study abroad.', href: '/programs/birthright-israel/', link: 'Birthright & Israel experiences' },
-  { title: 'A family away from home', text: 'A rabbi and rebbetzin who know you by name, for good days and hard ones.', href: '/about/', link: 'About Chabad on Campus' },
+const slides = [
+  { key: 'florida-pegisha-students', alt: 'Florida college students together at the Florida Regional Pegisha Shabbaton' },
+  { key: 'students-friends', alt: 'Jewish college students smiling together at a Chabad on Campus event' },
+  { key: 'shabbat-candles', alt: 'Students lighting Shabbat candles together' },
+  { key: 'pizza-friends', alt: 'Friends sharing pizza at a Chabad on Campus event' },
+].map((s) => ({ ...s, ...img(s.key) }));
+
+const tabs = [
+  { id: 'shabbat', icon: 'Flame', label: 'Shabbat', title: 'Friday night, there is a seat for you', text: 'Candles, challah, a home-cooked dinner and a table full of friends. You never need an invitation.', image: 'shabbat-candles', alt: 'Students lighting Shabbat candles together', href: '/jewish-life-on-campus/shabbat/', link: 'Shabbat on campus' },
+  { id: 'holidays', icon: 'PartyPopper', label: 'Holidays', title: 'Every Jewish holiday, together', text: 'High Holiday services and dinners, a sukkah near campus, menorah lightings, Purim and Passover Seders.', image: 'tefillin', alt: 'A student putting on tefillin with a rabbi', href: '/jewish-life-on-campus/jewish-holidays/', link: 'Jewish holidays in college' },
+  { id: 'learning', icon: 'BookOpen', label: 'Learning', title: 'Big questions welcome', text: 'Classes over pizza, JewishU courses, the Sinai Scholars fellowship or a one-on-one with the rabbi.', image: 'sinai-study-pair', alt: 'A rabbi learning with two students', href: '/programs/', link: 'Explore programs' },
+  { id: 'travel', icon: 'Plane', label: 'Trips', title: 'Go places with your campus crew', text: 'Birthright Israel with Chabad, Pegisha Shabbatons with hundreds of students, and heritage trips.', image: 'pegisha-brooklyn-bridge', alt: 'Students on the Brooklyn Bridge during Pegisha', href: '/programs/birthright-israel/', link: 'Birthright & Israel' },
+  { id: 'home', icon: 'HeartHandshake', label: 'A home', title: 'Family, when you are far from yours', text: 'Chicken soup when you are sick, a quiet place to study, and people who know your name.', image: 'friends-outdoors', alt: 'Students standing together outside a Chabad House', href: '/about/', link: 'About Chabad on Campus' },
+];
+const values = [
+  { icon: 'DoorOpen', title: 'Every Jewish student', text: 'Whatever your background, you belong here.' },
+  { icon: 'BadgeCheck', title: 'No membership', text: 'Just show up. No dues, no sign-up required.' },
+  { icon: 'MessagesSquare', title: 'Every question welcome', text: 'No judgment and no pressure, ever.' },
+  { icon: 'Heart', title: 'People who care', text: 'A rabbi and rebbetzin who make their home yours.' },
 ];
 ---
 <Base
@@ -30,184 +44,301 @@ const offers = [
   path="/"
   jsonLd={[itemList]}
 >
-  <section class="hero band-blue">
-    <div class="wrap hero-inner">
-      <h1>
-        <span class="kicker">Chabad on Campus Florida</span>
-        Serving over <span class="hl">{SITE.reported.students} Jewish students</span> on <span class="hl">{stats.campuses}+ campuses</span> throughout Florida.
-      </h1>
-      <p class="lead">We champion robust Jewish life and learning on college campuses in Florida. We seek a future where every Jewish student has a deeper affinity, connection and understanding of their faith, heritage and identity.</p>
-      <form class="hero-search" action="/campuses/" method="get" role="search">
-        <label for="hero-q">Is there a Chabad at my school?</label>
-        <div class="field">
-          <input id="hero-q" name="q" type="search" list="schools" placeholder="Type your school, like UF, FIU or Rollins" autocomplete="off" />
-          <button class="btn btn-gold" type="submit">Find my campus</button>
-        </div>
-        <datalist id="schools">
-          {colleges.map((r) => <option value={r.campus.name} />)}
-        </datalist>
-      </form>
+  <section class="hero">
+    <div class="hero-text">
+      <div class="hero-inner">
+        <h1>Your Jewish home on every Florida campus</h1>
+        <p class="lead">Serving over {SITE.reported.students} Jewish students on {stats.campuses}+ campuses throughout Florida.</p>
+        <SchoolSearch id="hero-search" />
+      </div>
+    </div>
+    <div class="hero-media" data-slides>
+      {slides.map((s, i) => (
+        <img class:list={['slide', i === 0 && 'on']} src={s.src} srcset={s.srcset} sizes="(max-width: 960px) 100vw, 55vw" width={s.width} height={s.height} alt={s.alt} loading={i === 0 ? 'eager' : 'lazy'} fetchpriority={i === 0 ? 'high' : undefined} decoding="async" />
+      ))}
+      <div class="ticks" role="group" aria-label="Choose a photo">
+        {slides.map((s, i) => <button type="button" aria-label={`Show photo ${i + 1}`} aria-pressed={i === 0 ? 'true' : 'false'} data-tick={i}><span></span></button>)}
+      </div>
     </div>
   </section>
 
-  <section class="stats band-deep" aria-label="Chabad on Campus Florida by the numbers">
+  <section class="stats band-gold">
     <div class="wrap stat-grid">
-      <div><strong>{stats.centers}</strong><span>Chabad centers</span></div>
-      <div><strong>{stats.campuses}</strong><span>Campuses served</span></div>
-      <div><strong>{SITE.reported.studentsServed}</strong><span>Students served</span></div>
-      <div><strong>{SITE.reported.engagements}</strong><span>Jewish engagements in {SITE.reported.engagementsYear}</span></div>
+      <div class="stat"><strong data-count={stats.centers}>{stats.centers}</strong><span>Chabad centers</span></div>
+      <div class="stat"><strong data-count={stats.campuses}>{stats.campuses}</strong><span>Campuses served</span></div>
+      <div class="stat"><strong data-count={parseInt(SITE.reported.studentsServed)} data-suffix="k">{SITE.reported.studentsServed}</strong><span>Students served</span></div>
+      <div class="stat"><strong data-count={parseInt(SITE.reported.engagements)} data-suffix="k">{SITE.reported.engagements}</strong><span>Jewish engagements in {SITE.reported.engagementsYear}</span></div>
     </div>
   </section>
 
   <section class="section">
     <div class="wrap">
-      <div class="head">
-        <div>
-          <span class="eyebrow">Florida directory</span>
-          <h2>You call it college. We call it home.</h2>
-          <p class="lead">There is a Chabad House near nearly every major campus in Florida. Find yours, meet the rabbi and rebbetzin, and come for Shabbat.</p>
-        </div>
-        <a class="btn btn-ghost" href="/campuses/">Search all campuses</a>
+      <div class="sec-head reveal">
+        <h2>You call it college. We call it home.</h2>
+        <p class="lead">There is a rabbi and rebbetzin ready to welcome you, from Tallahassee to Miami.</p>
       </div>
-      {regions.map((r) => (
-        <div class="region">
-          <h3 class="region-title">{r.name} <span>{r.blurb}</span></h3>
-          <div class="grid grid-3">
-            {r.centers.map((c) => <CenterCard center={c} compact />)}
-          </div>
-        </div>
-      ))}
+      <div class="map-grid">
+        <div class="map-col reveal"><FloridaMap /></div>
+        <ul class="clist">
+          {sorted.map((c, i) => (
+            <li class="reveal" style={`--d:${Math.min(i, 8) * 40}ms`}>
+              <a href={c.url} data-hl={c.id}>
+                <CenterLogo center={c} size={48} />
+                <span><strong>{c.primaryCampus.name}</strong><small>{c.city}</small></span>
+                <Icon name="ArrowRight" size={20} />
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   </section>
 
   <section class="section band-cream">
-    <div class="wrap split">
-      <Picture name="florida-pegisha-students" alt="Florida Jewish college students together at the Florida Regional Pegisha Shabbaton" aspect="4/3" />
-      <div>
-        <span class="eyebrow">Jewish life on campus</span>
-        <h2>Get support, find family, celebrate Judaism your own way</h2>
-        <p class="lead">Chabad on Campus is open to every Jewish student, whatever your background or level of observance. No membership, no judgment, just a warm home a few minutes from class.</p>
-        <p><a href="/jewish-life-on-campus/">Read the guide to Jewish life on campus</a> or see <a href="/jewish-life-on-campus/florida/">Jewish life at Florida colleges</a>, region by region.</p>
-      </div>
-    </div>
     <div class="wrap">
-      <div class="grid grid-3 offers">
-        {offers.map((o) => (
-          <div class="offer">
-            <h3>{o.title}</h3>
-            <p>{o.text}</p>
-            <a href={o.href}>{o.link} &rarr;</a>
+      <div class="sec-head reveal">
+        <h2>What happens at Chabad?</h2>
+        <p class="lead">Every Chabad House has its own flavor. Here is what you can count on.</p>
+      </div>
+      <div class="htabs" role="tablist" aria-label="Life at Chabad">
+        {tabs.map((t, i) => <button role="tab" id={`ht-${t.id}`} aria-controls={`hp-${t.id}`} aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1}><Icon name={t.icon} size={22} /> {t.label}</button>)}
+      </div>
+      {tabs.map((t, i) => {
+        const im = img(t.image);
+        return (
+          <div class="hpanel" role="tabpanel" id={`hp-${t.id}`} aria-labelledby={`ht-${t.id}`} hidden={i !== 0}>
+            <div class="photo hp-photo"><img src={im.src} srcset={im.srcset} sizes="(max-width: 900px) 100vw, 640px" width={im.width} height={im.height} alt={t.alt} loading="lazy" decoding="async" /></div>
+            <div class="hp-text">
+              <span class="bubble lg gold"><Icon name={t.icon} size={32} /></span>
+              <h3>{t.title}</h3>
+              <p>{t.text}</p>
+              <a class="btn btn-blue" href={t.href}>{t.link} <Icon name="ArrowRight" size={20} /></a>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="values">
+        {values.map((v, i) => (
+          <div class="value reveal" style={`--d:${i * 90}ms`}>
+            <span class:list={['bubble', 'lg', i % 2 ? 'gold' : 'blue']}><Icon name={v.icon} size={30} /></span>
+            <h3>{v.title}</h3>
+            <p>{v.text}</p>
           </div>
         ))}
       </div>
     </div>
   </section>
 
-  <section class="section">
+  <section class="section band-wash">
     <div class="wrap">
-      <div class="head">
-        <div>
-          <span class="eyebrow">Programs</span>
-          <h2>Learn, travel and grow with Chabad on Campus</h2>
-          <p class="lead">Florida students have access to the full range of Chabad on Campus programs, from weekly classes to Shabbatons with hundreds of students.</p>
+      <div class="phead">
+        <div class="sec-head reveal">
+          <h2>Learn, travel and grow together</h2>
+          <p class="lead">Programs that take Jewish life beyond Friday night.</p>
         </div>
-        <a class="btn btn-ghost" href="/programs/">All programs</a>
+        <div class="arrows">
+          <button type="button" class="arr" data-scroll="-1" aria-label="Previous programs"><Icon name="ArrowLeft" size={22} /></button>
+          <button type="button" class="arr" data-scroll="1" aria-label="More programs"><Icon name="ArrowRight" size={22} /></button>
+        </div>
       </div>
-      <div class="grid grid-3">
-        {programs.slice(0, 6).map((p) => <ProgramCard program={p} />)}
+      <div class="rail" data-rail>
+        {programs.map((p) => <div class="slidecard"><ProgramCard program={p} /></div>)}
       </div>
+      <a class="textlink all" href="/programs/">See all programs <Icon name="ArrowRight" size={20} /></a>
     </div>
   </section>
 
-  <section class="section band-blue voices">
+  <section class="section band-night voices">
     <div class="wrap">
-      <span class="eyebrow">Student voices</span>
-      <h2>In their words</h2>
       <div class="quotes">
-        {TESTIMONIALS.map((t) => (
-          <figure>
-            <blockquote>&ldquo;{t.quote}&rdquo;</blockquote>
+        {TESTIMONIALS.map((t, i) => (
+          <figure class="q" hidden={i !== 0} data-q>
+            <Icon name="Quote" size={56} class="qmark" />
+            <blockquote>{t.quote}</blockquote>
             <figcaption><strong>{t.name}</strong><span>{t.school}</span></figcaption>
           </figure>
         ))}
       </div>
+      <div class="dots" role="group" aria-label="Choose a testimonial">
+        {TESTIMONIALS.map((t, i) => <button type="button" aria-label={`Show quote from ${t.name}`} aria-pressed={i === 0 ? 'true' : 'false'} data-dot={i}></button>)}
+      </div>
     </div>
   </section>
 
   <section class="section">
-    <div class="wrap grid grid-2 duo">
-      <div class="card">
-        <span class="eyebrow">For parents</span>
-        <h2>Sending your child to a Florida college?</h2>
-        <p>Learn what Chabad on Campus offers students, how to connect your child with the rabbi and rebbetzin before move-in, and what support looks like during the year.</p>
-        <p><a class="btn btn-blue" href="/parents/">Resources for parents</a></p>
-      </div>
-      <div class="card">
-        <span class="eyebrow">Choosing a school</span>
-        <h2>Looking for a college with Jewish life?</h2>
-        <p>What to ask on a campus tour, how to compare Jewish communities, and which Florida universities have a Chabad House nearby.</p>
-        <p><a class="btn btn-blue" href="/jewish-life-on-campus/choosing-a-college/">Choosing a college with Jewish life</a></p>
-      </div>
-    </div>
+    <div class="wrap"><div class="duo">
+      <a class="duo-card reveal" href="/parents/">
+        <span class="bubble lg gold"><Icon name="HandHeart" size={32} /></span>
+        <h2>For parents</h2>
+        <p>How Chabad on Campus supports your student, and how to connect before move-in.</p>
+        <span class="textlink">Resources for parents <Icon name="ArrowRight" size={20} /></span>
+      </a>
+      <a class="duo-card reveal" href="/jewish-life-on-campus/choosing-a-college/" style="--d:100ms">
+        <span class="bubble lg blue"><Icon name="Compass" size={32} /></span>
+        <h2>Choosing a college</h2>
+        <p>What to look for in Jewish life, and what to ask on a campus visit.</p>
+        <span class="textlink">Choosing a college with Jewish life <Icon name="ArrowRight" size={20} /></span>
+      </a>
+    </div></div>
   </section>
 
-  <section class="section band-cream">
-    <div class="wrap split">
-      <div>
-        <h2>Connect with your Florida Chabad on Campus</h2>
-        <p class="lead">Wherever you're studying in Florida, there's a Chabad House nearby ready to welcome you. Find yours in the directory and say hello!</p>
-        <div class="btn-row">
-          <a class="btn btn-blue" href="/campuses/">Find your Chabad House</a>
-          <a class="btn btn-ghost" href="/faq/">Questions? Read the FAQ</a>
-        </div>
-      </div>
-      <Picture name="students-friends" alt="Jewish college students smiling together at a Chabad on Campus event" aspect="3/2" />
-    </div>
-  </section>
+  <CtaBand title="Come for Shabbat. Stay for the people." text="Find your campus and say hello." />
 </Base>
 
+<script>
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // hero slideshow
+  const slides = Array.from(document.querySelectorAll<HTMLImageElement>('[data-slides] .slide'));
+  const ticks = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-tick]'));
+  let s = 0;
+  let st: number | undefined;
+  const go = (n: number) => {
+    s = (n + slides.length) % slides.length;
+    slides.forEach((im, i) => im.classList.toggle('on', i === s));
+    ticks.forEach((t, i) => t.setAttribute('aria-pressed', String(i === s)));
+  };
+  const auto = () => { clearInterval(st); if (!reduce) st = window.setInterval(() => go(s + 1), 6000); };
+  ticks.forEach((t, i) => t.addEventListener('click', () => { go(i); auto(); }));
+  auto();
+
+  // tabs
+  document.querySelectorAll<HTMLElement>('.htabs').forEach((list) => {
+    const btns = Array.from(list.querySelectorAll<HTMLButtonElement>('[role=tab]'));
+    const select = (b: HTMLButtonElement, focus = false) => {
+      btns.forEach((x) => {
+        const on = x === b;
+        x.setAttribute('aria-selected', String(on));
+        x.tabIndex = on ? 0 : -1;
+        document.getElementById(x.getAttribute('aria-controls')!)!.hidden = !on;
+      });
+      if (focus) b.focus();
+    };
+    btns.forEach((b, i) => {
+      b.addEventListener('click', () => select(b));
+      b.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight') select(btns[(i + 1) % btns.length], true);
+        if (e.key === 'ArrowLeft') select(btns[(i - 1 + btns.length) % btns.length], true);
+      });
+    });
+  });
+
+  // list hover lights the map pin
+  const map = document.querySelector('[data-flmap]');
+  document.querySelectorAll<HTMLElement>('[data-hl]').forEach((a) => {
+    a.addEventListener('mouseenter', () => map?.dispatchEvent(new CustomEvent('highlight', { detail: a.dataset.hl })));
+    a.addEventListener('mouseleave', () => map?.dispatchEvent(new CustomEvent('highlight', { detail: null })));
+  });
+
+  // program rail
+  const rail = document.querySelector<HTMLElement>('[data-rail]');
+  document.querySelectorAll<HTMLButtonElement>('[data-scroll]').forEach((b) =>
+    b.addEventListener('click', () => rail?.scrollBy({ left: Number(b.dataset.scroll) * rail.clientWidth * 0.8, behavior: 'smooth' })),
+  );
+
+  // testimonials
+  const qs = Array.from(document.querySelectorAll<HTMLElement>('[data-q]'));
+  const dots = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-dot]'));
+  let cur = 0;
+  let qt: number | undefined;
+  const show = (n: number) => {
+    cur = (n + qs.length) % qs.length;
+    qs.forEach((q, i) => (q.hidden = i !== cur));
+    dots.forEach((d, i) => d.setAttribute('aria-pressed', String(i === cur)));
+  };
+  dots.forEach((d, i) => d.addEventListener('click', () => { show(i); clearInterval(qt); }));
+  if (!reduce) qt = window.setInterval(() => show(cur + 1), 8000);
+</script>
+
 <style>
-  .hero { padding: clamp(56px, 9vw, 112px) 0 clamp(48px, 7vw, 88px); }
-  .hero-inner { max-width: 980px; text-align: center; }
-  .hero h1 { font-size: clamp(2.2rem, 5.2vw, 4.4rem); line-height: 1.08; max-width: none; margin-bottom: 26px; }
-  .kicker { display: block; font-size: clamp(0.85rem, 1.2vw, 1rem); letter-spacing: 0.12em; text-transform: uppercase; color: #cfe2f0; font-weight: 700; margin-bottom: 18px; }
-  .hero .lead { max-width: 640px; margin: 0 auto 34px; }
-  .hero-search { max-width: 640px; margin: 0 auto; text-align: left; }
-  .hero-search label { display: block; font-weight: 700; margin-bottom: 10px; color: #fff; text-align: center; }
-  .field { display: flex; gap: 8px; background: #fff; padding: 6px; border-radius: var(--radius); box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18); }
-  .field input { flex: 1; min-width: 0; border: 0; font: 500 1.05rem var(--font); padding: 12px 14px; color: var(--ink); background: transparent; }
-  .field input:focus { outline: none; }
-  .field:focus-within { outline: 3px solid var(--gold); outline-offset: 2px; }
-  @media (max-width: 520px) { .field { flex-direction: column; } }
+  .hero { display: grid; grid-template-columns: minmax(0, 45fr) minmax(0, 55fr); min-height: min(calc(100vh - 75px), 760px); }
+  @media (max-width: 960px) { .hero { grid-template-columns: 1fr; min-height: 0; } }
+  .hero-text { background: var(--blue); color: #fff; display: flex; align-items: center; padding: clamp(56px, 8vw, 104px) var(--gutter); }
+  .hero-inner { max-width: 560px; margin-left: auto; width: 100%; }
+  @media (max-width: 960px) { .hero-inner { margin: 0; } }
+  .hero h1 { color: #fff; font-size: clamp(2.6rem, 5vw, 4.4rem); line-height: 1.03; margin-bottom: 24px; }
+  .hero .lead { color: #e3eff8; margin-bottom: 44px; max-width: 36ch; }
+  .hero :global(.ss label) { color: #fff; }
+  .hero :global(.ss-field) { border-color: #fff; }
+  .hero-media { position: relative; overflow: hidden; background: var(--blue-night); min-height: 340px; }
+  @media (max-width: 960px) { .hero-media { aspect-ratio: 4 / 3; min-height: 0; } .hero { grid-template-columns: minmax(0, 1fr); } }
+  .slide { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1.2s ease, transform 7s linear; transform: scale(1.04); }
+  .slide.on { opacity: 1; transform: scale(1); }
+  @media (prefers-reduced-motion: reduce) { .slide { transition: opacity 0.3s; transform: none; } }
+  .ticks { position: absolute; left: 0; right: 0; bottom: 0; display: flex; gap: 0; }
+  .ticks button { flex: 1; height: 44px; border: 0; background: transparent; cursor: pointer; padding: 0 0 0; display: flex; align-items: flex-end; }
+  .ticks span { display: block; width: 100%; height: 6px; background: rgba(255, 255, 255, 0.35); transition: background 0.3s, height 0.2s; }
+  .ticks button:hover span { height: 10px; }
+  .ticks button[aria-pressed='true'] span { background: var(--gold); }
 
-  .stats { padding: clamp(36px, 5vw, 56px) 0; }
-  .stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; text-align: center; }
-  @media (max-width: 720px) { .stat-grid { grid-template-columns: 1fr 1fr; } }
-  .stat-grid strong { display: block; font-size: clamp(2.4rem, 5vw, 3.6rem); font-weight: 900; color: var(--gold); line-height: 1; letter-spacing: -0.02em; }
-  .stat-grid span { display: block; margin-top: 10px; font-weight: 600; font-size: 0.95rem; }
+  .stats { padding: clamp(44px, 6vw, 72px) 0; }
+  .stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; }
+  @media (max-width: 860px) { .stat-grid { grid-template-columns: 1fr 1fr; } }
+  .stat strong { display: block; font-size: clamp(2.8rem, 5vw, 4.2rem); font-weight: 900; color: var(--ink); line-height: 1; letter-spacing: -0.04em; }
+  .stat span { display: block; margin-top: 10px; font-weight: 700; color: var(--ink-2); }
 
-  .head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 20px; margin-bottom: 36px; }
-  .head > div { max-width: 700px; }
-  .head .lead { margin-bottom: 0; }
-  .region + .region { margin-top: 40px; }
-  .region-title { font-size: 1rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--blue-ink); border-bottom: 2px solid var(--gold); padding-bottom: 10px; margin-bottom: 18px; display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: baseline; }
-  .region-title span { text-transform: none; letter-spacing: 0; color: var(--muted); font-weight: 500; font-size: 0.9rem; }
+  .map-col { position: sticky; top: 110px; }
+  .map-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px, 6vw, 96px); align-items: start; }
+  @media (max-width: 960px) { .map-grid { grid-template-columns: minmax(0, 1fr); } .map-col { max-width: 560px; width: 100%; } }
+  .clist { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr; border-top: 2px solid var(--ink); }
+  .clist li { border-bottom: 1px solid var(--line-strong); }
+  .clist a { display: flex; align-items: center; gap: 18px; padding: 14px 4px; text-decoration: none; color: var(--ink); transition: background 0.2s, padding 0.25s var(--ease); }
+  .clist a:hover { background: var(--gold-wash); padding-left: 14px; }
+  .clist a > span { flex: 1; }
+  .clist strong { display: block; line-height: 1.25; font-size: 1.05rem; }
+  .clist small { color: var(--muted); font-size: 0.9rem; }
+  .clist a > :global(.icon) { color: var(--blue); transition: transform 0.2s var(--ease); }
+  .clist a:hover > :global(.icon) { transform: translateX(4px); }
 
-  .offers { margin-top: clamp(40px, 6vw, 64px); }
-  .offer { border-top: 3px solid var(--blue); padding-top: 16px; }
-  .offer h3 { margin-bottom: 6px; }
-  .offer p { color: var(--ink-2); margin-bottom: 8px; }
-  .offer a { font-weight: 700; text-decoration: none; }
-  .offer a:hover { text-decoration: underline; }
+  .htabs { display: flex; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; gap: 0; margin-bottom: 48px; border-bottom: 2px solid var(--ink); }
+  .htabs button { flex-shrink: 0; font: 750 1rem var(--font); padding: 16px 22px; border: 0; background: transparent; color: var(--ink-2); cursor: pointer; display: inline-flex; align-items: center; gap: 10px; transition: background 0.2s, color 0.2s; margin-bottom: -2px; border-bottom: 2px solid transparent; }
+  .htabs button:hover { color: var(--blue); background: #fff; }
+  .htabs button[aria-selected='true'] { background: var(--blue); color: #fff; border-bottom-color: var(--blue); }
+  .hpanel { display: grid; grid-template-columns: 1.15fr 1fr; gap: clamp(36px, 6vw, 88px); align-items: center; animation: fadeup 0.5s var(--ease); }
+  @keyframes fadeup { from { opacity: 0; transform: translateY(12px); } }
+  @media (max-width: 900px) { .hpanel { grid-template-columns: minmax(0, 1fr); } }
+  .hp-photo { aspect-ratio: 4 / 3; }
+  .hp-text h3 { font-size: clamp(1.8rem, 3vw, 2.5rem); margin: 28px 0 16px; line-height: 1.1; }
+  .hp-text p { font-size: 1.2rem; color: var(--ink-2); margin-bottom: 32px; max-width: 38ch; }
 
-  .voices h2 { margin-bottom: 32px; }
-  .quotes { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 20px; }
-  figure { margin: 0; background: var(--blue-deep); padding: 28px; border-radius: var(--radius); display: flex; flex-direction: column; justify-content: space-between; gap: 18px; }
-  blockquote { margin: 0; font-size: 1.02rem; line-height: 1.65; color: #e9f2f8; }
-  figcaption strong { display: block; color: var(--gold); }
-  figcaption span { color: #bcd6e6; font-size: 0.9rem; }
+  .values { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(28px, 4vw, 56px); }
+  @media (max-width: 960px) { .values { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 520px) { .values { grid-template-columns: minmax(0, 1fr); } }
+  .value .bubble { margin-bottom: 24px; }
+  .value h3 { margin-bottom: 8px; font-size: 1.3rem; }
+  .value p { margin: 0; color: var(--ink-2); }
 
-  .duo .card { padding: clamp(24px, 4vw, 40px); }
-  .duo h2 { font-size: clamp(1.35rem, 2.2vw, 1.7rem); }
-  .duo p:last-child { margin: 0; }
+  .phead { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px; }
+  .arrows { display: flex; gap: 8px; margin-bottom: clamp(36px, 5vw, 56px); }
+  .arr { width: 56px; height: 56px; border: 2px solid var(--ink); background: transparent; color: var(--ink); cursor: pointer; display: grid; place-items: center; transition: background 0.2s, color 0.2s; }
+  .arr:hover { background: var(--ink); color: #fff; }
+  .rail { display: grid; grid-auto-flow: column; grid-auto-columns: min(360px, 84%); gap: 24px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 8px; scrollbar-width: none; }
+  .rail::-webkit-scrollbar { display: none; }
+  .slidecard { scroll-snap-align: start; }
+  .all { margin-top: 36px; }
+
+  .voices .quotes { min-height: 300px; display: grid; align-items: center; max-width: 980px; }
+  .q { margin: 0; animation: fadeup 0.6s var(--ease); }
+  .q :global(.qmark) { color: var(--gold); margin-bottom: 24px; }
+  .q blockquote { margin: 0 0 32px; font-size: clamp(1.5rem, 3vw, 2.3rem); line-height: 1.35; font-weight: 650; color: #fff; letter-spacing: -0.01em; }
+  .q figcaption strong { display: block; color: var(--gold); font-size: 1.1rem; }
+  .q figcaption span { color: #cfe2f0; }
+  .dots { display: flex; gap: 8px; margin-top: 40px; }
+  .dots button { width: 44px; height: 6px; border: 0; background: rgba(255, 255, 255, 0.3); cursor: pointer; padding: 0; transition: background 0.3s; }
+  .dots button[aria-pressed='true'] { background: var(--gold); }
+
+  .duo { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 2px solid var(--ink); }
+  @media (max-width: 800px) { .duo { grid-template-columns: minmax(0, 1fr); } }
+  .duo-card { padding: clamp(36px, 5vw, 64px); display: flex; flex-direction: column; gap: 14px; text-decoration: none; color: var(--ink); transition: background 0.25s; }
+  .duo-card + .duo-card { border-left: 2px solid var(--ink); }
+  @media (max-width: 800px) { .duo-card + .duo-card { border-left: 0; border-top: 2px solid var(--ink); } }
+  .duo-card:hover { background: var(--gold-wash); }
+  .duo-card h2 { font-size: clamp(1.7rem, 2.8vw, 2.2rem); margin: 16px 0 0; }
+  .duo-card p { color: var(--ink-2); margin: 0; font-size: 1.1rem; max-width: 36ch; }
+  .duo-card .textlink { margin-top: 12px; color: var(--blue); }
 </style>

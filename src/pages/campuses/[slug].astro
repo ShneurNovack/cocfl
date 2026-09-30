@@ -2,9 +2,12 @@
 import Base from '../../layouts/Base.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import CenterLogo from '../../components/CenterLogo.astro';
+import Icon from '../../components/Icon.astro';
+import FloridaMap from '../../components/FloridaMap.astro';
+import SocialIcon from '../../components/SocialIcon.astro';
 import CenterCard from '../../components/CenterCard.astro';
 import CtaBand from '../../components/CtaBand.astro';
-import { centers, nearbyCenters, withThe, distanceText, formatNumber, stateAbbr, KOSHER_KEYS, type Center } from '../../lib/centers';
+import { centers, nearbyCenters, withThe, distanceText, stateAbbr, KOSHER_KEYS, type Center } from '../../lib/centers';
 import { SITE } from '../../lib/site';
 
 export function getStaticPaths() {
@@ -20,7 +23,7 @@ const abbr = P.abbr;
 const short = abbr || pName;
 const others = c.otherCampuses;
 const nearby = nearbyCenters(c, 3);
-const sameSchool = centers.filter((x) => x.id !== c.id && (x.primaryCampus.name.startsWith(pName.split(' (')[0]) || pName.startsWith(x.primaryCampus.name.split(' (')[0])));
+const sameSchool: Center[] = centers.filter((x) => x.id !== c.id && (x.primaryCampus.name.startsWith(pName.split(' (')[0]) || pName.startsWith(x.primaryCampus.name.split(' (')[0])));
 const dist = distanceText(P.distance);
 const cityState = `${c.city}, ${stateAbbr(c.address?.state ?? null)}`;
 const addressLine = c.address ? [c.address.street, c.address.city, [stateAbbr(c.address.state), c.address.zip].filter(Boolean).join(' ')].filter(Boolean).join(', ') : null;
@@ -33,7 +36,35 @@ const kosher = c.amenities.filter((a) => KOSHER_KEYS.includes(a.key));
 const hasServices = c.amenities.some((a) => a.key === 'Shabbat and holidays minyan');
 const confirmedPrograms = c.programs.filter((p) => p.confirmed);
 const networkPrograms = c.programs.filter((p) => !p.confirmed);
-const socialLabel: Record<string, string> = { Facebook: 'Facebook', Instagram: 'Instagram', Twitter: 'X (Twitter)', TikTok: 'TikTok', YouTube: 'YouTube', LinkedIn: 'LinkedIn' };
+const socialLabel: Record<string, string> = { Facebook: 'Facebook', Instagram: 'Instagram', Twitter: 'X', TikTok: 'TikTok', YouTube: 'YouTube', LinkedIn: 'LinkedIn' };
+const AMENITY_ICON: Record<string, string> = {
+  'Jewish student lounge': 'Sofa',
+  'Jewish student housing': 'BedDouble',
+  'Full Kosher meal plan (3 meals a day)': 'UtensilsCrossed',
+  'Daily Kosher meal plan (1 meal a day)': 'UtensilsCrossed',
+  'Limited Kosher meal plan (1 or 2 meals a week)': 'UtensilsCrossed',
+  'Kosher restaurant': 'ChefHat',
+  'Packaged kosher food': 'Package',
+  'Kosher food truck': 'Truck',
+  'Kosher for Passover meal plan': 'Wine',
+  'Shabbat and holidays minyan': 'Flame',
+  'Daily minyan': 'Sunrise',
+};
+const PROGRAM_ICON: Record<string, string> = { jewishu: 'GraduationCap', 'sinai-scholars': 'BookOpen', 'birthright-israel': 'Plane', pegisha: 'Flame', 'your-israel': 'Globe', 'living-links': 'Landmark', 'study-away-grant': 'Wallet' };
+const always = [
+  { icon: 'Flame', label: 'Shabbat dinners' },
+  { icon: 'PartyPopper', label: 'Holiday celebrations' },
+  { icon: 'BookOpen', label: 'Classes & learning' },
+  { icon: 'MessageCircleHeart', label: 'Someone to talk to' },
+];
+const amenities = c.amenities.map((a) => ({ ...a, icon: AMENITY_ICON[a.key] || 'Check' }));
+const heroBg = c.image?.src || null;
+const quick = [
+  telHref && { icon: 'Phone', label: 'Call', href: telHref },
+  c.email && { icon: 'Mail', label: 'Email', href: `mailto:${c.email}` },
+  mapsUrl && { icon: 'Navigation', label: 'Directions', href: mapsUrl, ext: true },
+  c.website && { icon: 'Globe', label: 'Website', href: c.website, ext: true },
+].filter(Boolean) as { icon: string; label: string; href: string; ext?: boolean }[];
 
 const campusList = (list: typeof c.campuses) => {
   const names = list.map((x) => withThe(x.name));
@@ -113,267 +144,252 @@ qa.push({
 });
 ---
 <Base title={title} description={description} path={c.url} jsonLd={[orgLd, pageLd]} breadcrumbs={crumbs} ogImage={c.image?.src || undefined}>
-  <section class="page-hero band-blue chero">
-    <div class="wrap">
+  <section class="chero">
+    {heroBg ? (
+      <div class="bg"><img src={heroBg} srcset={c.image!.srcset} sizes="100vw" width={c.image!.width} height={c.image!.height} alt="" fetchpriority="high" decoding="async" /></div>
+    ) : (
+      <img class="bgmark" src="/flame.webp" alt="" width="96" height="96" />
+    )}
+    <div class="wrap hero-in">
       <Breadcrumbs items={crumbs} />
-      <div class="hero-grid">
-        <div class="hero-text">
-          <div class="id">
-            <CenterLogo center={c} size={76} eager />
-            <p class="official">{c.officialName}<span>{cityState}</span></p>
-          </div>
-          <h1>Chabad at {pThe}</h1>
-          <p class="lead">
-            Your Jewish home at {abbr ? `${abbr}` : pThe}: Shabbat dinners, holidays, learning and friends{others.length ? `, for students at ${campusList(c.campuses)}` : ''}.
-            {c.directorsLine && <> Led by {c.directorsLine}.</>}
-          </p>
-          <div class="btn-row">
-            {c.website && <a class="btn btn-gold" href={c.website} rel="noopener">Visit {c.officialName.length < 34 ? c.officialName : 'their'} website</a>}
-            {telHref && <a class="btn btn-ghost" href={telHref}>Call {c.phone}</a>}
-            {!telHref && c.email && <a class="btn btn-ghost" href={`mailto:${c.email}`}>Email the Chabad House</a>}
-          </div>
+      <div class="id">
+        <CenterLogo center={c} size={96} eager />
+        <div>
+          <p class="official">{c.officialName}</p>
+          <p class="loc"><Icon name="MapPin" size={18} /> {cityState}</p>
         </div>
-        {c.image && (
-          <div class="hero-photo photo">
-            <img src={c.image.src} srcset={c.image.srcset} sizes="(max-width: 900px) 100vw, 480px" width={c.image.width} height={c.image.height} alt={`${c.officialName} in ${c.city}, Florida`} fetchpriority="high" decoding="async" />
-          </div>
-        )}
       </div>
+      <h1>Chabad at {pThe}</h1>
+      {c.directorsLine && <p class="lead">Led by {c.directorsLine}</p>}
     </div>
   </section>
 
-  <div class="wrap layout section-tight">
+  <nav class="quickbar" aria-label="Contact shortcuts">
+    <div class="wrap qb-in">
+      {quick.map((q) => (
+        <a href={q.href} rel={q.ext ? 'noopener' : undefined}><Icon name={q.icon} size={22} /><span>{q.label}</span></a>
+      ))}
+      {c.donateUrl && <a href={c.donateUrl} rel="noopener" class="give"><Icon name="HeartHandshake" size={22} /><span>Support</span></a>}
+    </div>
+  </nav>
+
+  <div class="wrap dash">
     <div class="main">
-      <section>
-        <h2>About Chabad at {short}</h2>
-        <p>
-          {c.officialName} is the Chabad on Campus center for Jewish students at {pThe}{others.length ? <>, with students also coming from {campusList(others)}</> : ''}.
-          {c.address ? <> The Chabad House is at {c.address.street} in {c.city}{dist ? <>, {dist}</> : ''}.</> : <> It is based in {c.city}.</>}
+      <section class="panel intro reveal">
+        <h2>Welcome to Chabad at {short}</h2>
+        <p class="lead">
+          {c.officialName} is the Jewish home away from home for students at {pThe}{others.length ? <> and {campusList(others)}</> : ''}.
+          {c.address && dist ? <> You'll find it at {c.address.street}, {dist}.</> : ''}
         </p>
-        <p>
-          Like every Chabad on Campus center, it is a home away from home run by a husband and wife team who know students by name. Students come for Friday night Shabbat dinners, celebrate the Jewish holidays together, take classes, travel, and stop by when they need a meal, a quiet place to study or someone to talk to. It is open to every Jewish student, whatever your background, and there is no membership.
-        </p>
-        {P.jewishStudents && (
-          <div class="facts">
-            <div><strong>{formatNumber(P.jewishStudents)}</strong><span>estimated Jewish students at {short}</span></div>
-            {P.undergrad && <div><strong>{formatNumber(P.undergrad)}</strong><span>undergraduates at {short}</span></div>}
-            <div><strong>{c.campuses.length}</strong><span>{c.campuses.length === 1 ? 'campus' : 'campuses'} served</span></div>
-          </div>
-        )}
-        {P.jewishStudents && <p class="small muted">Student population estimates are reported by Chabad on Campus International.</p>}
+        <p>Come for Friday night Shabbat dinner, celebrate the holidays, take a class, or just stop by between classes. Every Jewish student is welcome, whatever your background, and there is no membership.</p>
+        <div class="tiles">
+          {always.map((t) => <div class="tile"><span class="bubble sm gold"><Icon name={t.icon} size={20} /></span><span>{t.label}</span></div>)}
+        </div>
         {sameSchool.length > 0 && (
-          <p class="callout">
-            {pThe.replace(/^the/, 'The')} has more than one Chabad on Campus center. Also see {sameSchool.map((s, i) => <>{i > 0 && ', '}<a href={s.url}>{s.officialName}</a></>)}.
-          </p>
+          <p class="callout blue"><Icon name="Info" size={22} /> <span>{pThe.replace(/^the/, 'The')} has more than one Chabad on Campus center. Also see {sameSchool.map((s, i) => <>{i > 0 && ', '}<a href={s.url}>{s.officialName}</a></>)}.</span></p>
         )}
       </section>
 
       {c.staff.length > 0 && (
-        <section>
-          <h2>Meet the rabbi and rebbetzin</h2>
-          <p>Chabad Houses are led by <em>shluchim</em>, emissaries of the Lubavitcher Rebbe who move to campus to build Jewish life for students.</p>
+        <section class="panel reveal">
+          <div class="ph"><span class="bubble blue"><Icon name="Users" size={24} /></span><h2>Your rabbi and rebbetzin</h2></div>
+          <p class="muted">Chabad Houses are led by <em>shluchim</em>, emissaries of the Lubavitcher Rebbe who make their home your home.</p>
           <ul class="staff">
             {c.staff.map((s) => (
               <li>
-                {s.photo ? <img src={s.photo.src} width={120} height={120} alt={`${s.title ? s.title + ' ' : ''}${s.name}`} loading="lazy" decoding="async" /> : <span class="nophoto" aria-hidden="true">{s.name.split(' ').map((w) => w[0]).slice(0, 2).join('')}</span>}
-                <div><strong>{s.title && /rabbi/i.test(s.title) ? 'Rabbi ' : ''}{s.name}</strong>{s.role && <span>{s.role}</span>}</div>
+                {s.photo ? <img src={s.photo.src} width={120} height={120} alt={`${s.title && /rabbi/i.test(s.title) ? 'Rabbi ' : ''}${s.name}`} loading="lazy" decoding="async" /> : <span class="nophoto" aria-hidden="true">{s.name.split(' ').map((w) => w[0]).slice(0, 2).join('')}</span>}
+                <strong>{s.title && /rabbi/i.test(s.title) ? 'Rabbi ' : ''}{s.name}</strong>
+                {s.role && <span>{s.role}</span>}
               </li>
             ))}
           </ul>
         </section>
       )}
 
-      <section>
-        <h2>Jewish life at {short}</h2>
-        {c.amenities.length > 0 ? (
-          <>
-            <p>Here is what Jewish students at {pThe} can find through Chabad and on campus, according to Chabad on Campus.</p>
-            <div class="amen">
-              {byChabad.length > 0 && (
-                <div>
-                  <h3>At Chabad</h3>
-                  <ul class="checks">{byChabad.map((a) => <li>{a.label}</li>)}</ul>
-                </div>
-              )}
-              {onCampusOnly.length > 0 && (
-                <div>
-                  <h3>On or near campus</h3>
-                  <ul class="checks">{onCampusOnly.map((a) => <li>{a.label}</li>)}</ul>
-                </div>
-              )}
-              {c.groups.length > 0 && (
-                <div>
-                  <h3>Student groups</h3>
-                  <ul class="checks">{c.groups.map((g) => <li>{g}</li>)}</ul>
-                </div>
-              )}
-            </div>
-          </>
-        ) : (
-          <p>{c.officialName} hosts Shabbat dinners, celebrates every Jewish holiday with students and offers classes and one-on-one learning. Contact the Chabad House for this semester's schedule, kosher food options and upcoming events.</p>
-        )}
-        <p class="more">
-          Learn more: <a href="/jewish-life-on-campus/shabbat/">Shabbat on campus</a> &middot; <a href="/jewish-life-on-campus/jewish-holidays/">Jewish holidays in college</a> &middot; <a href="/jewish-life-on-campus/kosher-food/">Kosher food at Florida colleges</a>
-        </p>
-      </section>
-
-      <section>
-        <h2>Programs at Chabad at {short}</h2>
-        {confirmedPrograms.length > 0 && (
-          <ul class="progs">
-            {confirmedPrograms.map(({ program: p }) => (
+      <section class="panel reveal">
+        <div class="ph"><span class="bubble gold"><Icon name="Sparkles" size={24} /></span><h2>At a glance</h2></div>
+        {amenities.length > 0 ? (
+          <ul class="amen">
+            {amenities.map((a) => (
               <li>
-                <a href={`/programs/${p.slug}/`}><strong>{p.name}</strong></a>
-                <span>{p.tagline}{p.slug === 'jewishu' && c.jewishU && c.jewishU.courses > 0 ? ` ${c.officialName} has offered ${c.jewishU.courses} JewishU ${c.jewishU.courses === 1 ? 'course' : 'courses'}.` : ''}</span>
+                <span class="bubble sm"><Icon name={a.icon} size={20} /></span>
+                <span class="al">{a.label}<small>{a.byChabad && a.onCampus ? 'Chabad & campus' : a.byChabad ? 'At Chabad' : 'On or near campus'}</small></span>
               </li>
             ))}
           </ul>
+        ) : (
+          <p>Ask {c.officialName} about this semester's schedule, kosher food and upcoming events.</p>
         )}
-        <p>{confirmedPrograms.length ? 'Students here can also join' : 'Students here can join'} Chabad on Campus opportunities open to every Florida center:</p>
-        <ul class="progs compact">
-          {networkPrograms.map(({ program: p }) => <li><a href={`/programs/${p.slug}/`}><strong>{p.name}</strong></a><span>{p.tagline}</span></li>)}
+        <p class="more">
+          <a href="/jewish-life-on-campus/shabbat/">Shabbat on campus</a>
+          <a href="/jewish-life-on-campus/jewish-holidays/">Jewish holidays</a>
+          <a href="/jewish-life-on-campus/kosher-food/">Kosher food</a>
+        </p>
+      </section>
+
+      <section class="panel reveal">
+        <div class="ph"><span class="bubble blue"><Icon name="Rocket" size={24} /></span><h2>Programs</h2></div>
+        <ul class="progs">
+          {c.programs.map(({ program: p }) => (
+            <li>
+              <a href={`/programs/${p.slug}/`}>
+                <span class="bubble sm gold"><Icon name={PROGRAM_ICON[p.slug] || 'Star'} size={20} /></span>
+                <span class="pl"><strong>{p.name}</strong><small>{p.tagline}</small></span>
+                <Icon name="ArrowRight" size={20} />
+              </a>
+            </li>
+          ))}
         </ul>
         {c.jewishU && <p class="small"><a href={c.jewishU.locationUrl} rel="noopener">See current JewishU courses at {c.officialName}</a></p>}
       </section>
 
-      <section>
-        <h2>{c.campuses.length > 1 ? `Campuses served by ${c.officialName}` : `Campus served`}</h2>
-        <div class="campuses">
+      <section class="panel reveal">
+        <div class="ph"><span class="bubble gold"><Icon name="GraduationCap" size={24} /></span><h2>{c.campuses.length > 1 ? 'Campuses served' : 'Campus served'}</h2></div>
+        <ul class="campuses">
           {c.campuses.map((x) => (
-            <div class="campus" id={x.anchor}>
-              <h3>{x.name}{x.abbr && <span> ({x.abbr})</span>}</h3>
-              <p>
-                {x.primary ? <>Primary campus of {c.officialName}{distanceText(x.distance) ? <>, {distanceText(x.distance)}</> : ''}.</> : <>Students at {withThe(x.name)} are welcome at {c.officialName}{distanceText(x.distance, x.abbr || 'their campus') ? <>, {distanceText(x.distance, x.abbr || 'their campus')}</> : ''}.</>}
-                {x.jewishStudents && !x.primary && <> An estimated {formatNumber(x.jewishStudents)} Jewish students attend.</>}
-              </p>
-              {x.website && <a href={x.website} rel="noopener nofollow" class="small">{x.name} website</a>}
-            </div>
+            <li id={x.anchor}>
+              <span class="cn">{x.name}{x.abbr && <em>{x.abbr}</em>}</span>
+              <span class="cd">{x.primary ? 'Main campus' : 'Also welcome'}{distanceText(x.distance, x.primary ? 'campus' : x.abbr || 'campus') ? ` · ${distanceText(x.distance, x.primary ? 'campus' : x.abbr || 'campus')}` : ''}</span>
+            </li>
           ))}
-        </div>
+        </ul>
       </section>
 
-      <section>
-        <h2>Questions about Chabad at {short}</h2>
-        <div class="qa">
+      <section class="panel reveal">
+        <div class="ph"><span class="bubble blue"><Icon name="MessageCircleQuestion" size={24} /></span><h2>Questions about Chabad at {short}</h2></div>
+        <div class="faq">
           {qa.map((item) => (
-            <div>
-              <h3>{item.q}</h3>
-              <p>{item.a}</p>
-            </div>
+            <details>
+              <summary>{item.q}</summary>
+              <div class="answer"><p>{item.a}</p></div>
+            </details>
           ))}
         </div>
       </section>
     </div>
 
     <aside class="side" aria-label="Contact information">
-      <div class="card contact">
-        <h2>Contact {c.officialName}</h2>
-        <dl>
-          {addressLine && <><dt>Address</dt><dd>{addressLine}{mapsUrl && <><br /><a href={mapsUrl} rel="noopener">Get directions</a></>}</dd></>}
-          {c.phone && <><dt>Phone</dt><dd><a href={telHref}>{c.phone}</a></dd></>}
-          {c.email && <><dt>Email</dt><dd><a href={`mailto:${c.email}`}>{c.email}</a></dd></>}
-          {c.website && <><dt>Website</dt><dd><a href={c.website} rel="noopener">{c.website.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')}</a></dd></>}
-          {!addressLine && <><dt>City</dt><dd>{cityState}</dd></>}
-        </dl>
+      <div class="contact">
+        <h2>Get in touch</h2>
+        <ul class="cl">
+          {addressLine && <li><Icon name="MapPin" size={20} /><span>{addressLine}{mapsUrl && <><br /><a href={mapsUrl} rel="noopener">Get directions</a></>}</span></li>}
+          {c.phone && <li><Icon name="Phone" size={20} /><a href={telHref}>{c.phone}</a></li>}
+          {c.email && <li><Icon name="Mail" size={20} /><a href={`mailto:${c.email}`}>{c.email}</a></li>}
+          {c.website && <li><Icon name="Globe" size={20} /><a href={c.website} rel="noopener">{c.website.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')}</a></li>}
+          {!addressLine && <li><Icon name="MapPin" size={20} /><span>{cityState}</span></li>}
+        </ul>
         {c.social.length > 0 && (
           <div class="social">
-            {c.social.map((s) => <a href={s.url} rel="noopener" class="pill pill-line">{socialLabel[s.type] || s.type}</a>)}
+            {c.social.map((s) => <a href={s.url} rel="noopener" aria-label={`${c.officialName} on ${socialLabel[s.type] || s.type}`}><SocialIcon type={s.type} size={20} /></a>)}
           </div>
         )}
-        {c.donateUrl && <a class="btn btn-blue donate" href={c.donateUrl} rel="noopener">Support {c.officialName}</a>}
+        {c.website && <a class="btn btn-gold full" href={c.website} rel="noopener">Visit their website <Icon name="ArrowUpRight" size={20} /></a>}
+        {c.donateUrl && <a class="btn btn-ghost full" href={c.donateUrl} rel="noopener">Support {c.officialName}</a>}
       </div>
-      <div class="card served">
-        <h2>Serving</h2>
-        <ul>
-          {c.campuses.map((x) => <li><a href={`#${x.anchor}`}>{x.name}</a></li>)}
-        </ul>
-      </div>
-      {!c.hasApi && <p class="small muted note">Details for this center are maintained by Chabad on Campus Florida.</p>}
-      {c.updatedAt && <p class="small muted note">Directory details from Chabad on Campus International, checked daily.</p>}
+      {c.location && <div class="minimap"><FloridaMap highlight={c.id} compact /></div>}
+      <p class="small muted note">{c.hasApi ? 'Details from Chabad on Campus International, checked daily.' : 'Details maintained by Chabad on Campus Florida.'}</p>
     </aside>
   </div>
 
   <section class="section band-cream">
     <div class="wrap">
-      <h2>Chabad centers near {short}</h2>
+      <h2 class="nh">Chabad near {short}</h2>
       <div class="grid grid-3">
         {nearby.map((n) => <CenterCard center={n} compact headingLevel="h3" />)}
       </div>
-      <p class="all"><a href="/campuses/">See every Chabad on Campus center in Florida</a> &middot; <a href="/jewish-life-on-campus/florida/">Jewish life at Florida colleges</a></p>
+      <p class="all"><a class="textlink" href="/campuses/">See every Chabad on Campus center in Florida <Icon name="ArrowRight" size={20} /></a></p>
     </div>
   </section>
 
   <CtaBand
     title={`Heading to ${short}?`}
-    text={`Introduce yourself to ${c.officialName} before you arrive, and your first Shabbat dinner is already planned.`}
+    text={`Say hello to ${c.officialName} before you arrive, and your first Shabbat dinner is already planned.`}
     primary={c.website ? { href: c.website, label: `Connect with Chabad at ${short}` } : { href: '/campuses/', label: 'Find your campus' }}
-    secondary={{ href: '/parents/', label: 'Information for parents' }}
+    secondary={{ href: '/parents/', label: 'For parents' }}
   />
 </Base>
 
 <style>
-  .chero { padding-bottom: clamp(40px, 6vw, 72px); }
-  .hero-grid { display: grid; grid-template-columns: 1fr minmax(0, 440px); gap: clamp(28px, 5vw, 56px); align-items: center; }
-  @media (max-width: 900px) { .hero-grid { grid-template-columns: 1fr; } }
-  .id { display: flex; align-items: center; gap: 16px; margin-bottom: 18px; }
-  .official { margin: 0; font-weight: 700; font-size: 1.05rem; line-height: 1.3; }
-  .official span { display: block; font-weight: 500; color: #cfe2f0; font-size: 0.92rem; }
-  .chero h1 { max-width: 18ch; }
-  .chero .lead { max-width: 58ch; margin-bottom: 26px; }
-  .hero-photo { aspect-ratio: 4 / 3; box-shadow: 0 18px 48px rgba(0, 0, 0, 0.25); }
+  .chero { position: relative; overflow: hidden; background: var(--blue-night); color: #fff; padding: clamp(40px, 6vw, 72px) 0 clamp(64px, 9vw, 120px); }
+  .chero .bg { position: absolute; inset: 0; }
+  .chero .bg img { width: 100%; height: 100%; object-fit: cover; opacity: 0.35; filter: saturate(0.9); }
+  .chero .bg::after { content: ''; position: absolute; inset: 0; background: rgba(12, 47, 71, 0.55); }
+  .bgmark { position: absolute; right: -40px; bottom: -80px; width: 460px; height: auto; opacity: 0.12; }
+  .hero-in { position: relative; }
+  .chero :global(.crumbs) { color: #cfe2f0; }
+  .id { display: flex; align-items: center; gap: 22px; margin-bottom: clamp(28px, 4vw, 44px); }
+  .id :global(.clogo) { border: 4px solid #fff; }
+  .official { margin: 0; font-weight: 750; font-size: 1.2rem; }
+  .loc { margin: 4px 0 0; display: flex; align-items: center; gap: 6px; color: #cfe2f0; }
+  .loc :global(.icon) { color: var(--gold); }
+  .chero h1 { color: #fff; max-width: 16ch; margin-bottom: 20px; }
+  .chero .lead { color: #e3eff8; margin: 0; max-width: 50ch; }
 
-  .layout { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: clamp(32px, 5vw, 64px); align-items: start; }
-  @media (max-width: 980px) { .layout { grid-template-columns: 1fr; } .side { order: -1; } }
-  .main > section { padding: clamp(28px, 4vw, 40px) 0; border-bottom: 1px solid var(--line); }
-  .main > section:last-child { border-bottom: 0; }
-  .main p { max-width: 70ch; }
+  .quickbar { background: var(--gold); position: sticky; top: 75px; z-index: 20; }
+  .qb-in { display: flex; }
+  .quickbar a { flex: 1; display: flex; align-items: center; justify-content: center; gap: 10px; padding: 18px 12px; color: var(--ink); text-decoration: none; font-weight: 750; transition: background 0.2s, color 0.2s; }
+  .quickbar a + a { border-left: 1px solid rgba(0, 0, 0, 0.15); }
+  .quickbar a:hover { background: var(--ink); color: var(--gold); }
+  @media (max-width: 560px) { .quickbar a { flex-direction: column; gap: 4px; font-size: 0.8rem; padding: 12px 4px; } }
 
-  .facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin: 24px 0 10px; }
-  .facts div { background: var(--blue-wash); padding: 18px; border-radius: var(--radius); }
-  .facts strong { display: block; font-size: 1.9rem; font-weight: 900; color: var(--blue-ink); line-height: 1; letter-spacing: -0.02em; }
-  .facts span { display: block; margin-top: 6px; font-size: 0.88rem; color: var(--ink-2); line-height: 1.35; }
+  .dash { display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: clamp(40px, 5vw, 72px); align-items: start; padding-top: clamp(48px, 7vw, 88px); padding-bottom: clamp(64px, 9vw, 112px); }
+  @media (max-width: 1000px) { .dash { grid-template-columns: minmax(0, 1fr); } }
+  .main { display: grid; gap: clamp(48px, 6vw, 72px); }
+  .panel h2 { font-size: clamp(1.6rem, 2.6vw, 2.1rem); margin: 0; }
+  .intro h2 { margin-bottom: 18px; }
+  .ph { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
+  .panel > p { max-width: 64ch; }
 
-  .staff { list-style: none; padding: 0; margin: 20px 0 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
-  .staff li { display: flex; gap: 14px; align-items: center; }
-  .staff img, .nophoto { width: 72px; height: 72px; border-radius: 50%; object-fit: cover; flex-shrink: 0; background: var(--cream); }
-  .nophoto { display: inline-flex; align-items: center; justify-content: center; font-weight: 800; color: var(--blue); background: var(--blue-wash); }
-  .staff strong { display: block; line-height: 1.3; }
-  .staff span { font-size: 0.88rem; color: var(--muted); }
+  .tiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 28px; }
+  @media (max-width: 720px) { .tiles { grid-template-columns: 1fr 1fr; } }
+  .tile { background: var(--gold-wash); padding: 18px; display: flex; flex-direction: column; gap: 14px; font-weight: 750; line-height: 1.3; }
+  .callout { margin-top: 24px; align-items: center; }
 
-  .amen { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin: 18px 0; }
-  .amen h3 { font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 10px; }
-  .checks { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
-  .checks li { position: relative; padding-left: 26px; line-height: 1.4; }
-  .checks li::before { content: ''; position: absolute; left: 0; top: 3px; width: 16px; height: 16px; border-radius: 50%; background: var(--gold) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 8.5l2.5 2.5L12 5.5' fill='none' stroke='%231f2320' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 14px no-repeat; }
-  .more { font-size: 0.93rem; color: var(--muted); }
+  .staff { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 28px 20px; }
+  .staff li { display: flex; flex-direction: column; gap: 4px; }
+  .staff img, .nophoto { width: 100%; aspect-ratio: 1; object-fit: cover; background: var(--cream); margin-bottom: 10px; }
+  .nophoto { display: grid; place-items: center; font-weight: 800; font-size: 2rem; color: var(--blue); background: var(--blue-wash); }
+  .staff strong { line-height: 1.3; }
+  .staff span { font-size: 0.9rem; color: var(--muted); }
 
-  .progs { list-style: none; padding: 0; margin: 16px 0 20px; display: grid; gap: 10px; }
-  .progs li { display: flex; flex-direction: column; gap: 2px; padding: 14px 16px; border: 1px solid var(--line); border-radius: var(--radius); }
-  .progs a { text-decoration: none; }
-  .progs span { color: var(--ink-2); font-size: 0.95rem; }
-  .progs.compact li { padding: 10px 14px; background: var(--cream-2); }
+  .amen { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 0; border-top: 1px solid var(--line-strong); border-left: 1px solid var(--line-strong); }
+  .amen li { display: flex; align-items: center; gap: 14px; padding: 18px; border-right: 1px solid var(--line-strong); border-bottom: 1px solid var(--line-strong); }
+  .al { font-weight: 700; line-height: 1.3; }
+  .al small { display: block; font-weight: 500; color: var(--muted); font-size: 0.82rem; margin-top: 2px; }
+  .more { display: flex; flex-wrap: wrap; gap: 8px 24px; margin-top: 22px; font-weight: 650; }
 
-  .campuses { display: grid; gap: 14px; margin-top: 16px; }
-  .campus { padding: 16px 18px; border-left: 3px solid var(--blue); background: var(--cream-2); border-radius: 0 var(--radius) var(--radius) 0; scroll-margin-top: 96px; }
-  .campus:target { border-left-color: var(--gold); background: var(--gold-soft); }
-  .campus h3 { margin-bottom: 4px; }
-  .campus h3 span { color: var(--muted); font-weight: 600; }
-  .campus p { margin: 0 0 4px; }
+  .progs { list-style: none; padding: 0; margin: 0 0 16px; border-top: 2px solid var(--ink); }
+  .progs li { border-bottom: 1px solid var(--line-strong); }
+  .progs a { display: flex; align-items: center; gap: 18px; padding: 18px 4px; text-decoration: none; color: var(--ink); transition: background 0.2s, padding 0.25s var(--ease); }
+  .progs a:hover { background: var(--gold-wash); padding-left: 14px; }
+  .pl { flex: 1; }
+  .pl strong { display: block; }
+  .pl small { color: var(--ink-2); font-size: 0.93rem; }
+  .progs a > :global(.icon) { color: var(--blue); flex-shrink: 0; }
 
-  .qa { display: grid; gap: 18px; margin-top: 12px; }
-  .qa h3 { margin-bottom: 4px; font-size: 1.08rem; }
-  .qa p { margin: 0; color: var(--ink-2); }
+  .campuses { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+  .campuses li { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 18px; padding: 20px 22px; background: var(--blue-wash); border-left: 6px solid var(--blue); scroll-margin-top: 150px; }
+  .campuses li:target { background: var(--gold-wash); border-left-color: var(--gold); }
+  .cn { font-weight: 750; font-size: 1.08rem; }
+  .cn em { font-style: normal; color: var(--blue); margin-left: 8px; }
+  .cd { color: var(--ink-2); font-size: 0.93rem; }
 
-  .side { position: sticky; top: 96px; display: grid; gap: 16px; padding-top: clamp(28px, 4vw, 40px); }
-  @media (max-width: 980px) { .side { position: static; } }
-  .side h2 { font-size: 1.1rem; margin-bottom: 4px; }
-  dl { margin: 0; display: grid; gap: 2px; }
-  dt { font-size: 0.76rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-top: 10px; }
-  dd { margin: 0; overflow-wrap: anywhere; }
-  .social { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
-  .social a { text-decoration: none; }
-  .donate { margin-top: 12px; }
-  .served ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; }
+  .side { position: sticky; top: 150px; display: grid; gap: 24px; }
+  @media (max-width: 1000px) { .side { position: static; order: -1; } }
+  .contact { background: var(--blue); color: #fff; padding: 30px; }
+  .contact h2 { color: #fff; font-size: 1.5rem; margin-bottom: 20px; }
+  .cl { list-style: none; padding: 0; margin: 0 0 22px; display: grid; gap: 16px; }
+  .cl li { display: flex; gap: 12px; align-items: flex-start; overflow-wrap: anywhere; line-height: 1.5; }
+  .cl :global(.icon) { color: var(--gold); flex-shrink: 0; margin-top: 2px; }
+  .contact a:not(.btn) { color: #fff; }
+  .social { display: flex; gap: 8px; margin-bottom: 22px; }
+  .social a { width: 44px; height: 44px; display: grid; place-items: center; background: rgba(255, 255, 255, 0.14); color: #fff; transition: background 0.2s, color 0.2s; }
+  .social a:hover { background: var(--gold); color: var(--ink); }
+  .full { width: 100%; }
+  .full + .full { margin-top: 10px; }
+  .minimap { border: 2px solid var(--line); padding: 20px; background: #fff; }
+  @media (max-width: 1000px) { .minimap { display: none; } }
   .note { margin: 0; }
-  .all { margin-top: 22px; font-weight: 600; }
+  .nh { margin-bottom: 36px; }
+  .all { margin: 36px 0 0; }
 </style>

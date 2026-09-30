@@ -1,5 +1,5 @@
 {
-  "_readme": "Authoritative list of centers in the Chabad on Campus Florida directory. Add or remove centers here. Each center with a cocHouseId is synced daily from the Chabad on Campus API (scripts/sync.mjs) into data/coc/<cocHouseId>.json; the 'local' block is the fallback used when a center has no API listing (cocHouseId: null) or its API data is unavailable. 'campusOverrides' fixes display names and abbreviations coming from the API, keyed by API campus ID. 'extraCampuses' lists schools the center serves that the API does not list. 'aliases' feed the directory search. 'hideImage': true suppresses an API building photo that isn't a real photo (e.g. a logo uploaded as the building image). 'seoTitle' optionally overrides the generated page title.",
+  "_readme": "Authoritative list of centers in the Chabad on Campus Florida directory. Add or remove centers here. Each center with a cocHouseId is synced daily from the Chabad on Campus API (scripts/sync.mjs) into data/coc/<cocHouseId>.json; the 'local' block is the fallback used when a center has no API listing (cocHouseId: null) or its API data is unavailable. 'campusOverrides' fixes display names and abbreviations coming from the API, keyed by API campus ID. 'extraCampuses' lists schools the center serves that the API does not list. 'aliases' feed the directory search. 'hideImage': true suppresses an API building photo that isn't a real photo (e.g. a logo uploaded as the building image). 'seoTitle' optionally overrides the generated page title. 'local.location' gives map coordinates for centers without an API listing.",
   "centers": [
     {
       "id": "uf",
@@ -364,7 +364,11 @@
         "directors": "Rabbi Chaim & Deenie Lipskar",
         "website": "https://www.jewishdowntown.net/",
         "logo": "https://w2.chabad.org/media/images/1098/vnqE10985897.png",
-        "additionalCampuses": []
+        "additionalCampuses": [],
+        "location": {
+          "lat": 25.7776,
+          "lng": -80.1906
+        }
       }
     },
     {

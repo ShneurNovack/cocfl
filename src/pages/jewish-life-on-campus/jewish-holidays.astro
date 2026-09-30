@@ -13,14 +13,13 @@ const holidays = [
   { name: 'Passover (Pesach)', when: 'March or April, eight days', campus: 'Community Seders for students, and at many campuses kosher-for-Passover meals for the whole holiday.' },
   { name: 'Shavuot', when: 'May or June', campus: 'Often after the semester ends. Students who stay on campus can hear the Ten Commandments and enjoy a dairy meal.' },
 ];
-const passover = centers.filter((c) => c.amenities.some((a) => a.key === 'Kosher for Passover meals' || a.key === 'Kosher for Passover meal plan'));
 ---
 <Guide
   title="Jewish holidays in college"
   metaTitle="Jewish Holidays in College: High Holidays, Sukkot, Passover & More"
   description="How to celebrate the Jewish holidays in college: High Holiday services, Sukkot, Chanukah, Purim and Passover Seders at Chabad on Campus, plus tips for missing class."
   path={path}
-  lead="Your first High Holidays away from home do not have to feel lonely. Every Chabad on Campus center celebrates the Jewish holidays with students, and most of it is free."
+  lead="Away from home, but never alone for the holidays."
   image="tefillin"
   imageAlt="A college student putting on tefillin with help from a Chabad rabbi"
   crumbs={[{ name: 'Jewish Life on Campus', href: '/jewish-life-on-campus/' }, { name: 'Jewish Holidays', href: path }]}
@@ -45,7 +44,7 @@ const passover = centers.filter((c) => c.amenities.some((a) => a.key === 'Kosher
   <p>Most universities allow excused absences for religious holidays, but you usually need to tell your professors in advance. Florida's public colleges and universities are required by <a href="https://www.flsenate.gov/Laws/Statutes/2024/1006.53" rel="noopener">state law</a> to have a religious observance policy, so look up your school's version at the start of each semester. Send your professors a short, polite email in the first week listing the days you will miss, and ask how to make up work. Your Chabad rabbi can write a letter if a professor needs one.</p>
 
   <h2>Passover in college</h2>
-  <p>Passover is eight days long and often falls in the middle of the spring semester. Chabad Houses host student Seders on the first nights, and many Florida centers also help students keep kosher for Passover for the rest of the week.{passover.length > 0 && <> According to Chabad on Campus, Passover meals are available through {passover.slice(0, 6).map((c, i) => <>{i > 0 && ', '}<a href={c.url}>{c.officialName}</a></>)}{passover.length > 6 ? ' and more' : ''}.</>} See <a href="/jewish-life-on-campus/kosher-food/">kosher food on campus</a> for more.</p>
+  <p>Passover is eight days long and often falls in the middle of the spring semester. Chabad Houses host student Seders on the first nights, and many Florida centers also help students keep kosher for Passover for the rest of the week. Ask your Chabad House what Passover looks like on your campus. See <a href="/jewish-life-on-campus/kosher-food/">kosher food on campus</a> for more.</p>
 
   <h2>Find holiday celebrations at your school</h2>
   <p>Holiday schedules are posted by each Chabad House a few weeks ahead. Find your campus below and reach out, especially before the High Holidays, when many centers ask students to RSVP for meals.</p>

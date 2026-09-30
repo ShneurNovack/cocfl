@@ -1,51 +1,55 @@
 ---
 import { NAV } from '../lib/site';
+import Icon from './Icon.astro';
 const current = Astro.url.pathname;
 const isActive = (href: string) => (href === '/' ? current === '/' : current.startsWith(href));
 ---
 <header class="site-header">
   <div class="bar wrap">
     <a href="/" class="brand" aria-label="Chabad on Campus Florida home">
-      <img src="/flame.webp" alt="" width="34" height="34" />
-      <span>Chabad on Campus <strong>Florida</strong></span>
+      <span class="mark"><img src="/flame.webp" alt="" width="26" height="26" /></span>
+      <span class="name">Chabad on Campus <strong>Florida</strong></span>
     </a>
     <nav class="nav-desktop" aria-label="Main">
       {NAV.slice(1).map((n) => <a href={n.href} aria-current={isActive(n.href) ? 'page' : undefined}>{n.label}</a>)}
-      <a href="/campuses/" class="btn btn-blue nav-cta" aria-current={isActive('/campuses/') ? 'page' : undefined}>Find Your Campus</a>
+      <a href="/campuses/" class="btn btn-blue nav-cta"><Icon name="MapPin" size={18} /> Find Your Campus</a>
     </nav>
     <details class="nav-mobile">
       <summary aria-label="Open menu"><span></span><span></span><span></span></summary>
       <nav aria-label="Mobile">
-        {NAV.map((n) => <a href={n.href} aria-current={isActive(n.href) ? 'page' : undefined}>{n.label}</a>)}
-        <a href="/faq/">FAQs</a>
+        <a href="/campuses/" class="m-cta"><Icon name="MapPin" size={20} /> Find your campus</a>
+        {NAV.slice(1).map((n) => <a href={n.href} aria-current={isActive(n.href) ? 'page' : undefined}>{n.label}<Icon name="ChevronRight" size={18} /></a>)}
+        <a href="/faq/">FAQs<Icon name="ChevronRight" size={18} /></a>
       </nav>
     </details>
   </div>
 </header>
 
 <style>
-  .site-header { position: sticky; top: 0; z-index: 50; background: rgba(255, 255, 255, 0.96); backdrop-filter: saturate(1.4) blur(10px); border-bottom: 1px solid var(--line); }
-  .bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 72px; }
-  .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); font-size: 1.08rem; font-weight: 600; letter-spacing: -0.01em; }
-  .brand strong { font-weight: 800; }
-  .brand img { width: 34px; height: 34px; }
-  .nav-desktop { display: flex; align-items: center; gap: 26px; font-weight: 600; font-size: 0.95rem; }
-  .nav-desktop a:not(.btn) { color: var(--ink-2); text-decoration: none; padding: 6px 0; border-bottom: 2px solid transparent; }
-  .nav-desktop a:not(.btn):hover { color: var(--blue); }
-  .nav-desktop a[aria-current='page']:not(.btn) { color: var(--ink); border-bottom-color: var(--gold); }
-  .nav-cta { padding: 10px 18px; }
-  .nav-mobile { display: none; position: relative; }
-  .nav-mobile summary { list-style: none; cursor: pointer; width: 44px; height: 44px; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 5px; }
+  .site-header { position: sticky; top: 0; z-index: 50; background: #fff; border-bottom: 1px solid var(--line); }
+  .bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 74px; }
+  .brand { display: flex; align-items: center; gap: 11px; text-decoration: none; color: var(--ink); font-size: 1.08rem; font-weight: 600; letter-spacing: -0.01em; }
+  .brand strong { font-weight: 850; color: var(--blue); }
+  .mark { width: 44px; height: 44px; background: var(--blue); display: grid; place-items: center; transition: background 0.2s; }
+  .brand:hover .mark { background: var(--blue-ink); }
+  .nav-desktop { display: flex; align-items: center; gap: 4px; font-weight: 650; font-size: 0.95rem; }
+  .nav-desktop a:not(.btn) { color: var(--ink-2); text-decoration: none; padding: 10px 14px; transition: background 0.2s, color 0.2s; }
+  .nav-desktop a:not(.btn):hover { background: var(--blue-wash); color: var(--blue); }
+  .nav-desktop a[aria-current='page']:not(.btn) { box-shadow: inset 0 -3px 0 var(--gold); color: var(--ink); }
+  .nav-cta { padding: 12px 20px; margin-left: 10px; }
+  .nav-mobile { display: none; }
+  .nav-mobile summary { list-style: none; cursor: pointer; width: 46px; height: 46px; background: var(--blue-wash); display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 5px; }
   .nav-mobile summary::-webkit-details-marker { display: none; }
-  .nav-mobile summary span { display: block; width: 24px; height: 2px; background: var(--ink); transition: transform 0.2s ease, opacity 0.2s ease; }
+  .nav-mobile summary span { display: block; width: 20px; height: 2px; background: var(--blue-ink); transition: transform 0.25s var(--ease), opacity 0.2s; }
   .nav-mobile[open] summary span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
   .nav-mobile[open] summary span:nth-child(2) { opacity: 0; }
   .nav-mobile[open] summary span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-  .nav-mobile nav { position: fixed; left: 0; right: 0; top: 72px; background: #fff; border-bottom: 1px solid var(--line); box-shadow: 0 16px 32px rgba(0, 0, 0, 0.08); display: flex; flex-direction: column; padding: 8px var(--gutter) 20px; }
-  .nav-mobile nav a { padding: 14px 0; border-bottom: 1px solid var(--line); color: var(--ink); text-decoration: none; font-weight: 600; font-size: 1.05rem; }
-  .nav-mobile nav a[aria-current='page'] { color: var(--blue); }
-  @media (max-width: 900px) {
-    .nav-desktop { display: none; }
-    .nav-mobile { display: block; }
-  }
+  .nav-mobile nav { position: fixed; left: 0; right: 0; top: 75px; bottom: 0; background: #fff; border-top: 1px solid var(--line); display: flex; flex-direction: column; padding: 16px var(--gutter); animation: drop 0.25s var(--ease); overflow-y: auto; }
+  @keyframes drop { from { opacity: 0; transform: translateY(-8px); } }
+  .nav-mobile nav a { display: flex; align-items: center; justify-content: space-between; padding: 18px 4px; border-bottom: 1px solid var(--line); color: var(--ink); text-decoration: none; font-weight: 750; font-size: 1.25rem; }
+  .nav-mobile nav a:hover, .nav-mobile nav a[aria-current='page'] { background: var(--blue-wash); color: var(--blue); }
+  .nav-mobile .m-cta { background: var(--blue); color: #fff; justify-content: flex-start; gap: 10px; margin-bottom: 10px; padding: 18px 16px; border: 0; }
+  .nav-mobile .m-cta:hover { background: var(--blue-deep); color: #fff; }
+  @media (max-width: 940px) { .nav-desktop { display: none; } .nav-mobile { display: block; } }
+  @media (max-width: 400px) { .brand .name { font-size: 0.95rem; } }
 </style>

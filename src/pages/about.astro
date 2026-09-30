@@ -1,12 +1,15 @@
 ---
 import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
-import Picture from '../components/Picture.astro';
+import CenterCard from '../components/CenterCard.astro';
 import CtaBand from '../components/CtaBand.astro';
-import { stats, centersByRegion } from '../lib/centers';
-import { SITE, TESTIMONIALS } from '../lib/site';
-const regions = centersByRegion();
+import Icon from '../components/Icon.astro';
+import { stats, centers } from '../lib/centers';
+import { SITE, TESTIMONIALS, img } from '../lib/site';
+const sorted = [...centers].sort((a, b) => a.primaryCampus.name.localeCompare(b.primaryCampus.name));
 const crumbs = [{ name: 'About', href: '/about/' }];
+const hero = img('rabbi-students');
+const rebbe = img('the-rebbe');
 const ld = [
   {
     '@context': 'https://schema.org',
@@ -16,6 +19,11 @@ const ld = [
     about: { '@id': `${SITE.url}/#organization` },
   },
 ];
+const pillars = [
+  { icon: 'Eye', title: 'Our vision', text: 'We champion robust Jewish life and learning on college campuses in Florida, and seek a future where every Jewish student has a deeper affinity, connection and understanding of their faith, heritage and identity.' },
+  { icon: 'Handshake', title: 'What we do', text: 'Chabad on Campus Florida brings the state’s Chabad Houses together to share resources, run statewide programs like the Florida Regional Pegisha, and make it easy for every student and parent to find Jewish life at their school.' },
+  { icon: 'Heart', title: 'How we do it', text: 'Every Chabad House is led by a husband and wife who open their home to students. No dues, no membership and no judgment, just a warm table and people who care.' },
+];
 ---
 <Base
   title="About Chabad on Campus Florida"
@@ -24,80 +32,70 @@ const ld = [
   breadcrumbs={crumbs}
   jsonLd={ld}
 >
-  <section class="page-hero band-blue">
-    <div class="wrap">
-      <Breadcrumbs items={crumbs} />
-      <h1>About Chabad on Campus Florida</h1>
-      <p class="lead">A regional initiative of Chabad on Campus centers in the state of Florida, bringing {stats.centers} Chabad Houses and the students they serve together as one statewide community.</p>
+  <section class="ahero">
+    <div class="atext band-blue">
+      <div class="ain">
+        <Breadcrumbs items={crumbs} />
+        <h1>A home for every Jewish student in Florida</h1>
+        <p class="lead">{stats.centers} Chabad Houses. {stats.campuses} campuses. One family.</p>
+      </div>
+    </div>
+    <div class="amedia"><img src={hero.src} srcset={hero.srcset} sizes="(max-width: 960px) 100vw, 55vw" width={hero.width} height={hero.height} alt="A Chabad rabbi learning with college students around a table" fetchpriority="high" /></div>
+  </section>
+
+  <section class="section">
+    <div class="wrap narrow">
+      <h2>What is Chabad on Campus?</h2>
+      <p class="lead">Chabad on Campus is a network of Chabad Houses on and near more than 950 college campuses around the world, where Jewish students of every background can find a home away from home.</p>
+      <p>Each Chabad House is directed by a husband and wife, known as <em>shluchim</em>, emissaries of the Lubavitcher Rebbe, Rabbi Menachem M. Schneerson. They move to a college town, open their home to students, and build Jewish life around them: Shabbat dinners, holidays, classes, trips and a lot of personal attention. Research on Chabad on Campus has found that almost 90 percent of participants do not come from Orthodox homes.</p>
+    </div>
+  </section>
+
+  <section class="section band-gold">
+    <div class="wrap pillars">
+      {pillars.map((p, i) => (
+        <div class="reveal" style={`--d:${i * 100}ms`}>
+          <span class="bubble lg white"><Icon name={p.icon} size={32} /></span>
+          <h2>{p.title}</h2>
+          <p>{p.text}</p>
+        </div>
+      ))}
     </div>
   </section>
 
   <section class="section">
     <div class="wrap split">
-      <div class="prose">
-        <h2>What is Chabad on Campus?</h2>
-        <p>Chabad on Campus is a network of Chabad Houses on and near more than 950 college campuses around the world, where Jewish students of every background and affiliation can find a home away from home. Each Chabad House is directed by a husband and wife, known as <em>shluchim</em>, emissaries of the Lubavitcher Rebbe, Rabbi Menachem M. Schneerson. They move to a college town, open their home to students, and build Jewish life around them: Shabbat dinners, holidays, classes, trips and a lot of personal attention.</p>
-        <p>There are no dues and no membership. Research on Chabad on Campus has found that almost 90 percent of participants do not come from Orthodox homes. No judgment, just joy.</p>
-      </div>
-      <Picture name="rabbi-students" alt="A Chabad rabbi learning with college students around a table" aspect="4/3" />
-    </div>
-  </section>
-
-  <section class="section band-cream">
-    <div class="wrap grid grid-3 mvv">
+      <div class="photo rebbe"><img src={rebbe.src} width={rebbe.width} height={rebbe.height} alt="The Lubavitcher Rebbe, Rabbi Menachem M. Schneerson" loading="lazy" /></div>
       <div>
-        <span class="eyebrow">Our vision</span>
-        <h2>Robust Jewish life on every Florida campus</h2>
-        <p>We champion robust Jewish life and learning on college campuses in Florida. We seek a future where every Jewish student has a deeper affinity, connection and understanding of their faith, heritage and identity.</p>
-      </div>
-      <div>
-        <span class="eyebrow">What we do</span>
-        <h2>Stronger together</h2>
-        <p>Chabad on Campus Florida brings the state's Chabad Houses together to share resources, run statewide programs like the Florida Regional Pegisha, and make it easy for every Jewish student and parent to find Jewish life at their school.</p>
-      </div>
-      <div>
-        <span class="eyebrow">By the numbers</span>
-        <h2>{stats.centers} centers, {stats.campuses} campuses</h2>
-        <p>Serving over {SITE.reported.students} Jewish students, with {SITE.reported.studentsServed} students served and {SITE.reported.engagements} Jewish engagements in {SITE.reported.engagementsYear}.</p>
+        <h2>Since the 1950s</h2>
+        <ol class="timeline">
+          <li><strong>1950s</strong><span>The Lubavitcher Rebbe begins reaching out to college campuses, sending rabbinical students to serve Jewish students.</span></li>
+          <li><strong>1969</strong><span>Chabad opens its first campus center at UCLA, welcoming every Jewish student regardless of background.</span></li>
+          <li><strong>Today</strong><span>Chabad Houses serve students on more than 950 campuses worldwide, including {stats.campuses} in Florida.</span></li>
+        </ol>
+        <p class="muted">Chabad on Campus Florida is part of <a href={SITE.parent.url} rel="noopener">Chabad on Campus International</a>.</p>
       </div>
     </div>
   </section>
 
-  <section class="section">
-    <div class="wrap split">
-      <Picture name="the-rebbe" alt="The Lubavitcher Rebbe, Rabbi Menachem M. Schneerson" aspect="1/1" class="rebbe" />
-      <div class="prose">
-        <h2>A short history</h2>
-        <p>At the beginning of his leadership in the early 1950s, the Lubavitcher Rebbe, Rabbi Menachem M. Schneerson, reached out to college campuses, sending rabbinical students to serve as a resource for Jewish students. In 1969, Chabad opened its first campus center at the University of California, Los Angeles. Today there are Chabad Houses serving students on more than 950 campuses worldwide.</p>
-        <p>Florida has grown into one of the most vibrant regions in the Chabad on Campus network, with centers from Tallahassee and Gainesville to Miami. Rabbi Berl Goldman of Chabad at the University of Florida also serves on the board of Chabad on Campus International.</p>
-        <p>Chabad on Campus Florida is part of <a href={SITE.parent.url} rel="noopener">Chabad on Campus International</a>, which supports Chabad Houses worldwide with leadership, programs and resources.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="section band-cream">
+  <section class="section band-night voices">
     <div class="wrap">
-      <h2>Our centers across Florida</h2>
-      <div class="grid grid-4">
-        {regions.map((r) => (
-          <div>
-            <h3>{r.name}</h3>
-            <ul class="link-list">{r.centers.map((c) => <li><a href={c.url}>{c.officialName}<span class="meta">{c.primaryCampus.abbr || c.city}</span></a></li>)}</ul>
-          </div>
+      <div class="qs">
+        {TESTIMONIALS.map((t, i) => (
+          <figure class="reveal" style={`--d:${i * 100}ms`}>
+            <Icon name="Quote" size={36} class="qm" />
+            <blockquote>{t.quote}</blockquote>
+            <figcaption><strong>{t.name}</strong><span>{t.school}</span></figcaption>
+          </figure>
         ))}
       </div>
     </div>
   </section>
 
   <section class="section">
-    <div class="wrap narrow">
-      <h2>From our students</h2>
-      {TESTIMONIALS.map((t) => (
-        <figure class="q">
-          <blockquote>&ldquo;{t.quote}&rdquo;</blockquote>
-          <figcaption>{t.name}, {t.school}</figcaption>
-        </figure>
-      ))}
+    <div class="wrap">
+      <h2 class="ch">Our centers</h2>
+      <div class="grid grid-3">{sorted.map((c) => <CenterCard center={c} compact />)}</div>
     </div>
   </section>
 
@@ -105,10 +103,31 @@ const ld = [
 </Base>
 
 <style>
-  .mvv h2 { font-size: 1.4rem; }
-  .mvv p { color: var(--ink-2); }
-  :global(.rebbe) { max-width: 420px; }
-  .q { margin: 0 0 28px; padding-left: 20px; border-left: 3px solid var(--gold); }
-  .q blockquote { margin: 0 0 8px; font-size: 1.12rem; color: var(--ink-2); }
-  .q figcaption { font-weight: 700; }
+  .ahero { display: grid; grid-template-columns: minmax(0, 48fr) minmax(0, 52fr); min-height: clamp(460px, 66vh, 660px); }
+  @media (max-width: 960px) { .ahero { grid-template-columns: minmax(0, 1fr); } }
+  .atext { display: flex; align-items: center; padding: clamp(48px, 7vw, 96px) var(--gutter); }
+  .ain { max-width: 560px; margin-left: auto; width: 100%; }
+  @media (max-width: 960px) { .ain { margin: 0; } }
+  .atext h1 { margin-bottom: 22px; }
+  .atext .lead { margin: 0; }
+  .amedia { position: relative; min-height: 320px; background: var(--blue-night); }
+  .amedia img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .narrow h2 { margin-bottom: 24px; }
+  .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(36px, 5vw, 72px); }
+  @media (max-width: 860px) { .pillars { grid-template-columns: minmax(0, 1fr); } }
+  .pillars h2 { font-size: 1.6rem; margin: 26px 0 12px; }
+  .pillars p { margin: 0; color: var(--ink); }
+  .rebbe { aspect-ratio: 1; max-width: 480px; }
+  .timeline { list-style: none; padding: 0; margin: 28px 0; border-left: 4px solid var(--gold); }
+  .timeline li { padding: 0 0 26px 26px; display: grid; gap: 4px; }
+  .timeline strong { font-size: 1.4rem; color: var(--blue); }
+  .timeline span { color: var(--ink-2); }
+  .qs { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(32px, 4vw, 56px); }
+  @media (max-width: 900px) { .qs { grid-template-columns: minmax(0, 1fr); } }
+  figure { margin: 0; }
+  figure :global(.qm) { color: var(--gold); margin-bottom: 18px; }
+  blockquote { margin: 0 0 22px; font-size: 1.15rem; line-height: 1.55; color: #fff; }
+  figcaption strong { display: block; color: var(--gold); }
+  figcaption span { color: #cfe2f0; font-size: 0.93rem; }
+  .ch { margin-bottom: 36px; }
 </style>

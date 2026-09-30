@@ -1,39 +1,27 @@
 ---
 import Guide from '../../layouts/Guide.astro';
-import { centers, formatNumber, KOSHER_KEYS } from '../../lib/centers';
+import { centers } from '../../lib/centers';
 const path = '/jewish-life-on-campus/choosing-a-college/';
-const rows = [...centers]
-  .sort((a, b) => (b.primaryCampus.jewishStudents || 0) - (a.primaryCampus.jewishStudents || 0))
-  .map((c) => ({
-    c,
-    jewish: c.primaryCampus.jewishStudents,
-    kosher: c.amenities.some((a) => KOSHER_KEYS.includes(a.key)),
-    services: c.amenities.some((a) => a.key === 'Shabbat and holidays minyan'),
-    lounge: c.amenities.some((a) => a.key === 'Jewish student lounge'),
-    learning: c.programs.filter((p) => p.confirmed && p.program.category === 'Learning').map((p) => p.program.shortName),
-  }));
-const yes = (b: boolean) => (b ? 'Yes' : 'Ask');
+const sorted = [...centers].sort((a, b) => a.primaryCampus.name.localeCompare(b.primaryCampus.name));
 ---
 <Guide
   title="Choosing a college with Jewish life"
   metaTitle="Choosing a College With Jewish Life: A Guide for Jewish Students"
-  description="How to choose a college with strong Jewish life: questions to ask, what to look for on a campus visit, and a comparison of Jewish life at Florida universities."
+  description="How to choose a college with strong Jewish life: questions to ask, what to look for on a campus visit, and how to find the Chabad House at Florida universities."
   path={path}
-  lead="For many Jewish students and families, Jewish life is a real factor in choosing a college. Here is how to evaluate it, and how Florida schools compare."
+  lead="What to look for, and what to ask on a campus visit."
   image="friends-outdoors"
   imageAlt="Three Jewish college students standing together outside a Chabad House"
   crumbs={[{ name: 'Jewish Life on Campus', href: '/jewish-life-on-campus/' }, { name: 'Choosing a College', href: path }]}
-  wide
 >
-  <p>Rankings and campus tours will tell you plenty about academics and dorms, but very little about what it will feel like to be Jewish on that campus on a Friday night in October. The numbers matter, but so do the people. A school with a modest Jewish population and a devoted Chabad House can offer a richer Jewish experience than a big school where it is easy to get lost.</p>
+  <p>Rankings and campus tours will tell you plenty about academics and dorms, but very little about what it will feel like to be Jewish on that campus on a Friday night in October. What matters most is the people: a warm Chabad House and friends to share Shabbat with.</p>
 
   <h2>What to look for</h2>
   <ul>
-    <li><strong>An active Chabad House and other Jewish organizations.</strong> Is there a rabbi and rebbetzin who live near campus and know students by name? Is there a Hillel, Jewish Greek life, Israel groups?</li>
+    <li><strong>An active Chabad House.</strong> Is there a rabbi and rebbetzin who live near campus and know students by name?</li>
     <li><strong>Shabbat and holidays.</strong> Are there Shabbat dinners every week? High Holiday services? A sukkah and a Passover Seder?</li>
     <li><strong>Kosher food.</strong> If you keep kosher, what exactly is available on weekdays, on Shabbat and on Passover?</li>
     <li><strong>Learning and growth.</strong> Are there classes, fellowships like <a href="/programs/sinai-scholars/">Sinai Scholars</a>, or courses on <a href="/programs/jewishu/">JewishU</a>?</li>
-    <li><strong>The size of the Jewish community.</strong> Larger communities offer more variety, while smaller ones can feel more personal.</li>
     <li><strong>How Jewish students feel on campus.</strong> Ask current students directly, and ask how the university responds when problems arise.</li>
   </ul>
 
@@ -47,35 +35,17 @@ const yes = (b: boolean) => (b ? 'Yes' : 'Ask');
     <li>What is the relationship between the Jewish community and the university administration?</li>
   </ol>
 
-  <h2>Comparing Jewish life at Florida universities</h2>
-  <p>Here is a side-by-side look at the main campus served by each Florida Chabad on Campus center, based on data reported to Chabad on Campus International. "Ask" means the information is not reported, not that it is unavailable.</p>
-  <div class="table-wrap">
-    <table>
-      <thead>
-        <tr>
-          <th scope="col">School</th>
-          <th scope="col">Est. Jewish students</th>
-          <th scope="col">Kosher options</th>
-          <th scope="col">Shabbat &amp; holiday services</th>
-          <th scope="col">Jewish student lounge</th>
-          <th scope="col">Learning programs</th>
-        </tr>
-      </thead>
-      <tbody>
-        {rows.map((r) => (
-          <tr>
-            <th scope="row"><a href={r.c.url}>{r.c.primaryCampus.name}</a></th>
-            <td>{r.jewish ? formatNumber(r.jewish) : 'Not reported'}</td>
-            <td>{yes(r.kosher)}</td>
-            <td>{yes(r.services)}</td>
-            <td>{yes(r.lounge)}</td>
-            <td>{r.learning.length ? r.learning.join(', ') : 'Ask'}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  </div>
+  <h2>Chabad at every Florida school on your list</h2>
+  <p>Every one of these Florida colleges has a Chabad on Campus center ready to welcome you. Visit the page for each school to meet the rabbi and rebbetzin, see what they offer and get in touch.</p>
+  <ul class="cols">
+    {sorted.map((c) => <li><a href={c.url}>Chabad at {c.primaryCampus.name}</a></li>)}
+  </ul>
 
   <h2>Once you've decided</h2>
-  <p>Reach out to the Chabad House at your new school over the summer. Introducing yourself early means you will have a familiar face at orientation and a seat at the first Shabbat dinner of the year. Parents can do the same: see <a href="/parents/">resources for parents of Jewish college students</a>. For a region-by-region overview, read <a href="/jewish-life-on-campus/florida/">Jewish life at Florida colleges</a>.</p>
+  <p>Reach out to the Chabad House at your new school over the summer. Introducing yourself early means you will have a familiar face at orientation and a seat at the first Shabbat dinner of the year. Parents can do the same: see <a href="/parents/">resources for parents of Jewish college students</a>. For an overview of the whole state, read <a href="/jewish-life-on-campus/florida/">Jewish life at Florida colleges</a>.</p>
 </Guide>
+
+<style>
+  .cols { columns: 2; column-gap: 40px; }
+  @media (max-width: 600px) { .cols { columns: 1; } }
+</style>

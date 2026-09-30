@@ -1,25 +1,13 @@
 ---
 import Guide from '../../layouts/Guide.astro';
-import { centersByRegion, allColleges, stats, formatNumber, withThe, KOSHER_KEYS } from '../../lib/centers';
+import CenterCard from '../../components/CenterCard.astro';
+import FloridaMap from '../../components/FloridaMap.astro';
+import { centers, allColleges, stats } from '../../lib/centers';
 import { SITE } from '../../lib/site';
 
 const path = '/jewish-life-on-campus/florida/';
-const regions = centersByRegion();
 const colleges = allColleges();
-const biggest = colleges
-  .filter((r) => r.campus.jewishStudents)
-  .sort((a, b) => (b.campus.jewishStudents || 0) - (a.campus.jewishStudents || 0))
-  .slice(0, 8);
-const regionCopy: Record<string, string> = {
-  north:
-    'North Florida is home to two of the state\'s largest universities. Gainesville has one of the largest Jewish student communities in the country at the University of Florida, Tallahassee brings together students from Florida State, FAMU and Tallahassee Community College, and Jacksonville\'s Chabad serves UNF, Jacksonville University and FSCJ.',
-  central:
-    'Orlando is anchored by the University of Central Florida, one of the largest universities in the nation by enrollment, with Valencia College students joining too. Nearby Winter Park has its own Chabad for the smaller, close-knit Rollins College community.',
-  gulf:
-    'On the Gulf Coast, Tampa has Chabad centers at both the University of South Florida and the University of Tampa, and Fort Myers welcomes students from Florida Gulf Coast University and Florida SouthWestern.',
-  south:
-    'South Florida has the densest Jewish community in the state, and its campuses reflect it: two Chabad centers at the University of Miami, plus Chabad at FIU, Miami Dade College, Nova Southeastern and Florida Atlantic University in Boca Raton, which also serves Lynn University and Palm Beach State.',
-};
+const sorted = [...centers].sort((a, b) => a.primaryCampus.name.localeCompare(b.primaryCampus.name));
 const ld = [
   {
     '@context': 'https://schema.org',
@@ -30,63 +18,29 @@ const ld = [
 ];
 ---
 <Guide
-  title="Jewish life at Florida colleges and universities"
+  title="Jewish life at Florida colleges"
   metaTitle="Jewish Life at Florida Colleges & Universities"
-  description={`Jewish life at Florida universities, region by region: ${stats.campuses} colleges served by ${stats.centers} Chabad on Campus centers, estimated Jewish student populations, kosher food and Shabbat.`}
+  description={`Jewish life at Florida colleges and universities: ${stats.campuses} schools welcomed by ${stats.centers} Chabad on Campus centers, from Tallahassee to Miami. Find yours.`}
   path={path}
-  lead={`Florida has one of the largest Jewish communities in the country, and Jewish students will find Chabad on Campus at ${stats.campuses} colleges and universities across the state. Here is where, region by region.`}
+  lead={`${stats.campuses} campuses. ${stats.centers} Chabad Houses. From Tallahassee to Miami.`}
   image="florida-pegisha-students"
   imageAlt="Jewish students from Florida colleges together at the Florida Regional Pegisha Shabbaton"
   crumbs={[{ name: 'Jewish Life on Campus', href: '/jewish-life-on-campus/' }, { name: 'Florida', href: path }]}
   jsonLd={ld}
   wide
 >
-  <p>Whether you are choosing a college or already enrolled, it helps to know what Jewish life looks like across Florida. The state has large public flagships with thousands of Jewish students, mid-size universities where Jewish community is close-knit, and private colleges where the Chabad House may be the center of Jewish life on campus. Every school below has a Chabad on Campus center nearby, and every one of them hosts Shabbat dinners and celebrates the Jewish holidays with students.</p>
+  <p>Florida is home to one of the largest Jewish communities in the country, and its campuses reflect that. Large public universities, small private colleges and community colleges all have a Chabad House nearby, and every one of them hosts Shabbat dinners, celebrates the Jewish holidays with students and is ready to welcome you.</p>
 
-  <h2>Florida universities with the largest Jewish student populations</h2>
-  <p>These estimates are reported by Chabad on Campus International and include undergraduate and graduate students. They are approximate, but they give a sense of scale.</p>
-  <div class="table-wrap">
-    <table>
-      <thead><tr><th scope="col">University</th><th scope="col">Estimated Jewish students</th><th scope="col">Chabad center</th></tr></thead>
-      <tbody>
-        {biggest.map((r) => (
-          <tr>
-            <td><a href={r.campus.primary ? r.center.url : `${r.center.url}#${r.campus.anchor}`}>{r.campus.name}</a></td>
-            <td>{formatNumber(r.campus.jewishStudents!)}</td>
-            <td>{r.center.officialName}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+  <div class="mapwrap"><FloridaMap /></div>
+
+  <h2>Chabad on Campus centers in Florida</h2>
+  <p>Each center is led by a rabbi and rebbetzin who make their home your home. Some also welcome students from nearby colleges.</p>
+  <div class="grid grid-3 cards">
+    {sorted.map((c) => <CenterCard center={c} compact />)}
   </div>
 
-  {regions.map((r) => (
-    <section class="region">
-      <h2>Jewish life in {r.name}</h2>
-      <p>{regionCopy[r.region]}</p>
-      <div class="rgrid">
-        {r.centers.map((c) => {
-          const kosher = c.amenities.filter((a) => KOSHER_KEYS.includes(a.key)).length > 0;
-          return (
-            <div class="rcard">
-              <h3><a href={c.url}>Jewish life at {withThe(c.primaryCampus.name)}</a></h3>
-              <p class="small muted">{c.officialName} &middot; {c.city}</p>
-              <ul>
-                {c.primaryCampus.jewishStudents && <li>About {formatNumber(c.primaryCampus.jewishStudents)} Jewish students</li>}
-                {c.otherCampuses.length > 0 && <li>Also serves {c.otherCampuses.map((o) => o.abbr || o.name).join(', ')}</li>}
-                {kosher && <li>Kosher food options</li>}
-                {c.programs.some((p) => p.program.slug === 'jewishu' && p.confirmed) && <li>JewishU courses</li>}
-                {c.programs.some((p) => p.program.slug === 'sinai-scholars' && p.confirmed) && <li>Sinai Scholars Society</li>}
-              </ul>
-            </div>
-          );
-        })}
-      </div>
-    </section>
-  ))}
-
   <h2>Every Florida college with Chabad on Campus</h2>
-  <p>Some Chabad Houses serve several nearby schools. If your college is on this list, there is a Chabad House ready to welcome you.</p>
+  <p>If your college is on this list, there is a Chabad House ready for you.</p>
   <div class="table-wrap">
     <table>
       <thead><tr><th scope="col">College or university</th><th scope="col">Chabad center</th><th scope="col">City</th></tr></thead>
@@ -103,15 +57,10 @@ const ld = [
   </div>
 
   <h2>Beyond your own campus</h2>
-  <p>Florida's Chabad centers also bring students together across the state. The <a href="/programs/pegisha/">Florida Regional Pegisha</a> Shabbaton gathers students from many Florida schools for a weekend, and students from every center can join <a href="/programs/birthright-israel/">Birthright Israel with Chabad</a>, <a href="/programs/living-links/">Living Links</a> and the <a href="/programs/study-away-grant/">Study Away Grant</a>. If you are still choosing a school, read <a href="/jewish-life-on-campus/choosing-a-college/">how to choose a college with Jewish life</a>.</p>
+  <p>Florida's Chabad centers also bring students together across the state. The <a href="/programs/pegisha/">Florida Regional Pegisha</a> Shabbaton gathers students from many Florida schools for a weekend, and every student can join <a href="/programs/birthright-israel/">Birthright Israel with Chabad</a>, <a href="/programs/living-links/">Living Links</a> and the <a href="/programs/study-away-grant/">Study Away Grant</a>. Still choosing a school? Read <a href="/jewish-life-on-campus/choosing-a-college/">how to choose a college with Jewish life</a>.</p>
 </Guide>
 
 <style>
-  .region { margin-top: 12px; }
-  .rgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); gap: 14px; margin: 16px 0 8px; }
-  .rcard { border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; }
-  .rcard h3 { font-size: 1.02rem; margin: 0 0 2px; }
-  .rcard h3 a { text-decoration: none; }
-  .rcard p { margin: 0 0 8px; }
-  .rcard ul { margin: 0; padding-left: 1.1em; font-size: 0.93rem; color: var(--ink-2); }
+  .mapwrap { max-width: 620px; margin: 48px 0 24px; }
+  .cards { margin: 32px 0 16px; }
 </style>

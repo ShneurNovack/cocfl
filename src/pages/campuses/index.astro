@@ -3,10 +3,11 @@ import Base from '../../layouts/Base.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import CenterCard from '../../components/CenterCard.astro';
 import CtaBand from '../../components/CtaBand.astro';
-import { centers, centersByRegion, allColleges, stats, REGIONS, stateAbbr } from '../../lib/centers';
+import { centers, allColleges, stats, stateAbbr } from '../../lib/centers';
+import FloridaMap from '../../components/FloridaMap.astro';
+import Icon from '../../components/Icon.astro';
 import { SITE } from '../../lib/site';
 
-const regions = centersByRegion();
 const colleges = allColleges();
 const sorted = [...centers].sort((a, b) => a.primaryCampus.name.localeCompare(b.primaryCampus.name));
 const ld = [
@@ -31,26 +32,29 @@ const ld = [
   breadcrumbs={[{ name: 'Find Your Campus', href: '/campuses/' }]}
   jsonLd={ld}
 >
-  <section class="page-hero band-blue">
+  <section class="page-hero band-blue dhero">
     <div class="wrap">
       <Breadcrumbs items={[{ name: 'Find Your Campus', href: '/campuses/' }]} />
-      <h1>Find Chabad at your college in Florida</h1>
-      <p class="lead">Every Chabad on Campus center in Florida, with the universities and colleges each one serves. Search by school name, abbreviation, city, center or rabbi.</p>
+      <h1>Find Chabad at your college</h1>
+      <p class="lead">Every Chabad on Campus center in Florida, and every school they welcome.</p>
       <div class="search" role="search">
         <label for="q" class="visually-hidden">Search Florida campuses</label>
-        <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
-        <input id="q" type="search" placeholder="Try UF, Florida State, Boca, Tampa or Rabbi Goldman" autocomplete="off" spellcheck="false" />
-      </div>
-      <div class="chips" role="group" aria-label="Filter by region">
-        <button type="button" class="chip" data-region="" aria-pressed="true">All of Florida</button>
-        {Object.entries(REGIONS).map(([k, r]) => <button type="button" class="chip" data-region={k} aria-pressed="false">{r.name}</button>)}
+        <Icon name="Search" size={24} class="si" />
+        <input id="q" type="search" placeholder="Search by school, city or rabbi" autocomplete="off" spellcheck="false" />
       </div>
     </div>
   </section>
 
   <section class="section-tight">
     <div class="wrap">
-      <p class="count" id="count" aria-live="polite">{centers.length} Chabad centers serving {stats.campuses} Florida campuses</p>
+      <div class="bar">
+        <p class="count" id="count" aria-live="polite">{centers.length} Chabad centers serving {stats.campuses} Florida campuses</p>
+        <div class="views" role="group" aria-label="View">
+          <button type="button" data-view="grid" aria-pressed="true"><Icon name="LayoutGrid" size={18} /> Grid</button>
+          <button type="button" data-view="map" aria-pressed="false"><Icon name="Map" size={18} /> Map</button>
+        </div>
+      </div>
+      <div class="mapview" id="mapview" hidden><FloridaMap /></div>
       <div class="grid grid-3" id="results">
         {sorted.map((c) => <CenterCard center={c} headingLevel="h2" />)}
       </div>
@@ -64,8 +68,7 @@ const ld = [
 
   <section class="section band-cream" id="colleges">
     <div class="wrap">
-      <span class="eyebrow">A to Z</span>
-      <h2>Every Florida college and university in our directory</h2>
+      <h2>Every Florida college in the directory</h2>
       <p class="lead narrow">Some Chabad centers serve several nearby schools. Find your college below to see which Chabad House is yours.</p>
       <div class="table-wrap">
         <table>
@@ -87,22 +90,6 @@ const ld = [
     </div>
   </section>
 
-  <section class="section">
-    <div class="wrap">
-      <h2>Chabad on Campus by region</h2>
-      <div class="grid grid-4 regions">
-        {regions.map((r) => (
-          <div>
-            <h3>{r.name}</h3>
-            <p class="muted small">{r.blurb}</p>
-            <ul class="link-list">
-              {r.centers.map((c) => <li><a href={c.url}>Chabad at {c.primaryCampus.abbr || c.primaryCampus.name}<span class="meta">{c.city}</span></a></li>)}
-            </ul>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
 
   <CtaBand
     title="New to Chabad on Campus?"
@@ -146,13 +133,11 @@ const ld = [
   const index = cards.map((el) => {
     const text = norm(el.dataset.search || '');
     const [pname, pabbr] = (el.dataset.primary || '|').split('|');
-    return { el, text, words: Array.from(new Set(text.split(' '))), region: el.dataset.region, pname: norm(pname), pabbr: norm(pabbr) };
+    return { el, text, words: Array.from(new Set(text.split(' '))), pname: norm(pname), pabbr: norm(pabbr) };
   });
   const count = document.getElementById('count')!;
   const empty = document.getElementById('empty')!;
   const emptyQ = document.getElementById('empty-q')!;
-  const chips = Array.from(document.querySelectorAll<HTMLButtonElement>('.chip'));
-  let region = '';
   const total = count.textContent;
 
   function run() {
@@ -162,7 +147,6 @@ const ld = [
     let shown = 0;
     const ranked: { el: HTMLElement; score: number }[] = [];
     for (const item of index) {
-      if (region && item.region !== region) { item.el.hidden = true; continue; }
       let score = 0;
       let ok = true;
       for (const t of tokens) {
@@ -180,42 +164,43 @@ const ld = [
     ranked.sort((a, b) => b.score - a.score).forEach((r, i) => (r.el.style.order = String(tokens.length ? i : 0)));
     empty.hidden = shown > 0;
     emptyQ.textContent = raw;
-    count.textContent = !tokens.length && !region ? total : `${shown} ${shown === 1 ? 'center matches' : 'centers match'}${raw.trim() ? ` "${raw.trim()}"` : ''}`;
+    count.textContent = !tokens.length ? total : `${shown} ${shown === 1 ? 'center matches' : 'centers match'}${raw.trim() ? ` "${raw.trim()}"` : ''}`;
   }
 
   input.addEventListener('input', run);
-  chips.forEach((c) =>
-    c.addEventListener('click', () => {
-      region = c.dataset.region || '';
-      chips.forEach((x) => x.setAttribute('aria-pressed', String(x === c)));
-      run();
-    }),
-  );
   document.getElementById('clear')!.addEventListener('click', () => {
     input.value = '';
-    region = '';
-    chips.forEach((x, i) => x.setAttribute('aria-pressed', String(i === 0)));
     run();
     input.focus();
   });
+  const views = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-view]'));
+  const mapview = document.getElementById('mapview')!;
+  views.forEach((b) => b.addEventListener('click', () => {
+    views.forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+    const map = b.dataset.view === 'map';
+    mapview.hidden = !map;
+    grid.hidden = map;
+  }));
   const initial = new URLSearchParams(location.search).get('q');
   if (initial) { input.value = initial; run(); }
 </script>
 
 <style>
-  .search { position: relative; max-width: 720px; margin-top: 8px; }
-  .search svg { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: var(--muted); }
-  .search input { width: 100%; font: 500 1.1rem var(--font); padding: 18px 18px 18px 52px; border: 0; border-radius: var(--radius); color: var(--ink); box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18); }
-  .search input:focus { outline: 3px solid var(--gold); outline-offset: 2px; }
-  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
-  .chip { font: 600 0.9rem var(--font); padding: 8px 14px; border-radius: 999px; border: 1px solid rgba(255, 255, 255, 0.45); background: transparent; color: #fff; cursor: pointer; }
-  .chip:hover { border-color: #fff; }
-  .chip[aria-pressed='true'] { background: var(--gold); border-color: var(--gold); color: var(--ink); }
-  .count { font-weight: 600; color: var(--muted); margin-bottom: 20px; }
-  #results { grid-auto-flow: row dense; }
-  #results :global(.school) { font-size: 1.12rem; }
-  .empty { text-align: center; max-width: 620px; margin: 24px auto; padding: 36px 24px; border: 1px dashed var(--line-strong); border-radius: var(--radius); }
-  .empty h2 { font-size: 1.4rem; }
+  .dhero { padding-bottom: clamp(64px, 9vw, 112px); }
+  .dhero .lead { margin-bottom: clamp(32px, 4vw, 48px); }
+  .search { position: relative; max-width: 760px; }
+  .search :global(.si) { position: absolute; left: 22px; top: 50%; transform: translateY(-50%); color: var(--muted); }
+  .search input { width: 100%; font: 550 1.2rem var(--font); padding: 24px 24px 24px 62px; border: 0; color: var(--ink); background: #fff; }
+  .search input:focus { outline: 3px solid var(--gold); outline-offset: 0; }
+  .bar { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; margin-bottom: 32px; padding-bottom: 20px; border-bottom: 2px solid var(--ink); }
+  .count { font-weight: 700; margin: 0; }
+  .views { display: flex; }
+  .views button { font: 700 0.95rem var(--font); display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border: 2px solid var(--ink); background: #fff; color: var(--ink); cursor: pointer; }
+  .views button + button { border-left: 0; }
+  .views button[aria-pressed='true'] { background: var(--ink); color: #fff; }
+  .mapview { max-width: 640px; margin: 0 auto 24px; }
+  #results :global(.school) { font-size: 1.25rem; }
+  .empty { text-align: center; max-width: 640px; margin: 24px auto; padding: 48px 28px; border: 2px dashed var(--line-strong); }
+  .empty h2 { font-size: 1.5rem; }
   .abbr { color: var(--muted); }
-  .regions h3 { margin-bottom: 2px; }
 </style>

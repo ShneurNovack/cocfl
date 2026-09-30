@@ -3,18 +3,18 @@ import Base from '../../layouts/Base.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import ProgramCard from '../../components/ProgramCard.astro';
 import CtaBand from '../../components/CtaBand.astro';
-import Picture from '../../components/Picture.astro';
+import Icon from '../../components/Icon.astro';
 import { programs } from '../../data/programs';
-import { centers, programCenterIds } from '../../lib/centers';
-import { SITE } from '../../lib/site';
+import { SITE, img } from '../../lib/site';
 
-const cats = ['Learning', 'Shabbatons', 'Travel & Israel'] as const;
-const allIds = centers.map((c) => c.id);
-const catIntro: Record<string, string> = {
-  Learning: 'Courses and fellowships taught at your campus Chabad House, from short JewishU classes to the selective Sinai Scholars Society.',
-  Shabbatons: 'Weekends that bring Jewish students from many campuses together for Shabbat, in Florida and in New York.',
-  'Travel & Israel': 'Birthright Israel with your campus Chabad, heritage trips and grants for immersive study away from campus.',
-};
+const cats = [
+  { name: 'Learning', icon: 'BookOpen', text: 'Courses and fellowships taught at your campus Chabad House.' },
+  { name: 'Shabbatons', icon: 'Flame', text: 'Weekends with Jewish students from many campuses, in Florida and New York.' },
+  { name: 'Travel & Israel', icon: 'Plane', text: 'Birthright with your campus Chabad, heritage trips and study grants.' },
+] as const;
+const anchor = (s: string) => s.toLowerCase().replace(/[^a-z]+/g, '-');
+const hero = img('pegisha-group');
+const side = img('pegisha-welcome');
 const ld = [
   {
     '@context': 'https://schema.org',
@@ -35,87 +35,72 @@ const ld = [
   breadcrumbs={[{ name: 'Programs', href: '/programs/' }]}
   jsonLd={ld}
 >
-  <section class="page-hero band-blue">
+  <section class="ihero">
+    <img class="bg" src={hero.src} srcset={hero.srcset} sizes="100vw" width={hero.width} height={hero.height} alt="" fetchpriority="high" />
     <div class="wrap">
-      <Breadcrumbs items={[{ name: 'Programs', href: '/programs/' }]} />
-      <h1>Programs for Jewish college students</h1>
-      <p class="lead">Beyond Shabbat dinners and holidays, Florida students can learn, travel and connect through Chabad on Campus programs run by their local Chabad House and by Chabad on Campus International.</p>
+      <div class="box band-blue">
+        <Breadcrumbs items={[{ name: 'Programs', href: '/programs/' }]} />
+        <h1>Learn, travel and grow</h1>
+        <p class="lead">Programs for Florida students, run through your local Chabad House.</p>
+      </div>
     </div>
   </section>
 
-  <section class="section-tight">
-    <div class="wrap">
-      <nav class="jump" aria-label="Program categories">
-        {cats.map((c) => <a href={`#${c.toLowerCase().replace(/[^a-z]+/g, '-')}`}>{c}</a>)}
-      </nav>
+  <nav class="catnav" aria-label="Program categories">
+    <div class="wrap cn">
+      {cats.map((c) => <a href={`#${anchor(c.name)}`}><Icon name={c.icon} size={22} /> {c.name}</a>)}
     </div>
-  </section>
+  </nav>
 
   {cats.map((cat, i) => {
-    const list = programs.filter((p) => p.category === cat);
+    const list = programs.filter((p) => p.category === cat.name);
     return (
-      <section class:list={['section', i % 2 === 1 && 'band-cream']} id={cat.toLowerCase().replace(/[^a-z]+/g, '-')}>
+      <section class:list={['section', i % 2 === 1 && 'band-cream']} id={anchor(cat.name)}>
         <div class="wrap">
-          <h2>{cat}</h2>
-          <p class="lead narrow">{catIntro[cat]}</p>
+          <div class="chead reveal">
+            <span class="bubble lg gold"><Icon name={cat.icon} size={32} /></span>
+            <div>
+              <h2>{cat.name}</h2>
+              <p class="lead">{cat.text}</p>
+            </div>
+          </div>
           <div class="grid grid-3">
-            {list.map((p) => <ProgramCard program={p} />)}
+            {list.map((p) => <ProgramCard program={p} headingLevel="h3" />)}
           </div>
         </div>
       </section>
     );
   })}
 
-  <section class="section">
-    <div class="wrap">
-      <h2>Which programs are available at my school?</h2>
-      <p class="lead narrow">Campus programs vary by Chabad House. Here is what each Florida center offers, based on Chabad on Campus enrollment data and center information. Network-wide opportunities like Pegisha, Living Links and the Study Away Grant are open through every center.</p>
-      <div class="table-wrap">
-        <table class="matrix">
-          <thead>
-            <tr>
-              <th scope="col">Campus</th>
-              {programs.filter((p) => p.offeredAt !== 'all').map((p) => <th scope="col"><a href={`/programs/${p.slug}/`}>{p.shortName}</a></th>)}
-            </tr>
-          </thead>
-          <tbody>
-            {[...centers].sort((a, b) => a.primaryCampus.name.localeCompare(b.primaryCampus.name)).map((c) => (
-              <tr>
-                <th scope="row"><a href={c.url}>{c.primaryCampus.name}</a></th>
-                {programs.filter((p) => p.offeredAt !== 'all').map((p) => {
-                  const has = programCenterIds(p, allIds).ids.includes(c.id);
-                  return <td>{has ? <span class="yes" aria-label="Offered">&#10003;</span> : <span class="no" aria-label="Not listed">&middot;</span>}</td>;
-                })}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-      <p class="small muted">Not listed does not always mean unavailable. Ask your Chabad House about programs this semester.</p>
-    </div>
-  </section>
-
-  <section class="section band-cream">
+  <section class="section band-wash">
     <div class="wrap split">
-      <div>
-        <h2>Programs start with your Chabad House</h2>
-        <p>Every program on this page runs through a local Chabad House. The rabbi and rebbetzin at your school are the people who will sign you up, answer your questions and often travel with you. If you are not sure where to start, come to Shabbat dinner and ask.</p>
-        <a class="btn btn-blue" href="/campuses/">Find your Chabad House</a>
+      <div class="reveal">
+        <h2>It all starts with your Chabad House</h2>
+        <p class="lead">Your rabbi and rebbetzin will sign you up, answer your questions and often travel with you.</p>
+        <a class="btn btn-blue" href="/campuses/">Find your Chabad House <Icon name="ArrowRight" size={20} /></a>
       </div>
-      <Picture name="pegisha-welcome" alt="A Welcome to Pegisha banner over a street in Crown Heights, Brooklyn" aspect="4/3" />
+      <div class="photo sp"><img src={side.src} srcset={side.srcset} sizes="(max-width: 900px) 100vw, 50vw" width={side.width} height={side.height} alt="A Welcome to Pegisha banner over a street in Crown Heights, Brooklyn" loading="lazy" /></div>
     </div>
   </section>
 
-  <CtaBand title="New to Chabad on Campus?" text="Read what to expect, who it is for and how to get involved at your school." primary={{ href: '/faq/', label: 'Read the FAQ' }} secondary={{ href: '/jewish-life-on-campus/', label: 'Jewish life on campus' }} />
+  <CtaBand title="New to Chabad on Campus?" text="Read what to expect and how to get involved at your school." primary={{ href: '/faq/', label: 'Read the FAQ' }} secondary={{ href: '/jewish-life-on-campus/', label: 'Jewish life on campus' }} />
 </Base>
 
 <style>
-  .jump { display: flex; flex-wrap: wrap; gap: 10px; }
-  .jump a { padding: 10px 16px; border: 1px solid var(--line-strong); border-radius: 999px; text-decoration: none; font-weight: 600; color: var(--ink); }
-  .jump a:hover { border-color: var(--blue); color: var(--blue); }
-  .matrix th, .matrix td { text-align: center; white-space: nowrap; }
-  .matrix th[scope='row'], .matrix thead th:first-child { text-align: left; }
-  .matrix a { text-decoration: none; }
-  .yes { display: inline-flex; width: 26px; height: 26px; border-radius: 50%; align-items: center; justify-content: center; background: var(--gold); font-weight: 900; color: var(--ink); }
-  .no { color: var(--line-strong); font-size: 1.4rem; line-height: 1; }
+  .ihero { position: relative; min-height: clamp(480px, 66vh, 680px); display: flex; align-items: flex-end; background: var(--blue-night); }
+  .ihero .bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .ihero .wrap { position: relative; width: 100%; }
+  .box { max-width: 680px; padding: clamp(36px, 5vw, 64px); }
+  .box h1 { margin-bottom: 16px; }
+  .box .lead { margin: 0; }
+  .catnav { border-bottom: 2px solid var(--ink); }
+  .cn { display: flex; flex-wrap: wrap; }
+  .cn a { display: inline-flex; align-items: center; gap: 10px; padding: 22px 28px 22px 0; margin-right: 12px; font-weight: 750; font-size: 1.05rem; text-decoration: none; color: var(--ink); }
+  .cn a:hover { color: var(--blue); }
+  .cn a :global(.icon) { color: var(--blue); }
+  .chead { display: flex; gap: 24px; align-items: flex-start; margin-bottom: clamp(36px, 5vw, 56px); }
+  .chead h2 { margin-bottom: 8px; }
+  .chead .lead { margin: 0; }
+  .sp { aspect-ratio: 4 / 3; }
+  .split .lead { margin-bottom: 32px; }
 </style>

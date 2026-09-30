@@ -1,40 +1,46 @@
 ---
 import type { Center } from '../lib/centers';
 import CenterLogo from './CenterLogo.astro';
+import Icon from './Icon.astro';
 import { stateAbbr } from '../lib/centers';
 interface Props { center: Center; headingLevel?: 'h2' | 'h3'; compact?: boolean }
 const { center: c, headingLevel = 'h3', compact = false } = Astro.props;
 const H = headingLevel;
-const also = c.otherCampuses.map((x) => x.name);
+const also = c.otherCampuses;
+const bg = c.image ? c.image.src.replace('-w1280', '-w640') : null;
 ---
-<article class="ccard card is-link" data-center={c.id} data-region={c.region} data-search={c.searchText} data-primary={`${c.primaryCampus.name}|${c.primaryCampus.abbr || ""}`}>
-  <div class="top">
-    <CenterLogo center={c} size={56} />
-    <div class="ttl">
-      <H class="school"><a href={c.url} class="stretch">{c.primaryCampus.name}</a></H>
-      <p class="meta">{c.officialName !== c.primaryCampus.name ? c.officialName : c.shortName} &middot; {c.city}, {stateAbbr(c.address?.state ?? null)}</p>
-    </div>
+<article class:list={['ccard', compact && 'compact']} data-center={c.id} data-search={c.searchText} data-primary={`${c.primaryCampus.name}|${c.primaryCampus.abbr || ''}`}>
+  <div class:list={['cover', !bg && 'nobg']}>
+    {bg ? <img src={bg} alt="" loading="lazy" decoding="async" /> : <img class="fl" src="/flame.webp" alt="" loading="lazy" width="96" height="96" />}
   </div>
-  {also.length > 0 && <p class="also"><span>Also serving</span> {also.join(', ')}</p>}
-  {!compact && c.directorsLine && <p class="dir">{c.directorsLine}</p>}
-  {!compact && c.programs.some((p) => p.confirmed) && (
-    <div class="pills">{c.programs.filter((p) => p.confirmed).slice(0, 3).map((p) => <span class="pill">{p.program.shortName}</span>)}</div>
-  )}
-  <span class="go" aria-hidden="true">View center <span>&rarr;</span></span>
+  <div class="logo"><CenterLogo center={c} size={68} /></div>
+  <div class="body">
+    <H class="school"><a href={c.url} class="stretch">{c.primaryCampus.name}</a></H>
+    <p class="meta"><Icon name="MapPin" size={16} /> {c.city}, {stateAbbr(c.address?.state ?? null)}</p>
+    {also.length > 0 && <p class="also">Also welcoming {also.map((o) => o.abbr || o.name).join(', ')}</p>}
+    <span class="go">{c.officialName} <Icon name="ArrowRight" size={20} /></span>
+  </div>
 </article>
 
 <style>
-  .ccard { position: relative; gap: 12px; height: 100%; }
-  .top { display: flex; gap: 14px; align-items: center; }
-  .school { font-size: 1.08rem; line-height: 1.25; margin: 0; }
+  .ccard { position: relative; background: #fff; border: 2px solid var(--line); display: flex; flex-direction: column; height: 100%; transition: border-color 0.2s; }
+  .ccard:hover { border-color: var(--blue); }
+  .cover { height: 150px; position: relative; overflow: hidden; background: var(--blue-night); }
+  .cover img { width: 100%; height: 100%; object-fit: cover; opacity: 0.75; transition: transform 0.7s var(--ease), opacity 0.3s; }
+  .ccard:hover .cover img { transform: scale(1.06); opacity: 0.9; }
+  .cover.nobg { background: var(--blue); }
+  .cover.nobg .fl { position: absolute; right: 18px; top: 50%; translate: 0 -50%; width: 110px; height: auto; opacity: 0.35; object-fit: contain; }
+  .logo { position: relative; z-index: 2; margin: -36px 0 0 22px; width: max-content; background: #fff; border: 3px solid #fff; }
+  .body { padding: 18px 24px 24px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+  .school { font-size: 1.25rem; line-height: 1.2; margin: 0; }
   .school a { color: var(--ink); text-decoration: none; }
-  .stretch::after { content: ''; position: absolute; inset: 0; z-index: 1; }
+  .stretch::after { content: ''; position: absolute; inset: 0; z-index: 3; }
   .ccard:hover .school a { color: var(--blue); }
-  .meta { margin: 2px 0 0; font-size: 0.86rem; color: var(--muted); line-height: 1.4; }
-  .also { margin: 0; font-size: 0.88rem; color: var(--ink-2); line-height: 1.5; }
-  .also span { font-weight: 700; color: var(--muted); font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.06em; margin-right: 4px; }
-  .dir { margin: 0; font-size: 0.9rem; color: var(--ink-2); line-height: 1.5; }
-  .go { margin-top: auto; padding-top: 6px; font-weight: 700; font-size: 0.9rem; color: var(--blue); }
-  .go span { display: inline-block; transition: transform 0.15s ease; }
-  .ccard:hover .go span { transform: translateX(3px); }
+  .meta { display: flex; align-items: center; gap: 6px; margin: 0; font-size: 0.95rem; color: var(--muted); }
+  .meta :global(.icon) { color: var(--gold-deep); }
+  .also { margin: 0; font-size: 0.92rem; color: var(--ink-2); }
+  .go { margin-top: auto; padding-top: 16px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; gap: 10px; font-weight: 750; font-size: 0.95rem; color: var(--blue); }
+  .go :global(.icon) { flex-shrink: 0; transition: transform 0.2s var(--ease); }
+  .ccard:hover .go :global(.icon) { transform: translateX(5px); }
+  .compact .cover { height: 110px; }
 </style>

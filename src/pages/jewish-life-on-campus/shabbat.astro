@@ -3,15 +3,13 @@ import Guide from '../../layouts/Guide.astro';
 import Picture from '../../components/Picture.astro';
 import { centers, withThe } from '../../lib/centers';
 const path = '/jewish-life-on-campus/shabbat/';
-const withServices = centers.filter((c) => c.amenities.some((a) => a.key === 'Shabbat and holidays minyan'));
-const withHousing = centers.filter((c) => c.amenities.some((a) => a.key === 'Jewish student housing'));
 ---
 <Guide
   title="Shabbat on campus"
   metaTitle="Shabbat on Campus: Shabbat Dinners for College Students in Florida"
   description="How Shabbat works in college: Friday night Shabbat dinners at Chabad, Shabbat services, keeping Shabbat in a dorm, and where to find Shabbat at Florida universities."
   path={path}
-  lead="For thousands of Jewish students, Friday night dinner at Chabad is the best part of the week. Here is what Shabbat in college looks like and how to find it at your school."
+  lead="Friday night dinner at Chabad might be the best part of your week."
   image="shabbat-candles"
   imageAlt="Jewish college students lighting Shabbat candles together"
   crumbs={[{ name: 'Jewish Life on Campus', href: '/jewish-life-on-campus/' }, { name: 'Shabbat', href: path }]}
@@ -25,14 +23,14 @@ const withHousing = centers.filter((c) => c.amenities.some((a) => a.key === 'Jew
   <Picture name="rabbi-students" alt="A rabbi talking with college students around a table at a Chabad House" aspect="16/9" />
 
   <h2>Shabbat services and Shabbat day</h2>
-  <p>Many Chabad Houses hold services on Friday night and Shabbat morning, followed by a Kiddush lunch. If you have never been to a service, this is a gentle place to start: prayer books have English translations, the rabbi explains what is going on, and no one expects you to know the tunes. In Florida, Chabad on Campus reports Shabbat and holiday services at {withServices.length} of our {centers.length} centers, including {withServices.slice(0, 4).map((c, i) => <>{i > 0 && ', '}<a href={c.url}>{withThe(c.primaryCampus.name)}</a></>)}.</p>
+  <p>Many Chabad Houses hold services on Friday night and Shabbat morning, followed by a Kiddush lunch. If you have never been to a service, this is a gentle place to start: prayer books have English translations, the rabbi explains what is going on, and no one expects you to know the tunes.</p>
 
   <h2>Keeping Shabbat in college</h2>
   <p>Some students keep Shabbat fully, and many are figuring out which parts of Shabbat they want to take on. A few practical tips:</p>
   <ul>
     <li><strong>Talk to your professors early.</strong> Most universities have religious accommodation policies for exams and assignments that fall on Shabbat or holidays. Florida law (<a href="https://www.flsenate.gov/Laws/Statutes/2024/1006.53" rel="noopener">section 1006.53, Florida Statutes</a>) requires public colleges and universities to have a policy for reasonably accommodating students' religious observances.</li>
     <li><strong>Plan food ahead.</strong> Your Chabad House can usually host you for Friday night and Shabbat lunch. Some also offer packaged kosher meals for Shabbat.</li>
-    <li><strong>Think about housing and access.</strong> Electronic dorm key cards can be a challenge for students who keep Shabbat. Ask housing about alternatives, and ask your Chabad House what other students do.{withHousing.length > 0 && <> A few Florida Chabad Houses, such as {withHousing.slice(0, 2).map((c, i) => <>{i > 0 && ' and '}<a href={c.url}>{c.officialName}</a></>)}, even offer Jewish student housing.</>}</li>
+    <li><strong>Think about housing and access.</strong> Electronic dorm key cards can be a challenge for students who keep Shabbat. Ask housing about alternatives, and ask your Chabad House what other students do.</li>
     <li><strong>Start small.</strong> Light candles in your room on Friday (battery candles if your dorm prohibits flames), say Kiddush, or put your phone away for dinner. Every step counts.</li>
   </ul>
 

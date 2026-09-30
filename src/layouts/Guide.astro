@@ -2,6 +2,7 @@
 import Base from './Base.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import CtaBand from '../components/CtaBand.astro';
+import Icon from '../components/Icon.astro';
 import { GUIDES } from '../data/guides';
 import { SITE, img } from '../lib/site';
 
@@ -17,8 +18,8 @@ interface Props {
   jsonLd?: object[];
   wide?: boolean;
 }
-const { title, metaTitle, description, path, lead, image, imageAlt = '', crumbs, jsonLd = [], wide = false } = Astro.props;
-const hero = image ? img(image) : null;
+const { title, metaTitle, description, path, lead, image = 'students-friends', imageAlt = '', crumbs, jsonLd = [], wide = false } = Astro.props;
+const hero = img(image);
 const others = GUIDES.filter((g) => g.href !== path);
 const articleLd = {
   '@context': 'https://schema.org',
@@ -29,60 +30,96 @@ const articleLd = {
   mainEntityOfPage: `${SITE.url}${path}`,
   author: { '@id': `${SITE.url}/#organization` },
   publisher: { '@id': `${SITE.url}/#organization` },
-  ...(hero ? { image: `${SITE.url}${hero.src}` } : {}),
+  image: `${SITE.url}${hero.src}`,
   inLanguage: 'en-US',
 };
+const guideIcon: Record<string, string> = {
+  '/jewish-life-on-campus/': 'Compass',
+  '/jewish-life-on-campus/florida/': 'MapPin',
+  '/jewish-life-on-campus/shabbat/': 'Flame',
+  '/jewish-life-on-campus/jewish-holidays/': 'PartyPopper',
+  '/jewish-life-on-campus/kosher-food/': 'UtensilsCrossed',
+  '/jewish-life-on-campus/choosing-a-college/': 'GraduationCap',
+  '/jewish-life-on-campus/resources/': 'LifeBuoy',
+};
 ---
-<Base title={metaTitle} description={description} path={path} breadcrumbs={crumbs} jsonLd={[articleLd, ...jsonLd]} ogType="article" ogImage={hero?.src}>
-  <section class="page-hero band-blue">
-    <div class:list={['wrap', hero && 'ghero']}>
-      <div>
+<Base title={metaTitle} description={description} path={path} breadcrumbs={crumbs} jsonLd={[articleLd, ...jsonLd]} ogType="article" ogImage={hero.src}>
+  <section class="ghero">
+    <div class="gtext band-blue">
+      <div class="gin">
         <Breadcrumbs items={crumbs} />
         <h1>{title}</h1>
         <p class="lead">{lead}</p>
       </div>
-      {hero && (
-        <div class="photo gphoto">
-          <img src={hero.src} srcset={hero.srcset} sizes="(max-width: 900px) 100vw, 480px" width={hero.width} height={hero.height} alt={imageAlt} fetchpriority="high" decoding="async" />
-        </div>
-      )}
+    </div>
+    <div class="gmedia">
+      <img src={hero.src} srcset={hero.srcset} sizes="(max-width: 960px) 100vw, 55vw" width={hero.width} height={hero.height} alt={imageAlt} fetchpriority="high" decoding="async" />
     </div>
   </section>
 
-  <div class:list={['wrap', 'section-tight', 'gbody', wide && 'is-wide']}>
+  <div class:list={['wrap', 'gbody', wide && 'is-wide']}>
     <article class="prose">
       <slot />
     </article>
     {!wide && (
-      <aside class="gside" aria-label="More guides">
-        <div class="card">
+      <aside class="gside" aria-label="Find your Chabad House">
+        <div class="find">
+          <span class="bubble gold"><Icon name="MapPin" size={24} /></span>
           <h2>Find your Chabad House</h2>
-          <p class="small">Every Chabad on Campus center in Florida, searchable by school.</p>
-          <a class="btn btn-blue" href="/campuses/">Search campuses</a>
+          <p>Every Chabad on Campus center in Florida, searchable by school.</p>
+          <a class="btn btn-white" href="/campuses/">Search campuses <Icon name="ArrowRight" size={20} /></a>
         </div>
-        <nav class="card" aria-label="Jewish life guides">
-          <h2>More guides</h2>
-          <ul>{others.map((g) => <li><a href={g.href}>{g.title}</a></li>)}<li><a href="/parents/">Resources for parents</a></li></ul>
-        </nav>
       </aside>
     )}
   </div>
+
+  <section class="section band-cream more">
+    <div class="wrap">
+      <h2>Keep reading</h2>
+      <div class="glist">
+        {others.map((g, i) => (
+          <a href={g.href} class="gcard reveal" style={`--d:${i * 50}ms`}>
+            <span class="bubble"><Icon name={guideIcon[g.href] || 'BookOpen'} size={24} /></span>
+            <strong>{g.title}</strong>
+            <span class="gb">{g.blurb}</span>
+            <Icon name="ArrowRight" size={20} class="ga" />
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
   <slot name="after" />
   <CtaBand />
 </Base>
 
 <style>
-  .ghero { display: grid; grid-template-columns: 1fr minmax(0, 460px); gap: clamp(28px, 5vw, 56px); align-items: center; }
-  @media (max-width: 900px) { .ghero { grid-template-columns: 1fr; } }
-  .gphoto { aspect-ratio: 3 / 2; box-shadow: 0 18px 48px rgba(0, 0, 0, 0.25); }
-  .gbody { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: clamp(32px, 6vw, 80px); align-items: start; }
-  .gbody.is-wide { grid-template-columns: 1fr; }
-  .gbody.is-wide .prose { max-width: none; }
-  @media (max-width: 960px) { .gbody { grid-template-columns: 1fr; } }
-  .gside { position: sticky; top: 96px; display: grid; gap: 16px; padding-top: 24px; }
-  @media (max-width: 960px) { .gside { position: static; } }
-  .gside h2 { font-size: 1.05rem; margin: 0; }
-  .gside p { margin: 0; }
-  .gside ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; font-size: 0.95rem; }
-  .gbody :global(.prose > p:first-child) { font-size: 1.12rem; color: var(--ink-2); }
+  .ghero { display: grid; grid-template-columns: minmax(0, 48fr) minmax(0, 52fr); min-height: clamp(440px, 62vh, 620px); }
+  @media (max-width: 960px) { .ghero { grid-template-columns: minmax(0, 1fr); } }
+  .gtext { display: flex; align-items: center; padding: clamp(48px, 7vw, 96px) var(--gutter); }
+  .gin { max-width: 580px; margin-left: auto; width: 100%; }
+  @media (max-width: 960px) { .gin { margin: 0; } }
+  .gtext h1 { margin-bottom: 22px; font-size: clamp(2.4rem, 4.6vw, 3.8rem); }
+  .gtext .lead { margin: 0; max-width: 42ch; }
+  .gmedia { position: relative; min-height: 300px; background: var(--blue-night); }
+  .gmedia img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+  .gbody { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: clamp(48px, 7vw, 112px); align-items: start; padding-top: clamp(64px, 9vw, 112px); padding-bottom: clamp(64px, 9vw, 112px); }
+  .gbody.is-wide { grid-template-columns: minmax(0, 1fr); }
+  .gbody.is-wide .prose { max-width: 960px; }
+  @media (max-width: 1000px) { .gbody { grid-template-columns: minmax(0, 1fr); } }
+  .gbody :global(.prose > p:first-child) { font-size: 1.25rem; color: var(--ink); }
+  .gside { position: sticky; top: 110px; }
+  @media (max-width: 1000px) { .gside { position: static; } }
+  .find { background: var(--blue); color: #fff; padding: 32px; display: grid; gap: 14px; justify-items: start; }
+  .find h2 { color: #fff; font-size: 1.4rem; margin: 6px 0 0; }
+  .find p { margin: 0; color: #e3eff8; }
+
+  .more h2 { margin-bottom: 36px; }
+  .glist { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 0; border-top: 2px solid var(--ink); border-left: 1px solid var(--line-strong); }
+  .gcard { position: relative; display: flex; flex-direction: column; gap: 10px; padding: 28px 56px 28px 28px; text-decoration: none; color: var(--ink); border-right: 1px solid var(--line-strong); border-bottom: 1px solid var(--line-strong); background: #fff; transition: background 0.2s; }
+  .gcard:hover { background: var(--gold-wash); }
+  .gcard strong { font-size: 1.15rem; line-height: 1.25; }
+  .gb { color: var(--ink-2); font-size: 0.97rem; }
+  .gcard :global(.ga) { position: absolute; right: 24px; top: 32px; color: var(--blue); transition: transform 0.2s var(--ease); }
+  .gcard:hover :global(.ga) { transform: translateX(4px); }
 </style>

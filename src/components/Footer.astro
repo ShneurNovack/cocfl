@@ -3,15 +3,17 @@ import { centers } from '../lib/centers';
 import { programs } from '../data/programs';
 import { SITE } from '../lib/site';
 import { GUIDES } from '../data/guides';
+import Icon from './Icon.astro';
 const year = new Date().getFullYear();
 const sorted = [...centers].sort((a, b) => a.primaryCampus.name.localeCompare(b.primaryCampus.name));
 ---
 <footer class="site-footer">
+  <img class="wm" src="/flame.webp" alt="" width="96" height="96" loading="lazy" />
   <div class="wrap cols">
     <div class="about">
-      <a href="/" class="brand"><img src="/flame.webp" alt="" width="30" height="30" loading="lazy" /> Chabad on Campus Florida</a>
+      <a href="/" class="brand"><span class="mk"><img src="/flame.webp" alt="" width="22" height="22" loading="lazy" /></span> Chabad on Campus Florida</a>
       <p>A statewide network of Chabad on Campus centers welcoming Jewish students at universities and colleges across Florida, part of <a href={SITE.parent.url} rel="noopener">Chabad on Campus International</a>.</p>
-      <a class="btn btn-gold" href="/campuses/">Find Chabad at your school</a>
+      <a class="btn btn-gold" href="/campuses/"><Icon name="MapPin" size={18} /> Find Chabad at your school</a>
     </div>
     <nav aria-label="Florida campuses">
       <h2>Chabad at Florida campuses</h2>
@@ -35,25 +37,27 @@ const sorted = [...centers].sort((a, b) => a.primaryCampus.name.localeCompare(b.
       </ul>
     </nav>
   </div>
-  <div class="wrap legal">
+  <div class="wrap"><div class="legal">
     <span>&copy; {year} Chabad on Campus Florida</span>
     <span>Directory data provided by <a href="https://chabadoncampus.org/" rel="noopener">Chabad on Campus International</a> and refreshed daily.</span>
-  </div>
+  </div></div>
 </footer>
 
 <style>
-  .site-footer { background: var(--night); color: #b9bab4; font-size: 0.93rem; padding-top: 64px; }
-  .site-footer a { color: #d9dad4; text-decoration: none; }
+  .site-footer { background: var(--blue-night); color: #b8cddd; font-size: 0.93rem; padding-top: clamp(64px, 8vw, 96px); position: relative; overflow: hidden; }
+  .wm { position: absolute; right: -40px; bottom: -40px; width: 360px; height: auto; opacity: 0.05; pointer-events: none; }
+  .mk { width: 38px; height: 38px; background: var(--blue); display: grid; place-items: center; }
+  .site-footer a { color: #e3eff8; text-decoration: none; }
   .site-footer a:hover { color: var(--gold); text-decoration: underline; }
   .site-footer .btn-gold { color: var(--ink); margin-top: 8px; }
   .site-footer .btn-gold:hover { color: var(--ink); text-decoration: none; }
   .cols { display: grid; gap: 40px; grid-template-columns: 1.3fr 1fr 1fr 1fr; }
   @media (max-width: 1000px) { .cols { grid-template-columns: 1fr 1fr; } }
-  @media (max-width: 560px) { .cols { grid-template-columns: 1fr; } }
+  @media (max-width: 560px) { .cols { grid-template-columns: minmax(0, 1fr); } }
   .brand { display: inline-flex; align-items: center; gap: 10px; color: #fff; font-weight: 800; font-size: 1.05rem; margin-bottom: 14px; }
   h2 { color: #fff; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 14px; }
   ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
   .about p { line-height: 1.7; max-width: 38ch; }
-  .legal { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; margin-top: 48px; padding-top: 22px; padding-bottom: 28px; border-top: 1px solid rgba(255, 255, 255, 0.1); font-size: 0.84rem; color: #8a8c86; }
-  .legal a { color: #b9bab4; text-decoration: underline; }
+  .legal { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; margin-top: 48px; padding-top: 22px; padding-bottom: 28px; border-top: 1px solid rgba(255, 255, 255, 0.1); font-size: 0.84rem; color: #8fb0c7; }
+  .legal a { color: #b8cddd; text-decoration: underline; }
 </style>

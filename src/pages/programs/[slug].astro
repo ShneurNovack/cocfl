@@ -1,12 +1,12 @@
 ---
 import Base from '../../layouts/Base.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
-import CenterCard from '../../components/CenterCard.astro';
 import ProgramCard from '../../components/ProgramCard.astro';
+import SchoolSearch from '../../components/SchoolSearch.astro';
 import Faq from '../../components/Faq.astro';
+import Icon from '../../components/Icon.astro';
 import CtaBand from '../../components/CtaBand.astro';
 import { programs, programBySlug, type Program } from '../../data/programs';
-import { centers, programCenterIds } from '../../lib/centers';
 import { SITE, img } from '../../lib/site';
 
 export function getStaticPaths() {
@@ -14,8 +14,6 @@ export function getStaticPaths() {
 }
 interface Props { program: Program }
 const { program: p } = Astro.props;
-const { ids, all } = programCenterIds(p, centers.map((c) => c.id));
-const offered = centers.filter((c) => ids.includes(c.id)).sort((a, b) => a.primaryCampus.name.localeCompare(b.primaryCampus.name));
 const related = p.related.map((s) => programBySlug[s]).filter(Boolean);
 const hero = img(p.image);
 const crumbs = [
@@ -34,39 +32,43 @@ const ld = [
     primaryImageOfPage: { '@type': 'ImageObject', url: `${SITE.url}${hero.src}` },
   },
 ];
+const glance = [
+  { icon: 'Users', title: "Who it's for", text: p.audience },
+  { icon: 'CalendarDays', title: 'Format', text: p.format },
+  { icon: 'Tag', title: 'Cost', text: p.cost },
+];
 ---
 <Base title={p.metaTitle} description={p.metaDescription} path={`/programs/${p.slug}/`} breadcrumbs={crumbs} jsonLd={ld} ogImage={hero.src}>
-  <section class="page-hero band-blue phero">
-    <div class="wrap hero-grid">
-      <div>
+  <section class="phero">
+    <div class="ptext band-blue">
+      <div class="pin">
         <Breadcrumbs items={crumbs} />
-        <span class="eyebrow">{p.category}</span>
+        {p.logo && <img class="plogo" src={p.logo} alt={`${p.name} logo`} width="180" height="90" />}
         <h1>{p.name}</h1>
         <p class="lead">{p.tagline}</p>
-        <div class="btn-row">
-          <a class="btn btn-gold" href="#offered-at">Where it's offered in Florida</a>
-          {p.officialLinks[0] && <a class="btn btn-ghost" href={p.officialLinks[0].href} rel="noopener">{p.officialLinks[0].label}</a>}
+      </div>
+    </div>
+    <div class="pmedia">
+      <img src={hero.src} srcset={hero.srcset} sizes="(max-width: 960px) 100vw, 55vw" width={hero.width} height={hero.height} alt={p.imageAlt} fetchpriority="high" decoding="async" />
+    </div>
+  </section>
+
+  <section class="glance band-gold">
+    <div class="wrap gg">
+      {glance.map((g) => (
+        <div>
+          <Icon name={g.icon} size={28} />
+          <h2>{g.title}</h2>
+          <p>{g.text}</p>
         </div>
-      </div>
-      <div class="photo hero-photo">
-        <img src={hero.src} srcset={hero.srcset} sizes="(max-width: 900px) 100vw, 520px" width={hero.width} height={hero.height} alt={p.imageAlt} fetchpriority="high" decoding="async" />
-      </div>
+      ))}
     </div>
   </section>
 
-  <section class="section-tight glance-wrap">
-    <div class="wrap glance">
-      <div><h2>Who it's for</h2><p>{p.audience}</p></div>
-      <div><h2>Format</h2><p>{p.format}</p></div>
-      <div><h2>Cost</h2><p>{p.cost}</p></div>
-    </div>
-  </section>
-
-  <section class="section-tight">
+  <section class="section">
     <div class="wrap body">
       <div class="prose">
-        {p.logo && <img class="plogo" src={p.logo} alt={`${p.name} logo`} width="180" height="90" loading="lazy" />}
-        {p.intro.map((t) => <p class="lead-p">{t}</p>)}
+        {p.intro.map((t, i) => <p class:list={[i === 0 && 'lead']}>{t}</p>)}
         {p.sections.map((s) => (
           <>
             <h2>{s.h2}</h2>
@@ -75,56 +77,64 @@ const ld = [
           </>
         ))}
       </div>
-    </div>
-  </section>
-
-  <section class="section band-cream" id="offered-at">
-    <div class="wrap">
-      <span class="eyebrow">Offered at</span>
-      <h2>{p.shortName} at Florida colleges</h2>
-      <p class="lead narrow">{p.offeredAtNote}</p>
-      {offered.length > 0 ? (
-        <div class="grid grid-3">
-          {offered.map((c) => <CenterCard center={c} compact />)}
-        </div>
-      ) : (
-        <p>Contact your campus Chabad House to ask about {p.shortName}.</p>
-      )}
-      {!all && <p class="small muted note">Don't see your school? <a href="/campuses/">Find your Chabad House</a> and ask whether {p.shortName} is coming to your campus.</p>}
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="wrap narrow">
-      <h2>{p.shortName} FAQs</h2>
-      <Faq items={p.faqs} open />
-      {p.officialLinks.length > 0 && (
-        <p class="links">Official information: {p.officialLinks.map((l, i) => <>{i > 0 && ' · '}<a href={l.href} rel="noopener">{l.label}</a></>)}</p>
-      )}
+      <aside class="join">
+        <span class="bubble lg gold"><Icon name="MapPin" size={30} /></span>
+        <h2>Join through your Chabad House</h2>
+        <p>Your campus rabbi and rebbetzin can tell you when {p.shortName} runs next and help you sign up.</p>
+        <SchoolSearch id="prog-search" size="md" label="Find your Chabad House" />
+        {p.officialLinks.length > 0 && (
+          <ul class="ext">
+            {p.officialLinks.map((l) => <li><a href={l.href} rel="noopener">{l.label} <Icon name="ArrowUpRight" size={18} /></a></li>)}
+          </ul>
+        )}
+      </aside>
     </div>
   </section>
 
   <section class="section band-cream">
+    <div class="wrap narrow">
+      <h2 class="fh">Questions about {p.shortName}</h2>
+      <Faq items={p.faqs} open />
+    </div>
+  </section>
+
+  <section class="section">
     <div class="wrap">
-      <h2>Related programs</h2>
+      <h2 class="fh">More ways to get involved</h2>
       <div class="grid grid-3">{related.map((r) => <ProgramCard program={r} />)}</div>
     </div>
   </section>
 
-  <CtaBand title={`Interested in ${p.shortName}?`} text="Your campus Chabad House is the place to start. Find yours and reach out to the rabbi and rebbetzin." />
+  <CtaBand title={`Interested in ${p.shortName}?`} text="Find your campus and reach out to your rabbi and rebbetzin." />
 </Base>
 
 <style>
-  .hero-grid { display: grid; grid-template-columns: 1fr minmax(0, 520px); gap: clamp(28px, 5vw, 56px); align-items: center; }
-  @media (max-width: 900px) { .hero-grid { grid-template-columns: 1fr; } }
-  .hero-photo { aspect-ratio: 3 / 2; box-shadow: 0 18px 48px rgba(0, 0, 0, 0.25); }
-  .phero .lead { margin-bottom: 26px; }
-  .glance-wrap { border-bottom: 1px solid var(--line); }
-  .glance { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 28px; }
-  .glance h2 { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--blue); margin-bottom: 6px; }
-  .glance p { margin: 0; color: var(--ink-2); }
-  .plogo { width: auto; height: 64px; margin-bottom: 24px; }
-  .lead-p { font-size: 1.12rem; color: var(--ink-2); }
-  .note { margin-top: 18px; }
-  .links { margin-top: 20px; color: var(--muted); }
+  .phero { display: grid; grid-template-columns: minmax(0, 45fr) minmax(0, 55fr); min-height: clamp(460px, 68vh, 660px); }
+  @media (max-width: 960px) { .phero { grid-template-columns: minmax(0, 1fr); } }
+  .ptext { display: flex; align-items: center; padding: clamp(48px, 7vw, 96px) var(--gutter); }
+  .pin { max-width: 540px; margin-left: auto; width: 100%; }
+  @media (max-width: 960px) { .pin { margin: 0; } }
+  .plogo { height: 72px; width: auto; margin-bottom: 28px; background: #fff; padding: 10px; }
+  .ptext h1 { margin-bottom: 20px; }
+  .ptext .lead { margin: 0; max-width: 34ch; }
+  .pmedia { position: relative; min-height: 320px; background: var(--blue-night); }
+  .pmedia img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+  .glance { padding: clamp(48px, 6vw, 72px) 0; }
+  .gg { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(28px, 4vw, 64px); }
+  @media (max-width: 800px) { .gg { grid-template-columns: minmax(0, 1fr); } }
+  .gg h2 { font-size: 1.15rem; margin: 14px 0 6px; }
+  .gg p { margin: 0; color: var(--ink-2); }
+
+  .body { display: grid; grid-template-columns: minmax(0, 1fr) 380px; gap: clamp(48px, 7vw, 112px); align-items: start; }
+  @media (max-width: 1000px) { .body { grid-template-columns: minmax(0, 1fr); } }
+  .prose > .lead { font-size: 1.3rem; color: var(--ink); }
+  .join { position: sticky; top: 110px; background: var(--blue-wash); padding: 32px; display: grid; gap: 16px; }
+  .join h2 { font-size: 1.5rem; margin: 8px 0 0; }
+  .join p { margin: 0; color: var(--ink-2); }
+  .join :global(.ss-field) { border-color: var(--ink); }
+  .join :global(.ss .btn) { padding: 0 16px; }
+  .ext { list-style: none; padding: 0; margin: 8px 0 0; display: grid; gap: 6px; }
+  .ext a { display: inline-flex; align-items: center; gap: 6px; font-weight: 700; text-decoration: none; }
+  .fh { margin-bottom: 36px; }
 </style>
