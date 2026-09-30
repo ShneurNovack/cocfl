@@ -43,8 +43,6 @@ export type CampusInfo = {
   residency: string | null;
   undergrad: number | null;
   grad: number | null;
-  jewishUndergrad: number | null;
-  jewishGrad: number | null;
   levels: string[];
   studentLife: string[];
 };
@@ -199,8 +197,6 @@ function build(): Center[] {
             residency: cp.residency && cp.residency !== 'Unknown' ? cp.residency : null,
             undergrad: cp.undergrad || null,
             grad: cp.grad || null,
-            jewishUndergrad: cp.jewishUndergrad || null,
-            jewishGrad: cp.jewishGrad || null,
             levels: cp.programLevels || [],
             studentLife: (cp.studentLife || []).filter((x: any) => AMENITY_LABELS[x.name]).map((x: any) => AMENITY_LABELS[x.name]),
           },

@@ -263,8 +263,6 @@ qa.push({
               inf.levels.length > 0 && { icon: 'GraduationCap', k: 'Degrees', v: inf.levels.map((l) => (l === 'Grad' ? 'Graduate' : 'Undergraduate')).sort().reverse().join(' & ') },
               inf.undergrad && { icon: 'Users', k: 'Undergraduates', v: inf.undergrad.toLocaleString('en-US') },
               inf.grad && { icon: 'Users', k: 'Graduate students', v: inf.grad.toLocaleString('en-US') },
-              inf.jewishUndergrad && { icon: 'Star', k: 'Jewish undergraduates', v: `About ${inf.jewishUndergrad.toLocaleString('en-US')}` },
-              inf.jewishGrad && { icon: 'Star', k: 'Jewish graduate students', v: `About ${inf.jewishGrad.toLocaleString('en-US')}` },
               dt && { icon: 'Navigation', k: 'Chabad House', v: dt.charAt(0).toUpperCase() + dt.slice(1) },
             ].filter(Boolean) as { icon: string; k: string; v: string }[] : [];
             return (
