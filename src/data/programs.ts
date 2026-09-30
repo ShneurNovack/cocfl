@@ -341,8 +341,8 @@ export const programs: Program[] = [
     metaDescription:
       'Living Links is a Chabad on Campus heritage trip to Poland exploring Jewish history, the Holocaust and the rebirth of Jewish life. Open to Florida college students.',
     logo: '/images/logo-living-links.webp',
-    image: 'fl-trip',
-    imageAlt: 'Students from Chabad at UNF on a trip, waving from a hilltop',
+    image: 'fl-trip2',
+    imageAlt: 'Students from Chabad at FGCU together on a trip',
     audience: 'Jewish college students ready for a meaningful and emotionally significant journey.',
     format: 'A group trip during winter or spring break, led by Chabad on Campus educators.',
     cost: 'Varies by season and is typically subsidized. Your Chabad House will share current details.',

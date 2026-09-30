@@ -13,7 +13,7 @@ import { SITE, TESTIMONIALS, img } from '../lib/site';
 
 const path = '/support/';
 const crumbs = [{ name: 'Support', href: path }];
-const hero = img('fl-support');
+const hero = img('fl-table');
 const story = TESTIMONIALS.find((t) => t.center === 'unf') || TESTIMONIALS[0];
 const storyImg = img('fl-story');
 
@@ -63,7 +63,7 @@ const ld = [
         </div>
       </div>
     </div>
-    <div class="smedia"><img src={hero.src} srcset={hero.srcset} sizes="(max-width: 960px) 100vw, 50vw" width={hero.width} height={hero.height} alt="FSU students around the Shabbat table at the Chabad House" fetchpriority="high" /></div>
+    <div class="smedia"><img src={hero.src} srcset={hero.srcset} sizes="(max-width: 960px) 100vw, 50vw" width={hero.width} height={hero.height} alt="Students around a long Shabbat table at Chabad at the University of Miami" fetchpriority="high" /></div>
   </section>
 
   <section class="trust">
