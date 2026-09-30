@@ -46,7 +46,7 @@ export const programs: Program[] = [
     metaDescription:
       'The Florida Pegisha brings Jewish college students from campuses across Florida together for one Shabbat weekend of food, music, learning and friendship. Register through your Chabad House.',
     logo: '/images/logo-pegisha.webp',
-    image: 'florida-pegisha-students',
+    image: 'fp-group',
     imageAlt: 'Florida college students in matching Florida Pegisha shirts at the statewide Shabbaton',
     audience: 'Jewish students at any Florida college, from every background.',
     format: 'A statewide Shabbat weekend, Friday through Sunday.',

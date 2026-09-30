@@ -23,7 +23,7 @@ const slides = [
   { key: 'shabbat-candles', alt: 'Students lighting Shabbat candles together' },
   { key: 'pizza-friends', alt: 'Friends sharing pizza at a Chabad on Campus event' },
 ].map((s) => ({ ...s, ...img(s.key) }));
-const fp = img('florida-pegisha-students');
+const fp = img('fp-havdalah-candle');
 
 const tabs = [
   { id: 'shabbat', icon: 'Flame', label: 'Shabbat', title: 'Friday night, there is a seat for you', text: 'Candles, challah, a home-cooked dinner and a table full of friends. You never need an invitation.', image: 'shabbat-candles', alt: 'Students lighting Shabbat candles together', href: '/jewish-life-on-campus/shabbat/', link: 'Shabbat on campus' },
@@ -96,7 +96,7 @@ const values = [
   </section>
 
   <section class="fp">
-    <div class="fp-media"><img src={fp.src} srcset={fp.srcset} sizes="(max-width: 960px) 100vw, 55vw" width={fp.width} height={fp.height} alt="Florida college students in matching shirts at the Florida Pegisha Shabbaton" loading="lazy" decoding="async" /></div>
+    <div class="fp-media"><img src={fp.src} srcset={fp.srcset} sizes="(max-width: 960px) 100vw, 55vw" width={fp.width} height={fp.height} alt="A student holding a lit Havdalah candle at the Florida Pegisha" loading="lazy" decoding="async" /></div>
     <div class="fp-text band-night">
       <div class="fp-in reveal">
         <h2>Florida Pegisha</h2>
