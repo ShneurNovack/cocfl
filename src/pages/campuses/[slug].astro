@@ -1,0 +1,379 @@
+---
+import Base from '../../layouts/Base.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import CenterLogo from '../../components/CenterLogo.astro';
+import CenterCard from '../../components/CenterCard.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { centers, nearbyCenters, withThe, distanceText, formatNumber, stateAbbr, KOSHER_KEYS, type Center } from '../../lib/centers';
+import { SITE } from '../../lib/site';
+
+export function getStaticPaths() {
+  return centers.map((c) => ({ params: { slug: c.slug }, props: { center: c } }));
+}
+interface Props { center: Center }
+const { center: c } = Astro.props;
+
+const P = c.primaryCampus;
+const pName = P.name;
+const pThe = withThe(pName);
+const abbr = P.abbr;
+const short = abbr || pName;
+const others = c.otherCampuses;
+const nearby = nearbyCenters(c, 3);
+const sameSchool = centers.filter((x) => x.id !== c.id && (x.primaryCampus.name.startsWith(pName.split(' (')[0]) || pName.startsWith(x.primaryCampus.name.split(' (')[0])));
+const dist = distanceText(P.distance);
+const cityState = `${c.city}, ${stateAbbr(c.address?.state ?? null)}`;
+const addressLine = c.address ? [c.address.street, c.address.city, [stateAbbr(c.address.state), c.address.zip].filter(Boolean).join(' ')].filter(Boolean).join(', ') : null;
+const mapsUrl = addressLine ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${c.officialName}, ${addressLine}`)}` : null;
+const telHref = c.phone ? `tel:+1${c.phone.replace(/\D/g, '').replace(/^1/, '')}` : null;
+
+const byChabad = c.amenities.filter((a) => a.byChabad);
+const onCampusOnly = c.amenities.filter((a) => !a.byChabad && a.onCampus);
+const kosher = c.amenities.filter((a) => KOSHER_KEYS.includes(a.key));
+const hasServices = c.amenities.some((a) => a.key === 'Shabbat and holidays minyan');
+const confirmedPrograms = c.programs.filter((p) => p.confirmed);
+const networkPrograms = c.programs.filter((p) => !p.confirmed);
+const socialLabel: Record<string, string> = { Facebook: 'Facebook', Instagram: 'Instagram', Twitter: 'X (Twitter)', TikTok: 'TikTok', YouTube: 'YouTube', LinkedIn: 'LinkedIn' };
+
+const campusList = (list: typeof c.campuses) => {
+  const names = list.map((x) => withThe(x.name));
+  return names.length <= 1 ? names.join('') : `${names.slice(0, -1).join(', ')} and ${names[names.length - 1]}`;
+};
+
+// ---- SEO ----
+const title = c.seoTitle ? c.seoTitle : abbr ? `Chabad at ${abbr} | Jewish Life at ${pThe}` : `Chabad at ${pThe} | Jewish Student Life & Shabbat`;
+const descBits = [
+  `Chabad at ${pThe}${abbr ? ` (${abbr})` : ''} in ${c.city}:`,
+  'Shabbat dinners, Jewish holidays',
+  kosher.length ? ', kosher food' : '',
+  ' and classes for Jewish students.',
+  c.directorsLine ? ` Meet ${c.directorsLine.split(',')[0]}.` : '',
+];
+let description = descBits.join('').replace(' ,', ',');
+if (others.length && description.length < 130) description += ` Also serving ${others.map((o) => o.abbr || o.name).join(', ')}.`;
+if (description.length > 165) description = description.slice(0, 162).replace(/\s+\S*$/, '') + '...';
+
+const orgLd: any = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  '@id': `${SITE.url}${c.url}#center`,
+  name: c.officialName,
+  alternateName: [`Chabad at ${pName}`, ...(abbr ? [`${abbr} Chabad`, `Chabad at ${abbr}`] : [])],
+  url: c.website || `${SITE.url}${c.url}`,
+  description: `Chabad on Campus center serving Jewish students at ${campusList(c.campuses)}.`,
+  ...(c.logo ? { logo: `${SITE.url}${c.logo.src}` } : {}),
+  ...(c.image ? { image: `${SITE.url}${c.image.src}` } : {}),
+  ...(c.phone ? { telephone: c.phone } : {}),
+  ...(c.email ? { email: c.email } : {}),
+  ...(c.address ? { address: { '@type': 'PostalAddress', streetAddress: c.address.street, addressLocality: c.address.city, addressRegion: 'FL', postalCode: c.address.zip, addressCountry: 'US' } } : {}),
+  ...(c.location ? { location: { '@type': 'Place', name: c.officialName, geo: { '@type': 'GeoCoordinates', latitude: c.location.lat, longitude: c.location.lng }, ...(c.address ? { address: { '@type': 'PostalAddress', streetAddress: c.address.street, addressLocality: c.address.city, addressRegion: 'FL', postalCode: c.address.zip, addressCountry: 'US' } } : {}) } } : {}),
+  areaServed: c.campuses.map((x) => ({ '@type': 'CollegeOrUniversity', name: x.name, ...(x.website ? { url: x.website } : {}) })),
+  ...(c.staff.length ? { employee: c.staff.map((s) => ({ '@type': 'Person', name: s.name, ...(s.title ? { honorificPrefix: s.title } : {}), ...(s.role ? { jobTitle: s.role } : {}) })) } : {}),
+  sameAs: [c.website, ...c.social.map((s) => s.url)].filter(Boolean),
+  parentOrganization: { '@type': 'Organization', name: SITE.parent.name, url: SITE.parent.url },
+  memberOf: { '@id': `${SITE.url}/#organization` },
+};
+const pageLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: title,
+  url: `${SITE.url}${c.url}`,
+  about: { '@id': `${SITE.url}${c.url}#center` },
+  isPartOf: { '@id': `${SITE.url}/#website` },
+  ...(c.updatedAt ? { dateModified: c.updatedAt } : {}),
+};
+const crumbs = [
+  { name: 'Find Your Campus', href: '/campuses/' },
+  { name: `Chabad at ${short}`, href: c.url },
+];
+
+// ---- Q&A (unique per center, rendered as content, not FAQ schema) ----
+const qa: { q: string; a: string }[] = [];
+qa.push({
+  q: `Is there a Chabad at ${pThe}?`,
+  a: `Yes. ${c.officialName} is the Chabad on Campus center for Jewish students at ${pThe}${others.length ? `, and it also serves ${campusList(others)}` : ''}.${c.directorsLine ? ` It is led by ${c.directorsLine}.` : ''}`,
+});
+if (addressLine) qa.push({ q: `Where is Chabad at ${short} located?`, a: `${c.officialName} is at ${addressLine}${dist ? `, ${dist}` : ''}.` });
+qa.push({
+  q: `Where can I go for Shabbat at ${short}?`,
+  a: `${c.officialName} hosts Shabbat dinners for students${hasServices ? ' and runs Shabbat and holiday services' : ''}. Every Jewish student is welcome, whatever your background. Reach out to the Chabad House to find out this week's plans${c.website ? ' or check their website' : ''}.`,
+});
+if (kosher.length) {
+  qa.push({
+    q: `Is there kosher food at ${short}?`,
+    a: `Yes. Kosher options for ${short} students include ${kosher.map((k) => k.label.charAt(0).toLowerCase() + k.label.slice(1)).join(', ')}. Ask ${c.officialName} for current details and schedules.`,
+  });
+} else {
+  qa.push({ q: `Is there kosher food at ${short}?`, a: `Kosher options change from year to year. ${c.officialName} is the best place to ask about kosher meals, Shabbat food and Passover arrangements near ${pThe}.` });
+}
+if (others.length) qa.push({ q: `Which other schools does ${c.officialName} serve?`, a: `Besides ${pThe}, ${c.officialName} welcomes students from ${campusList(others)}.` });
+qa.push({
+  q: `How do I get involved with Chabad at ${short}?`,
+  a: `Just show up to a Shabbat dinner or event, or introduce yourself${c.email ? ` by emailing ${c.email}` : ''}${c.phone ? `${c.email ? ' or' : ''} calling ${c.phone}` : ''}. There is no membership, and you do not need to be observant.`,
+});
+---
+<Base title={title} description={description} path={c.url} jsonLd={[orgLd, pageLd]} breadcrumbs={crumbs} ogImage={c.image?.src || undefined}>
+  <section class="page-hero band-blue chero">
+    <div class="wrap">
+      <Breadcrumbs items={crumbs} />
+      <div class="hero-grid">
+        <div class="hero-text">
+          <div class="id">
+            <CenterLogo center={c} size={76} eager />
+            <p class="official">{c.officialName}<span>{cityState}</span></p>
+          </div>
+          <h1>Chabad at {pThe}</h1>
+          <p class="lead">
+            Your Jewish home at {abbr ? `${abbr}` : pThe}: Shabbat dinners, holidays, learning and friends{others.length ? `, for students at ${campusList(c.campuses)}` : ''}.
+            {c.directorsLine && <> Led by {c.directorsLine}.</>}
+          </p>
+          <div class="btn-row">
+            {c.website && <a class="btn btn-gold" href={c.website} rel="noopener">Visit {c.officialName.length < 34 ? c.officialName : 'their'} website</a>}
+            {telHref && <a class="btn btn-ghost" href={telHref}>Call {c.phone}</a>}
+            {!telHref && c.email && <a class="btn btn-ghost" href={`mailto:${c.email}`}>Email the Chabad House</a>}
+          </div>
+        </div>
+        {c.image && (
+          <div class="hero-photo photo">
+            <img src={c.image.src} srcset={c.image.srcset} sizes="(max-width: 900px) 100vw, 480px" width={c.image.width} height={c.image.height} alt={`${c.officialName} in ${c.city}, Florida`} fetchpriority="high" decoding="async" />
+          </div>
+        )}
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap layout section-tight">
+    <div class="main">
+      <section>
+        <h2>About Chabad at {short}</h2>
+        <p>
+          {c.officialName} is the Chabad on Campus center for Jewish students at {pThe}{others.length ? <>, with students also coming from {campusList(others)}</> : ''}.
+          {c.address ? <> The Chabad House is at {c.address.street} in {c.city}{dist ? <>, {dist}</> : ''}.</> : <> It is based in {c.city}.</>}
+        </p>
+        <p>
+          Like every Chabad on Campus center, it is a home away from home run by a husband and wife team who know students by name. Students come for Friday night Shabbat dinners, celebrate the Jewish holidays together, take classes, travel, and stop by when they need a meal, a quiet place to study or someone to talk to. It is open to every Jewish student, whatever your background, and there is no membership.
+        </p>
+        {P.jewishStudents && (
+          <div class="facts">
+            <div><strong>{formatNumber(P.jewishStudents)}</strong><span>estimated Jewish students at {short}</span></div>
+            {P.undergrad && <div><strong>{formatNumber(P.undergrad)}</strong><span>undergraduates at {short}</span></div>}
+            <div><strong>{c.campuses.length}</strong><span>{c.campuses.length === 1 ? 'campus' : 'campuses'} served</span></div>
+          </div>
+        )}
+        {P.jewishStudents && <p class="small muted">Student population estimates are reported by Chabad on Campus International.</p>}
+        {sameSchool.length > 0 && (
+          <p class="callout">
+            {pThe.replace(/^the/, 'The')} has more than one Chabad on Campus center. Also see {sameSchool.map((s, i) => <>{i > 0 && ', '}<a href={s.url}>{s.officialName}</a></>)}.
+          </p>
+        )}
+      </section>
+
+      {c.staff.length > 0 && (
+        <section>
+          <h2>Meet the rabbi and rebbetzin</h2>
+          <p>Chabad Houses are led by <em>shluchim</em>, emissaries of the Lubavitcher Rebbe who move to campus to build Jewish life for students.</p>
+          <ul class="staff">
+            {c.staff.map((s) => (
+              <li>
+                {s.photo ? <img src={s.photo.src} width={120} height={120} alt={`${s.title ? s.title + ' ' : ''}${s.name}`} loading="lazy" decoding="async" /> : <span class="nophoto" aria-hidden="true">{s.name.split(' ').map((w) => w[0]).slice(0, 2).join('')}</span>}
+                <div><strong>{s.title && /rabbi/i.test(s.title) ? 'Rabbi ' : ''}{s.name}</strong>{s.role && <span>{s.role}</span>}</div>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      <section>
+        <h2>Jewish life at {short}</h2>
+        {c.amenities.length > 0 ? (
+          <>
+            <p>Here is what Jewish students at {pThe} can find through Chabad and on campus, according to Chabad on Campus.</p>
+            <div class="amen">
+              {byChabad.length > 0 && (
+                <div>
+                  <h3>At Chabad</h3>
+                  <ul class="checks">{byChabad.map((a) => <li>{a.label}</li>)}</ul>
+                </div>
+              )}
+              {onCampusOnly.length > 0 && (
+                <div>
+                  <h3>On or near campus</h3>
+                  <ul class="checks">{onCampusOnly.map((a) => <li>{a.label}</li>)}</ul>
+                </div>
+              )}
+              {c.groups.length > 0 && (
+                <div>
+                  <h3>Student groups</h3>
+                  <ul class="checks">{c.groups.map((g) => <li>{g}</li>)}</ul>
+                </div>
+              )}
+            </div>
+          </>
+        ) : (
+          <p>{c.officialName} hosts Shabbat dinners, celebrates every Jewish holiday with students and offers classes and one-on-one learning. Contact the Chabad House for this semester's schedule, kosher food options and upcoming events.</p>
+        )}
+        <p class="more">
+          Learn more: <a href="/jewish-life-on-campus/shabbat/">Shabbat on campus</a> &middot; <a href="/jewish-life-on-campus/jewish-holidays/">Jewish holidays in college</a> &middot; <a href="/jewish-life-on-campus/kosher-food/">Kosher food at Florida colleges</a>
+        </p>
+      </section>
+
+      <section>
+        <h2>Programs at Chabad at {short}</h2>
+        {confirmedPrograms.length > 0 && (
+          <ul class="progs">
+            {confirmedPrograms.map(({ program: p }) => (
+              <li>
+                <a href={`/programs/${p.slug}/`}><strong>{p.name}</strong></a>
+                <span>{p.tagline}{p.slug === 'jewishu' && c.jewishU && c.jewishU.courses > 0 ? ` ${c.officialName} has offered ${c.jewishU.courses} JewishU ${c.jewishU.courses === 1 ? 'course' : 'courses'}.` : ''}</span>
+              </li>
+            ))}
+          </ul>
+        )}
+        <p>{confirmedPrograms.length ? 'Students here can also join' : 'Students here can join'} Chabad on Campus opportunities open to every Florida center:</p>
+        <ul class="progs compact">
+          {networkPrograms.map(({ program: p }) => <li><a href={`/programs/${p.slug}/`}><strong>{p.name}</strong></a><span>{p.tagline}</span></li>)}
+        </ul>
+        {c.jewishU && <p class="small"><a href={c.jewishU.locationUrl} rel="noopener">See current JewishU courses at {c.officialName}</a></p>}
+      </section>
+
+      <section>
+        <h2>{c.campuses.length > 1 ? `Campuses served by ${c.officialName}` : `Campus served`}</h2>
+        <div class="campuses">
+          {c.campuses.map((x) => (
+            <div class="campus" id={x.anchor}>
+              <h3>{x.name}{x.abbr && <span> ({x.abbr})</span>}</h3>
+              <p>
+                {x.primary ? <>Primary campus of {c.officialName}{distanceText(x.distance) ? <>, {distanceText(x.distance)}</> : ''}.</> : <>Students at {withThe(x.name)} are welcome at {c.officialName}{distanceText(x.distance, x.abbr || 'their campus') ? <>, {distanceText(x.distance, x.abbr || 'their campus')}</> : ''}.</>}
+                {x.jewishStudents && !x.primary && <> An estimated {formatNumber(x.jewishStudents)} Jewish students attend.</>}
+              </p>
+              {x.website && <a href={x.website} rel="noopener nofollow" class="small">{x.name} website</a>}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section>
+        <h2>Questions about Chabad at {short}</h2>
+        <div class="qa">
+          {qa.map((item) => (
+            <div>
+              <h3>{item.q}</h3>
+              <p>{item.a}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+
+    <aside class="side" aria-label="Contact information">
+      <div class="card contact">
+        <h2>Contact {c.officialName}</h2>
+        <dl>
+          {addressLine && <><dt>Address</dt><dd>{addressLine}{mapsUrl && <><br /><a href={mapsUrl} rel="noopener">Get directions</a></>}</dd></>}
+          {c.phone && <><dt>Phone</dt><dd><a href={telHref}>{c.phone}</a></dd></>}
+          {c.email && <><dt>Email</dt><dd><a href={`mailto:${c.email}`}>{c.email}</a></dd></>}
+          {c.website && <><dt>Website</dt><dd><a href={c.website} rel="noopener">{c.website.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')}</a></dd></>}
+          {!addressLine && <><dt>City</dt><dd>{cityState}</dd></>}
+        </dl>
+        {c.social.length > 0 && (
+          <div class="social">
+            {c.social.map((s) => <a href={s.url} rel="noopener" class="pill pill-line">{socialLabel[s.type] || s.type}</a>)}
+          </div>
+        )}
+        {c.donateUrl && <a class="btn btn-blue donate" href={c.donateUrl} rel="noopener">Support {c.officialName}</a>}
+      </div>
+      <div class="card served">
+        <h2>Serving</h2>
+        <ul>
+          {c.campuses.map((x) => <li><a href={`#${x.anchor}`}>{x.name}</a></li>)}
+        </ul>
+      </div>
+      {!c.hasApi && <p class="small muted note">Details for this center are maintained by Chabad on Campus Florida.</p>}
+      {c.updatedAt && <p class="small muted note">Directory details from Chabad on Campus International, checked daily.</p>}
+    </aside>
+  </div>
+
+  <section class="section band-cream">
+    <div class="wrap">
+      <h2>Chabad centers near {short}</h2>
+      <div class="grid grid-3">
+        {nearby.map((n) => <CenterCard center={n} compact headingLevel="h3" />)}
+      </div>
+      <p class="all"><a href="/campuses/">See every Chabad on Campus center in Florida</a> &middot; <a href="/jewish-life-on-campus/florida/">Jewish life at Florida colleges</a></p>
+    </div>
+  </section>
+
+  <CtaBand
+    title={`Heading to ${short}?`}
+    text={`Introduce yourself to ${c.officialName} before you arrive, and your first Shabbat dinner is already planned.`}
+    primary={c.website ? { href: c.website, label: `Connect with Chabad at ${short}` } : { href: '/campuses/', label: 'Find your campus' }}
+    secondary={{ href: '/parents/', label: 'Information for parents' }}
+  />
+</Base>
+
+<style>
+  .chero { padding-bottom: clamp(40px, 6vw, 72px); }
+  .hero-grid { display: grid; grid-template-columns: 1fr minmax(0, 440px); gap: clamp(28px, 5vw, 56px); align-items: center; }
+  @media (max-width: 900px) { .hero-grid { grid-template-columns: 1fr; } }
+  .id { display: flex; align-items: center; gap: 16px; margin-bottom: 18px; }
+  .official { margin: 0; font-weight: 700; font-size: 1.05rem; line-height: 1.3; }
+  .official span { display: block; font-weight: 500; color: #cfe2f0; font-size: 0.92rem; }
+  .chero h1 { max-width: 18ch; }
+  .chero .lead { max-width: 58ch; margin-bottom: 26px; }
+  .hero-photo { aspect-ratio: 4 / 3; box-shadow: 0 18px 48px rgba(0, 0, 0, 0.25); }
+
+  .layout { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: clamp(32px, 5vw, 64px); align-items: start; }
+  @media (max-width: 980px) { .layout { grid-template-columns: 1fr; } .side { order: -1; } }
+  .main > section { padding: clamp(28px, 4vw, 40px) 0; border-bottom: 1px solid var(--line); }
+  .main > section:last-child { border-bottom: 0; }
+  .main p { max-width: 70ch; }
+
+  .facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin: 24px 0 10px; }
+  .facts div { background: var(--blue-wash); padding: 18px; border-radius: var(--radius); }
+  .facts strong { display: block; font-size: 1.9rem; font-weight: 900; color: var(--blue-ink); line-height: 1; letter-spacing: -0.02em; }
+  .facts span { display: block; margin-top: 6px; font-size: 0.88rem; color: var(--ink-2); line-height: 1.35; }
+
+  .staff { list-style: none; padding: 0; margin: 20px 0 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+  .staff li { display: flex; gap: 14px; align-items: center; }
+  .staff img, .nophoto { width: 72px; height: 72px; border-radius: 50%; object-fit: cover; flex-shrink: 0; background: var(--cream); }
+  .nophoto { display: inline-flex; align-items: center; justify-content: center; font-weight: 800; color: var(--blue); background: var(--blue-wash); }
+  .staff strong { display: block; line-height: 1.3; }
+  .staff span { font-size: 0.88rem; color: var(--muted); }
+
+  .amen { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin: 18px 0; }
+  .amen h3 { font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 10px; }
+  .checks { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+  .checks li { position: relative; padding-left: 26px; line-height: 1.4; }
+  .checks li::before { content: ''; position: absolute; left: 0; top: 3px; width: 16px; height: 16px; border-radius: 50%; background: var(--gold) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 8.5l2.5 2.5L12 5.5' fill='none' stroke='%231f2320' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 14px no-repeat; }
+  .more { font-size: 0.93rem; color: var(--muted); }
+
+  .progs { list-style: none; padding: 0; margin: 16px 0 20px; display: grid; gap: 10px; }
+  .progs li { display: flex; flex-direction: column; gap: 2px; padding: 14px 16px; border: 1px solid var(--line); border-radius: var(--radius); }
+  .progs a { text-decoration: none; }
+  .progs span { color: var(--ink-2); font-size: 0.95rem; }
+  .progs.compact li { padding: 10px 14px; background: var(--cream-2); }
+
+  .campuses { display: grid; gap: 14px; margin-top: 16px; }
+  .campus { padding: 16px 18px; border-left: 3px solid var(--blue); background: var(--cream-2); border-radius: 0 var(--radius) var(--radius) 0; scroll-margin-top: 96px; }
+  .campus:target { border-left-color: var(--gold); background: var(--gold-soft); }
+  .campus h3 { margin-bottom: 4px; }
+  .campus h3 span { color: var(--muted); font-weight: 600; }
+  .campus p { margin: 0 0 4px; }
+
+  .qa { display: grid; gap: 18px; margin-top: 12px; }
+  .qa h3 { margin-bottom: 4px; font-size: 1.08rem; }
+  .qa p { margin: 0; color: var(--ink-2); }
+
+  .side { position: sticky; top: 96px; display: grid; gap: 16px; padding-top: clamp(28px, 4vw, 40px); }
+  @media (max-width: 980px) { .side { position: static; } }
+  .side h2 { font-size: 1.1rem; margin-bottom: 4px; }
+  dl { margin: 0; display: grid; gap: 2px; }
+  dt { font-size: 0.76rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-top: 10px; }
+  dd { margin: 0; overflow-wrap: anywhere; }
+  .social { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+  .social a { text-decoration: none; }
+  .donate { margin-top: 12px; }
+  .served ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; }
+  .note { margin: 0; }
+  .all { margin-top: 22px; font-weight: 600; }
+</style>

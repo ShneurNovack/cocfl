@@ -1,0 +1,94 @@
+{
+  "houseId": 339,
+  "center": "rollins",
+  "hash": "3c3330019d2cae30",
+  "updatedAt": "2026-09-29T23:45:15.257Z",
+  "source": "https://api.chabadoncampus.org/api/1.0/ChabadHouses/Public/339",
+  "data": {
+    "houseId": 339,
+    "name": "Chabad Student Center — Winter Park",
+    "cocSlug": "winter-park-jewish-student",
+    "website": "https://winterparkjewishstudent.com/",
+    "donateUrl": "https://winterparkjewishstudent.com/donate",
+    "logo": "https://cocistorage.blob.core.windows.net/prod/house_logo/qrXdbrUnt1L2Q7gajMH2xz.jpg",
+    "image": "https://cocistorage.blob.core.windows.net/prod/house/Qh9tr-RewIA2mxKAtC5El9.jpg",
+    "address": null,
+    "location": null,
+    "phone": "330-861-8770",
+    "email": "rabbi@jewishRollins.com",
+    "region": "USA - South",
+    "timezone": "America/New_York",
+    "staff": [
+      {
+        "title": "Rabbi",
+        "name": "Shmuli Sasonkin",
+        "role": null,
+        "photo": "https://cocistorage.blob.core.windows.net/prod/profile/S3BkTENcwOof6tCnRoLTO4.jpg",
+        "primary": true,
+        "photoLocal": {
+          "src": "/media/coc/96ed16d75e5f3034-staff.webp",
+          "width": 240,
+          "height": 240
+        }
+      },
+      {
+        "title": "Mrs.",
+        "name": "Chayala Sasonkin",
+        "role": null,
+        "photo": "https://cocistorage.blob.core.windows.net/prod/profile/tSwFyXMias6BqHXSQUFwfk.jpg",
+        "primary": true,
+        "photoLocal": {
+          "src": "/media/coc/7953767269de3ef8-staff.webp",
+          "width": 240,
+          "height": 240
+        }
+      }
+    ],
+    "social": [],
+    "campuses": [
+      {
+        "id": 109,
+        "name": "Rollins College",
+        "nickname": "Chabad at Rollins College",
+        "primary": true,
+        "fullTime": true,
+        "distance": "FivePlusMiles",
+        "website": null,
+        "publicInstitution": false,
+        "residency": "Residential",
+        "undergrad": 3500,
+        "grad": 1200,
+        "jewishUndergrad": 350,
+        "jewishGrad": 100,
+        "chabadGroupStatus": "ChabadRecognized",
+        "studentLife": [
+          {
+            "name": "Shabbat and holidays minyan",
+            "providers": [
+              "Chabad"
+            ]
+          },
+          {
+            "name": "Other Jewish student groups",
+            "providers": []
+          }
+        ],
+        "programLevels": [
+          "Grad",
+          "Undergrad"
+        ]
+      }
+    ],
+    "logoLocal": {
+      "src": "/media/coc/6cd8104bd2f8a645-logo.webp",
+      "width": 320,
+      "height": 240
+    },
+    "imageLocal": {
+      "src": "/media/coc/3426944444b5ccd8-w1280.webp",
+      "width": 1280,
+      "height": 960,
+      "srcset": "/media/coc/3426944444b5ccd8-w1280.webp 1280w, /media/coc/3426944444b5ccd8-w640.webp 640w"
+    }
+  }
+}

@@ -1,0 +1,88 @@
+---
+import Base from './Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { GUIDES } from '../data/guides';
+import { SITE, img } from '../lib/site';
+
+interface Props {
+  title: string;
+  metaTitle: string;
+  description: string;
+  path: string;
+  lead: string;
+  image?: string;
+  imageAlt?: string;
+  crumbs: { name: string; href: string }[];
+  jsonLd?: object[];
+  wide?: boolean;
+}
+const { title, metaTitle, description, path, lead, image, imageAlt = '', crumbs, jsonLd = [], wide = false } = Astro.props;
+const hero = image ? img(image) : null;
+const others = GUIDES.filter((g) => g.href !== path);
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  url: `${SITE.url}${path}`,
+  mainEntityOfPage: `${SITE.url}${path}`,
+  author: { '@id': `${SITE.url}/#organization` },
+  publisher: { '@id': `${SITE.url}/#organization` },
+  ...(hero ? { image: `${SITE.url}${hero.src}` } : {}),
+  inLanguage: 'en-US',
+};
+---
+<Base title={metaTitle} description={description} path={path} breadcrumbs={crumbs} jsonLd={[articleLd, ...jsonLd]} ogType="article" ogImage={hero?.src}>
+  <section class="page-hero band-blue">
+    <div class:list={['wrap', hero && 'ghero']}>
+      <div>
+        <Breadcrumbs items={crumbs} />
+        <h1>{title}</h1>
+        <p class="lead">{lead}</p>
+      </div>
+      {hero && (
+        <div class="photo gphoto">
+          <img src={hero.src} srcset={hero.srcset} sizes="(max-width: 900px) 100vw, 480px" width={hero.width} height={hero.height} alt={imageAlt} fetchpriority="high" decoding="async" />
+        </div>
+      )}
+    </div>
+  </section>
+
+  <div class:list={['wrap', 'section-tight', 'gbody', wide && 'is-wide']}>
+    <article class="prose">
+      <slot />
+    </article>
+    {!wide && (
+      <aside class="gside" aria-label="More guides">
+        <div class="card">
+          <h2>Find your Chabad House</h2>
+          <p class="small">Every Chabad on Campus center in Florida, searchable by school.</p>
+          <a class="btn btn-blue" href="/campuses/">Search campuses</a>
+        </div>
+        <nav class="card" aria-label="Jewish life guides">
+          <h2>More guides</h2>
+          <ul>{others.map((g) => <li><a href={g.href}>{g.title}</a></li>)}<li><a href="/parents/">Resources for parents</a></li></ul>
+        </nav>
+      </aside>
+    )}
+  </div>
+  <slot name="after" />
+  <CtaBand />
+</Base>
+
+<style>
+  .ghero { display: grid; grid-template-columns: 1fr minmax(0, 460px); gap: clamp(28px, 5vw, 56px); align-items: center; }
+  @media (max-width: 900px) { .ghero { grid-template-columns: 1fr; } }
+  .gphoto { aspect-ratio: 3 / 2; box-shadow: 0 18px 48px rgba(0, 0, 0, 0.25); }
+  .gbody { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: clamp(32px, 6vw, 80px); align-items: start; }
+  .gbody.is-wide { grid-template-columns: 1fr; }
+  .gbody.is-wide .prose { max-width: none; }
+  @media (max-width: 960px) { .gbody { grid-template-columns: 1fr; } }
+  .gside { position: sticky; top: 96px; display: grid; gap: 16px; padding-top: 24px; }
+  @media (max-width: 960px) { .gside { position: static; } }
+  .gside h2 { font-size: 1.05rem; margin: 0; }
+  .gside p { margin: 0; }
+  .gside ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; font-size: 0.95rem; }
+  .gbody :global(.prose > p:first-child) { font-size: 1.12rem; color: var(--ink-2); }
+</style>

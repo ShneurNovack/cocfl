@@ -1,0 +1,52 @@
+---
+import Guide from '../../layouts/Guide.astro';
+import { programs } from '../../data/programs';
+const path = '/jewish-life-on-campus/resources/';
+---
+<Guide
+  title="Resources for Jewish college students"
+  metaTitle="Resources for Jewish College Students in Florida"
+  description="Resources for Jewish college students: learning programs, Israel trips, travel grants, Shabbat times, support on hard days and what to do if you face antisemitism."
+  path={path}
+  lead="A practical list of the programs, tools and people Jewish students can turn to in college, from learning and travel to support on a hard day."
+  image="sinai-teacher"
+  imageAlt="An educator leading a discussion with Jewish college students"
+  crumbs={[{ name: 'Jewish Life on Campus', href: '/jewish-life-on-campus/' }, { name: 'Resources', href: path }]}
+>
+  <p>Your first and best resource is a person: the rabbi and rebbetzin at your campus Chabad House. They can connect you to almost everything on this page, and they are there when something does not fit neatly into any category. <a href="/campuses/">Find your Chabad House</a>.</p>
+
+  <h2>Learning</h2>
+  <ul>
+    <li><a href="/programs/jewishu/">JewishU</a>: short Jewish courses on campus with credits and incentives.</li>
+    <li><a href="/programs/sinai-scholars/">Sinai Scholars Society</a>: a selective eight-week fellowship with a stipend and a national retreat.</li>
+    <li><a href="/programs/your-israel/">Your Israel</a>: a six-week course on the meaning of Israel beyond the headlines.</li>
+    <li><a href="https://www.chabad.org/" rel="noopener">Chabad.org</a>: thousands of articles, classes and videos on Judaism, plus an Ask the Rabbi service.</li>
+  </ul>
+
+  <h2>Shabbat, holidays and kosher</h2>
+  <ul>
+    <li><a href="https://www.chabad.org/calendar/candlelighting.htm" rel="noopener">Shabbat candle-lighting times</a> for your city.</li>
+    <li><a href="/jewish-life-on-campus/shabbat/">Shabbat on campus</a>, <a href="/jewish-life-on-campus/jewish-holidays/">Jewish holidays in college</a> and <a href="/jewish-life-on-campus/kosher-food/">kosher food at Florida colleges</a>.</li>
+    <li>Most Chabad Houses loan mezuzahs for dorm rooms and apartments and offer holiday care packages. Just ask.</li>
+  </ul>
+
+  <h2>Travel, Israel and Shabbatons</h2>
+  <ul>
+    {programs.filter((p) => p.category !== 'Learning').map((p) => <li><a href={`/programs/${p.slug}/`}>{p.name}</a>: {p.tagline}</li>)}
+  </ul>
+
+  <h2>When things get hard</h2>
+  <p>College is exciting, and it can also be lonely and stressful. Chabad Houses are a place to talk, get a home-cooked meal, or just be around people who care. Your university's counseling center offers free, confidential support for students.</p>
+  <p class="callout">If you or a friend is in crisis or thinking about suicide, call or text <strong>988</strong> to reach the 988 Suicide &amp; Crisis Lifeline, available 24/7. In an emergency, call 911.</p>
+
+  <h2>If you experience antisemitism</h2>
+  <ul>
+    <li>Tell someone you trust right away, including your Chabad rabbi or rebbetzin. You do not have to handle it alone.</li>
+    <li>Write down what happened, when and who was involved, and save screenshots of anything online.</li>
+    <li>Report it to your university, usually through the dean of students or the office that handles discrimination and Title VI complaints.</li>
+    <li>If you are threatened or in danger, contact campus police or call 911.</li>
+  </ul>
+
+  <h2>For families</h2>
+  <p>Parents and grandparents can find guidance on connecting their student with Jewish life before move-in on our page for <a href="/parents/">parents of Jewish college students</a>.</p>
+</Guide>

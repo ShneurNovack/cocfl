@@ -1,0 +1,40 @@
+---
+import type { Center } from '../lib/centers';
+import CenterLogo from './CenterLogo.astro';
+import { stateAbbr } from '../lib/centers';
+interface Props { center: Center; headingLevel?: 'h2' | 'h3'; compact?: boolean }
+const { center: c, headingLevel = 'h3', compact = false } = Astro.props;
+const H = headingLevel;
+const also = c.otherCampuses.map((x) => x.name);
+---
+<article class="ccard card is-link" data-center={c.id} data-region={c.region} data-search={c.searchText} data-primary={`${c.primaryCampus.name}|${c.primaryCampus.abbr || ""}`}>
+  <div class="top">
+    <CenterLogo center={c} size={56} />
+    <div class="ttl">
+      <H class="school"><a href={c.url} class="stretch">{c.primaryCampus.name}</a></H>
+      <p class="meta">{c.officialName !== c.primaryCampus.name ? c.officialName : c.shortName} &middot; {c.city}, {stateAbbr(c.address?.state ?? null)}</p>
+    </div>
+  </div>
+  {also.length > 0 && <p class="also"><span>Also serving</span> {also.join(', ')}</p>}
+  {!compact && c.directorsLine && <p class="dir">{c.directorsLine}</p>}
+  {!compact && c.programs.some((p) => p.confirmed) && (
+    <div class="pills">{c.programs.filter((p) => p.confirmed).slice(0, 3).map((p) => <span class="pill">{p.program.shortName}</span>)}</div>
+  )}
+  <span class="go" aria-hidden="true">View center <span>&rarr;</span></span>
+</article>
+
+<style>
+  .ccard { position: relative; gap: 12px; height: 100%; }
+  .top { display: flex; gap: 14px; align-items: center; }
+  .school { font-size: 1.08rem; line-height: 1.25; margin: 0; }
+  .school a { color: var(--ink); text-decoration: none; }
+  .stretch::after { content: ''; position: absolute; inset: 0; z-index: 1; }
+  .ccard:hover .school a { color: var(--blue); }
+  .meta { margin: 2px 0 0; font-size: 0.86rem; color: var(--muted); line-height: 1.4; }
+  .also { margin: 0; font-size: 0.88rem; color: var(--ink-2); line-height: 1.5; }
+  .also span { font-weight: 700; color: var(--muted); font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.06em; margin-right: 4px; }
+  .dir { margin: 0; font-size: 0.9rem; color: var(--ink-2); line-height: 1.5; }
+  .go { margin-top: auto; padding-top: 6px; font-weight: 700; font-size: 0.9rem; color: var(--blue); }
+  .go span { display: inline-block; transition: transform 0.15s ease; }
+  .ccard:hover .go span { transform: translateX(3px); }
+</style>

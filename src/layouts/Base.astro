@@ -1,0 +1,97 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE } from '../lib/site';
+
+export interface Crumb { name: string; href: string }
+interface Props {
+  title: string;
+  description: string;
+  path?: string;
+  ogImage?: string;
+  ogType?: 'website' | 'article';
+  jsonLd?: object[];
+  breadcrumbs?: Crumb[];
+  noindex?: boolean;
+}
+const { title, description, ogImage = SITE.ogImage, ogType = 'website', jsonLd = [], breadcrumbs = [], noindex = false } = Astro.props;
+const path = Astro.props.path ?? Astro.url.pathname;
+const canonical = new URL(path, SITE.url).href;
+// Brand suffix only when it fits in a typical results-page title width.
+const fullTitle = title.includes(SITE.name) || title.length + SITE.name.length + 3 > 70 ? title : `${title} | ${SITE.name}`;
+const ogImageUrl = new URL(ogImage, SITE.url).href;
+
+const orgLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  '@id': `${SITE.url}/#organization`,
+  name: SITE.name,
+  url: SITE.url + '/',
+  logo: `${SITE.url}/flame-512.png`,
+  description: SITE.description,
+  areaServed: { '@type': 'State', name: 'Florida' },
+  parentOrganization: { '@type': 'Organization', name: SITE.parent.name, url: SITE.parent.url },
+};
+const siteLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': `${SITE.url}/#website`,
+  name: SITE.name,
+  url: SITE.url + '/',
+  publisher: { '@id': `${SITE.url}/#organization` },
+  inLanguage: 'en-US',
+};
+const crumbLd = breadcrumbs.length
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [{ name: 'Home', href: '/' }, ...breadcrumbs].map((b, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        name: b.name,
+        item: new URL(b.href, SITE.url).href,
+      })),
+    }
+  : null;
+const allLd = [orgLd, ...(path === '/' ? [siteLd] : []), ...(crumbLd ? [crumbLd] : []), ...jsonLd];
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
+    <meta name="theme-color" content="#2474ae" />
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="icon" href="/flame-192.png" sizes="192x192" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:locale" content={SITE.locale} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    <slot name="head" />
+    {allLd.map((ld) => <script type="application/ld+json" set:html={JSON.stringify(ld)} />)}
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <Header />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

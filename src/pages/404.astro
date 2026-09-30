@@ -1,0 +1,19 @@
+---
+import Base from '../layouts/Base.astro';
+import { centers } from '../lib/centers';
+---
+<Base title="Page not found" description="The page you were looking for could not be found." path="/404/" noindex>
+  <section class="page-hero band-blue">
+    <div class="wrap">
+      <h1>We couldn't find that page</h1>
+      <p class="lead">It may have moved when we rebuilt the site. Try finding your campus instead.</p>
+      <div class="btn-row"><a class="btn btn-gold" href="/campuses/">Find your campus</a><a class="btn btn-ghost" href="/">Go to the homepage</a></div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="wrap">
+      <h2>Chabad on Campus in Florida</h2>
+      <ul class="link-list">{centers.map((c) => <li><a href={c.url}>{c.primaryCampus.name}<span class="meta">{c.city}</span></a></li>)}</ul>
+    </div>
+  </section>
+</Base>

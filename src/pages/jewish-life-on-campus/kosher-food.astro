@@ -1,0 +1,85 @@
+---
+import Guide from '../../layouts/Guide.astro';
+import { centers, KOSHER_KEYS } from '../../lib/centers';
+const path = '/jewish-life-on-campus/kosher-food/';
+const cols = [
+  { key: 'meal', label: 'Kosher meal plan', match: ['Full Kosher meal plan (3 meals a day)', 'Daily Kosher meal plan (1 meal a day)', 'Limited Kosher meal plan (1 or 2 meals a week)'] },
+  { key: 'dining', label: 'Kosher dining', match: ['Kosher restaurant', 'Kosher food truck'] },
+  { key: 'packaged', label: 'Packaged kosher food', match: ['Packaged kosher food'] },
+  { key: 'pesach', label: 'Passover meals', match: ['Kosher for Passover meal plan'] },
+];
+const rows = [...centers]
+  .sort((a, b) => a.primaryCampus.name.localeCompare(b.primaryCampus.name))
+  .map((c) => ({
+    c,
+    cells: cols.map((col) => {
+      const found = c.amenities.filter((a) => col.match.includes(a.key));
+      if (!found.length) return null;
+      const who = new Set<string>();
+      found.forEach((f) => { if (f.byChabad) who.add('Chabad'); if (f.onCampus) who.add('Campus'); });
+      return { label: found[0].label, who: [...who].join(' + ') };
+    }),
+  }));
+const withAny = rows.filter((r) => r.cells.some(Boolean));
+const noData = rows.filter((r) => !r.c.amenities.length);
+---
+<Guide
+  title="Kosher food on campus"
+  metaTitle="Kosher Food on Campus at Florida Colleges & Universities"
+  description="Where to find kosher food at Florida universities: kosher meal plans, kosher dining and Passover meals through Chabad on Campus at UF, FSU, UCF, FIU, UM and more."
+  path={path}
+  lead="Keeping kosher in college is more doable than most students expect. Here is what kosher food looks like on campus and what is available at Florida schools."
+  image="pizza-friends"
+  imageAlt="College students sharing kosher pizza at a Chabad on Campus event"
+  crumbs={[{ name: 'Jewish Life on Campus', href: '/jewish-life-on-campus/' }, { name: 'Kosher Food', href: path }]}
+  wide
+>
+  <p>Whether you keep strictly kosher, keep kosher at home, or just want a good kosher meal with friends once in a while, your campus Chabad House is the place to start. Chabad Houses keep kosher kitchens, host kosher Shabbat and holiday meals, and in many cases run kosher meal plans or kosher cafes for students. Some Florida universities also offer kosher options through campus dining.</p>
+
+  <h2>Kosher options at Florida colleges</h2>
+  <p>This table shows kosher food options reported to Chabad on Campus for the main campus served by each Florida center. "Chabad" means the option is provided by the Chabad House; "Campus" means it is offered by the university or another provider nearby. Options change from year to year, so confirm with the Chabad House before you plan around them.</p>
+  <div class="table-wrap">
+    <table class="k">
+      <thead>
+        <tr><th scope="col">School</th>{cols.map((c) => <th scope="col">{c.label}</th>)}</tr>
+      </thead>
+      <tbody>
+        {withAny.map((r) => (
+          <tr>
+            <th scope="row"><a href={r.c.url}>{r.c.primaryCampus.name}</a></th>
+            {r.cells.map((cell) => <td>{cell ? <><span class="dot" aria-hidden="true"></span>{cell.label}<span class="who">{cell.who}</span></> : <span class="none">Ask</span>}</td>)}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+  {noData.length > 0 && (
+    <p class="small muted">Kosher information is not yet reported for {noData.map((r, i) => <>{i > 0 && ', '}<a href={r.c.url}>{r.c.primaryCampus.name}</a></>)}. Contact the Chabad House directly.</p>
+  )}
+
+  <h2>Types of kosher food you will find</h2>
+  <ul>
+    <li><strong>Kosher meal plans.</strong> Some Chabad Houses and universities offer daily kosher meals or a few kosher meals a week. A handful of campuses in Florida offer a full kosher meal plan.</li>
+    <li><strong>Kosher cafes and dining.</strong> Several Florida Chabad Houses run kosher cafes or partner with nearby kosher restaurants and food trucks, often with student discounts.</li>
+    <li><strong>Packaged kosher food.</strong> Many campus markets carry certified kosher packaged meals and snacks, which help on busy days.</li>
+    <li><strong>Shabbat and holiday meals.</strong> Every Chabad House serves kosher Shabbat dinners and holiday meals, which for many students covers the most important meals of the week.</li>
+    <li><strong>Kosher for Passover.</strong> Passover is the hardest week to eat kosher on a campus meal plan, so many Chabad Houses offer Passover meals for the whole holiday.</li>
+  </ul>
+
+  <h2>Tips for keeping kosher in college</h2>
+  <ul>
+    <li>Contact the Chabad House before you arrive. They know which campus options are truly kosher and which only look it.</li>
+    <li>Ask about meal plan exemptions or kosher meal plan credits if you keep strictly kosher.</li>
+    <li>If you have a kitchen, the rabbi or rebbetzin can help you kasher it and put up a mezuzah.</li>
+    <li>Learn to recognize reliable kosher certification symbols, and ask when in doubt.</li>
+  </ul>
+  <p>Kosher food is one part of Jewish life on campus. See also <a href="/jewish-life-on-campus/shabbat/">Shabbat on campus</a> and <a href="/jewish-life-on-campus/jewish-holidays/">Jewish holidays in college</a>, or <a href="/campuses/">find your Chabad House</a>.</p>
+</Guide>
+
+<style>
+  .k td, .k th { vertical-align: top; }
+  .k td { min-width: 150px; }
+  .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--gold); margin-right: 6px; vertical-align: middle; }
+  .who { display: block; font-size: 0.8rem; color: var(--muted); margin-left: 14px; }
+  .none { color: var(--muted); font-size: 0.88rem; }
+</style>

@@ -1,0 +1,59 @@
+---
+import { centers } from '../lib/centers';
+import { programs } from '../data/programs';
+import { SITE } from '../lib/site';
+import { GUIDES } from '../data/guides';
+const year = new Date().getFullYear();
+const sorted = [...centers].sort((a, b) => a.primaryCampus.name.localeCompare(b.primaryCampus.name));
+---
+<footer class="site-footer">
+  <div class="wrap cols">
+    <div class="about">
+      <a href="/" class="brand"><img src="/flame.webp" alt="" width="30" height="30" loading="lazy" /> Chabad on Campus Florida</a>
+      <p>A statewide network of Chabad on Campus centers welcoming Jewish students at universities and colleges across Florida, part of <a href={SITE.parent.url} rel="noopener">Chabad on Campus International</a>.</p>
+      <a class="btn btn-gold" href="/campuses/">Find Chabad at your school</a>
+    </div>
+    <nav aria-label="Florida campuses">
+      <h2>Chabad at Florida campuses</h2>
+      <ul>
+        {sorted.map((c) => <li><a href={c.url}>{c.primaryCampus.name}</a></li>)}
+      </ul>
+    </nav>
+    <div>
+      <nav aria-label="Programs">
+        <h2>Programs</h2>
+        <ul>{programs.map((p) => <li><a href={`/programs/${p.slug}/`}>{p.name}</a></li>)}</ul>
+      </nav>
+    </div>
+    <nav aria-label="Jewish life guides">
+      <h2>Jewish life in college</h2>
+      <ul>
+        {GUIDES.map((g) => <li><a href={g.href}>{g.nav}</a></li>)}
+        <li><a href="/parents/">For parents</a></li>
+        <li><a href="/faq/">Chabad on Campus FAQs</a></li>
+        <li><a href="/about/">About Chabad on Campus Florida</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="wrap legal">
+    <span>&copy; {year} Chabad on Campus Florida</span>
+    <span>Directory data provided by <a href="https://chabadoncampus.org/" rel="noopener">Chabad on Campus International</a> and refreshed daily.</span>
+  </div>
+</footer>
+
+<style>
+  .site-footer { background: var(--night); color: #b9bab4; font-size: 0.93rem; padding-top: 64px; }
+  .site-footer a { color: #d9dad4; text-decoration: none; }
+  .site-footer a:hover { color: var(--gold); text-decoration: underline; }
+  .site-footer .btn-gold { color: var(--ink); margin-top: 8px; }
+  .site-footer .btn-gold:hover { color: var(--ink); text-decoration: none; }
+  .cols { display: grid; gap: 40px; grid-template-columns: 1.3fr 1fr 1fr 1fr; }
+  @media (max-width: 1000px) { .cols { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .cols { grid-template-columns: 1fr; } }
+  .brand { display: inline-flex; align-items: center; gap: 10px; color: #fff; font-weight: 800; font-size: 1.05rem; margin-bottom: 14px; }
+  h2 { color: #fff; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 14px; }
+  ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+  .about p { line-height: 1.7; max-width: 38ch; }
+  .legal { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; margin-top: 48px; padding-top: 22px; padding-bottom: 28px; border-top: 1px solid rgba(255, 255, 255, 0.1); font-size: 0.84rem; color: #8a8c86; }
+  .legal a { color: #b9bab4; text-decoration: underline; }
+</style>

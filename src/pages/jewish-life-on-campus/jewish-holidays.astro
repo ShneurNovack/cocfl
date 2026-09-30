@@ -1,0 +1,61 @@
+---
+import Guide from '../../layouts/Guide.astro';
+import Picture from '../../components/Picture.astro';
+import { centers } from '../../lib/centers';
+const path = '/jewish-life-on-campus/jewish-holidays/';
+const holidays = [
+  { name: 'Rosh Hashanah', when: 'September or early October', campus: 'Holiday dinners, services with the shofar, and shofar blowing on campus for students who cannot make it to services. Many Chabad Houses also lead Tashlich by a lake or river.' },
+  { name: 'Yom Kippur', when: 'Ten days after Rosh Hashanah', campus: 'Kol Nidre and Yom Kippur services with English explanations, a pre-fast meal, and a big break-fast dinner when the fast ends.' },
+  { name: 'Sukkot', when: 'Five days after Yom Kippur, for a week', campus: 'A sukkah on or near campus for meals, "pizza in the hut", shaking the lulav and etrog between classes, and dinners under the stars.' },
+  { name: 'Simchat Torah', when: 'Right after Sukkot', campus: 'Dancing with the Torah late into the night, often the most joyful party of the fall semester.' },
+  { name: 'Chanukah', when: 'November or December, eight nights', campus: 'Public menorah lightings on campus, latkes and sufganiyot, and Chanukah parties before finals.' },
+  { name: 'Purim', when: 'February or March', campus: 'Megillah readings, costumes, a festive Purim party and care packages to share with friends.' },
+  { name: 'Passover (Pesach)', when: 'March or April, eight days', campus: 'Community Seders for students, and at many campuses kosher-for-Passover meals for the whole holiday.' },
+  { name: 'Shavuot', when: 'May or June', campus: 'Often after the semester ends. Students who stay on campus can hear the Ten Commandments and enjoy a dairy meal.' },
+];
+const passover = centers.filter((c) => c.amenities.some((a) => a.key === 'Kosher for Passover meals' || a.key === 'Kosher for Passover meal plan'));
+---
+<Guide
+  title="Jewish holidays in college"
+  metaTitle="Jewish Holidays in College: High Holidays, Sukkot, Passover & More"
+  description="How to celebrate the Jewish holidays in college: High Holiday services, Sukkot, Chanukah, Purim and Passover Seders at Chabad on Campus, plus tips for missing class."
+  path={path}
+  lead="Your first High Holidays away from home do not have to feel lonely. Every Chabad on Campus center celebrates the Jewish holidays with students, and most of it is free."
+  image="tefillin"
+  imageAlt="A college student putting on tefillin with help from a Chabad rabbi"
+  crumbs={[{ name: 'Jewish Life on Campus', href: '/jewish-life-on-campus/' }, { name: 'Jewish Holidays', href: path }]}
+>
+  <p>The Jewish calendar does not follow the academic calendar. Rosh Hashanah can land in the second week of classes, Passover can fall right before finals, and it is not always possible to fly home. The good news is that the holidays are when Chabad Houses are at their busiest and most welcoming. For many students, their first real connection to Jewish life in college happens at a Rosh Hashanah dinner.</p>
+
+  <h2>The Jewish holidays through the school year</h2>
+  <p>Jewish holidays follow the Hebrew calendar, so their secular dates move from year to year. Here is roughly when each one falls and how it is typically celebrated on campus.</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th scope="col">Holiday</th><th scope="col">Usually falls</th><th scope="col">On campus</th></tr></thead>
+      <tbody>{holidays.map((h) => <tr><th scope="row">{h.name}</th><td>{h.when}</td><td>{h.campus}</td></tr>)}</tbody>
+    </table>
+  </div>
+
+  <h2>High Holidays on campus: Rosh Hashanah and Yom Kippur</h2>
+  <p>Chabad on Campus High Holiday services are designed for students. There are no tickets and no membership fees, prayer books include English, and the rabbi explains the prayers along the way. Services are usually paired with festive holiday dinners featuring apples and honey, round challah and the traditional foods of the season. On Yom Kippur, students fast together and then celebrate at a break-fast meal. If you cannot get to services, many Chabad Houses bring the shofar to you on campus.</p>
+
+  <Picture name="students-selfie" alt="Jewish college students taking a group selfie at a Chabad on Campus event" aspect="16/9" />
+
+  <h2>Missing class for the holidays</h2>
+  <p>Most universities allow excused absences for religious holidays, but you usually need to tell your professors in advance. Florida's public colleges and universities are required by <a href="https://www.flsenate.gov/Laws/Statutes/2024/1006.53" rel="noopener">state law</a> to have a religious observance policy, so look up your school's version at the start of each semester. Send your professors a short, polite email in the first week listing the days you will miss, and ask how to make up work. Your Chabad rabbi can write a letter if a professor needs one.</p>
+
+  <h2>Passover in college</h2>
+  <p>Passover is eight days long and often falls in the middle of the spring semester. Chabad Houses host student Seders on the first nights, and many Florida centers also help students keep kosher for Passover for the rest of the week.{passover.length > 0 && <> According to Chabad on Campus, Passover meals are available through {passover.slice(0, 6).map((c, i) => <>{i > 0 && ', '}<a href={c.url}>{c.officialName}</a></>)}{passover.length > 6 ? ' and more' : ''}.</>} See <a href="/jewish-life-on-campus/kosher-food/">kosher food on campus</a> for more.</p>
+
+  <h2>Find holiday celebrations at your school</h2>
+  <p>Holiday schedules are posted by each Chabad House a few weeks ahead. Find your campus below and reach out, especially before the High Holidays, when many centers ask students to RSVP for meals.</p>
+  <ul class="cols">
+    {centers.map((c) => <li><a href={c.url}>{c.officialName}</a> ({c.primaryCampus.abbr || c.primaryCampus.name})</li>)}
+  </ul>
+</Guide>
+
+<style>
+  .cols { columns: 2; column-gap: 32px; }
+  @media (max-width: 560px) { .cols { columns: 1; } }
+  th[scope='row'] { white-space: nowrap; }
+</style>

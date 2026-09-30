@@ -1,0 +1,53 @@
+---
+import Guide from '../../layouts/Guide.astro';
+import Picture from '../../components/Picture.astro';
+import { centers, withThe } from '../../lib/centers';
+const path = '/jewish-life-on-campus/shabbat/';
+const withServices = centers.filter((c) => c.amenities.some((a) => a.key === 'Shabbat and holidays minyan'));
+const withHousing = centers.filter((c) => c.amenities.some((a) => a.key === 'Jewish student housing'));
+---
+<Guide
+  title="Shabbat on campus"
+  metaTitle="Shabbat on Campus: Shabbat Dinners for College Students in Florida"
+  description="How Shabbat works in college: Friday night Shabbat dinners at Chabad, Shabbat services, keeping Shabbat in a dorm, and where to find Shabbat at Florida universities."
+  path={path}
+  lead="For thousands of Jewish students, Friday night dinner at Chabad is the best part of the week. Here is what Shabbat in college looks like and how to find it at your school."
+  image="shabbat-candles"
+  imageAlt="Jewish college students lighting Shabbat candles together"
+  crumbs={[{ name: 'Jewish Life on Campus', href: '/jewish-life-on-campus/' }, { name: 'Shabbat', href: path }]}
+>
+  <p>Shabbat begins at sundown on Friday and ends after nightfall on Saturday. For a college student juggling classes, jobs and exams, it can be the one moment each week to slow down, eat a real meal with friends and step out of the rush. You do not need to keep every detail of Shabbat to enjoy it. Most students start with Friday night dinner and see where it goes.</p>
+
+  <h2>What a Chabad Shabbat dinner is like</h2>
+  <p>Every Chabad House hosts Shabbat dinners during the semester, and most do it every Friday night. The evening usually begins with candle lighting and a short, upbeat Kabbalat Shabbat service for anyone who wants to join. Then everyone sits down for Kiddush over wine or grape juice, the blessing over challah, and a long, home-cooked dinner: soup, salads, chicken or brisket, and plenty of dessert.</p>
+  <p>Between courses there is usually a short thought on the week's Torah portion, a few songs, maybe a toast for someone's birthday, and a lot of conversation. Dinners are free or nearly free, and no one checks your background at the door. Many Chabad Houses also run themed Shabbat dinners, like Israeli, Italian or Super Bowl Shabbat, and a few times a year a big community Shabbat that fills the house.</p>
+
+  <Picture name="rabbi-students" alt="A rabbi talking with college students around a table at a Chabad House" aspect="16/9" />
+
+  <h2>Shabbat services and Shabbat day</h2>
+  <p>Many Chabad Houses hold services on Friday night and Shabbat morning, followed by a Kiddush lunch. If you have never been to a service, this is a gentle place to start: prayer books have English translations, the rabbi explains what is going on, and no one expects you to know the tunes. In Florida, Chabad on Campus reports Shabbat and holiday services at {withServices.length} of our {centers.length} centers, including {withServices.slice(0, 4).map((c, i) => <>{i > 0 && ', '}<a href={c.url}>{withThe(c.primaryCampus.name)}</a></>)}.</p>
+
+  <h2>Keeping Shabbat in college</h2>
+  <p>Some students keep Shabbat fully, and many are figuring out which parts of Shabbat they want to take on. A few practical tips:</p>
+  <ul>
+    <li><strong>Talk to your professors early.</strong> Most universities have religious accommodation policies for exams and assignments that fall on Shabbat or holidays. Florida law (<a href="https://www.flsenate.gov/Laws/Statutes/2024/1006.53" rel="noopener">section 1006.53, Florida Statutes</a>) requires public colleges and universities to have a policy for reasonably accommodating students' religious observances.</li>
+    <li><strong>Plan food ahead.</strong> Your Chabad House can usually host you for Friday night and Shabbat lunch. Some also offer packaged kosher meals for Shabbat.</li>
+    <li><strong>Think about housing and access.</strong> Electronic dorm key cards can be a challenge for students who keep Shabbat. Ask housing about alternatives, and ask your Chabad House what other students do.{withHousing.length > 0 && <> A few Florida Chabad Houses, such as {withHousing.slice(0, 2).map((c, i) => <>{i > 0 && ' and '}<a href={c.url}>{c.officialName}</a></>)}, even offer Jewish student housing.</>}</li>
+    <li><strong>Start small.</strong> Light candles in your room on Friday (battery candles if your dorm prohibits flames), say Kiddush, or put your phone away for dinner. Every step counts.</li>
+  </ul>
+
+  <h2>Shabbat candle-lighting times</h2>
+  <p>Shabbat starts 18 minutes before sunset on Friday, so the time changes every week and differs across Florida. You can look up exact times for your city on <a href="https://www.chabad.org/calendar/candlelighting.htm" rel="noopener">Chabad.org</a>, and most Chabad House websites post them too.</p>
+
+  <h2>Find Shabbat at your Florida campus</h2>
+  <p>The easiest way to get to your first Shabbat dinner is to reach out to the Chabad House at your school. Many use an online RSVP so they know how much food to make.</p>
+  <ul class="cols">
+    {centers.map((c) => <li><a href={c.url}>Shabbat at {c.primaryCampus.abbr || c.primaryCampus.name}</a></li>)}
+  </ul>
+  <p>Want a bigger Shabbat? The <a href="/programs/pegisha/">Pegisha Shabbatons</a> bring hundreds of students together for a full Shabbat weekend, in Florida and in New York.</p>
+</Guide>
+
+<style>
+  .cols { columns: 2; column-gap: 32px; }
+  @media (max-width: 560px) { .cols { columns: 1; } }
+</style>

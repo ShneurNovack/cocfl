@@ -1,0 +1,207 @@
+{
+  "houseId": 81,
+  "center": "unf",
+  "hash": "b0a522ecd5aaa1cb",
+  "updatedAt": "2026-09-29T23:45:15.257Z",
+  "source": "https://api.chabadoncampus.org/api/1.0/ChabadHouses/Public/81",
+  "data": {
+    "houseId": 81,
+    "name": "Chabad at UNF",
+    "cocSlug": "chabadunf",
+    "website": "https://chabadunf.com/",
+    "donateUrl": "https://chabadunf.com/donate",
+    "logo": "https://cocistorage.blob.core.windows.net/prod/house_logo/LAepgnopgDdScUaqHgrk50.png",
+    "image": "https://cocistorage.blob.core.windows.net/prod/house/z_mjvPIozqRnyrcw~MYWH5.jpg",
+    "address": {
+      "street": "11271 Alumni Way",
+      "city": "Jacksonville",
+      "state": "Florida",
+      "zip": "32246-6685",
+      "country": "USA"
+    },
+    "location": {
+      "lat": 30.2756883,
+      "lng": -81.5260852
+    },
+    "phone": "904-646-4434",
+    "email": "office@chabadunf.com",
+    "region": "USA - South",
+    "timezone": "America/New_York",
+    "staff": [
+      {
+        "title": "Rabbi",
+        "name": "Shmuel Novack",
+        "role": null,
+        "photo": "https://cocistorage.blob.core.windows.net/prod/profile/Lgf4so8uS68cdybOTAoV6J.JPG",
+        "primary": true,
+        "photoLocal": {
+          "src": "/media/coc/625d756cbacc28e1-staff.webp",
+          "width": 240,
+          "height": 240
+        }
+      },
+      {
+        "title": "Mrs.",
+        "name": "Chana Novack",
+        "role": "Co-Director",
+        "photo": "https://cocistorage.blob.core.windows.net/prod/profile/1g03hcdsC3WDaZ7u02M_HJ.jpg",
+        "primary": true,
+        "photoLocal": {
+          "src": "/media/coc/d1f3cd0771fed26b-staff.webp",
+          "width": 240,
+          "height": 240
+        }
+      }
+    ],
+    "social": [
+      {
+        "type": "Facebook",
+        "url": "https://facebook.com/jewishospreys"
+      },
+      {
+        "type": "Instagram",
+        "url": "https://instagram.com/jewishospreys"
+      }
+    ],
+    "campuses": [
+      {
+        "id": 582,
+        "name": "University of North Florida",
+        "nickname": "UNF",
+        "primary": true,
+        "fullTime": true,
+        "distance": "FifthMile",
+        "website": null,
+        "publicInstitution": true,
+        "residency": "Residential",
+        "undergrad": 14000,
+        "grad": 3000,
+        "jewishUndergrad": 225,
+        "jewishGrad": 25,
+        "chabadGroupStatus": "ChabadRecognized",
+        "studentLife": [
+          {
+            "name": "Jewish student lounge",
+            "providers": [
+              "Chabad"
+            ]
+          },
+          {
+            "name": "Kosher restaurant",
+            "providers": [
+              "Chabad"
+            ]
+          },
+          {
+            "name": "Shabbat and holidays minyan",
+            "providers": [
+              "Chabad"
+            ]
+          },
+          {
+            "name": "Israel Orgs",
+            "providers": []
+          },
+          {
+            "name": "Other Jewish student groups",
+            "providers": []
+          }
+        ],
+        "programLevels": [
+          "Grad",
+          "Undergrad"
+        ]
+      },
+      {
+        "id": 686,
+        "name": "Florida State College at Jacksonville",
+        "nickname": "FSCJ",
+        "primary": false,
+        "fullTime": false,
+        "distance": "TwoMiles",
+        "website": "https://www.fccj.org/",
+        "publicInstitution": true,
+        "residency": "Commuter",
+        "undergrad": 40000,
+        "grad": null,
+        "jewishUndergrad": 1,
+        "jewishGrad": null,
+        "chabadGroupStatus": "Unrecognized",
+        "studentLife": [
+          {
+            "name": "Jewish student lounge",
+            "providers": [
+              "Chabad"
+            ]
+          },
+          {
+            "name": "Kosher restaurant",
+            "providers": [
+              "Chabad"
+            ]
+          },
+          {
+            "name": "Shabbat and holidays minyan",
+            "providers": [
+              "Chabad"
+            ]
+          }
+        ],
+        "programLevels": [
+          "Undergrad"
+        ]
+      },
+      {
+        "id": 1290,
+        "name": "Jacksonville University",
+        "nickname": "JU",
+        "primary": false,
+        "fullTime": false,
+        "distance": "Other",
+        "website": null,
+        "publicInstitution": false,
+        "residency": "Residential",
+        "undergrad": 3000,
+        "grad": 500,
+        "jewishUndergrad": 1,
+        "jewishGrad": 25,
+        "chabadGroupStatus": "Unrecognized",
+        "studentLife": [
+          {
+            "name": "Jewish student lounge",
+            "providers": [
+              "Chabad"
+            ]
+          },
+          {
+            "name": "Kosher restaurant",
+            "providers": [
+              "Chabad"
+            ]
+          },
+          {
+            "name": "Shabbat and holidays minyan",
+            "providers": [
+              "Chabad"
+            ]
+          }
+        ],
+        "programLevels": [
+          "Grad",
+          "Undergrad"
+        ]
+      }
+    ],
+    "logoLocal": {
+      "src": "/media/coc/5d3f3e0d6c74612f-logo.webp",
+      "width": 320,
+      "height": 320
+    },
+    "imageLocal": {
+      "src": "/media/coc/4019c806a2b40d0d-w1280.webp",
+      "width": 651,
+      "height": 652,
+      "srcset": "/media/coc/4019c806a2b40d0d-w1280.webp 651w, /media/coc/4019c806a2b40d0d-w640.webp 639w"
+    }
+  }
+}

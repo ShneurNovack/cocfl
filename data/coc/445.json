@@ -1,0 +1,162 @@
+{
+  "houseId": 445,
+  "center": "usf",
+  "hash": "d23e4cb984294e6e",
+  "updatedAt": "2026-09-29T23:45:15.257Z",
+  "source": "https://api.chabadoncampus.org/api/1.0/ChabadHouses/Public/445",
+  "data": {
+    "houseId": 445,
+    "name": "Chabad at the University of South Florida",
+    "cocSlug": "chabad-at-the-university-of-south-florida",
+    "website": "https://usfchabad.com/",
+    "donateUrl": "https://www.usfchabad.com/donate",
+    "logo": "https://cocistorage.blob.core.windows.net/prod/house_logo/Fooaoh0obH2v9dVPvMyYd-.png",
+    "image": "https://cocistorage.blob.core.windows.net/prod/house/p_FTkJ1DKj6nFbSrNIl4pv.jpg",
+    "address": {
+      "street": "12301 North 52nd Street",
+      "city": "Tampa",
+      "state": "Florida",
+      "zip": "33617",
+      "country": "USA"
+    },
+    "location": {
+      "lat": 28.0591634,
+      "lng": -82.3973496
+    },
+    "phone": "813-930-5105",
+    "email": "rabbipinny@gmail.com",
+    "region": "USA - South",
+    "timezone": "America/New_York",
+    "staff": [
+      {
+        "title": "Mrs.",
+        "name": "Chava Backman",
+        "role": "Director",
+        "photo": "https://cocistorage.blob.core.windows.net/prod/profile/OwG8iJ5xwI5mEC9khVrtAU.jpg",
+        "primary": true,
+        "photoLocal": {
+          "src": "/media/coc/6b97eae5874a2160-staff.webp",
+          "width": 226,
+          "height": 226
+        }
+      },
+      {
+        "title": "Rabbi",
+        "name": "Pinny Backman",
+        "role": "Director",
+        "photo": "https://cocistorage.blob.core.windows.net/prod/profile/coSRsnOjhCNL6qdn4nNuEz.jpg",
+        "primary": true,
+        "photoLocal": {
+          "src": "/media/coc/d72139227f3a1150-staff.webp",
+          "width": 194,
+          "height": 240
+        }
+      },
+      {
+        "title": "Rabbi",
+        "name": "Yehuda Tanenbaum",
+        "role": "Other",
+        "photo": "https://cocistorage.blob.core.windows.net/prod/profile/A9n5ARCreF39XcazMNzUn4.jpg",
+        "primary": true,
+        "photoLocal": {
+          "src": "/media/coc/9bed025b1ef6798a-staff.webp",
+          "width": 240,
+          "height": 240
+        }
+      },
+      {
+        "title": "Rebbetzin",
+        "name": "Devo Tanenbaum",
+        "role": null,
+        "photo": "https://cocistorage.blob.core.windows.net/prod/profile/d9K7JAZWHKzOla572uSmNB.jpg",
+        "primary": true,
+        "photoLocal": {
+          "src": "/media/coc/f9d2f37d11df7af3-staff.webp",
+          "width": 240,
+          "height": 240
+        }
+      }
+    ],
+    "social": [
+      {
+        "type": "Instagram",
+        "url": "https://instagram.com/chabadatusf"
+      },
+      {
+        "type": "Facebook",
+        "url": "https://www.facebook.com/ChabadatUSF/"
+      }
+    ],
+    "campuses": [
+      {
+        "id": 45,
+        "name": "University of South Florida",
+        "nickname": "USF",
+        "primary": true,
+        "fullTime": true,
+        "distance": "HalfMile",
+        "website": "https://www.usf.edu/",
+        "publicInstitution": true,
+        "residency": "Residential",
+        "undergrad": 36521,
+        "grad": 11547,
+        "jewishUndergrad": 1200,
+        "jewishGrad": 200,
+        "chabadGroupStatus": "ChabadRecognized",
+        "studentLife": [
+          {
+            "name": "Kosher restaurant",
+            "providers": [
+              "Other"
+            ]
+          },
+          {
+            "name": "Packaged kosher food",
+            "providers": [
+              "School"
+            ]
+          },
+          {
+            "name": "Kosher for Passover meal plan",
+            "providers": [
+              "Other"
+            ]
+          },
+          {
+            "name": "Shabbat and holidays minyan",
+            "providers": [
+              "Chabad"
+            ]
+          },
+          {
+            "name": "Israel Orgs",
+            "providers": []
+          },
+          {
+            "name": "Jewish Greek life",
+            "providers": []
+          },
+          {
+            "name": "Other Jewish student groups",
+            "providers": []
+          }
+        ],
+        "programLevels": [
+          "Grad",
+          "Undergrad"
+        ]
+      }
+    ],
+    "logoLocal": {
+      "src": "/media/coc/7f62bb459f73e43f-logo.webp",
+      "width": 320,
+      "height": 311
+    },
+    "imageLocal": {
+      "src": "/media/coc/a4b93d2c804752fa-w1280.webp",
+      "width": 1216,
+      "height": 913,
+      "srcset": "/media/coc/a4b93d2c804752fa-w1280.webp 1216w, /media/coc/a4b93d2c804752fa-w640.webp 640w"
+    }
+  }
+}

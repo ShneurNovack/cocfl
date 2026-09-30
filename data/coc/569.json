@@ -1,0 +1,136 @@
+{
+  "houseId": 569,
+  "center": "fgcu",
+  "hash": "a8a8dc95ca44de91",
+  "updatedAt": "2026-09-29T23:45:15.257Z",
+  "source": "https://api.chabadoncampus.org/api/1.0/ChabadHouses/Public/569",
+  "data": {
+    "houseId": 569,
+    "name": "Chabad at FGCU",
+    "cocSlug": "chabad-at-fgcu",
+    "website": "https://chabadfgcu.com/",
+    "donateUrl": "https://fgcu.chabadsuite.net/",
+    "logo": "https://cocistorage.blob.core.windows.net/prod/house_logo/J~CxQCUMYZ4Dlh3VIXZCeV.png",
+    "image": "https://cocistorage.blob.core.windows.net/prod/house/chP53cVZBSVcH-TYOmWunP.jpg",
+    "address": {
+      "street": "17150 Caloosa Trace Circle",
+      "city": "Fort Myers",
+      "state": "Florida",
+      "zip": "33967",
+      "country": "USA"
+    },
+    "location": {
+      "lat": 26.490817,
+      "lng": -81.8164107
+    },
+    "phone": "239-355-8481",
+    "email": "Rabbi@chabadfgcu.com",
+    "region": "USA - Southeast",
+    "timezone": "America/New_York",
+    "staff": [
+      {
+        "title": "Rabbi",
+        "name": "Mendel Gordon",
+        "role": null,
+        "photo": "https://cocistorage.blob.core.windows.net/prod/profile/1akRz5JmW5vhnkdwyjSDnH.jpg",
+        "primary": true,
+        "photoLocal": {
+          "src": "/media/coc/102d06521ff3ef5b-staff.webp",
+          "width": 240,
+          "height": 240
+        }
+      },
+      {
+        "title": "Mrs.",
+        "name": "Shternie Gordon",
+        "role": null,
+        "photo": "https://cocistorage.blob.core.windows.net/prod/profile/bQSHvuZ6Je5e~DSuJ3zja0.jpg",
+        "primary": true,
+        "photoLocal": {
+          "src": "/media/coc/b818b0db3fe048f1-staff.webp",
+          "width": 240,
+          "height": 240
+        }
+      }
+    ],
+    "social": [
+      {
+        "type": "Instagram",
+        "url": "https://instagram.com/chabadfgcu"
+      },
+      {
+        "type": "Facebook",
+        "url": "https://m.facebook.com/jewishfgcu/"
+      }
+    ],
+    "campuses": [
+      {
+        "id": 772,
+        "name": "Florida Gulf Coast University - Undergrads",
+        "nickname": "FGCU",
+        "primary": true,
+        "fullTime": true,
+        "distance": "ThreeMiles",
+        "website": null,
+        "publicInstitution": true,
+        "residency": "Residential",
+        "undergrad": 14000,
+        "grad": 2000,
+        "jewishUndergrad": 400,
+        "jewishGrad": 50,
+        "chabadGroupStatus": "ChabadRecognized",
+        "studentLife": [
+          {
+            "name": "Jewish student lounge",
+            "providers": [
+              "Chabad"
+            ]
+          },
+          {
+            "name": "Jewish Greek life",
+            "providers": []
+          },
+          {
+            "name": "Other Jewish student groups",
+            "providers": []
+          }
+        ],
+        "programLevels": [
+          "Grad",
+          "Undergrad"
+        ]
+      },
+      {
+        "id": 1377,
+        "name": "Florida SouthWestern",
+        "nickname": "FSW",
+        "primary": false,
+        "fullTime": false,
+        "distance": "FivePlusMiles",
+        "website": null,
+        "publicInstitution": true,
+        "residency": "Commuter",
+        "undergrad": 14000,
+        "grad": null,
+        "jewishUndergrad": 50,
+        "jewishGrad": null,
+        "chabadGroupStatus": "Unrecognized",
+        "studentLife": [],
+        "programLevels": [
+          "Undergrad"
+        ]
+      }
+    ],
+    "logoLocal": {
+      "src": "/media/coc/fbf7089bc17e35df-logo.webp",
+      "width": 320,
+      "height": 320
+    },
+    "imageLocal": {
+      "src": "/media/coc/e1b5e4cb0d60a261-w1280.webp",
+      "width": 1280,
+      "height": 960,
+      "srcset": "/media/coc/e1b5e4cb0d60a261-w1280.webp 1280w, /media/coc/e1b5e4cb0d60a261-w640.webp 640w"
+    }
+  }
+}

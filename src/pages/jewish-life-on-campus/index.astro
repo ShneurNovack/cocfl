@@ -1,0 +1,65 @@
+---
+import Guide from '../../layouts/Guide.astro';
+import { GUIDES } from '../../data/guides';
+import { centers, stats } from '../../lib/centers';
+import { programs } from '../../data/programs';
+const path = '/jewish-life-on-campus/';
+const subGuides = GUIDES.filter((g) => g.href !== path);
+---
+<Guide
+  title="Jewish life on campus: a guide for college students"
+  metaTitle="Jewish Life on Campus: A Guide for Jewish College Students"
+  description="What Jewish life in college looks like: Shabbat, holidays, kosher food, Jewish student organizations, Chabad on Campus and how to find community in your first week."
+  path={path}
+  lead="College is often the first time Jewish life is up to you. Here is what it can look like, where to find it, and how to make it your own from the first week of freshman year."
+  image="students-group-nyc"
+  imageAlt="A group of Jewish college students posing together outdoors"
+  crumbs={[{ name: 'Jewish Life on Campus', href: path }]}
+>
+  <p>At home, Jewish life usually happens around you: family dinners, a synagogue your parents chose, holidays that simply arrive. In college, nobody is going to set the table for you. That can feel like a loss, but many students discover it is the first time Judaism becomes something they choose for themselves. The good news is that almost every campus with a meaningful Jewish population has people whose whole job is to make that easy.</p>
+
+  <h2>What Jewish life on campus looks like</h2>
+  <p>Jewish life in college is less about a single building and more about a web of places and people. On most campuses you will find some combination of:</p>
+  <ul>
+    <li><strong>Shabbat dinners</strong> on Friday nights, often the heartbeat of the week. See our guide to <a href="/jewish-life-on-campus/shabbat/">Shabbat on campus</a>.</li>
+    <li><strong>Holiday celebrations</strong> from Rosh Hashanah services and a sukkah on the quad to Chanukah menorah lightings and Passover Seders. See <a href="/jewish-life-on-campus/jewish-holidays/">Jewish holidays in college</a>.</li>
+    <li><strong>Kosher food</strong>, which ranges from a weekly kosher meal to full kosher meal plans. See <a href="/jewish-life-on-campus/kosher-food/">kosher food on campus</a>.</li>
+    <li><strong>Learning</strong>, from casual classes over pizza to structured courses like <a href="/programs/jewishu/">JewishU</a> and the <a href="/programs/sinai-scholars/">Sinai Scholars Society</a>.</li>
+    <li><strong>Travel</strong>, including <a href="/programs/birthright-israel/">Birthright Israel</a> trips and weekend Shabbatons like <a href="/programs/pegisha/">Pegisha</a>.</li>
+    <li><strong>Jewish student organizations</strong> such as Chabad, Hillel, Israel clubs, Jewish fraternities and sororities, and cultural or academic groups.</li>
+  </ul>
+
+  <h2>What is Chabad on Campus?</h2>
+  <p>Chabad on Campus is a network of Chabad Houses serving Jewish students at more than 950 colleges and universities around the world. Each Chabad House is run by a rabbi and his wife, known as <em>shluchim</em> (emissaries of the Lubavitcher Rebbe), who move near campus and make their home the students' home. There are no dues and no membership. Students of every background and level of observance are welcome, and research on Chabad on Campus has found that the large majority of students who participate did not grow up in Orthodox homes.</p>
+  <p>In practice, a Chabad House is a place to eat a home-cooked Shabbat dinner, ask a question you were embarrassed to ask in Hebrew school, take a class, celebrate a holiday, or just sit on a couch between classes. When something goes wrong in a student's life, it is also often the first place they call. Read more <a href="/about/">about Chabad on Campus Florida</a> or browse the <a href="/faq/">Chabad on Campus FAQ</a>.</p>
+
+  <h2>How to find Jewish community in your first week</h2>
+  <ol>
+    <li><strong>Look up your campus before you arrive.</strong> Search the <a href="/campuses/">Chabad on Campus Florida directory</a> for your school and send the rabbi or rebbetzin a quick hello. Many will invite you to a welcome event or a first Shabbat dinner.</li>
+    <li><strong>Go to the first Shabbat dinner of the semester.</strong> It is the easiest room to walk into, because everyone else is new too.</li>
+    <li><strong>Say yes to one thing a week.</strong> A class, a holiday event, a lunch. Community comes from showing up regularly, not from joining a list.</li>
+    <li><strong>Bring a friend</strong>, Jewish or curious. Most Chabad Houses are happy to welcome friends who want to learn.</li>
+  </ol>
+
+  <h2>Jewish life at Florida colleges</h2>
+  <p>Florida is home to one of the largest Jewish communities in the United States, and its universities reflect that. Chabad on Campus Florida includes {stats.centers} Chabad centers serving {stats.campuses} colleges and universities, from Tallahassee and Gainesville to Miami, and each one has its own personality. Read our region-by-region overview of <a href="/jewish-life-on-campus/florida/">Jewish life at Florida colleges</a>, or jump straight to a campus:</p>
+  <p class="campus-links">
+    {centers.map((c, i) => <>{i > 0 && ' · '}<a href={c.url}>Chabad at {c.primaryCampus.abbr || c.primaryCampus.name}</a></>)}
+  </p>
+
+  <h2>Programs that take Jewish life further</h2>
+  <p>Once you have found your Chabad House, there is a lot more to explore. Florida students can join any of these Chabad on Campus programs through their local center:</p>
+  <ul>
+    {programs.map((p) => <li><a href={`/programs/${p.slug}/`}>{p.name}</a>: {p.tagline}</li>)}
+  </ul>
+
+  <h2>More guides for Jewish students</h2>
+  <ul>
+    {subGuides.map((g) => <li><a href={g.href}>{g.title}</a>: {g.blurb}</li>)}
+    <li><a href="/parents/">Resources for parents of Jewish college students</a></li>
+  </ul>
+</Guide>
+
+<style>
+  .campus-links { line-height: 2; }
+</style>

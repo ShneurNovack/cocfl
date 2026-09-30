@@ -1,0 +1,397 @@
+{
+  "_readme": "Authoritative list of centers in the Chabad on Campus Florida directory. Add or remove centers here. Each center with a cocHouseId is synced daily from the Chabad on Campus API (scripts/sync.mjs) into data/coc/<cocHouseId>.json; the 'local' block is the fallback used when a center has no API listing (cocHouseId: null) or its API data is unavailable. 'campusOverrides' fixes display names and abbreviations coming from the API, keyed by API campus ID. 'extraCampuses' lists schools the center serves that the API does not list. 'aliases' feed the directory search. 'hideImage': true suppresses an API building photo that isn't a real photo (e.g. a logo uploaded as the building image). 'seoTitle' optionally overrides the generated page title.",
+  "centers": [
+    {
+      "id": "uf",
+      "slug": "university-of-florida",
+      "cocHouseId": 257,
+      "aliases": [
+        "UF",
+        "Gators",
+        "Jewish Gator",
+        "Chabad UF",
+        "U of F",
+        "Gainesville",
+        "Santa Fe",
+        "SFC"
+      ],
+      "local": {
+        "name": "Chabad at UF",
+        "school": "University of Florida",
+        "city": "Gainesville",
+        "directors": "Rabbi Berl & Chanie Goldman, Rabbi Aaron & Pessie Notik",
+        "website": "https://jewishgator.com/",
+        "logo": "https://jewishgator.com/wp-content/uploads/2026/06/jg_logo_official.png.webp",
+        "additionalCampuses": [
+          "Santa Fe College"
+        ]
+      }
+    },
+    {
+      "id": "fsu",
+      "slug": "florida-state-university",
+      "cocHouseId": 7,
+      "aliases": [
+        "FSU",
+        "Florida State",
+        "Seminoles",
+        "Noles",
+        "Tallahassee",
+        "TCC",
+        "FAMU",
+        "Chabad of Tallahassee"
+      ],
+      "extraCampuses": [
+        {
+          "name": "Tallahassee Community College",
+          "abbr": "TCC"
+        },
+        {
+          "name": "Florida A&M University",
+          "abbr": "FAMU"
+        },
+        {
+          "name": "Keiser University",
+          "abbr": ""
+        }
+      ],
+      "local": {
+        "name": "Chabad of FSU",
+        "school": "Florida State University",
+        "city": "Tallahassee",
+        "directors": "Rabbi Schneur Zalman & Chanie Oirechman, Rabbi Ari & Rivky Oirechman",
+        "website": "https://www.chabadtallahassee.com/",
+        "logo": "",
+        "additionalCampuses": [
+          "Tallahassee Community College",
+          "FAMU",
+          "Keiser University"
+        ]
+      }
+    },
+    {
+      "id": "ucf",
+      "slug": "university-of-central-florida",
+      "cocHouseId": 124,
+      "aliases": [
+        "UCF",
+        "Central Florida",
+        "Knights",
+        "Orlando",
+        "Valencia",
+        "Jewish UCF"
+      ],
+      "local": {
+        "name": "Chabad at UCF",
+        "school": "University of Central Florida",
+        "city": "Orlando",
+        "directors": "Rabbi Chaim & Rivkie Lipskier",
+        "website": "https://www.jewishucf.com/",
+        "logo": "https://www.jewishucf.com/uploads/8/8/4/6/8846385/4574522.png",
+        "additionalCampuses": [
+          "Valencia College"
+        ]
+      }
+    },
+    {
+      "id": "unf",
+      "slug": "university-of-north-florida",
+      "cocHouseId": 81,
+      "aliases": [
+        "UNF",
+        "North Florida",
+        "Ospreys",
+        "Jewish Ospreys",
+        "Jacksonville",
+        "Jax",
+        "JU",
+        "FSCJ"
+      ],
+      "local": {
+        "name": "Chabad at UNF",
+        "school": "University of North Florida",
+        "city": "Jacksonville",
+        "directors": "Rabbi Shmuli & Chana Novack",
+        "website": "https://www.chabadunf.com/",
+        "logo": "https://static.wixstatic.com/media/572ca4_daeeeac7cf704331b2e868822de89ee2~mv2.png",
+        "additionalCampuses": [
+          "Jacksonville University",
+          "Florida State College at Jacksonville"
+        ]
+      }
+    },
+    {
+      "id": "usf",
+      "slug": "university-of-south-florida",
+      "cocHouseId": 445,
+      "aliases": [
+        "USF",
+        "South Florida",
+        "Bulls",
+        "Tampa",
+        "USF Tampa"
+      ],
+      "local": {
+        "name": "Chabad at USF",
+        "school": "University of South Florida",
+        "city": "Tampa",
+        "directors": "Rabbi Pinny & Chava Backman, Rabbi Yehuda & Devo Tanenbaum",
+        "website": "https://www.usfchabad.com/",
+        "logo": "https://w2.chabad.org/media/images/1203/Ehvj12033885.png",
+        "additionalCampuses": []
+      }
+    },
+    {
+      "id": "ut",
+      "slug": "university-of-tampa",
+      "cocHouseId": 829,
+      "aliases": [
+        "UT",
+        "UTampa",
+        "U Tampa",
+        "Spartans",
+        "Tampa"
+      ],
+      "local": {
+        "name": "Chabad at UT",
+        "school": "University of Tampa",
+        "city": "Tampa",
+        "directors": "Rabbi Levi & Chana Rivkin",
+        "website": "https://www.chabadut.org/",
+        "logo": "https://static.wixstatic.com/media/50a04c_45131bf7139b41ed836d6cb7a4c8e571~mv2.png",
+        "additionalCampuses": []
+      }
+    },
+    {
+      "id": "um",
+      "slug": "university-of-miami",
+      "cocHouseId": 233,
+      "aliases": [
+        "UM",
+        "UMiami",
+        "U Miami",
+        "The U",
+        "Hurricanes",
+        "Canes",
+        "Coral Gables",
+        "UChabad",
+        "Miami grad"
+      ],
+      "local": {
+        "name": "Chabad at UM",
+        "school": "University of Miami",
+        "city": "Coral Gables",
+        "directors": "Rabbi Mendy & Henchi Fellig",
+        "website": "https://uchabad.com/",
+        "logo": "https://uchabad.com/wp-content/uploads/2020/11/Chabad-University-of-Miami-Logo.png",
+        "additionalCampuses": []
+      },
+      "hideImage": true
+    },
+    {
+      "id": "um-undergrad",
+      "slug": "university-of-miami-undergraduate",
+      "cocHouseId": 318,
+      "aliases": [
+        "UM",
+        "UMiami",
+        "U Miami",
+        "The U",
+        "Hurricanes",
+        "Canes",
+        "Coral Gables",
+        "UChabad Undergrad",
+        "undergrad",
+        "undergraduate"
+      ],
+      "campusOverrides": {
+        "732": {
+          "name": "University of Miami (Undergraduate)",
+          "abbr": "UM"
+        }
+      },
+      "local": {
+        "name": "UChabad Undergrad",
+        "school": "University of Miami (Undergraduate)",
+        "city": "Coral Gables",
+        "directors": "Rabbi Shmuly & Mushka Lipskier",
+        "website": "https://uchabadundergrad.com/",
+        "logo": "https://static.wixstatic.com/media/b2c4a9_dfebf6fd1f654236b65a1834d77ee886~mv2.png",
+        "additionalCampuses": []
+      },
+      "seoTitle": "UChabad Undergrad | Chabad for University of Miami Undergrads"
+    },
+    {
+      "id": "fiu",
+      "slug": "florida-international-university",
+      "cocHouseId": 639,
+      "aliases": [
+        "FIU",
+        "Florida International",
+        "Panthers",
+        "Miami",
+        "Jewish FIU"
+      ],
+      "local": {
+        "name": "Chabad at FIU",
+        "school": "Florida International University",
+        "city": "Miami",
+        "directors": "Rabbi Berel & Henny Garelik",
+        "website": "https://www.jewishfiu.com/",
+        "logo": "https://w2.chabad.org/media/images/1167/jFig11672068.png",
+        "additionalCampuses": []
+      }
+    },
+    {
+      "id": "fau",
+      "slug": "florida-atlantic-university",
+      "cocHouseId": 80,
+      "aliases": [
+        "FAU",
+        "Florida Atlantic",
+        "Owls",
+        "Boca",
+        "Boca Raton",
+        "Lynn",
+        "PBSC",
+        "Palm Beach State",
+        "Chabad Student Center"
+      ],
+      "campusOverrides": {
+        "31": {
+          "name": "Florida Atlantic University",
+          "abbr": "FAU"
+        },
+        "112": {
+          "name": "Palm Beach State College",
+          "abbr": "PBSC"
+        }
+      },
+      "local": {
+        "name": "Chabad at FAU",
+        "school": "Florida Atlantic University",
+        "city": "Boca Raton",
+        "directors": "Rabbi Boruch Shmuel & Rivka Rochel Liberow",
+        "website": "https://www.chabadstudentcenter.org/",
+        "logo": "",
+        "additionalCampuses": [
+          "Lynn University",
+          "Palm Beach State College"
+        ]
+      }
+    },
+    {
+      "id": "nsu",
+      "slug": "nova-southeastern-university",
+      "cocHouseId": 149,
+      "aliases": [
+        "NSU",
+        "Nova",
+        "Nova Southeastern",
+        "Sharks",
+        "Davie",
+        "Fort Lauderdale",
+        "Broward"
+      ],
+      "campusOverrides": {
+        "205": {
+          "abbr": ""
+        }
+      },
+      "local": {
+        "name": "Chabad at NSU",
+        "school": "Nova Southeastern University",
+        "city": "Davie",
+        "directors": "Rabbi Aryeh & Etty Schwartz",
+        "website": "https://www.jewishnsu.com/",
+        "logo": "https://w2.chabad.org/media/images/1277/IKHy12774949.png",
+        "additionalCampuses": [
+          "Broward College"
+        ]
+      }
+    },
+    {
+      "id": "fgcu",
+      "slug": "florida-gulf-coast-university",
+      "cocHouseId": 569,
+      "aliases": [
+        "FGCU",
+        "Florida Gulf Coast",
+        "Eagles",
+        "Fort Myers",
+        "Ft Myers",
+        "FSW",
+        "Florida SouthWestern"
+      ],
+      "campusOverrides": {
+        "772": {
+          "name": "Florida Gulf Coast University",
+          "abbr": "FGCU"
+        },
+        "1377": {
+          "name": "Florida SouthWestern State College",
+          "abbr": "FSW"
+        }
+      },
+      "local": {
+        "name": "Chabad at FGCU",
+        "school": "Florida Gulf Coast University",
+        "city": "Fort Myers",
+        "directors": "Rabbi Mendel & Shternie Gordon",
+        "website": "https://www.chabadfgcu.com/",
+        "logo": "",
+        "additionalCampuses": []
+      }
+    },
+    {
+      "id": "mdc",
+      "slug": "miami-dade-college",
+      "cocHouseId": null,
+      "aliases": [
+        "MDC",
+        "Miami Dade",
+        "Miami-Dade",
+        "Wolfson",
+        "Downtown Miami",
+        "Brickell",
+        "The Shul Downtown"
+      ],
+      "local": {
+        "name": "Chabad at MDC",
+        "school": "Miami Dade College",
+        "city": "Miami",
+        "state": "FL",
+        "directors": "Rabbi Chaim & Deenie Lipskar",
+        "website": "https://www.jewishdowntown.net/",
+        "logo": "https://w2.chabad.org/media/images/1098/vnqE10985897.png",
+        "additionalCampuses": []
+      }
+    },
+    {
+      "id": "rollins",
+      "slug": "rollins-college",
+      "cocHouseId": 339,
+      "aliases": [
+        "Rollins",
+        "Tars",
+        "Winter Park",
+        "Maitland",
+        "Chabad Student Center Winter Park"
+      ],
+      "campusOverrides": {
+        "109": {
+          "abbr": ""
+        }
+      },
+      "local": {
+        "name": "Chabad at Rollins College",
+        "school": "Rollins College",
+        "city": "Winter Park",
+        "directors": "Rabbi Shmuli & Chayala Sasonkin",
+        "website": "https://www.winterparkjewishstudent.com/",
+        "logo": "",
+        "additionalCampuses": []
+      }
+    }
+  ]
+}

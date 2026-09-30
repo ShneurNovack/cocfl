@@ -1,0 +1,35 @@
+---
+import type { Program } from '../data/programs';
+import { img } from '../lib/site';
+interface Props { program: Program; headingLevel?: 'h2' | 'h3' }
+const { program: p, headingLevel = 'h3' } = Astro.props;
+const H = headingLevel;
+const i = img(p.image);
+---
+<article class="pcard card is-link">
+  <div class="thumb">
+    <img src={`/images/${p.image}-640.webp`} width={640} height={Math.round((640 * i.height) / i.width)} alt="" loading="lazy" decoding="async" />
+    <span class="cat">{p.category}</span>
+  </div>
+  <div class="body">
+    <H><a href={`/programs/${p.slug}/`} class="stretch">{p.name}</a></H>
+    <p>{p.tagline}</p>
+    <span class="go" aria-hidden="true">About {p.shortName} <span>&rarr;</span></span>
+  </div>
+</article>
+<style>
+  .pcard { position: relative; padding: 0; overflow: hidden; height: 100%; }
+  .thumb { position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: var(--cream); }
+  .thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+  .pcard:hover .thumb img { transform: scale(1.03); }
+  .cat { position: absolute; left: 12px; top: 12px; background: #fff; color: var(--ink); font-size: 0.74rem; font-weight: 700; letter-spacing: 0.04em; padding: 4px 10px; border-radius: 999px; }
+  .body { padding: 20px 22px 22px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+  .body h2, .body h3 { font-size: 1.2rem; margin: 0; }
+  .body a { color: var(--ink); text-decoration: none; }
+  .pcard:hover .body a { color: var(--blue); }
+  .body p { margin: 0; color: var(--ink-2); font-size: 0.95rem; }
+  .stretch::after { content: ''; position: absolute; inset: 0; }
+  .go { margin-top: auto; padding-top: 8px; font-weight: 700; font-size: 0.9rem; color: var(--blue); }
+  .go span { display: inline-block; transition: transform 0.15s ease; }
+  .pcard:hover .go span { transform: translateX(3px); }
+</style>

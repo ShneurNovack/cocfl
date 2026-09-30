@@ -1,0 +1,283 @@
+{
+  "houseId": 257,
+  "center": "uf",
+  "hash": "f66b55a9fb63dda5",
+  "updatedAt": "2026-09-29T23:45:15.257Z",
+  "source": "https://api.chabadoncampus.org/api/1.0/ChabadHouses/Public/257",
+  "data": {
+    "houseId": 257,
+    "name": "Chabad UF",
+    "cocSlug": "chabaduf",
+    "website": "https://jewishgator.com/",
+    "donateUrl": "https://jewishgator.com/donate",
+    "logo": "https://cocistorage.blob.core.windows.net/prod/house_logo/V1CbTW_U6egeNMzSk_L1vs.jpg",
+    "image": "https://cocistorage.blob.core.windows.net/prod/house/SrXBKHXYkGgQrAzAfUPyBC.JPG",
+    "address": {
+      "street": "2021 NW 5th Avenue",
+      "city": "Gainesville",
+      "state": "Florida",
+      "zip": "32603",
+      "country": "USA"
+    },
+    "location": {
+      "lat": 29.6557202,
+      "lng": -82.338481
+    },
+    "phone": "352-336-5877",
+    "email": "rabbia@jewishgator.com",
+    "region": "USA - South",
+    "timezone": "America/New_York",
+    "staff": [
+      {
+        "title": "Mrs.",
+        "name": "Chanie Goldman",
+        "role": "Co-Director",
+        "photo": "https://cocistorage.blob.core.windows.net/prod/profile/voebs_q3cy4FwkUF23mEFI.JPG",
+        "primary": true,
+        "photoLocal": {
+          "src": "/media/coc/54001497c68e6d79-staff.webp",
+          "width": 240,
+          "height": 240
+        }
+      },
+      {
+        "title": "Rabbi",
+        "name": "Aharon Chaim Notik",
+        "role": "Co-Director",
+        "photo": "https://cocistorage.blob.core.windows.net/prod/profile/uwakn_d7QIZz~ImWmYaPNB.png",
+        "primary": true,
+        "photoLocal": {
+          "src": "/media/coc/8fd182df2495db2d-staff.webp",
+          "width": 216,
+          "height": 234
+        }
+      },
+      {
+        "title": "Rabbi",
+        "name": "Berl Goldman",
+        "role": "Director",
+        "photo": "https://cocistorage.blob.core.windows.net/prod/profile/WCNoY70mwC1GBKbcDJDBJv.jpg",
+        "primary": true,
+        "photoLocal": {
+          "src": "/media/coc/f964b29224f1c12f-staff.webp",
+          "width": 204,
+          "height": 240
+        }
+      },
+      {
+        "title": "Mrs.",
+        "name": "Pessie Notik",
+        "role": "Co-Director",
+        "photo": "https://cocistorage.blob.core.windows.net/prod/profile/rRZ~XPKizVZohL1rRziOch.png",
+        "primary": true,
+        "photoLocal": {
+          "src": "/media/coc/c430447981e2eccb-staff.webp",
+          "width": 216,
+          "height": 216
+        }
+      },
+      {
+        "title": "Rabbi",
+        "name": "Meyer Shlomo Brook",
+        "role": "Co-Director",
+        "photo": "https://cocistorage.blob.core.windows.net/prod/profile/Mk2YI6mkHcZ3eM2a07QNyc.jpg",
+        "primary": true,
+        "photoLocal": {
+          "src": "/media/coc/11b5dc40f9a036b4-staff.webp",
+          "width": 240,
+          "height": 240
+        }
+      },
+      {
+        "title": "Mrs.",
+        "name": "Mushka Brook",
+        "role": null,
+        "photo": "https://cocistorage.blob.core.windows.net/prod/profile/E2pnUDV2VALA6db6Y-Z93W.jpg",
+        "primary": true,
+        "photoLocal": {
+          "src": "/media/coc/cd965ae352ae45b9-staff.webp",
+          "width": 240,
+          "height": 240
+        }
+      }
+    ],
+    "social": [
+      {
+        "type": "Facebook",
+        "url": "https://facebook.com/chabaduf"
+      },
+      {
+        "type": "Instagram",
+        "url": "https://www.instagram.com/chabad_uf/"
+      }
+    ],
+    "campuses": [
+      {
+        "id": 304,
+        "name": "University of Florida",
+        "nickname": "UF",
+        "primary": true,
+        "fullTime": true,
+        "distance": "FifthMile",
+        "website": "https://www.ufl.edu/",
+        "publicInstitution": true,
+        "residency": "Commuter",
+        "undergrad": 39000,
+        "grad": 18740,
+        "jewishUndergrad": 5000,
+        "jewishGrad": 2000,
+        "chabadGroupStatus": "AssociatedGroupRecognized",
+        "studentLife": [
+          {
+            "name": "Jewish student lounge",
+            "providers": [
+              "Chabad"
+            ]
+          },
+          {
+            "name": "Jewish student housing",
+            "providers": [
+              "Chabad"
+            ]
+          },
+          {
+            "name": "Daily Kosher meal plan (1 meal a day)",
+            "providers": [
+              "Chabad",
+              "School"
+            ]
+          },
+          {
+            "name": "Limited Kosher meal plan (1 or 2 meals a week)",
+            "providers": [
+              "Chabad",
+              "School"
+            ]
+          },
+          {
+            "name": "Kosher restaurant",
+            "providers": [
+              "Chabad",
+              "School"
+            ]
+          },
+          {
+            "name": "Packaged kosher food",
+            "providers": [
+              "Chabad",
+              "School"
+            ]
+          },
+          {
+            "name": "Kosher for Passover meal plan",
+            "providers": [
+              "Chabad"
+            ]
+          },
+          {
+            "name": "Shabbat and holidays minyan",
+            "providers": [
+              "Chabad"
+            ]
+          },
+          {
+            "name": "Daily minyan",
+            "providers": [
+              "Chabad"
+            ]
+          },
+          {
+            "name": "Israel Orgs",
+            "providers": []
+          },
+          {
+            "name": "Jewish Greek life",
+            "providers": []
+          },
+          {
+            "name": "Other Jewish student groups",
+            "providers": []
+          }
+        ],
+        "programLevels": [
+          "Grad",
+          "Undergrad"
+        ]
+      },
+      {
+        "id": 1225,
+        "name": "Santa Fe College",
+        "nickname": "SFC",
+        "primary": false,
+        "fullTime": true,
+        "distance": "FivePlusMiles",
+        "website": null,
+        "publicInstitution": true,
+        "residency": "Residential",
+        "undergrad": 14000,
+        "grad": null,
+        "jewishUndergrad": 1000,
+        "jewishGrad": null,
+        "chabadGroupStatus": "Unrecognized",
+        "studentLife": [
+          {
+            "name": "Jewish student lounge",
+            "providers": [
+              "Chabad"
+            ]
+          },
+          {
+            "name": "Jewish student housing",
+            "providers": [
+              "Chabad"
+            ]
+          },
+          {
+            "name": "Daily Kosher meal plan (1 meal a day)",
+            "providers": [
+              "Chabad"
+            ]
+          },
+          {
+            "name": "Kosher restaurant",
+            "providers": [
+              "Chabad"
+            ]
+          },
+          {
+            "name": "Kosher for Passover meal plan",
+            "providers": [
+              "Chabad"
+            ]
+          },
+          {
+            "name": "Shabbat and holidays minyan",
+            "providers": [
+              "Chabad"
+            ]
+          },
+          {
+            "name": "Daily minyan",
+            "providers": [
+              "Chabad"
+            ]
+          }
+        ],
+        "programLevels": [
+          "Undergrad"
+        ]
+      }
+    ],
+    "logoLocal": {
+      "src": "/media/coc/3dd048c8a371f54a-logo.webp",
+      "width": 320,
+      "height": 320
+    },
+    "imageLocal": {
+      "src": "/media/coc/2bda8366e094c057-w1280.webp",
+      "width": 1280,
+      "height": 960,
+      "srcset": "/media/coc/2bda8366e094c057-w1280.webp 1280w, /media/coc/2bda8366e094c057-w640.webp 640w"
+    }
+  }
+}

@@ -1,0 +1,164 @@
+{
+  "programs": {
+    "jewishu": {
+      "source": "EduChabadHouses eduProgramId=1",
+      "offeredAt": [
+        {
+          "center": "fau",
+          "slug": "chabad-student-center-boca",
+          "courses": 36,
+          "currentCourses": 3
+        },
+        {
+          "center": "fgcu",
+          "slug": "chabad-at-fgcu",
+          "courses": 53,
+          "currentCourses": 3
+        },
+        {
+          "center": "fiu",
+          "slug": "chabad-fiu",
+          "courses": 40,
+          "currentCourses": 7
+        },
+        {
+          "center": "fsu",
+          "slug": "chabad-at-fsu",
+          "courses": 40,
+          "currentCourses": 2
+        },
+        {
+          "center": "nsu",
+          "slug": "chabad-at-nsu",
+          "courses": 26,
+          "currentCourses": 7
+        },
+        {
+          "center": "ucf",
+          "slug": "ucf",
+          "courses": 79,
+          "currentCourses": 3
+        },
+        {
+          "center": "uf",
+          "slug": "chabaduf",
+          "courses": 74,
+          "currentCourses": 5
+        },
+        {
+          "center": "um",
+          "slug": "chabad-university-of-miami",
+          "courses": 2,
+          "currentCourses": 2
+        },
+        {
+          "center": "um-undergrad",
+          "slug": "chabad-um-undergrad",
+          "courses": 9,
+          "currentCourses": 4
+        },
+        {
+          "center": "unf",
+          "slug": "chabadunf",
+          "courses": 3,
+          "currentCourses": 0
+        },
+        {
+          "center": "usf",
+          "slug": "chabad-at-the-university-of-south-florida",
+          "courses": 45,
+          "currentCourses": 1
+        },
+        {
+          "center": "ut",
+          "slug": "chabad-at-university-of-tampa",
+          "courses": 4,
+          "currentCourses": 3
+        }
+      ]
+    },
+    "your-israel": {
+      "source": "EduChabadHouses eduProgramId=2",
+      "offeredAt": [
+        {
+          "center": "fau",
+          "slug": "chabad-student-center-boca"
+        },
+        {
+          "center": "fsu",
+          "slug": "chabad-at-fsu"
+        },
+        {
+          "center": "ucf",
+          "slug": "ucf"
+        },
+        {
+          "center": "uf",
+          "slug": "chabaduf"
+        },
+        {
+          "center": "um-undergrad",
+          "slug": "chabad-um-undergrad"
+        },
+        {
+          "center": "usf",
+          "slug": "chabad-at-the-university-of-south-florida"
+        }
+      ]
+    },
+    "sinai-scholars": {
+      "source": "EduChabadHouses eduProgramId=3",
+      "offeredAt": [
+        {
+          "center": "fau",
+          "slug": "chabad-student-center-boca"
+        },
+        {
+          "center": "fgcu",
+          "slug": "chabad-at-fgcu"
+        },
+        {
+          "center": "fiu",
+          "slug": "chabad-fiu"
+        },
+        {
+          "center": "fsu",
+          "slug": "chabad-at-fsu"
+        },
+        {
+          "center": "nsu",
+          "slug": "chabad-at-nsu"
+        },
+        {
+          "center": "rollins",
+          "slug": "winter-park-jewish-student"
+        },
+        {
+          "center": "ucf",
+          "slug": "ucf"
+        },
+        {
+          "center": "uf",
+          "slug": "chabaduf"
+        },
+        {
+          "center": "um",
+          "slug": "chabad-university-of-miami"
+        },
+        {
+          "center": "um-undergrad",
+          "slug": "chabad-um-undergrad"
+        },
+        {
+          "center": "unf",
+          "slug": "chabadunf"
+        },
+        {
+          "center": "usf",
+          "slug": "chabad-at-the-university-of-south-florida"
+        }
+      ]
+    }
+  },
+  "updatedAt": "2026-09-29T23:45:15.257Z"
+}

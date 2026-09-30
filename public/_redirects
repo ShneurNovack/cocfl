@@ -1,0 +1,13 @@
+# Legacy URLs from the previous site
+/directory              /campuses/  301
+/directory/             /campuses/  301
+/directory.html         /campuses/  301
+/index.html             /           301
+/Chabad%20Florida%20Home.dc.html  /  301
+# Common shortcuts
+/campus                 /campuses/  301
+/centers                /campuses/  301
+/centers/               /campuses/  301
+/find                   /campuses/  301
+/programs/birthright    /programs/birthright-israel/  301
+/programs/sinai-scholars-society  /programs/sinai-scholars/  301

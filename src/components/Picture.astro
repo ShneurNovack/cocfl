@@ -1,0 +1,9 @@
+---
+import { img } from '../lib/site';
+interface Props { name: string; alt: string; sizes?: string; eager?: boolean; class?: string; aspect?: string }
+const { name, alt, sizes = '(max-width: 800px) 100vw, 50vw', eager = false, aspect } = Astro.props;
+const i = img(name);
+---
+<div class:list={['photo', Astro.props.class]} style={aspect ? `aspect-ratio:${aspect}` : undefined}>
+  <img src={i.src} srcset={i.srcset} sizes={sizes} width={i.width} height={i.height} alt={alt} loading={eager ? 'eager' : 'lazy'} decoding="async" fetchpriority={eager ? 'high' : undefined} />
+</div>

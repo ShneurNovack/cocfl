@@ -1,0 +1,5097 @@
+{
+ "houses": {
+  "257": {
+   "id": 257,
+   "name": "Chabad UF",
+   "legalName": "Chabad UF",
+   "slug": "chabaduf",
+   "websiteURL": "http://jewishgator.com/",
+   "donateURL": "http://jewishgator.com/donate",
+   "jewishUDashboardURL": null,
+   "logoURL": "https://cocistorage.blob.core.windows.net/prod/house_logo/V1CbTW_U6egeNMzSk_L1vs.jpg",
+   "buildingImageURL": "https://cocistorage.blob.core.windows.net/prod/house/SrXBKHXYkGgQrAzAfUPyBC.JPG",
+   "regionID": 3,
+   "region": {
+    "id": 3,
+    "name": "USA - South"
+   },
+   "taxID": "",
+   "isRegistered501": false,
+   "timezoneID": "America/New_York",
+   "address": {
+    "hideFromPublic": false,
+    "address1": "2021 NW 5th Avenue",
+    "city": "Gainesville",
+    "country": "USA",
+    "id": 153,
+    "address2": "",
+    "state": "Florida",
+    "zip": "32603",
+    "discriminator": "ChabadHouse",
+    "locationName": null
+   },
+   "email": {
+    "id": 1015,
+    "type": "Email",
+    "value": "rabbia@jewishgator.com",
+    "normalizedValue": "rabbia@jewishgator.com",
+    "isPrimary": false,
+    "isPreferred": false,
+    "phoneExtension": null,
+    "phoneCountryID": null,
+    "callingCode": null,
+    "discriminator": "ChabadHouse"
+   },
+   "phone": {
+    "id": 11,
+    "type": "WorkNumber",
+    "value": "352-336-5877",
+    "normalizedValue": "13523365877",
+    "isPrimary": false,
+    "isPreferred": true,
+    "phoneExtension": "",
+    "phoneCountryID": 34,
+    "callingCode": "1",
+    "discriminator": "ChabadHouse"
+   },
+   "smsContactMethod": null,
+   "shluchim": [
+    {
+     "shliachID": 430,
+     "chabadHouseID": 257,
+     "title": "Mrs",
+     "fullName": "Chanie Goldman",
+     "shliachPosition": "CoDirector",
+     "profileImageURL": "https://cocistorage.blob.core.windows.net/prod/profile/voebs_q3cy4FwkUF23mEFI.JPG",
+     "titleDisplay": "Mrs.",
+     "shliachPositionDisplay": "Co-Director",
+     "isPrimary": true,
+     "chabadHouseName": "Chabad UF",
+     "websiteURL": "http://jewishgator.com/"
+    },
+    {
+     "shliachID": 431,
+     "chabadHouseID": 257,
+     "title": "Rabbi",
+     "fullName": "Aharon Chaim Notik",
+     "shliachPosition": "CoDirector",
+     "profileImageURL": "https://cocistorage.blob.core.windows.net/prod/profile/uwakn_d7QIZz~ImWmYaPNB.png",
+     "titleDisplay": "Rabbi",
+     "shliachPositionDisplay": "Co-Director",
+     "isPrimary": true,
+     "chabadHouseName": "Chabad UF",
+     "websiteURL": "http://jewishgator.com/"
+    },
+    {
+     "shliachID": 508,
+     "chabadHouseID": 257,
+     "title": "Rabbi",
+     "fullName": "Berl Goldman",
+     "shliachPosition": "Director",
+     "profileImageURL": "https://cocistorage.blob.core.windows.net/prod/profile/WCNoY70mwC1GBKbcDJDBJv.jpg",
+     "titleDisplay": "Rabbi",
+     "shliachPositionDisplay": "Director",
+     "isPrimary": true,
+     "chabadHouseName": "Chabad UF",
+     "websiteURL": "http://jewishgator.com/"
+    },
+    {
+     "shliachID": 509,
+     "chabadHouseID": 257,
+     "title": "Mrs",
+     "fullName": "Pessie Notik",
+     "shliachPosition": "CoDirector",
+     "profileImageURL": "https://cocistorage.blob.core.windows.net/prod/profile/rRZ~XPKizVZohL1rRziOch.png",
+     "titleDisplay": "Mrs.",
+     "shliachPositionDisplay": "Co-Director",
+     "isPrimary": true,
+     "chabadHouseName": "Chabad UF",
+     "websiteURL": "http://jewishgator.com/"
+    },
+    {
+     "shliachID": 1953,
+     "chabadHouseID": 257,
+     "title": "Rabbi",
+     "fullName": "Meyer Shlomo Brook",
+     "shliachPosition": "CoDirector",
+     "profileImageURL": "https://cocistorage.blob.core.windows.net/prod/profile/Mk2YI6mkHcZ3eM2a07QNyc.jpg",
+     "titleDisplay": "Rabbi",
+     "shliachPositionDisplay": "Co-Director",
+     "isPrimary": true,
+     "chabadHouseName": "Chabad UF",
+     "websiteURL": "http://jewishgator.com/"
+    },
+    {
+     "shliachID": 1954,
+     "chabadHouseID": 257,
+     "title": "Mrs",
+     "fullName": "Mushka Brook",
+     "shliachPosition": "Unknown",
+     "profileImageURL": "https://cocistorage.blob.core.windows.net/prod/profile/E2pnUDV2VALA6db6Y-Z93W.jpg",
+     "titleDisplay": "Mrs.",
+     "shliachPositionDisplay": "",
+     "isPrimary": true,
+     "chabadHouseName": "Chabad UF",
+     "websiteURL": "http://jewishgator.com/"
+    }
+   ],
+   "campuses": [
+    {
+     "chabadHouseID": 257,
+     "campusID": 304,
+     "isFullTime": true,
+     "isPrimary": true,
+     "distance": "FifthMile",
+     "campusName": "University of Florida",
+     "chabadHouseName": "Chabad UF"
+    },
+    {
+     "chabadHouseID": 257,
+     "campusID": 1225,
+     "isFullTime": true,
+     "isPrimary": false,
+     "distance": "FivePlusMiles",
+     "campusName": "Santa Fe College",
+     "chabadHouseName": "Chabad UF"
+    }
+   ],
+   "personnel": [],
+   "socialMediaAccounts": [
+    {
+     "id": 694,
+     "url": "https://facebook.com/chabaduf",
+     "type": "Facebook",
+     "optOut": false
+    },
+    {
+     "id": 695,
+     "url": "https://www.instagram.com/chabad_uf/",
+     "type": "Instagram",
+     "optOut": false
+    },
+    {
+     "id": 696,
+     "url": "",
+     "type": "Twitter",
+     "optOut": true
+    }
+   ]
+  },
+  "7": {
+   "id": 7,
+   "name": "Chabad at FSU",
+   "legalName": "Chabad Lubavitch of the Panhandle-Tallahassee ",
+   "slug": "chabad-at-fsu",
+   "websiteURL": "https://www.chabadtallahassee.com/directions",
+   "donateURL": "http://www.chabadtallahassee.com/donate",
+   "jewishUDashboardURL": "https://jewishu-growth-summit.netlify.app/?t=c0ba67ce4e9466fcefcdc40688d2f7cd",
+   "logoURL": "https://cocistorage.blob.core.windows.net/prod/house_logo/AbGqzB2eD59iLKJYpHglMG.jpg",
+   "buildingImageURL": "https://cocistorage.blob.core.windows.net/prod/house/eeDT2s2_O-NApWICOJGfdr.jpg",
+   "regionID": 3,
+   "region": {
+    "id": 3,
+    "name": "USA - South"
+   },
+   "taxID": "65-0970446",
+   "isRegistered501": true,
+   "timezoneID": "America/New_York",
+   "address": {
+    "hideFromPublic": false,
+    "address1": "224 Chapel Drive",
+    "city": "Tallahassee",
+    "country": "USA",
+    "id": 512,
+    "address2": "",
+    "state": "Florida",
+    "zip": "32304",
+    "discriminator": "ChabadHouse",
+    "locationName": null
+   },
+   "email": {
+    "id": 853,
+    "type": "Email",
+    "value": "Office@chabadtallahassee.com",
+    "normalizedValue": "Office@chabadtallahassee.com",
+    "isPrimary": false,
+    "isPreferred": false,
+    "phoneExtension": null,
+    "phoneCountryID": null,
+    "callingCode": null,
+    "discriminator": "ChabadHouse"
+   },
+   "phone": {
+    "id": 44,
+    "type": "WorkNumber",
+    "value": "850-523-9294",
+    "normalizedValue": "18505239294",
+    "isPrimary": false,
+    "isPreferred": true,
+    "phoneExtension": "1",
+    "phoneCountryID": 34,
+    "callingCode": "1",
+    "discriminator": "ChabadHouse"
+   },
+   "smsContactMethod": {
+    "id": 663,
+    "type": "MessagingNumber",
+    "value": "850-429-4494",
+    "normalizedValue": "18504294494",
+    "isPrimary": false,
+    "isPreferred": false,
+    "phoneExtension": "",
+    "phoneCountryID": 34,
+    "callingCode": "1",
+    "discriminator": "ChabadHouse"
+   },
+   "shluchim": [
+    {
+     "shliachID": 457,
+     "chabadHouseID": 7,
+     "title": "Mrs",
+     "fullName": "Chana Oirechman",
+     "shliachPosition": "Director",
+     "profileImageURL": "https://cocistorage.blob.core.windows.net/prod/profile/xt0uqluLqybNia~jawslMv.jpg",
+     "titleDisplay": "Mrs.",
+     "shliachPositionDisplay": "Director",
+     "isPrimary": false,
+     "chabadHouseName": "Chabad at FSU",
+     "websiteURL": "https://www.chabadtallahassee.com/directions"
+    },
+    {
+     "shliachID": 491,
+     "chabadHouseID": 7,
+     "title": "Rabbi",
+     "fullName": "Schneur Zalman Oirechman",
+     "shliachPosition": "Director",
+     "profileImageURL": "https://cocistorage.blob.core.windows.net/prod/profile/HiF6z6NOlv2gs9bFpx3WV6.jpg",
+     "titleDisplay": "Rabbi",
+     "shliachPositionDisplay": "Director",
+     "isPrimary": false,
+     "chabadHouseName": "Chabad at FSU",
+     "websiteURL": "https://www.chabadtallahassee.com/directions"
+    },
+    {
+     "shliachID": 2151,
+     "chabadHouseID": 7,
+     "title": "Rabbi",
+     "fullName": "Yosef Oirechman",
+     "shliachPosition": "Director",
+     "profileImageURL": "",
+     "titleDisplay": "Rabbi",
+     "shliachPositionDisplay": "Director",
+     "isPrimary": false,
+     "chabadHouseName": "Chabad at FSU",
+     "websiteURL": "https://www.chabadtallahassee.com/directions"
+    },
+    {
+     "shliachID": 2152,
+     "chabadHouseID": 7,
+     "title": "Rebbetzin",
+     "fullName": "Rivka Oirechman",
+     "shliachPosition": "Director",
+     "profileImageURL": "",
+     "titleDisplay": "Rebbetzin",
+     "shliachPositionDisplay": "Director",
+     "isPrimary": false,
+     "chabadHouseName": "Chabad at FSU",
+     "websiteURL": "https://www.chabadtallahassee.com/directions"
+    }
+   ],
+   "campuses": [
+    {
+     "chabadHouseID": 7,
+     "campusID": 41,
+     "isFullTime": true,
+     "isPrimary": true,
+     "distance": "OneMile",
+     "campusName": "Florida State University",
+     "chabadHouseName": "Chabad at FSU"
+    }
+   ],
+   "personnel": [
+    {
+     "id": 220,
+     "personnelID": 231,
+     "chabadHousePersonnelID": 220,
+     "chabadHouseID": 7,
+     "position": "ExecutiveAssistant",
+     "positionDisplay": "Executive Assistant",
+     "firstName": "Cassie",
+     "lastName": "Dover",
+     "email": "office@chabadtallahassee.com",
+     "expirationDate": "2026-08-28",
+     "personID": 196411,
+     "studentID": null,
+     "isStudent": false
+    }
+   ],
+   "socialMediaAccounts": [
+    {
+     "id": 2,
+     "url": "",
+     "type": "Facebook",
+     "optOut": true
+    },
+    {
+     "id": 3,
+     "url": "",
+     "type": "Instagram",
+     "optOut": true
+    },
+    {
+     "id": 461,
+     "url": "",
+     "type": "Twitter",
+     "optOut": true
+    }
+   ]
+  },
+  "124": {
+   "id": 124,
+   "name": "Chabad @ University of Central Florida",
+   "legalName": "Chabad at UCF, Inc",
+   "slug": "ucf",
+   "websiteURL": "https://www.jewishucf.com/",
+   "donateURL": "https://www.jewishucf.com/Donate",
+   "jewishUDashboardURL": "https://jewishu-growth-summit.netlify.app/?t=10d13d4bf1346bccf443c47871522e6a",
+   "logoURL": "https://cocistorage.blob.core.windows.net/prod/house_logo/6dZZlwMA~foJgRd6_g80hP.png",
+   "buildingImageURL": "https://cocistorage.blob.core.windows.net/prod/house/tTVpgNot9k9QItLLDltZni.jpg",
+   "regionID": 3,
+   "region": {
+    "id": 3,
+    "name": "USA - South"
+   },
+   "taxID": "20-5758752",
+   "isRegistered501": true,
+   "timezoneID": "America/New_York",
+   "address": {
+    "hideFromPublic": false,
+    "address1": "3144 N Alafaya Trail",
+    "city": "Orlando",
+    "country": "USA",
+    "id": 44,
+    "address2": "",
+    "state": "Florida",
+    "zip": "32826",
+    "discriminator": "ChabadHouse",
+    "locationName": null
+   },
+   "email": {
+    "id": 855,
+    "type": "Email",
+    "value": "Rabbi@JewishUCF.com",
+    "normalizedValue": "Rabbi@JewishUCF.com",
+    "isPrimary": false,
+    "isPreferred": false,
+    "phoneExtension": null,
+    "phoneCountryID": null,
+    "callingCode": null,
+    "discriminator": "ChabadHouse"
+   },
+   "phone": {
+    "id": 166,
+    "type": "WorkNumber",
+    "value": "407-949-8838",
+    "normalizedValue": "14079498838",
+    "isPrimary": false,
+    "isPreferred": true,
+    "phoneExtension": "1",
+    "phoneCountryID": 34,
+    "callingCode": "1",
+    "discriminator": "ChabadHouse"
+   },
+   "smsContactMethod": {
+    "id": 804,
+    "type": "MessagingNumber",
+    "value": "407-974-7707",
+    "normalizedValue": "14079747707",
+    "isPrimary": false,
+    "isPreferred": false,
+    "phoneExtension": "",
+    "phoneCountryID": 34,
+    "callingCode": "1",
+    "discriminator": "ChabadHouse"
+   },
+   "shluchim": [
+    {
+     "shliachID": 1381,
+     "chabadHouseID": 124,
+     "title": "Rabbi",
+     "fullName": "Chaim Boruch Lipskier",
+     "shliachPosition": "Unknown",
+     "profileImageURL": "https://cocistorage.blob.core.windows.net/prod/profile/aYtYHQhXmI4ew4DVMLWECF.jpg",
+     "titleDisplay": "Rabbi",
+     "shliachPositionDisplay": "",
+     "isPrimary": false,
+     "chabadHouseName": "Chabad @ University of Central Florida",
+     "websiteURL": "https://www.jewishucf.com/"
+    },
+    {
+     "shliachID": 1413,
+     "chabadHouseID": 124,
+     "title": "Mrs",
+     "fullName": "Rivkie Lipskier",
+     "shliachPosition": "CoDirector",
+     "profileImageURL": "https://cocistorage.blob.core.windows.net/prod/profile/7RAq4w~zZTdSk9b7Lt7Uvl.jpg",
+     "titleDisplay": "Mrs.",
+     "shliachPositionDisplay": "Co-Director",
+     "isPrimary": false,
+     "chabadHouseName": "Chabad @ University of Central Florida",
+     "websiteURL": "https://www.jewishucf.com/"
+    }
+   ],
+   "campuses": [
+    {
+     "chabadHouseID": 124,
+     "campusID": 70,
+     "isFullTime": true,
+     "isPrimary": true,
+     "distance": "FifthMile",
+     "campusName": "University of Central Florida",
+     "chabadHouseName": "Chabad @ University of Central Florida"
+    },
+    {
+     "chabadHouseID": 124,
+     "campusID": 726,
+     "isFullTime": true,
+     "isPrimary": false,
+     "distance": "TwoMiles",
+     "campusName": "Valencia College",
+     "chabadHouseName": "Chabad @ University of Central Florida"
+    }
+   ],
+   "personnel": [
+    {
+     "id": 168,
+     "personnelID": 179,
+     "chabadHousePersonnelID": 168,
+     "chabadHouseID": 124,
+     "position": "Intern",
+     "positionDisplay": "Intern",
+     "firstName": "Shlomo",
+     "lastName": "Jacobs",
+     "email": "shlomoyj03@gmail.com",
+     "expirationDate": "2026-05-10",
+     "personID": 175304,
+     "studentID": null,
+     "isStudent": false
+    },
+    {
+     "id": 223,
+     "personnelID": 234,
+     "chabadHousePersonnelID": 223,
+     "chabadHouseID": 124,
+     "position": "Intern",
+     "positionDisplay": "Intern",
+     "firstName": "Chayale",
+     "lastName": "Lipskier",
+     "email": "Lipskier.Chayale@gmail.com",
+     "expirationDate": "2027-08-31",
+     "personID": 96491,
+     "studentID": 83113,
+     "isStudent": false
+    },
+    {
+     "id": 224,
+     "personnelID": 235,
+     "chabadHousePersonnelID": 224,
+     "chabadHouseID": 124,
+     "position": "Intern",
+     "positionDisplay": "Intern",
+     "firstName": "Chana",
+     "lastName": "Rapoport",
+     "email": "Chanarapoport@gmail.com",
+     "expirationDate": "2026-12-31",
+     "personID": 196689,
+     "studentID": null,
+     "isStudent": false
+    }
+   ],
+   "socialMediaAccounts": [
+    {
+     "id": 89,
+     "url": "https://www.instagram.com/chabaducf/",
+     "type": "Instagram",
+     "optOut": false
+    },
+    {
+     "id": 90,
+     "url": "https://x.com/ChabadUCF",
+     "type": "Twitter",
+     "optOut": false
+    },
+    {
+     "id": 91,
+     "url": "http://facebook.com/ChabadUCF",
+     "type": "Facebook",
+     "optOut": false
+    }
+   ]
+  },
+  "81": {
+   "id": 81,
+   "name": "Chabad at UNF",
+   "legalName": "Chabad Lubavitch of Southside",
+   "slug": "chabadunf",
+   "websiteURL": "https://chabadunf.com/",
+   "donateURL": "https://chabadunf.com/donate",
+   "jewishUDashboardURL": null,
+   "logoURL": "https://cocistorage.blob.core.windows.net/prod/house_logo/LAepgnopgDdScUaqHgrk50.png",
+   "buildingImageURL": "https://cocistorage.blob.core.windows.net/prod/house/z_mjvPIozqRnyrcw~MYWH5.jpg",
+   "regionID": 3,
+   "region": {
+    "id": 3,
+    "name": "USA - South"
+   },
+   "taxID": "",
+   "isRegistered501": true,
+   "timezoneID": "America/New_York",
+   "address": {
+    "hideFromPublic": false,
+    "address1": "11271 Alumni Way",
+    "city": "Jacksonville",
+    "country": "USA",
+    "id": 269,
+    "address2": "",
+    "state": "Florida",
+    "zip": "32246-6685",
+    "discriminator": "ChabadHouse",
+    "locationName": null
+   },
+   "email": {
+    "id": 811,
+    "type": "Email",
+    "value": "office@chabadunf.com",
+    "normalizedValue": "office@chabadunf.com",
+    "isPrimary": false,
+    "isPreferred": false,
+    "phoneExtension": null,
+    "phoneCountryID": null,
+    "callingCode": null,
+    "discriminator": "ChabadHouse"
+   },
+   "phone": {
+    "id": 129,
+    "type": "WorkNumber",
+    "value": "904-646-4434",
+    "normalizedValue": "19046464434",
+    "isPrimary": false,
+    "isPreferred": true,
+    "phoneExtension": "",
+    "phoneCountryID": 34,
+    "callingCode": "1",
+    "discriminator": "ChabadHouse"
+   },
+   "smsContactMethod": null,
+   "shluchim": [
+    {
+     "shliachID": 1279,
+     "chabadHouseID": 81,
+     "title": "Rabbi",
+     "fullName": "Shmuel Novack",
+     "shliachPosition": "Unknown",
+     "profileImageURL": "https://cocistorage.blob.core.windows.net/prod/profile/Lgf4so8uS68cdybOTAoV6J.JPG",
+     "titleDisplay": "Rabbi",
+     "shliachPositionDisplay": "",
+     "isPrimary": true,
+     "chabadHouseName": "Chabad at UNF",
+     "websiteURL": "https://chabadunf.com/"
+    },
+    {
+     "shliachID": 1282,
+     "chabadHouseID": 81,
+     "title": "Mrs",
+     "fullName": "Chana Novack",
+     "shliachPosition": "CoDirector",
+     "profileImageURL": "https://cocistorage.blob.core.windows.net/prod/profile/1g03hcdsC3WDaZ7u02M_HJ.jpg",
+     "titleDisplay": "Mrs.",
+     "shliachPositionDisplay": "Co-Director",
+     "isPrimary": true,
+     "chabadHouseName": "Chabad at UNF",
+     "websiteURL": "https://chabadunf.com/"
+    }
+   ],
+   "campuses": [
+    {
+     "chabadHouseID": 81,
+     "campusID": 582,
+     "isFullTime": true,
+     "isPrimary": true,
+     "distance": "FifthMile",
+     "campusName": "University of North Florida",
+     "chabadHouseName": "Chabad at UNF"
+    },
+    {
+     "chabadHouseID": 81,
+     "campusID": 686,
+     "isFullTime": false,
+     "isPrimary": false,
+     "distance": "TwoMiles",
+     "campusName": "Florida State College at Jacksonville",
+     "chabadHouseName": "Chabad at UNF"
+    },
+    {
+     "chabadHouseID": 81,
+     "campusID": 1290,
+     "isFullTime": false,
+     "isPrimary": false,
+     "distance": "Other",
+     "campusName": "Jacksonville University",
+     "chabadHouseName": "Chabad at UNF"
+    }
+   ],
+   "personnel": [
+    {
+     "id": 16,
+     "personnelID": 25,
+     "chabadHousePersonnelID": 16,
+     "chabadHouseID": 81,
+     "position": "ExecutiveAssistant",
+     "positionDisplay": "Executive Assistant",
+     "firstName": "Shneur",
+     "lastName": "Novack",
+     "email": "shneurnovack@gmail.com",
+     "expirationDate": null,
+     "personID": 69790,
+     "studentID": null,
+     "isStudent": false
+    }
+   ],
+   "socialMediaAccounts": [
+    {
+     "id": 57,
+     "url": "http://facebook.com/jewishospreys",
+     "type": "Facebook",
+     "optOut": false
+    },
+    {
+     "id": 58,
+     "url": "https://instagram.com/jewishospreys",
+     "type": "Instagram",
+     "optOut": false
+    },
+    {
+     "id": 390,
+     "url": "",
+     "type": "Twitter",
+     "optOut": true
+    }
+   ]
+  },
+  "445": {
+   "id": 445,
+   "name": "Chabad at the University of South Florida",
+   "legalName": "Chabad at USF INC.",
+   "slug": "chabad-at-the-university-of-south-florida",
+   "websiteURL": "http://usfchabad.com/",
+   "donateURL": "http://www.usfchabad.com/donate",
+   "jewishUDashboardURL": "https://jewishu-growth-summit.netlify.app/?t=934a461b287620c497eb54fc7a7c37dc",
+   "logoURL": "https://cocistorage.blob.core.windows.net/prod/house_logo/Fooaoh0obH2v9dVPvMyYd-.png",
+   "buildingImageURL": "https://cocistorage.blob.core.windows.net/prod/house/p_FTkJ1DKj6nFbSrNIl4pv.jpg",
+   "regionID": 3,
+   "region": {
+    "id": 3,
+    "name": "USA - South"
+   },
+   "taxID": "",
+   "isRegistered501": true,
+   "timezoneID": "America/New_York",
+   "address": {
+    "hideFromPublic": false,
+    "address1": "12301 North 52nd Street",
+    "city": "Tampa",
+    "country": "USA",
+    "id": 886,
+    "address2": "",
+    "state": "Florida",
+    "zip": "33617",
+    "discriminator": "ChabadHouse",
+    "locationName": null
+   },
+   "email": {
+    "id": 935,
+    "type": "Email",
+    "value": "rabbipinny@gmail.com",
+    "normalizedValue": "rabbipinny@gmail.com",
+    "isPrimary": false,
+    "isPreferred": false,
+    "phoneExtension": null,
+    "phoneCountryID": null,
+    "callingCode": null,
+    "discriminator": "ChabadHouse"
+   },
+   "phone": {
+    "id": 343,
+    "type": "WorkNumber",
+    "value": "813-930-5105",
+    "normalizedValue": "18139305105",
+    "isPrimary": false,
+    "isPreferred": true,
+    "phoneExtension": "",
+    "phoneCountryID": 34,
+    "callingCode": "1",
+    "discriminator": "ChabadHouse"
+   },
+   "smsContactMethod": {
+    "id": 680,
+    "type": "MessagingNumber",
+    "value": "813-537-2639",
+    "normalizedValue": "18135372639",
+    "isPrimary": false,
+    "isPreferred": false,
+    "phoneExtension": "",
+    "phoneCountryID": 34,
+    "callingCode": "1",
+    "discriminator": "ChabadHouse"
+   },
+   "shluchim": [
+    {
+     "shliachID": 1385,
+     "chabadHouseID": 445,
+     "title": "Mrs",
+     "fullName": "Chava Backman",
+     "shliachPosition": "Director",
+     "profileImageURL": "https://cocistorage.blob.core.windows.net/prod/profile/OwG8iJ5xwI5mEC9khVrtAU.jpg",
+     "titleDisplay": "Mrs.",
+     "shliachPositionDisplay": "Director",
+     "isPrimary": true,
+     "chabadHouseName": "Chabad at the University of South Florida",
+     "websiteURL": "http://usfchabad.com/"
+    },
+    {
+     "shliachID": 1398,
+     "chabadHouseID": 445,
+     "title": "Rabbi",
+     "fullName": "Pinny Backman",
+     "shliachPosition": "Director",
+     "profileImageURL": "https://cocistorage.blob.core.windows.net/prod/profile/coSRsnOjhCNL6qdn4nNuEz.jpg",
+     "titleDisplay": "Rabbi",
+     "shliachPositionDisplay": "Director",
+     "isPrimary": true,
+     "chabadHouseName": "Chabad at the University of South Florida",
+     "websiteURL": "http://usfchabad.com/"
+    },
+    {
+     "shliachID": 2109,
+     "chabadHouseID": 445,
+     "title": "Rabbi",
+     "fullName": "Yehuda Tanenbaum",
+     "shliachPosition": "Other",
+     "profileImageURL": "https://cocistorage.blob.core.windows.net/prod/profile/A9n5ARCreF39XcazMNzUn4.jpg",
+     "titleDisplay": "Rabbi",
+     "shliachPositionDisplay": "Other",
+     "isPrimary": true,
+     "chabadHouseName": "Chabad at the University of South Florida",
+     "websiteURL": "http://usfchabad.com/"
+    },
+    {
+     "shliachID": 2110,
+     "chabadHouseID": 445,
+     "title": "Rebbetzin",
+     "fullName": "Devo Tanenbaum",
+     "shliachPosition": "Unknown",
+     "profileImageURL": "https://cocistorage.blob.core.windows.net/prod/profile/d9K7JAZWHKzOla572uSmNB.jpg",
+     "titleDisplay": "Rebbetzin",
+     "shliachPositionDisplay": "",
+     "isPrimary": true,
+     "chabadHouseName": "Chabad at the University of South Florida",
+     "websiteURL": "http://usfchabad.com/"
+    }
+   ],
+   "campuses": [
+    {
+     "chabadHouseID": 445,
+     "campusID": 45,
+     "isFullTime": true,
+     "isPrimary": true,
+     "distance": "HalfMile",
+     "campusName": "University of South Florida",
+     "chabadHouseName": "Chabad at the University of South Florida"
+    }
+   ],
+   "personnel": [
+    {
+     "id": 183,
+     "personnelID": 194,
+     "chabadHousePersonnelID": 183,
+     "chabadHouseID": 445,
+     "position": "Secretary",
+     "positionDisplay": "Secretary",
+     "firstName": "Carly",
+     "lastName": "Neeman",
+     "email": "neemancarli@gmail.com",
+     "expirationDate": "2026-07-28",
+     "personID": 180790,
+     "studentID": null,
+     "isStudent": false
+    },
+    {
+     "id": 202,
+     "personnelID": 213,
+     "chabadHousePersonnelID": 202,
+     "chabadHouseID": 445,
+     "position": "ExecutiveAssistant",
+     "positionDisplay": "Executive Assistant",
+     "firstName": "Rocky",
+     "lastName": "the Bull",
+     "email": "rocky@usfchabad.com",
+     "expirationDate": null,
+     "personID": 189493,
+     "studentID": null,
+     "isStudent": false
+    }
+   ],
+   "socialMediaAccounts": [
+    {
+     "id": 246,
+     "url": "http://instagram.com/chabadatusf",
+     "type": "Instagram",
+     "optOut": false
+    },
+    {
+     "id": 247,
+     "url": "https://www.facebook.com/ChabadatUSF/",
+     "type": "Facebook",
+     "optOut": false
+    },
+    {
+     "id": 601,
+     "url": "",
+     "type": "Twitter",
+     "optOut": true
+    }
+   ]
+  },
+  "829": {
+   "id": 829,
+   "name": "Chabad at University of Tampa",
+   "legalName": "",
+   "slug": "chabad-at-university-of-tampa",
+   "websiteURL": "",
+   "donateURL": "",
+   "jewishUDashboardURL": null,
+   "logoURL": "",
+   "buildingImageURL": "",
+   "regionID": 16,
+   "region": {
+    "id": 16,
+    "name": "USA - Southwest"
+   },
+   "taxID": "",
+   "isRegistered501": false,
+   "timezoneID": "America/New_York",
+   "address": {
+    "hideFromPublic": true,
+    "address1": "",
+    "city": "Tampa",
+    "country": "USA",
+    "id": 902,
+    "address2": "",
+    "state": "Florida",
+    "zip": "33606",
+    "discriminator": "ChabadHouse",
+    "locationName": null
+   },
+   "email": null,
+   "phone": {
+    "id": 1146,
+    "type": "WorkNumber",
+    "value": "(813) 504-4432",
+    "normalizedValue": "18135044432",
+    "isPrimary": false,
+    "isPreferred": false,
+    "phoneExtension": "",
+    "phoneCountryID": 34,
+    "callingCode": "1",
+    "discriminator": "ChabadHouse"
+   },
+   "smsContactMethod": {
+    "id": 1165,
+    "type": "MessagingNumber",
+    "value": "(813) 536-3637",
+    "normalizedValue": "18135363637",
+    "isPrimary": false,
+    "isPreferred": false,
+    "phoneExtension": null,
+    "phoneCountryID": null,
+    "callingCode": null,
+    "discriminator": "ChabadHouse"
+   },
+   "shluchim": [
+    {
+     "shliachID": 2179,
+     "chabadHouseID": 829,
+     "title": "Rabbi",
+     "fullName": "Levi Rivkin",
+     "shliachPosition": "Director",
+     "profileImageURL": "",
+     "titleDisplay": "Rabbi",
+     "shliachPositionDisplay": "Director",
+     "isPrimary": false,
+     "chabadHouseName": "Chabad at University of Tampa",
+     "websiteURL": ""
+    },
+    {
+     "shliachID": 2180,
+     "chabadHouseID": 829,
+     "title": "Rebbetzin",
+     "fullName": "Chana Hinda Rivkin",
+     "shliachPosition": "Director",
+     "profileImageURL": "",
+     "titleDisplay": "Rebbetzin",
+     "shliachPositionDisplay": "Director",
+     "isPrimary": true,
+     "chabadHouseName": "Chabad at University of Tampa",
+     "websiteURL": ""
+    }
+   ],
+   "campuses": [
+    {
+     "chabadHouseID": 829,
+     "campusID": 1439,
+     "isFullTime": true,
+     "isPrimary": true,
+     "distance": null,
+     "campusName": "University of Tampa",
+     "chabadHouseName": "Chabad at University of Tampa"
+    }
+   ],
+   "personnel": [],
+   "socialMediaAccounts": []
+  },
+  "233": {
+   "id": 233,
+   "name": "Chabad @ University of Miami",
+   "legalName": "Chabad of the Gables, Inc",
+   "slug": "chabad-university-of-miami",
+   "websiteURL": "http://uchabad.com/",
+   "donateURL": "https://www.zeffy.com/en-US/donation-form/1c6b424b-382a-4c65-92ab-5cf68714bc5c",
+   "jewishUDashboardURL": null,
+   "logoURL": "https://cocistorage.blob.core.windows.net/prod/house_logo/GFFh2GlVq8O7RvegTcAfJO.png",
+   "buildingImageURL": "https://cocistorage.blob.core.windows.net/prod/house/73NGGdDJ_OCfOb8SqPuANL.png",
+   "regionID": 3,
+   "region": {
+    "id": 3,
+    "name": "USA - South"
+   },
+   "taxID": "41-2035841",
+   "isRegistered501": true,
+   "timezoneID": "America/New_York",
+   "address": {
+    "hideFromPublic": false,
+    "address1": "1251 Hardee Road",
+    "city": "Coral Gables",
+    "country": "USA",
+    "id": 228,
+    "address2": "",
+    "state": "Florida",
+    "zip": "33146-3253",
+    "discriminator": "ChabadHouse",
+    "locationName": null
+   },
+   "email": {
+    "id": 1012,
+    "type": "Email",
+    "value": "rabbimendy@uchabad.com",
+    "normalizedValue": "rabbimendy@uchabad.com",
+    "isPrimary": false,
+    "isPreferred": false,
+    "phoneExtension": null,
+    "phoneCountryID": null,
+    "callingCode": null,
+    "discriminator": "ChabadHouse"
+   },
+   "phone": {
+    "id": 334,
+    "type": "WorkNumber",
+    "value": "305-206-4013",
+    "normalizedValue": "13052064013",
+    "isPrimary": false,
+    "isPreferred": true,
+    "phoneExtension": "",
+    "phoneCountryID": 34,
+    "callingCode": "1",
+    "discriminator": "ChabadHouse"
+   },
+   "smsContactMethod": null,
+   "shluchim": [
+    {
+     "shliachID": 1286,
+     "chabadHouseID": 233,
+     "title": "Mrs",
+     "fullName": "Henchi Fellig",
+     "shliachPosition": "CoDirector",
+     "profileImageURL": "https://cocistorage.blob.core.windows.net/prod/profile/1Bq48xBZszRBhGCtu2ll~D.jpg",
+     "titleDisplay": "Mrs.",
+     "shliachPositionDisplay": "Co-Director",
+     "isPrimary": true,
+     "chabadHouseName": "Chabad @ University of Miami",
+     "websiteURL": "http://uchabad.com/"
+    },
+    {
+     "shliachID": 1395,
+     "chabadHouseID": 233,
+     "title": "Rabbi",
+     "fullName": "Mendy Fellig",
+     "shliachPosition": "Unknown",
+     "profileImageURL": "https://cocistorage.blob.core.windows.net/prod/profile/siWzxyoTRjGV~aB_RZmhxE.png",
+     "titleDisplay": "Rabbi",
+     "shliachPositionDisplay": "",
+     "isPrimary": true,
+     "chabadHouseName": "Chabad @ University of Miami",
+     "websiteURL": "http://uchabad.com/"
+    }
+   ],
+   "campuses": [
+    {
+     "chabadHouseID": 233,
+     "campusID": 305,
+     "isFullTime": true,
+     "isPrimary": true,
+     "distance": "FifthMile",
+     "campusName": "University of Miami",
+     "chabadHouseName": "Chabad @ University of Miami"
+    }
+   ],
+   "personnel": [
+    {
+     "id": 132,
+     "personnelID": 143,
+     "chabadHousePersonnelID": 132,
+     "chabadHouseID": 233,
+     "position": "ExecutiveAssistant",
+     "positionDisplay": "Executive Assistant",
+     "firstName": "Jackie",
+     "lastName": "Ruloff",
+     "email": "jackie.ruloff@uchabad.com",
+     "expirationDate": "2027-07-31",
+     "personID": 159482,
+     "studentID": null,
+     "isStudent": false
+    }
+   ],
+   "socialMediaAccounts": [
+    {
+     "id": 688,
+     "url": "",
+     "type": "Facebook",
+     "optOut": true
+    },
+    {
+     "id": 689,
+     "url": "",
+     "type": "Instagram",
+     "optOut": true
+    },
+    {
+     "id": 690,
+     "url": "",
+     "type": "Twitter",
+     "optOut": true
+    }
+   ]
+  },
+  "318": {
+   "id": 318,
+   "name": "Chabad at University of Miami - Undergrad",
+   "legalName": "Jewish Nation Undergrad",
+   "slug": "chabad-um-undergrad",
+   "websiteURL": "http://uchabadundergrad.com/",
+   "donateURL": "https://www.uchabadundergrad.com/donate",
+   "jewishUDashboardURL": "https://jewishu-growth-summit.netlify.app/?t=d94b0394a5dad3c4b3eb83e72e578b40",
+   "logoURL": "https://cocistorage.blob.core.windows.net/prod/house_logo/XnB1UpdcpcCcC5ylgsdZho.png",
+   "buildingImageURL": "https://cocistorage.blob.core.windows.net/prod/house/z39_t-HknNf0zWRbjOVf-O.jpg",
+   "regionID": 3,
+   "region": {
+    "id": 3,
+    "name": "USA - South"
+   },
+   "taxID": "83-2403422",
+   "isRegistered501": true,
+   "timezoneID": "America/New_York",
+   "address": {
+    "hideFromPublic": false,
+    "address1": "5800 Maynada Street",
+    "city": "Coral Gables",
+    "country": "USA",
+    "id": 490,
+    "address2": "",
+    "state": "Florida",
+    "zip": "33146",
+    "discriminator": "ChabadHouse",
+    "locationName": null
+   },
+   "email": {
+    "id": 972,
+    "type": "Email",
+    "value": "rabbi@uchabadundergrad.com",
+    "normalizedValue": "rabbi@uchabadundergrad.com",
+    "isPrimary": false,
+    "isPreferred": false,
+    "phoneExtension": null,
+    "phoneCountryID": null,
+    "callingCode": null,
+    "discriminator": "ChabadHouse"
+   },
+   "phone": {
+    "id": 431,
+    "type": "WorkNumber",
+    "value": "305-924-4721",
+    "normalizedValue": "13059244721",
+    "isPrimary": false,
+    "isPreferred": false,
+    "phoneExtension": "",
+    "phoneCountryID": 34,
+    "callingCode": "1",
+    "discriminator": "ChabadHouse"
+   },
+   "smsContactMethod": null,
+   "shluchim": [
+    {
+     "shliachID": 14,
+     "chabadHouseID": 318,
+     "title": "Mrs",
+     "fullName": "Mushka Lipskier",
+     "shliachPosition": "Unknown",
+     "profileImageURL": "https://cocistorage.blob.core.windows.net/prod/profile/WrXN030BN6JZtAZTj~z7Je.JPG",
+     "titleDisplay": "Mrs.",
+     "shliachPositionDisplay": "",
+     "isPrimary": true,
+     "chabadHouseName": "Chabad at University of Miami - Undergrad",
+     "websiteURL": "http://uchabadundergrad.com/"
+    },
+    {
+     "shliachID": 669,
+     "chabadHouseID": 318,
+     "title": "Rabbi",
+     "fullName": "Shmuel Lipskier",
+     "shliachPosition": "Unknown",
+     "profileImageURL": "https://cocistorage.blob.core.windows.net/prod/profile/w9UYOwkqDKjnKLcyC62RrB.JPG",
+     "titleDisplay": "Rabbi",
+     "shliachPositionDisplay": "",
+     "isPrimary": true,
+     "chabadHouseName": "Chabad at University of Miami - Undergrad",
+     "websiteURL": "http://uchabadundergrad.com/"
+    }
+   ],
+   "campuses": [
+    {
+     "chabadHouseID": 318,
+     "campusID": 732,
+     "isFullTime": true,
+     "isPrimary": true,
+     "distance": "FifthMile",
+     "campusName": "University of Miami - Undergrad",
+     "chabadHouseName": "Chabad at University of Miami - Undergrad"
+    }
+   ],
+   "personnel": [
+    {
+     "id": 115,
+     "personnelID": 126,
+     "chabadHousePersonnelID": 115,
+     "chabadHouseID": 318,
+     "position": "Intern",
+     "positionDisplay": "Intern",
+     "firstName": "Sheva",
+     "lastName": "Werde",
+     "email": "shevawerde1015@gmail.com",
+     "expirationDate": "2027-05-13",
+     "personID": 149897,
+     "studentID": null,
+     "isStudent": false
+    },
+    {
+     "id": 116,
+     "personnelID": 127,
+     "chabadHousePersonnelID": 116,
+     "chabadHouseID": 318,
+     "position": "Intern",
+     "positionDisplay": "Intern",
+     "firstName": "Menucha",
+     "lastName": "Johnson",
+     "email": "menucha942@gmail.com",
+     "expirationDate": "2027-05-20",
+     "personID": 149898,
+     "studentID": null,
+     "isStudent": false
+    }
+   ],
+   "socialMediaAccounts": [
+    {
+     "id": 177,
+     "url": "https://www.instagram.com/umchabadundergrad/#",
+     "type": "Instagram",
+     "optOut": false
+    },
+    {
+     "id": 178,
+     "url": "https://www.facebook.com/p/UChabad-Undergrad-100056213126850/",
+     "type": "Facebook",
+     "optOut": false
+    },
+    {
+     "id": 641,
+     "url": "",
+     "type": "Twitter",
+     "optOut": true
+    }
+   ]
+  },
+  "639": {
+   "id": 639,
+   "name": "Chabad on Campus at FIU",
+   "legalName": "Chabad jewish students center at Florida international university Inc.",
+   "slug": "chabad-fiu",
+   "websiteURL": "http://jewishfiu.com/",
+   "donateURL": "http://jewishfiu.com/donate",
+   "jewishUDashboardURL": null,
+   "logoURL": "https://cocistorage.blob.core.windows.net/prod/house_logo/0Yyozl6NhuUDKYjAHSfhAB.jpg",
+   "buildingImageURL": "https://cocistorage.blob.core.windows.net/prod/house/-mHKQZSH9eClkOAXNnGaHG.jpg",
+   "regionID": 17,
+   "region": {
+    "id": 17,
+    "name": "USA - Southeast"
+   },
+   "taxID": "85-3846060",
+   "isRegistered501": true,
+   "timezoneID": "America/New_York",
+   "address": {
+    "hideFromPublic": true,
+    "address1": "",
+    "city": "Miami",
+    "country": "USA",
+    "id": 633,
+    "address2": "",
+    "state": "Florida",
+    "zip": "33174",
+    "discriminator": "ChabadHouse",
+    "locationName": null
+   },
+   "email": {
+    "id": 863,
+    "type": "Email",
+    "value": "ChabadatFIU@gmail.com",
+    "normalizedValue": "ChabadatFIU@gmail.com",
+    "isPrimary": false,
+    "isPreferred": false,
+    "phoneExtension": null,
+    "phoneCountryID": null,
+    "callingCode": null,
+    "discriminator": "ChabadHouse"
+   },
+   "phone": {
+    "id": 521,
+    "type": "WorkNumber",
+    "value": "305-563-4549",
+    "normalizedValue": "13055634549",
+    "isPrimary": false,
+    "isPreferred": false,
+    "phoneExtension": "",
+    "phoneCountryID": 34,
+    "callingCode": "1",
+    "discriminator": "ChabadHouse"
+   },
+   "smsContactMethod": {
+    "id": 692,
+    "type": "MessagingNumber",
+    "value": "786-886-3332",
+    "normalizedValue": "17868863332",
+    "isPrimary": false,
+    "isPreferred": false,
+    "phoneExtension": "",
+    "phoneCountryID": 34,
+    "callingCode": "1",
+    "discriminator": "ChabadHouse"
+   },
+   "shluchim": [
+    {
+     "shliachID": 1696,
+     "chabadHouseID": 639,
+     "title": "Rabbi",
+     "fullName": "Dovber Garelik",
+     "shliachPosition": "CoDirector",
+     "profileImageURL": "https://cocistorage.blob.core.windows.net/prod/profile/2W3gWLsJ9aTs2608v5jc5l.jpg",
+     "titleDisplay": "Rabbi",
+     "shliachPositionDisplay": "Co-Director",
+     "isPrimary": true,
+     "chabadHouseName": "Chabad on Campus at FIU",
+     "websiteURL": "http://jewishfiu.com/"
+    },
+    {
+     "shliachID": 1697,
+     "chabadHouseID": 639,
+     "title": "Mrs",
+     "fullName": "Henna Garelik",
+     "shliachPosition": "CoDirector",
+     "profileImageURL": "https://cocistorage.blob.core.windows.net/prod/profile/iUPe4KIcXP~~ahINEqvzwx.png",
+     "titleDisplay": "Mrs.",
+     "shliachPositionDisplay": "Co-Director",
+     "isPrimary": true,
+     "chabadHouseName": "Chabad on Campus at FIU",
+     "websiteURL": "http://jewishfiu.com/"
+    }
+   ],
+   "campuses": [
+    {
+     "chabadHouseID": 639,
+     "campusID": 44,
+     "isFullTime": true,
+     "isPrimary": true,
+     "distance": "FifthMile",
+     "campusName": "Florida International University",
+     "chabadHouseName": "Chabad on Campus at FIU"
+    }
+   ],
+   "personnel": [
+    {
+     "id": 83,
+     "personnelID": 94,
+     "chabadHousePersonnelID": 83,
+     "chabadHouseID": 639,
+     "position": "ExecutiveAssistant",
+     "positionDisplay": "Executive Assistant",
+     "firstName": "Shterna",
+     "lastName": "Garelik",
+     "email": "shternafiu@gmail.com",
+     "expirationDate": "2025-08-31",
+     "personID": 131633,
+     "studentID": null,
+     "isStudent": false
+    }
+   ],
+   "socialMediaAccounts": [
+    {
+     "id": 333,
+     "url": "http://facebook.com/chabadfiu/",
+     "type": "Facebook",
+     "optOut": false
+    },
+    {
+     "id": 334,
+     "url": "http://instagram.com/jewishfiu/",
+     "type": "Instagram",
+     "optOut": false
+    },
+    {
+     "id": 484,
+     "url": "",
+     "type": "Twitter",
+     "optOut": true
+    }
+   ]
+  },
+  "80": {
+   "id": 80,
+   "name": "Chabad Student Center",
+   "legalName": "Chabad Student Association Lubavitch Inc.",
+   "slug": "chabad-student-center-boca",
+   "websiteURL": "http://chabadstudentcenter.org/",
+   "donateURL": "https://www.chabadstudentcenter.org/donate",
+   "jewishUDashboardURL": "https://jewishu-growth-summit.netlify.app/?t=5b511c51ad415b410e0cc6d57e1300b6",
+   "logoURL": "https://cocistorage.blob.core.windows.net/prod/house_logo/bQiUYFzCmK9PIy_IZmkDxo.png",
+   "buildingImageURL": "https://cocistorage.blob.core.windows.net/prod/house/0UT-Ce4LeuE_mpNnw6IHZl.jpg",
+   "regionID": 3,
+   "region": {
+    "id": 3,
+    "name": "USA - South"
+   },
+   "taxID": "46-0628358",
+   "isRegistered501": true,
+   "timezoneID": "America/New_York",
+   "address": {
+    "hideFromPublic": false,
+    "address1": "935 NW 5th Avenue",
+    "city": "Boca Raton",
+    "country": "USA",
+    "id": 255,
+    "address2": "",
+    "state": "Florida",
+    "zip": "33432",
+    "discriminator": "ChabadHouse",
+    "locationName": null
+   },
+   "email": {
+    "id": 1045,
+    "type": "Email",
+    "value": "info@chabadstudentcenter.org",
+    "normalizedValue": "info@chabadstudentcenter.org",
+    "isPrimary": false,
+    "isPreferred": false,
+    "phoneExtension": null,
+    "phoneCountryID": null,
+    "callingCode": null,
+    "discriminator": "ChabadHouse"
+   },
+   "phone": {
+    "id": 111,
+    "type": "WorkNumber",
+    "value": "561-827-3175",
+    "normalizedValue": "15618273175",
+    "isPrimary": false,
+    "isPreferred": true,
+    "phoneExtension": "",
+    "phoneCountryID": 34,
+    "callingCode": "1",
+    "discriminator": "ChabadHouse"
+   },
+   "smsContactMethod": null,
+   "shluchim": [
+    {
+     "shliachID": 429,
+     "chabadHouseID": 80,
+     "title": "Rabbi",
+     "fullName": "Boruch Shmuel Liberow",
+     "shliachPosition": "Director",
+     "profileImageURL": "https://cocistorage.blob.core.windows.net/prod/profile/biuUxrki4viPUHfMYYBHY4.jpg",
+     "titleDisplay": "Rabbi",
+     "shliachPositionDisplay": "Director",
+     "isPrimary": true,
+     "chabadHouseName": "Chabad Student Center",
+     "websiteURL": "http://chabadstudentcenter.org/"
+    },
+    {
+     "shliachID": 432,
+     "chabadHouseID": 80,
+     "title": "Mrs",
+     "fullName": "Rivka Rochel Liberow",
+     "shliachPosition": "Unknown",
+     "profileImageURL": "https://cocistorage.blob.core.windows.net/prod/profile/dHG23EF76I8l~wfOzuFqIe.jpg",
+     "titleDisplay": "Mrs.",
+     "shliachPositionDisplay": "",
+     "isPrimary": true,
+     "chabadHouseName": "Chabad Student Center",
+     "websiteURL": "http://chabadstudentcenter.org/"
+    }
+   ],
+   "campuses": [
+    {
+     "chabadHouseID": 80,
+     "campusID": 31,
+     "isFullTime": true,
+     "isPrimary": true,
+     "distance": "HalfMile",
+     "campusName": "Florida Atlantic University, Boca Raton Campus",
+     "chabadHouseName": "Chabad Student Center"
+    },
+    {
+     "chabadHouseID": 80,
+     "campusID": 32,
+     "isFullTime": true,
+     "isPrimary": false,
+     "distance": "ThreeMiles",
+     "campusName": "Lynn University",
+     "chabadHouseName": "Chabad Student Center"
+    },
+    {
+     "chabadHouseID": 80,
+     "campusID": 112,
+     "isFullTime": true,
+     "isPrimary": false,
+     "distance": "OneMile",
+     "campusName": "Palm Beach Community College",
+     "chabadHouseName": "Chabad Student Center"
+    }
+   ],
+   "personnel": [],
+   "socialMediaAccounts": [
+    {
+     "id": 55,
+     "url": "http://instagram.com/jewishknightowls/",
+     "type": "Instagram",
+     "optOut": false
+    },
+    {
+     "id": 56,
+     "url": "http://facebook.com/jewknightjewowls/",
+     "type": "Facebook",
+     "optOut": false
+    },
+    {
+     "id": 765,
+     "url": "",
+     "type": "Twitter",
+     "optOut": true
+    }
+   ]
+  },
+  "149": {
+   "id": 149,
+   "name": "Chabad at NSU",
+   "legalName": "Chabad at NSU, Inc",
+   "slug": "chabad-at-nsu",
+   "websiteURL": "http://jewishnsu.com/",
+   "donateURL": "http://jewishnsu.com/givejewish",
+   "jewishUDashboardURL": "",
+   "logoURL": "https://cocistorage.blob.core.windows.net/prod/house_logo/xekooQ1b24hNW9xVQYk2Rd.jpg",
+   "buildingImageURL": "https://cocistorage.blob.core.windows.net/prod/house/-Qmu2poUx4fyt0J4lHg8xM.jpg",
+   "regionID": 3,
+   "region": {
+    "id": 3,
+    "name": "USA - South"
+   },
+   "taxID": "82-4589396",
+   "isRegistered501": true,
+   "timezoneID": "America/New_York",
+   "address": {
+    "hideFromPublic": false,
+    "address1": "7430 SW 39th St",
+    "city": "Davie",
+    "country": "USA",
+    "id": 110,
+    "address2": "",
+    "state": "Florida",
+    "zip": "33314",
+    "discriminator": "ChabadHouse",
+    "locationName": null
+   },
+   "email": {
+    "id": 931,
+    "type": "Email",
+    "value": "jewishnsu@gmail.com",
+    "normalizedValue": "jewishnsu@gmail.com",
+    "isPrimary": false,
+    "isPreferred": false,
+    "phoneExtension": null,
+    "phoneCountryID": null,
+    "callingCode": null,
+    "discriminator": "ChabadHouse"
+   },
+   "phone": {
+    "id": 466,
+    "type": "WorkNumber",
+    "value": "954-376-9973",
+    "normalizedValue": "19543769973",
+    "isPrimary": false,
+    "isPreferred": false,
+    "phoneExtension": "",
+    "phoneCountryID": 34,
+    "callingCode": "1",
+    "discriminator": "ChabadHouse"
+   },
+   "smsContactMethod": {
+    "id": 676,
+    "type": "MessagingNumber",
+    "value": "954-231-1481",
+    "normalizedValue": "19542311481",
+    "isPrimary": false,
+    "isPreferred": false,
+    "phoneExtension": "",
+    "phoneCountryID": 34,
+    "callingCode": "1",
+    "discriminator": "ChabadHouse"
+   },
+   "shluchim": [
+    {
+     "shliachID": 830,
+     "chabadHouseID": 149,
+     "title": "Rabbi",
+     "fullName": "Aryeh Schwartz",
+     "shliachPosition": "Unknown",
+     "profileImageURL": "https://cocistorage.blob.core.windows.net/prod/profile/VnCkDrW4rxQbBGD4a4qJEx.jpg",
+     "titleDisplay": "Rabbi",
+     "shliachPositionDisplay": "",
+     "isPrimary": true,
+     "chabadHouseName": "Chabad at NSU",
+     "websiteURL": "http://jewishnsu.com/"
+    },
+    {
+     "shliachID": 831,
+     "chabadHouseID": 149,
+     "title": "Mrs",
+     "fullName": "Etty Schwartz",
+     "shliachPosition": "Director",
+     "profileImageURL": "https://cocistorage.blob.core.windows.net/prod/profile/od0ikO~TuLj9GkaKyCpltz.jpg",
+     "titleDisplay": "Mrs.",
+     "shliachPositionDisplay": "Director",
+     "isPrimary": true,
+     "chabadHouseName": "Chabad at NSU",
+     "websiteURL": "http://jewishnsu.com/"
+    }
+   ],
+   "campuses": [
+    {
+     "chabadHouseID": 149,
+     "campusID": 204,
+     "isFullTime": true,
+     "isPrimary": true,
+     "distance": "FifthMile",
+     "campusName": "Nova Southeastern University",
+     "chabadHouseName": "Chabad at NSU"
+    },
+    {
+     "chabadHouseID": 149,
+     "campusID": 205,
+     "isFullTime": true,
+     "isPrimary": false,
+     "distance": "FifthMile",
+     "campusName": "Broward College",
+     "chabadHouseName": "Chabad at NSU"
+    }
+   ],
+   "personnel": [
+    {
+     "id": 67,
+     "personnelID": 78,
+     "chabadHousePersonnelID": 67,
+     "chabadHouseID": 149,
+     "position": "Intern",
+     "positionDisplay": "Intern",
+     "firstName": "Daniella",
+     "lastName": "Friedman",
+     "email": "Daniellafriedman33@gmail.com",
+     "expirationDate": "2026-12-31",
+     "personID": 73411,
+     "studentID": 61961,
+     "isStudent": false
+    },
+    {
+     "id": 204,
+     "personnelID": 215,
+     "chabadHousePersonnelID": 204,
+     "chabadHouseID": 149,
+     "position": "Intern",
+     "positionDisplay": "Intern",
+     "firstName": "Jonathan",
+     "lastName": "Azuelos",
+     "email": "jonathan@jewishnsu.com",
+     "expirationDate": "2027-07-31",
+     "personID": 190639,
+     "studentID": null,
+     "isStudent": false
+    },
+    {
+     "id": 236,
+     "personnelID": 247,
+     "chabadHousePersonnelID": 236,
+     "chabadHouseID": 149,
+     "position": "Intern",
+     "positionDisplay": "Intern",
+     "firstName": "Elia",
+     "lastName": "Gorelik",
+     "email": "elia.gorelik29@gmail.com",
+     "expirationDate": "2026-12-25",
+     "personID": 97303,
+     "studentID": 83890,
+     "isStudent": false
+    }
+   ],
+   "socialMediaAccounts": [
+    {
+     "id": 105,
+     "url": "https://www.instagram.com/jewishnsu/?hl=en",
+     "type": "Instagram",
+     "optOut": false
+    },
+    {
+     "id": 106,
+     "url": "",
+     "type": "Facebook",
+     "optOut": true
+    },
+    {
+     "id": 595,
+     "url": "",
+     "type": "Twitter",
+     "optOut": true
+    }
+   ]
+  },
+  "569": {
+   "id": 569,
+   "name": "Chabad at FGCU ",
+   "legalName": "Chabad at FGCU Inc ",
+   "slug": "chabad-at-fgcu",
+   "websiteURL": "http://chabadfgcu.com/",
+   "donateURL": "http://fgcu.chabadsuite.net/",
+   "jewishUDashboardURL": "https://jewishu-growth-summit.netlify.app/?t=49d3f7ab9c35d242e3aab878d173adb4",
+   "logoURL": "https://cocistorage.blob.core.windows.net/prod/house_logo/J~CxQCUMYZ4Dlh3VIXZCeV.png",
+   "buildingImageURL": "https://cocistorage.blob.core.windows.net/prod/house/chP53cVZBSVcH-TYOmWunP.jpg",
+   "regionID": 17,
+   "region": {
+    "id": 17,
+    "name": "USA - Southeast"
+   },
+   "taxID": "834484945",
+   "isRegistered501": true,
+   "timezoneID": "America/New_York",
+   "address": {
+    "hideFromPublic": false,
+    "address1": "17150 Caloosa Trace Circle",
+    "city": "Fort Myers",
+    "country": "USA",
+    "id": 911,
+    "address2": "",
+    "state": "Florida",
+    "zip": "33967",
+    "discriminator": "ChabadHouse",
+    "locationName": null
+   },
+   "email": {
+    "id": 821,
+    "type": "Email",
+    "value": "Rabbi@chabadfgcu.com",
+    "normalizedValue": "Rabbi@chabadfgcu.com",
+    "isPrimary": false,
+    "isPreferred": false,
+    "phoneExtension": null,
+    "phoneCountryID": null,
+    "callingCode": null,
+    "discriminator": "ChabadHouse"
+   },
+   "phone": {
+    "id": 461,
+    "type": "WorkNumber",
+    "value": "239-355-8481",
+    "normalizedValue": "12393558481",
+    "isPrimary": false,
+    "isPreferred": false,
+    "phoneExtension": "",
+    "phoneCountryID": 34,
+    "callingCode": "1",
+    "discriminator": "ChabadHouse"
+   },
+   "smsContactMethod": {
+    "id": 594,
+    "type": "MessagingNumber",
+    "value": "239-788-2223",
+    "normalizedValue": "12397882223",
+    "isPrimary": false,
+    "isPreferred": false,
+    "phoneExtension": "",
+    "phoneCountryID": 34,
+    "callingCode": "1",
+    "discriminator": "ChabadHouse"
+   },
+   "shluchim": [
+    {
+     "shliachID": 1514,
+     "chabadHouseID": 569,
+     "title": "Rabbi",
+     "fullName": "Mendel Gordon",
+     "shliachPosition": "Unknown",
+     "profileImageURL": "https://cocistorage.blob.core.windows.net/prod/profile/1akRz5JmW5vhnkdwyjSDnH.jpg",
+     "titleDisplay": "Rabbi",
+     "shliachPositionDisplay": "",
+     "isPrimary": true,
+     "chabadHouseName": "Chabad at FGCU ",
+     "websiteURL": "http://chabadfgcu.com/"
+    },
+    {
+     "shliachID": 1515,
+     "chabadHouseID": 569,
+     "title": "Mrs",
+     "fullName": "Shternie Gordon",
+     "shliachPosition": "Unknown",
+     "profileImageURL": "https://cocistorage.blob.core.windows.net/prod/profile/bQSHvuZ6Je5e~DSuJ3zja0.jpg",
+     "titleDisplay": "Mrs.",
+     "shliachPositionDisplay": "",
+     "isPrimary": true,
+     "chabadHouseName": "Chabad at FGCU ",
+     "websiteURL": "http://chabadfgcu.com/"
+    }
+   ],
+   "campuses": [
+    {
+     "chabadHouseID": 569,
+     "campusID": 772,
+     "isFullTime": true,
+     "isPrimary": true,
+     "distance": "ThreeMiles",
+     "campusName": "Florida Gulf Coast University - Undergrads ",
+     "chabadHouseName": "Chabad at FGCU "
+    },
+    {
+     "chabadHouseID": 569,
+     "campusID": 1377,
+     "isFullTime": false,
+     "isPrimary": false,
+     "distance": "FivePlusMiles",
+     "campusName": "Florida SouthWestern",
+     "chabadHouseName": "Chabad at FGCU "
+    }
+   ],
+   "personnel": [],
+   "socialMediaAccounts": [
+    {
+     "id": 312,
+     "url": "https://instagram.com/chabadfgcu",
+     "type": "Instagram",
+     "optOut": false
+    },
+    {
+     "id": 313,
+     "url": "https://m.facebook.com/jewishfgcu/",
+     "type": "Facebook",
+     "optOut": false
+    },
+    {
+     "id": 409,
+     "url": "",
+     "type": "Twitter",
+     "optOut": true
+    }
+   ]
+  },
+  "339": {
+   "id": 339,
+   "name": "Chabad Student Center \u2014 Winter Park",
+   "legalName": "Winter park jewish student center",
+   "slug": "winter-park-jewish-student",
+   "websiteURL": "http://winterparkjewishstudent.com/",
+   "donateURL": "http://winterparkjewishstudent.com/donate",
+   "jewishUDashboardURL": null,
+   "logoURL": "https://cocistorage.blob.core.windows.net/prod/house_logo/qrXdbrUnt1L2Q7gajMH2xz.jpg",
+   "buildingImageURL": "https://cocistorage.blob.core.windows.net/prod/house/Qh9tr-RewIA2mxKAtC5El9.jpg",
+   "regionID": 3,
+   "region": {
+    "id": 3,
+    "name": "USA - South"
+   },
+   "taxID": "",
+   "isRegistered501": false,
+   "timezoneID": "America/New_York",
+   "address": {
+    "hideFromPublic": true,
+    "address1": "",
+    "city": "Maitland",
+    "country": "USA",
+    "id": 842,
+    "address2": "",
+    "state": "Florida",
+    "zip": "32751",
+    "discriminator": "ChabadHouse",
+    "locationName": null
+   },
+   "email": {
+    "id": 1055,
+    "type": "Email",
+    "value": "rabbi@jewishRollins.com",
+    "normalizedValue": "rabbi@jewishRollins.com",
+    "isPrimary": false,
+    "isPreferred": false,
+    "phoneExtension": null,
+    "phoneCountryID": null,
+    "callingCode": null,
+    "discriminator": "ChabadHouse"
+   },
+   "phone": {
+    "id": 276,
+    "type": "WorkNumber",
+    "value": "330-861-8770",
+    "normalizedValue": "13308618770",
+    "isPrimary": false,
+    "isPreferred": true,
+    "phoneExtension": "",
+    "phoneCountryID": 34,
+    "callingCode": "1",
+    "discriminator": "ChabadHouse"
+   },
+   "smsContactMethod": null,
+   "shluchim": [
+    {
+     "shliachID": 338,
+     "chabadHouseID": 339,
+     "title": "Rabbi",
+     "fullName": "Shmuli Sasonkin",
+     "shliachPosition": "Unknown",
+     "profileImageURL": "https://cocistorage.blob.core.windows.net/prod/profile/S3BkTENcwOof6tCnRoLTO4.jpg",
+     "titleDisplay": "Rabbi",
+     "shliachPositionDisplay": "",
+     "isPrimary": true,
+     "chabadHouseName": "Chabad Student Center \u2014 Winter Park",
+     "websiteURL": "http://winterparkjewishstudent.com/"
+    },
+    {
+     "shliachID": 415,
+     "chabadHouseID": 339,
+     "title": "Mrs",
+     "fullName": "Chayala Sasonkin",
+     "shliachPosition": "Unknown",
+     "profileImageURL": "https://cocistorage.blob.core.windows.net/prod/profile/tSwFyXMias6BqHXSQUFwfk.jpg",
+     "titleDisplay": "Mrs.",
+     "shliachPositionDisplay": "",
+     "isPrimary": true,
+     "chabadHouseName": "Chabad Student Center \u2014 Winter Park",
+     "websiteURL": "http://winterparkjewishstudent.com/"
+    }
+   ],
+   "campuses": [
+    {
+     "chabadHouseID": 339,
+     "campusID": 109,
+     "isFullTime": true,
+     "isPrimary": true,
+     "distance": "FivePlusMiles",
+     "campusName": "Rollins College",
+     "chabadHouseName": "Chabad Student Center \u2014 Winter Park"
+    }
+   ],
+   "personnel": [],
+   "socialMediaAccounts": [
+    {
+     "id": 191,
+     "url": "",
+     "type": "Instagram",
+     "optOut": true
+    },
+    {
+     "id": 192,
+     "url": "",
+     "type": "Twitter",
+     "optOut": true
+    },
+    {
+     "id": 784,
+     "url": "",
+     "type": "Facebook",
+     "optOut": true
+    }
+   ]
+  }
+ },
+ "campuses": {
+  "304": {
+   "jewishStudentLife": [
+    {
+     "name": "Jewish student lounge",
+     "providers": [
+      "Chabad"
+     ]
+    },
+    {
+     "name": "Jewish student housing",
+     "providers": [
+      "Chabad"
+     ]
+    },
+    {
+     "name": "Daily Kosher meal plan (1 meal a day)",
+     "providers": [
+      "Chabad",
+      "School"
+     ]
+    },
+    {
+     "name": "Limited Kosher meal plan (1 or 2 meals a week)",
+     "providers": [
+      "Chabad",
+      "School"
+     ]
+    },
+    {
+     "name": "Kosher restaurant",
+     "providers": [
+      "Chabad",
+      "School"
+     ]
+    },
+    {
+     "name": "Packaged kosher food",
+     "providers": [
+      "Chabad",
+      "School"
+     ]
+    },
+    {
+     "name": "Kosher for Passover meal plan",
+     "providers": [
+      "Chabad"
+     ]
+    },
+    {
+     "name": "Shabbat and holidays minyan",
+     "providers": [
+      "Chabad"
+     ]
+    },
+    {
+     "name": "Daily minyan",
+     "providers": [
+      "Chabad"
+     ]
+    },
+    {
+     "name": "Israel Orgs",
+     "providers": []
+    },
+    {
+     "name": "Jewish Greek life",
+     "providers": []
+    },
+    {
+     "name": "Other Jewish student groups",
+     "providers": []
+    }
+   ],
+   "shliachChaplainStatusDisplay": "No",
+   "shluchaChaplainStatusDisplay": "No",
+   "chabadStudentGroupStatusDisplay": "Chabad associated students are",
+   "id": 304,
+   "name": "University of Florida",
+   "isActive": true,
+   "nickname": "UF",
+   "nicknameOptOut": null,
+   "websiteURL": "http://www.ufl.edu/",
+   "annualTuition": 22000.0,
+   "isInstitutionControlPublic": true,
+   "studentResidencyType": "Commuter",
+   "schoolCalendarType": "Semester",
+   "prestige": "Standard",
+   "graduatePopulation": 18740,
+   "undergradPopulation": 39000,
+   "jewishUndergradPopulation": 5000,
+   "jewishGraduatePopulation": 2000,
+   "shliachChaplainStatus": "Unrecognized",
+   "shluchaChaplainStatus": "Unrecognized",
+   "chabadStudentGroupStatus": "AssociatedGroupRecognized",
+   "chabadHouses": [
+    {
+     "chabadHouseID": 257,
+     "campusID": 304,
+     "isFullTime": true,
+     "isPrimary": true,
+     "distance": "FifthMile",
+     "campusName": "University of Florida",
+     "chabadHouseName": "Chabad UF"
+    }
+   ],
+   "studyAreas": [
+    "Law",
+    "Medical",
+    "Business",
+    "Psychology",
+    "PublicPolicy",
+    "Other"
+   ],
+   "programLevels": [
+    "Grad",
+    "Undergrad"
+   ],
+   "studentResources": [
+    {
+     "id": 3686,
+     "studentResourceID": 1,
+     "provider": "Chabad"
+    },
+    {
+     "id": 3687,
+     "studentResourceID": 2,
+     "provider": "Chabad"
+    },
+    {
+     "id": 3688,
+     "studentResourceID": 3,
+     "provider": "NA"
+    },
+    {
+     "id": 3689,
+     "studentResourceID": 4,
+     "provider": "Chabad"
+    },
+    {
+     "id": 6394,
+     "studentResourceID": 4,
+     "provider": "School"
+    },
+    {
+     "id": 6395,
+     "studentResourceID": 5,
+     "provider": "Chabad"
+    },
+    {
+     "id": 6396,
+     "studentResourceID": 5,
+     "provider": "School"
+    },
+    {
+     "id": 3691,
+     "studentResourceID": 6,
+     "provider": "Chabad"
+    },
+    {
+     "id": 6393,
+     "studentResourceID": 6,
+     "provider": "School"
+    },
+    {
+     "id": 3692,
+     "studentResourceID": 7,
+     "provider": "NA"
+    },
+    {
+     "id": 3694,
+     "studentResourceID": 8,
+     "provider": "Chabad"
+    },
+    {
+     "id": 3693,
+     "studentResourceID": 8,
+     "provider": "School"
+    },
+    {
+     "id": 3695,
+     "studentResourceID": 9,
+     "provider": "Chabad"
+    },
+    {
+     "id": 3696,
+     "studentResourceID": 10,
+     "provider": "Chabad"
+    },
+    {
+     "id": 3697,
+     "studentResourceID": 11,
+     "provider": "Chabad"
+    }
+   ],
+   "studentGroups": [
+    "IsraelOrgs",
+    "JewishGreekLife",
+    "Other"
+   ]
+  },
+  "1225": {
+   "jewishStudentLife": [
+    {
+     "name": "Jewish student lounge",
+     "providers": [
+      "Chabad"
+     ]
+    },
+    {
+     "name": "Jewish student housing",
+     "providers": [
+      "Chabad"
+     ]
+    },
+    {
+     "name": "Daily Kosher meal plan (1 meal a day)",
+     "providers": [
+      "Chabad"
+     ]
+    },
+    {
+     "name": "Kosher restaurant",
+     "providers": [
+      "Chabad"
+     ]
+    },
+    {
+     "name": "Kosher for Passover meal plan",
+     "providers": [
+      "Chabad"
+     ]
+    },
+    {
+     "name": "Shabbat and holidays minyan",
+     "providers": [
+      "Chabad"
+     ]
+    },
+    {
+     "name": "Daily minyan",
+     "providers": [
+      "Chabad"
+     ]
+    }
+   ],
+   "shliachChaplainStatusDisplay": "No",
+   "shluchaChaplainStatusDisplay": "No",
+   "chabadStudentGroupStatusDisplay": "No",
+   "id": 1225,
+   "name": "Santa Fe College",
+   "isActive": true,
+   "nickname": "SFC",
+   "nicknameOptOut": null,
+   "websiteURL": "",
+   "annualTuition": 5000.0,
+   "isInstitutionControlPublic": true,
+   "studentResidencyType": "Residential",
+   "schoolCalendarType": "Semester",
+   "prestige": "CommunityCollege",
+   "graduatePopulation": null,
+   "undergradPopulation": 14000,
+   "jewishUndergradPopulation": 1000,
+   "jewishGraduatePopulation": null,
+   "shliachChaplainStatus": "Unrecognized",
+   "shluchaChaplainStatus": "Unrecognized",
+   "chabadStudentGroupStatus": "Unrecognized",
+   "chabadHouses": [
+    {
+     "chabadHouseID": 257,
+     "campusID": 1225,
+     "isFullTime": true,
+     "isPrimary": false,
+     "distance": "FivePlusMiles",
+     "campusName": "Santa Fe College",
+     "chabadHouseName": "Chabad UF"
+    }
+   ],
+   "studyAreas": [
+    "Other"
+   ],
+   "programLevels": [
+    "Undergrad"
+   ],
+   "studentResources": [
+    {
+     "id": 3698,
+     "studentResourceID": 1,
+     "provider": "Chabad"
+    },
+    {
+     "id": 3699,
+     "studentResourceID": 2,
+     "provider": "Chabad"
+    },
+    {
+     "id": 3700,
+     "studentResourceID": 3,
+     "provider": "NA"
+    },
+    {
+     "id": 3701,
+     "studentResourceID": 4,
+     "provider": "Chabad"
+    },
+    {
+     "id": 3703,
+     "studentResourceID": 5,
+     "provider": "NA"
+    },
+    {
+     "id": 3702,
+     "studentResourceID": 6,
+     "provider": "Chabad"
+    },
+    {
+     "id": 3704,
+     "studentResourceID": 7,
+     "provider": "NA"
+    },
+    {
+     "id": 3705,
+     "studentResourceID": 8,
+     "provider": "NA"
+    },
+    {
+     "id": 3706,
+     "studentResourceID": 9,
+     "provider": "Chabad"
+    },
+    {
+     "id": 3707,
+     "studentResourceID": 10,
+     "provider": "Chabad"
+    },
+    {
+     "id": 3708,
+     "studentResourceID": 11,
+     "provider": "Chabad"
+    }
+   ],
+   "studentGroups": [
+    "None"
+   ]
+  },
+  "41": {
+   "jewishStudentLife": [
+    {
+     "name": "Jewish student lounge",
+     "providers": [
+      "Chabad"
+     ]
+    },
+    {
+     "name": "Jewish student housing",
+     "providers": [
+      "Chabad"
+     ]
+    },
+    {
+     "name": "Limited Kosher meal plan (1 or 2 meals a week)",
+     "providers": [
+      "Chabad"
+     ]
+    },
+    {
+     "name": "Kosher for Passover meal plan",
+     "providers": [
+      "Chabad",
+      "School"
+     ]
+    },
+    {
+     "name": "Shabbat and holidays minyan",
+     "providers": [
+      "Chabad"
+     ]
+    },
+    {
+     "name": "Israel Orgs",
+     "providers": []
+    },
+    {
+     "name": "Jewish Greek life",
+     "providers": []
+    },
+    {
+     "name": "Other Jewish student groups",
+     "providers": []
+    }
+   ],
+   "shliachChaplainStatusDisplay": "No",
+   "shluchaChaplainStatusDisplay": "No",
+   "chabadStudentGroupStatusDisplay": "Yes, Chabad itself",
+   "id": 41,
+   "name": "Florida State University",
+   "isActive": true,
+   "nickname": "FSU",
+   "nicknameOptOut": null,
+   "websiteURL": "",
+   "annualTuition": 6500.0,
+   "isInstitutionControlPublic": true,
+   "studentResidencyType": "Commuter",
+   "schoolCalendarType": "Semester",
+   "prestige": "Standard",
+   "graduatePopulation": 8500,
+   "undergradPopulation": 32000,
+   "jewishUndergradPopulation": 3200,
+   "jewishGraduatePopulation": 850,
+   "shliachChaplainStatus": "Unrecognized",
+   "shluchaChaplainStatus": "Unrecognized",
+   "chabadStudentGroupStatus": "ChabadRecognized",
+   "chabadHouses": [
+    {
+     "chabadHouseID": 7,
+     "campusID": 41,
+     "isFullTime": true,
+     "isPrimary": true,
+     "distance": "OneMile",
+     "campusName": "Florida State University",
+     "chabadHouseName": "Chabad at FSU"
+    }
+   ],
+   "studyAreas": [
+    "Law",
+    "Medical",
+    "Business",
+    "Psychology",
+    "PublicPolicy"
+   ],
+   "programLevels": [
+    "Grad",
+    "Undergrad"
+   ],
+   "studentResources": [
+    {
+     "id": 854,
+     "studentResourceID": 1,
+     "provider": "Chabad"
+    },
+    {
+     "id": 855,
+     "studentResourceID": 2,
+     "provider": "Chabad"
+    },
+    {
+     "id": 853,
+     "studentResourceID": 3,
+     "provider": "NA"
+    },
+    {
+     "id": 852,
+     "studentResourceID": 4,
+     "provider": "NA"
+    },
+    {
+     "id": 845,
+     "studentResourceID": 5,
+     "provider": "Chabad"
+    },
+    {
+     "id": 851,
+     "studentResourceID": 6,
+     "provider": "NA"
+    },
+    {
+     "id": 850,
+     "studentResourceID": 7,
+     "provider": "NA"
+    },
+    {
+     "id": 849,
+     "studentResourceID": 8,
+     "provider": "NA"
+    },
+    {
+     "id": 846,
+     "studentResourceID": 9,
+     "provider": "Chabad"
+    },
+    {
+     "id": 844,
+     "studentResourceID": 9,
+     "provider": "School"
+    },
+    {
+     "id": 847,
+     "studentResourceID": 10,
+     "provider": "Chabad"
+    },
+    {
+     "id": 848,
+     "studentResourceID": 11,
+     "provider": "NA"
+    }
+   ],
+   "studentGroups": [
+    "IsraelOrgs",
+    "JewishGreekLife",
+    "Other"
+   ]
+  },
+  "70": {
+   "jewishStudentLife": [
+    {
+     "name": "Jewish student lounge",
+     "providers": [
+      "Chabad"
+     ]
+    },
+    {
+     "name": "Limited Kosher meal plan (1 or 2 meals a week)",
+     "providers": [
+      "Chabad"
+     ]
+    },
+    {
+     "name": "Kosher for Passover meal plan",
+     "providers": [
+      "Chabad"
+     ]
+    },
+    {
+     "name": "Shabbat and holidays minyan",
+     "providers": [
+      "Chabad"
+     ]
+    },
+    {
+     "name": "Daily minyan",
+     "providers": [
+      "Chabad"
+     ]
+    },
+    {
+     "name": "Israel Orgs",
+     "providers": []
+    },
+    {
+     "name": "Jewish Greek life",
+     "providers": []
+    },
+    {
+     "name": "Other Jewish student groups",
+     "providers": []
+    }
+   ],
+   "shliachChaplainStatusDisplay": "Yes, unpaid",
+   "shluchaChaplainStatusDisplay": "Yes, unpaid",
+   "chabadStudentGroupStatusDisplay": "Yes, Chabad itself",
+   "id": 70,
+   "name": "University of Central Florida",
+   "isActive": true,
+   "nickname": "UCF",
+   "nicknameOptOut": null,
+   "websiteURL": "http://www.ucf.edu/",
+   "annualTuition": 22000.0,
+   "isInstitutionControlPublic": true,
+   "studentResidencyType": "Residential",
+   "schoolCalendarType": "Semester",
+   "prestige": "Standard",
+   "graduatePopulation": 9000,
+   "undergradPopulation": 60000,
+   "jewishUndergradPopulation": 6000,
+   "jewishGraduatePopulation": 900,
+   "shliachChaplainStatus": "RecognizedUnpaid",
+   "shluchaChaplainStatus": "RecognizedUnpaid",
+   "chabadStudentGroupStatus": "ChabadRecognized",
+   "chabadHouses": [
+    {
+     "chabadHouseID": 124,
+     "campusID": 70,
+     "isFullTime": true,
+     "isPrimary": true,
+     "distance": "FifthMile",
+     "campusName": "University of Central Florida",
+     "chabadHouseName": "Chabad @ University of Central Florida"
+    }
+   ],
+   "studyAreas": [
+    "Medical",
+    "Business",
+    "Psychology",
+    "PublicPolicy"
+   ],
+   "programLevels": [
+    "Grad",
+    "Undergrad"
+   ],
+   "studentResources": [
+    {
+     "id": 878,
+     "studentResourceID": 1,
+     "provider": "Chabad"
+    },
+    {
+     "id": 879,
+     "studentResourceID": 2,
+     "provider": "NA"
+    },
+    {
+     "id": 880,
+     "studentResourceID": 3,
+     "provider": "NA"
+    },
+    {
+     "id": 881,
+     "studentResourceID": 4,
+     "provider": "NA"
+    },
+    {
+     "id": 882,
+     "studentResourceID": 5,
+     "provider": "Chabad"
+    },
+    {
+     "id": 883,
+     "studentResourceID": 6,
+     "provider": "NA"
+    },
+    {
+     "id": 884,
+     "studentResourceID": 7,
+     "provider": "NA"
+    },
+    {
+     "id": 885,
+     "studentResourceID": 8,
+     "provider": "NA"
+    },
+    {
+     "id": 886,
+     "studentResourceID": 9,
+     "provider": "Chabad"
+    },
+    {
+     "id": 887,
+     "studentResourceID": 10,
+     "provider": "Chabad"
+    },
+    {
+     "id": 888,
+     "studentResourceID": 11,
+     "provider": "Chabad"
+    }
+   ],
+   "studentGroups": [
+    "IsraelOrgs",
+    "JewishGreekLife",
+    "Other"
+   ]
+  },
+  "726": {
+   "jewishStudentLife": [
+    {
+     "name": "Jewish student lounge",
+     "providers": [
+      "Chabad"
+     ]
+    },
+    {
+     "name": "Limited Kosher meal plan (1 or 2 meals a week)",
+     "providers": [
+      "Chabad"
+     ]
+    },
+    {
+     "name": "Kosher for Passover meal plan",
+     "providers": [
+      "Chabad"
+     ]
+    },
+    {
+     "name": "Shabbat and holidays minyan",
+     "providers": [
+      "Chabad"
+     ]
+    },
+    {
+     "name": "Daily minyan",
+     "providers": [
+      "Chabad"
+     ]
+    }
+   ],
+   "shliachChaplainStatusDisplay": "No",
+   "shluchaChaplainStatusDisplay": "No",
+   "chabadStudentGroupStatusDisplay": "No",
+   "id": 726,
+   "name": "Valencia College",
+   "isActive": true,
+   "nickname": "Valencia",
+   "nicknameOptOut": null,
+   "websiteURL": "http://www.valenciacc.edu/",
+   "annualTuition": 15000.0,
+   "isInstitutionControlPublic": true,
+   "studentResidencyType": "Commuter",
+   "schoolCalendarType": "Semester",
+   "prestige": "Standard",
+   "graduatePopulation": null,
+   "undergradPopulation": 17000,
+   "jewishUndergradPopulation": 500,
+   "jewishGraduatePopulation": null,
+   "shliachChaplainStatus": "Unrecognized",
+   "shluchaChaplainStatus": "Unrecognized",
+   "chabadStudentGroupStatus": "Unrecognized",
+   "chabadHouses": [
+    {
+     "chabadHouseID": 124,
+     "campusID": 726,
+     "isFullTime": true,
+     "isPrimary": false,
+     "distance": "TwoMiles",
+     "campusName": "Valencia College",
+     "chabadHouseName": "Chabad @ University of Central Florida"
+    }
+   ],
+   "studyAreas": [
+    "Business",
+    "Psychology"
+   ],
+   "programLevels": [
+    "Undergrad"
+   ],
+   "studentResources": [
+    {
+     "id": 889,
+     "studentResourceID": 1,
+     "provider": "Chabad"
+    },
+    {
+     "id": 890,
+     "studentResourceID": 2,
+     "provider": "NA"
+    },
+    {
+     "id": 891,
+     "studentResourceID": 3,
+     "provider": "NA"
+    },
+    {
+     "id": 892,
+     "studentResourceID": 4,
+     "provider": "NA"
+    },
+    {
+     "id": 894,
+     "studentResourceID": 5,
+     "provider": "Chabad"
+    },
+    {
+     "id": 893,
+     "studentResourceID": 6,
+     "provider": "NA"
+    },
+    {
+     "id": 895,
+     "studentResourceID": 7,
+     "provider": "NA"
+    },
+    {
+     "id": 896,
+     "studentResourceID": 8,
+     "provider": "NA"
+    },
+    {
+     "id": 897,
+     "studentResourceID": 9,
+     "provider": "Chabad"
+    },
+    {
+     "id": 898,
+     "studentResourceID": 10,
+     "provider": "Chabad"
+    },
+    {
+     "id": 899,
+     "studentResourceID": 11,
+     "provider": "Chabad"
+    }
+   ],
+   "studentGroups": [
+    "None"
+   ]
+  },
+  "582": {
+   "jewishStudentLife": [
+    {
+     "name": "Jewish student lounge",
+     "providers": [
+      "Chabad"
+     ]
+    },
+    {
+     "name": "Kosher restaurant",
+     "providers": [
+      "Chabad"
+     ]
+    },
+    {
+     "name": "Shabbat and holidays minyan",
+     "providers": [
+      "Chabad"
+     ]
+    },
+    {
+     "name": "Israel Orgs",
+     "providers": []
+    },
+    {
+     "name": "Other Jewish student groups",
+     "providers": []
+    }
+   ],
+   "shliachChaplainStatusDisplay": "Yes, unpaid",
+   "shluchaChaplainStatusDisplay": "No",
+   "chabadStudentGroupStatusDisplay": "Yes, Chabad itself",
+   "id": 582,
+   "name": "University of North Florida",
+   "isActive": true,
+   "nickname": "UNF",
+   "nicknameOptOut": null,
+   "websiteURL": "",
+   "annualTuition": 20000.0,
+   "isInstitutionControlPublic": true,
+   "studentResidencyType": "Residential",
+   "schoolCalendarType": "Semester",
+   "prestige": "Standard",
+   "graduatePopulation": 3000,
+   "undergradPopulation": 14000,
+   "jewishUndergradPopulation": 225,
+   "jewishGraduatePopulation": 25,
+   "shliachChaplainStatus": "RecognizedUnpaid",
+   "shluchaChaplainStatus": "Unrecognized",
+   "chabadStudentGroupStatus": "ChabadRecognized",
+   "chabadHouses": [
+    {
+     "chabadHouseID": 81,
+     "campusID": 582,
+     "isFullTime": true,
+     "isPrimary": true,
+     "distance": "FifthMile",
+     "campusName": "University of North Florida",
+     "chabadHouseName": "Chabad at UNF"
+    }
+   ],
+   "studyAreas": [
+    "Medical",
+    "Business",
+    "Psychology",
+    "PublicPolicy",
+    "Other"
+   ],
+   "programLevels": [
+    "Grad",
+    "Undergrad"
+   ],
+   "studentResources": [
+    {
+     "id": 34,
+     "studentResourceID": 1,
+     "provider": "Chabad"
+    },
+    {
+     "id": 35,
+     "studentResourceID": 2,
+     "provider": "NA"
+    },
+    {
+     "id": 36,
+     "studentResourceID": 3,
+     "provider": "NA"
+    },
+    {
+     "id": 37,
+     "studentResourceID": 4,
+     "provider": "NA"
+    },
+    {
+     "id": 38,
+     "studentResourceID": 5,
+     "provider": "NA"
+    },
+    {
+     "id": 39,
+     "studentResourceID": 6,
+     "provider": "Chabad"
+    },
+    {
+     "id": 40,
+     "studentResourceID": 7,
+     "provider": "NA"
+    },
+    {
+     "id": 44,
+     "studentResourceID": 8,
+     "provider": "NA"
+    },
+    {
+     "id": 41,
+     "studentResourceID": 9,
+     "provider": "NA"
+    },
+    {
+     "id": 42,
+     "studentResourceID": 10,
+     "provider": "Chabad"
+    },
+    {
+     "id": 43,
+     "studentResourceID": 11,
+     "provider": "NA"
+    }
+   ],
+   "studentGroups": [
+    "IsraelOrgs",
+    "Other"
+   ]
+  },
+  "686": {
+   "jewishStudentLife": [
+    {
+     "name": "Jewish student lounge",
+     "providers": [
+      "Chabad"
+     ]
+    },
+    {
+     "name": "Kosher restaurant",
+     "providers": [
+      "Chabad"
+     ]
+    },
+    {
+     "name": "Shabbat and holidays minyan",
+     "providers": [
+      "Chabad"
+     ]
+    }
+   ],
+   "shliachChaplainStatusDisplay": "No",
+   "shluchaChaplainStatusDisplay": "No",
+   "chabadStudentGroupStatusDisplay": "No",
+   "id": 686,
+   "name": "Florida State College at Jacksonville",
+   "isActive": true,
+   "nickname": "FSCJ",
+   "nicknameOptOut": null,
+   "websiteURL": "http://www.fccj.org/",
+   "annualTuition": 20000.0,
+   "isInstitutionControlPublic": true,
+   "studentResidencyType": "Commuter",
+   "schoolCalendarType": "Semester",
+   "prestige": "Standard",
+   "graduatePopulation": null,
+   "undergradPopulation": 40000,
+   "jewishUndergradPopulation": 1,
+   "jewishGraduatePopulation": null,
+   "shliachChaplainStatus": "Unrecognized",
+   "shluchaChaplainStatus": "Unrecognized",
+   "chabadStudentGroupStatus": "Unrecognized",
+   "chabadHouses": [
+    {
+     "chabadHouseID": 81,
+     "campusID": 686,
+     "isFullTime": false,
+     "isPrimary": false,
+     "distance": "TwoMiles",
+     "campusName": "Florida State College at Jacksonville",
+     "chabadHouseName": "Chabad at UNF"
+    }
+   ],
+   "studyAreas": [
+    "Medical",
+    "Business",
+    "Psychology",
+    "PublicPolicy"
+   ],
+   "programLevels": [
+    "Undergrad"
+   ],
+   "studentResources": [
+    {
+     "id": 45,
+     "studentResourceID": 1,
+     "provider": "Chabad"
+    },
+    {
+     "id": 46,
+     "studentResourceID": 2,
+     "provider": "NA"
+    },
+    {
+     "id": 47,
+     "studentResourceID": 3,
+     "provider": "NA"
+    },
+    {
+     "id": 48,
+     "studentResourceID": 4,
+     "provider": "NA"
+    },
+    {
+     "id": 49,
+     "studentResourceID": 5,
+     "provider": "NA"
+    },
+    {
+     "id": 50,
+     "studentResourceID": 6,
+     "provider": "Chabad"
+    },
+    {
+     "id": 51,
+     "studentResourceID": 7,
+     "provider": "NA"
+    },
+    {
+     "id": 52,
+     "studentResourceID": 8,
+     "provider": "NA"
+    },
+    {
+     "id": 53,
+     "studentResourceID": 9,
+     "provider": "NA"
+    },
+    {
+     "id": 54,
+     "studentResourceID": 10,
+     "provider": "Chabad"
+    },
+    {
+     "id": 55,
+     "studentResourceID": 11,
+     "provider": "NA"
+    }
+   ],
+   "studentGroups": [
+    "None"
+   ]
+  },
+  "1290": {
+   "jewishStudentLife": [
+    {
+     "name": "Jewish student lounge",
+     "providers": [
+      "Chabad"
+     ]
+    },
+    {
+     "name": "Kosher restaurant",
+     "providers": [
+      "Chabad"
+     ]
+    },
+    {
+     "name": "Shabbat and holidays minyan",
+     "providers": [
+      "Chabad"
+     ]
+    }
+   ],
+   "shliachChaplainStatusDisplay": "No",
+   "shluchaChaplainStatusDisplay": "No",
+   "chabadStudentGroupStatusDisplay": "No",
+   "id": 1290,
+   "name": "Jacksonville University",
+   "isActive": true,
+   "nickname": "JU",
+   "nicknameOptOut": null,
+   "websiteURL": "",
+   "annualTuition": 46600.0,
+   "isInstitutionControlPublic": false,
+   "studentResidencyType": "Residential",
+   "schoolCalendarType": "Semester",
+   "prestige": "Standard",
+   "graduatePopulation": 500,
+   "undergradPopulation": 3000,
+   "jewishUndergradPopulation": 1,
+   "jewishGraduatePopulation": 25,
+   "shliachChaplainStatus": "Unrecognized",
+   "shluchaChaplainStatus": "Unrecognized",
+   "chabadStudentGroupStatus": "Unrecognized",
+   "chabadHouses": [
+    {
+     "chabadHouseID": 81,
+     "campusID": 1290,
+     "isFullTime": false,
+     "isPrimary": false,
+     "distance": "Other",
+     "campusName": "Jacksonville University",
+     "chabadHouseName": "Chabad at UNF"
+    }
+   ],
+   "studyAreas": [
+    "Law",
+    "Medical",
+    "Business",
+    "Psychology",
+    "PublicPolicy"
+   ],
+   "programLevels": [
+    "Grad",
+    "Undergrad"
+   ],
+   "studentResources": [
+    {
+     "id": 56,
+     "studentResourceID": 1,
+     "provider": "Chabad"
+    },
+    {
+     "id": 57,
+     "studentResourceID": 2,
+     "provider": "NA"
+    },
+    {
+     "id": 60,
+     "studentResourceID": 3,
+     "provider": "NA"
+    },
+    {
+     "id": 59,
+     "studentResourceID": 4,
+     "provider": "NA"
+    },
+    {
+     "id": 58,
+     "studentResourceID": 5,
+     "provider": "NA"
+    },
+    {
+     "id": 61,
+     "studentResourceID": 6,
+     "provider": "Chabad"
+    },
+    {
+     "id": 62,
+     "studentResourceID": 7,
+     "provider": "NA"
+    },
+    {
+     "id": 63,
+     "studentResourceID": 8,
+     "provider": "NA"
+    },
+    {
+     "id": 64,
+     "studentResourceID": 9,
+     "provider": "NA"
+    },
+    {
+     "id": 65,
+     "studentResourceID": 10,
+     "provider": "Chabad"
+    },
+    {
+     "id": 66,
+     "studentResourceID": 11,
+     "provider": "NA"
+    }
+   ],
+   "studentGroups": [
+    "None"
+   ]
+  },
+  "45": {
+   "jewishStudentLife": [
+    {
+     "name": "Kosher restaurant",
+     "providers": [
+      "Other"
+     ]
+    },
+    {
+     "name": "Packaged kosher food",
+     "providers": [
+      "School"
+     ]
+    },
+    {
+     "name": "Kosher for Passover meal plan",
+     "providers": [
+      "Other"
+     ]
+    },
+    {
+     "name": "Shabbat and holidays minyan",
+     "providers": [
+      "Chabad"
+     ]
+    },
+    {
+     "name": "Israel Orgs",
+     "providers": []
+    },
+    {
+     "name": "Jewish Greek life",
+     "providers": []
+    },
+    {
+     "name": "Other Jewish student groups",
+     "providers": []
+    }
+   ],
+   "shliachChaplainStatusDisplay": "Yes, unpaid",
+   "shluchaChaplainStatusDisplay": "No",
+   "chabadStudentGroupStatusDisplay": "Yes, Chabad itself",
+   "id": 45,
+   "name": "University of South Florida",
+   "isActive": true,
+   "nickname": "USF",
+   "nicknameOptOut": null,
+   "websiteURL": "http://www.usf.edu/",
+   "annualTuition": 6000.0,
+   "isInstitutionControlPublic": true,
+   "studentResidencyType": "Residential",
+   "schoolCalendarType": "Semester",
+   "prestige": "Standard",
+   "graduatePopulation": 11547,
+   "undergradPopulation": 36521,
+   "jewishUndergradPopulation": 1200,
+   "jewishGraduatePopulation": 200,
+   "shliachChaplainStatus": "RecognizedUnpaid",
+   "shluchaChaplainStatus": "Unrecognized",
+   "chabadStudentGroupStatus": "ChabadRecognized",
+   "chabadHouses": [
+    {
+     "chabadHouseID": 445,
+     "campusID": 45,
+     "isFullTime": true,
+     "isPrimary": true,
+     "distance": "HalfMile",
+     "campusName": "University of South Florida",
+     "chabadHouseName": "Chabad at the University of South Florida"
+    }
+   ],
+   "studyAreas": [
+    "Law",
+    "Medical",
+    "Business",
+    "Psychology",
+    "Other"
+   ],
+   "programLevels": [
+    "Grad",
+    "Undergrad"
+   ],
+   "studentResources": [
+    {
+     "id": 2577,
+     "studentResourceID": 1,
+     "provider": "NA"
+    },
+    {
+     "id": 2578,
+     "studentResourceID": 2,
+     "provider": "NA"
+    },
+    {
+     "id": 2579,
+     "studentResourceID": 3,
+     "provider": "NA"
+    },
+    {
+     "id": 2580,
+     "studentResourceID": 4,
+     "provider": "NA"
+    },
+    {
+     "id": 2581,
+     "studentResourceID": 5,
+     "provider": "NA"
+    },
+    {
+     "id": 2582,
+     "studentResourceID": 6,
+     "provider": "Other"
+    },
+    {
+     "id": 2583,
+     "studentResourceID": 7,
+     "provider": "NA"
+    },
+    {
+     "id": 6158,
+     "studentResourceID": 8,
+     "provider": "School"
+    },
+    {
+     "id": 2585,
+     "studentResourceID": 9,
+     "provider": "Other"
+    },
+    {
+     "id": 2586,
+     "studentResourceID": 10,
+     "provider": "Chabad"
+    },
+    {
+     "id": 2587,
+     "studentResourceID": 11,
+     "provider": "NA"
+    }
+   ],
+   "studentGroups": [
+    "IsraelOrgs",
+    "JewishGreekLife",
+    "Other"
+   ]
+  },
+  "1439": {
+   "jewishStudentLife": [],
+   "shliachChaplainStatusDisplay": null,
+   "shluchaChaplainStatusDisplay": null,
+   "chabadStudentGroupStatusDisplay": null,
+   "id": 1439,
+   "name": "University of Tampa",
+   "isActive": true,
+   "nickname": "",
+   "nicknameOptOut": null,
+   "websiteURL": "",
+   "annualTuition": null,
+   "isInstitutionControlPublic": false,
+   "studentResidencyType": "Unknown",
+   "schoolCalendarType": "Unknown",
+   "prestige": null,
+   "graduatePopulation": null,
+   "undergradPopulation": 12000,
+   "jewishUndergradPopulation": 1000,
+   "jewishGraduatePopulation": null,
+   "shliachChaplainStatus": null,
+   "shluchaChaplainStatus": null,
+   "chabadStudentGroupStatus": null,
+   "chabadHouses": [
+    {
+     "chabadHouseID": 829,
+     "campusID": 1439,
+     "isFullTime": true,
+     "isPrimary": true,
+     "distance": null,
+     "campusName": "University of Tampa",
+     "chabadHouseName": "Chabad at University of Tampa"
+    }
+   ],
+   "studyAreas": [],
+   "programLevels": [],
+   "studentResources": [],
+   "studentGroups": []
+  },
+  "305": {
+   "jewishStudentLife": [
+    {
+     "name": "Jewish student lounge",
+     "providers": [
+      "Chabad",
+      "School"
+     ]
+    },
+    {
+     "name": "Kosher restaurant",
+     "providers": [
+      "School"
+     ]
+    },
+    {
+     "name": "Kosher for Passover meal plan",
+     "providers": [
+      "Chabad"
+     ]
+    },
+    {
+     "name": "Shabbat and holidays minyan",
+     "providers": [
+      "Chabad"
+     ]
+    },
+    {
+     "name": "Daily minyan",
+     "providers": [
+      "Other"
+     ]
+    },
+    {
+     "name": "Israel Orgs",
+     "providers": []
+    },
+    {
+     "name": "Jewish Greek life",
+     "providers": []
+    },
+    {
+     "name": "Other Jewish student groups",
+     "providers": []
+    }
+   ],
+   "shliachChaplainStatusDisplay": "Yes, unpaid",
+   "shluchaChaplainStatusDisplay": "Yes, unpaid",
+   "chabadStudentGroupStatusDisplay": "Yes, Chabad itself",
+   "id": 305,
+   "name": "University of Miami",
+   "isActive": true,
+   "nickname": "UM, UMIAMI",
+   "nicknameOptOut": null,
+   "websiteURL": "",
+   "annualTuition": 66000.0,
+   "isInstitutionControlPublic": false,
+   "studentResidencyType": "Residential",
+   "schoolCalendarType": "Semester",
+   "prestige": "Standard",
+   "graduatePopulation": 6710,
+   "undergradPopulation": 12913,
+   "jewishUndergradPopulation": 2000,
+   "jewishGraduatePopulation": 1500,
+   "shliachChaplainStatus": "RecognizedUnpaid",
+   "shluchaChaplainStatus": "RecognizedUnpaid",
+   "chabadStudentGroupStatus": "ChabadRecognized",
+   "chabadHouses": [
+    {
+     "chabadHouseID": 233,
+     "campusID": 305,
+     "isFullTime": true,
+     "isPrimary": true,
+     "distance": "FifthMile",
+     "campusName": "University of Miami",
+     "chabadHouseName": "Chabad @ University of Miami"
+    }
+   ],
+   "studyAreas": [
+    "Law",
+    "Medical",
+    "Business",
+    "Psychology",
+    "Other"
+   ],
+   "programLevels": [
+    "Grad",
+    "Undergrad"
+   ],
+   "studentResources": [
+    {
+     "id": 3605,
+     "studentResourceID": 1,
+     "provider": "Chabad"
+    },
+    {
+     "id": 3606,
+     "studentResourceID": 1,
+     "provider": "School"
+    },
+    {
+     "id": 3610,
+     "studentResourceID": 2,
+     "provider": "NA"
+    },
+    {
+     "id": 3611,
+     "studentResourceID": 3,
+     "provider": "NA"
+    },
+    {
+     "id": 3612,
+     "studentResourceID": 4,
+     "provider": "NA"
+    },
+    {
+     "id": 3613,
+     "studentResourceID": 5,
+     "provider": "NA"
+    },
+    {
+     "id": 3607,
+     "studentResourceID": 6,
+     "provider": "School"
+    },
+    {
+     "id": 3614,
+     "studentResourceID": 7,
+     "provider": "NA"
+    },
+    {
+     "id": 3615,
+     "studentResourceID": 8,
+     "provider": "NA"
+    },
+    {
+     "id": 3608,
+     "studentResourceID": 9,
+     "provider": "Chabad"
+    },
+    {
+     "id": 3609,
+     "studentResourceID": 10,
+     "provider": "Chabad"
+    },
+    {
+     "id": 3616,
+     "studentResourceID": 11,
+     "provider": "Other"
+    }
+   ],
+   "studentGroups": [
+    "IsraelOrgs",
+    "JewishGreekLife",
+    "Other"
+   ]
+  },
+  "732": {
+   "jewishStudentLife": [
+    {
+     "name": "Jewish student lounge",
+     "providers": [
+      "School"
+     ]
+    },
+    {
+     "name": "Daily Kosher meal plan (1 meal a day)",
+     "providers": [
+      "School"
+     ]
+    },
+    {
+     "name": "Limited Kosher meal plan (1 or 2 meals a week)",
+     "providers": [
+      "School"
+     ]
+    },
+    {
+     "name": "Kosher restaurant",
+     "providers": [
+      "School"
+     ]
+    },
+    {
+     "name": "Packaged kosher food",
+     "providers": [
+      "School"
+     ]
+    },
+    {
+     "name": "Kosher for Passover meal plan",
+     "providers": [
+      "Chabad",
+      "School"
+     ]
+    },
+    {
+     "name": "Shabbat and holidays minyan",
+     "providers": [
+      "Chabad"
+     ]
+    },
+    {
+     "name": "Israel Orgs",
+     "providers": []
+    },
+    {
+     "name": "Jewish Greek life",
+     "providers": []
+    }
+   ],
+   "shliachChaplainStatusDisplay": "Yes, unpaid",
+   "shluchaChaplainStatusDisplay": "Yes, unpaid",
+   "chabadStudentGroupStatusDisplay": "Yes, Chabad itself",
+   "id": 732,
+   "name": "University of Miami - Undergrad",
+   "isActive": true,
+   "nickname": "",
+   "nicknameOptOut": true,
+   "websiteURL": "",
+   "annualTuition": 50226.0,
+   "isInstitutionControlPublic": false,
+   "studentResidencyType": "Residential",
+   "schoolCalendarType": "Semester",
+   "prestige": "Standard",
+   "graduatePopulation": null,
+   "undergradPopulation": 12000,
+   "jewishUndergradPopulation": 2200,
+   "jewishGraduatePopulation": null,
+   "shliachChaplainStatus": "RecognizedUnpaid",
+   "shluchaChaplainStatus": "RecognizedUnpaid",
+   "chabadStudentGroupStatus": "ChabadRecognized",
+   "chabadHouses": [
+    {
+     "chabadHouseID": 318,
+     "campusID": 732,
+     "isFullTime": true,
+     "isPrimary": true,
+     "distance": "FifthMile",
+     "campusName": "University of Miami - Undergrad",
+     "chabadHouseName": "Chabad at University of Miami - Undergrad"
+    }
+   ],
+   "studyAreas": [
+    "Law",
+    "Medical",
+    "Business",
+    "Psychology"
+   ],
+   "programLevels": [
+    "Undergrad"
+   ],
+   "studentResources": [
+    {
+     "id": 2990,
+     "studentResourceID": 1,
+     "provider": "School"
+    },
+    {
+     "id": 2991,
+     "studentResourceID": 2,
+     "provider": "NA"
+    },
+    {
+     "id": 2992,
+     "studentResourceID": 3,
+     "provider": "NA"
+    },
+    {
+     "id": 2993,
+     "studentResourceID": 4,
+     "provider": "School"
+    },
+    {
+     "id": 2994,
+     "studentResourceID": 5,
+     "provider": "School"
+    },
+    {
+     "id": 2995,
+     "studentResourceID": 6,
+     "provider": "School"
+    },
+    {
+     "id": 2996,
+     "studentResourceID": 7,
+     "provider": "NA"
+    },
+    {
+     "id": 2997,
+     "studentResourceID": 8,
+     "provider": "School"
+    },
+    {
+     "id": 2998,
+     "studentResourceID": 9,
+     "provider": "Chabad"
+    },
+    {
+     "id": 2999,
+     "studentResourceID": 9,
+     "provider": "School"
+    },
+    {
+     "id": 3000,
+     "studentResourceID": 10,
+     "provider": "Chabad"
+    },
+    {
+     "id": 3001,
+     "studentResourceID": 11,
+     "provider": "NA"
+    }
+   ],
+   "studentGroups": [
+    "IsraelOrgs",
+    "JewishGreekLife"
+   ]
+  },
+  "44": {
+   "jewishStudentLife": [
+    {
+     "name": "Jewish student lounge",
+     "providers": [
+      "Other"
+     ]
+    },
+    {
+     "name": "Kosher food truck",
+     "providers": [
+      "Other"
+     ]
+    },
+    {
+     "name": "Kosher for Passover meal plan",
+     "providers": [
+      "Chabad"
+     ]
+    },
+    {
+     "name": "Shabbat and holidays minyan",
+     "providers": [
+      "Chabad"
+     ]
+    },
+    {
+     "name": "Israel Orgs",
+     "providers": []
+    },
+    {
+     "name": "Jewish Greek life",
+     "providers": []
+    },
+    {
+     "name": "Other Jewish student groups",
+     "providers": []
+    }
+   ],
+   "shliachChaplainStatusDisplay": "Yes, unpaid",
+   "shluchaChaplainStatusDisplay": "Yes, unpaid",
+   "chabadStudentGroupStatusDisplay": "Yes, Chabad itself",
+   "id": 44,
+   "name": "Florida International University",
+   "isActive": true,
+   "nickname": "FIU",
+   "nicknameOptOut": null,
+   "websiteURL": "",
+   "annualTuition": 24000.0,
+   "isInstitutionControlPublic": true,
+   "studentResidencyType": "Commuter",
+   "schoolCalendarType": "Semester",
+   "prestige": "Standard",
+   "graduatePopulation": 9000,
+   "undergradPopulation": 46500,
+   "jewishUndergradPopulation": 2000,
+   "jewishGraduatePopulation": 500,
+   "shliachChaplainStatus": "RecognizedUnpaid",
+   "shluchaChaplainStatus": "RecognizedUnpaid",
+   "chabadStudentGroupStatus": "ChabadRecognized",
+   "chabadHouses": [
+    {
+     "chabadHouseID": 639,
+     "campusID": 44,
+     "isFullTime": true,
+     "isPrimary": true,
+     "distance": "FifthMile",
+     "campusName": "Florida International University",
+     "chabadHouseName": "Chabad on Campus at FIU"
+    }
+   ],
+   "studyAreas": [
+    "Law",
+    "Medical",
+    "Business",
+    "Psychology",
+    "PublicPolicy",
+    "Other"
+   ],
+   "programLevels": [
+    "Grad",
+    "Undergrad"
+   ],
+   "studentResources": [
+    {
+     "id": 5240,
+     "studentResourceID": 1,
+     "provider": "Other"
+    },
+    {
+     "id": 1114,
+     "studentResourceID": 2,
+     "provider": "NA"
+    },
+    {
+     "id": 1115,
+     "studentResourceID": 3,
+     "provider": "NA"
+    },
+    {
+     "id": 1116,
+     "studentResourceID": 4,
+     "provider": "NA"
+    },
+    {
+     "id": 1117,
+     "studentResourceID": 5,
+     "provider": "NA"
+    },
+    {
+     "id": 3529,
+     "studentResourceID": 6,
+     "provider": "NA"
+    },
+    {
+     "id": 1119,
+     "studentResourceID": 7,
+     "provider": "Other"
+    },
+    {
+     "id": 1120,
+     "studentResourceID": 8,
+     "provider": "NA"
+    },
+    {
+     "id": 1121,
+     "studentResourceID": 9,
+     "provider": "Chabad"
+    },
+    {
+     "id": 1122,
+     "studentResourceID": 10,
+     "provider": "Chabad"
+    },
+    {
+     "id": 1123,
+     "studentResourceID": 11,
+     "provider": "NA"
+    }
+   ],
+   "studentGroups": [
+    "IsraelOrgs",
+    "JewishGreekLife",
+    "Other"
+   ]
+  },
+  "31": {
+   "jewishStudentLife": [
+    {
+     "name": "Jewish student lounge",
+     "providers": [
+      "Other"
+     ]
+    },
+    {
+     "name": "Packaged kosher food",
+     "providers": [
+      "School"
+     ]
+    },
+    {
+     "name": "Kosher for Passover meal plan",
+     "providers": [
+      "Chabad"
+     ]
+    },
+    {
+     "name": "Shabbat and holidays minyan",
+     "providers": [
+      "Chabad"
+     ]
+    },
+    {
+     "name": "Israel Orgs",
+     "providers": []
+    },
+    {
+     "name": "Jewish Greek life",
+     "providers": []
+    },
+    {
+     "name": "Other Jewish student groups",
+     "providers": []
+    }
+   ],
+   "shliachChaplainStatusDisplay": "No",
+   "shluchaChaplainStatusDisplay": "No",
+   "chabadStudentGroupStatusDisplay": "Chabad associated students are",
+   "id": 31,
+   "name": "Florida Atlantic University, Boca Raton Campus",
+   "isActive": true,
+   "nickname": "Florida Atlantic",
+   "nicknameOptOut": null,
+   "websiteURL": "",
+   "annualTuition": 4831.0,
+   "isInstitutionControlPublic": true,
+   "studentResidencyType": "Commuter",
+   "schoolCalendarType": "Semester",
+   "prestige": "Standard",
+   "graduatePopulation": 5400,
+   "undergradPopulation": 25000,
+   "jewishUndergradPopulation": 700,
+   "jewishGraduatePopulation": 300,
+   "shliachChaplainStatus": "Unrecognized",
+   "shluchaChaplainStatus": "Unrecognized",
+   "chabadStudentGroupStatus": "AssociatedGroupRecognized",
+   "chabadHouses": [
+    {
+     "chabadHouseID": 80,
+     "campusID": 31,
+     "isFullTime": true,
+     "isPrimary": true,
+     "distance": "HalfMile",
+     "campusName": "Florida Atlantic University, Boca Raton Campus",
+     "chabadHouseName": "Chabad Student Center"
+    }
+   ],
+   "studyAreas": [
+    "Medical",
+    "Business",
+    "Psychology",
+    "Other"
+   ],
+   "programLevels": [
+    "Grad",
+    "Undergrad"
+   ],
+   "studentResources": [
+    {
+     "id": 4358,
+     "studentResourceID": 1,
+     "provider": "Other"
+    },
+    {
+     "id": 4359,
+     "studentResourceID": 2,
+     "provider": "NA"
+    },
+    {
+     "id": 4364,
+     "studentResourceID": 3,
+     "provider": "NA"
+    },
+    {
+     "id": 4363,
+     "studentResourceID": 4,
+     "provider": "NA"
+    },
+    {
+     "id": 4362,
+     "studentResourceID": 5,
+     "provider": "NA"
+    },
+    {
+     "id": 4361,
+     "studentResourceID": 6,
+     "provider": "NA"
+    },
+    {
+     "id": 4360,
+     "studentResourceID": 7,
+     "provider": "NA"
+    },
+    {
+     "id": 4365,
+     "studentResourceID": 8,
+     "provider": "School"
+    },
+    {
+     "id": 4366,
+     "studentResourceID": 9,
+     "provider": "Chabad"
+    },
+    {
+     "id": 4367,
+     "studentResourceID": 10,
+     "provider": "Chabad"
+    },
+    {
+     "id": 4368,
+     "studentResourceID": 11,
+     "provider": "NA"
+    }
+   ],
+   "studentGroups": [
+    "IsraelOrgs",
+    "JewishGreekLife",
+    "Other"
+   ]
+  },
+  "32": {
+   "jewishStudentLife": [
+    {
+     "name": "Packaged kosher food",
+     "providers": [
+      "School"
+     ]
+    },
+    {
+     "name": "Kosher for Passover meal plan",
+     "providers": [
+      "Chabad"
+     ]
+    },
+    {
+     "name": "Shabbat and holidays minyan",
+     "providers": [
+      "Chabad"
+     ]
+    },
+    {
+     "name": "Other Jewish student groups",
+     "providers": []
+    }
+   ],
+   "shliachChaplainStatusDisplay": "Yes, unpaid",
+   "shluchaChaplainStatusDisplay": "Yes, unpaid",
+   "chabadStudentGroupStatusDisplay": "Chabad associated students are",
+   "id": 32,
+   "name": "Lynn University",
+   "isActive": true,
+   "nickname": "",
+   "nicknameOptOut": true,
+   "websiteURL": "",
+   "annualTuition": 40000.0,
+   "isInstitutionControlPublic": false,
+   "studentResidencyType": "Residential",
+   "schoolCalendarType": "Semester",
+   "prestige": "LiberalArts",
+   "graduatePopulation": 675,
+   "undergradPopulation": 2800,
+   "jewishUndergradPopulation": 300,
+   "jewishGraduatePopulation": 75,
+   "shliachChaplainStatus": "RecognizedUnpaid",
+   "shluchaChaplainStatus": "RecognizedUnpaid",
+   "chabadStudentGroupStatus": "AssociatedGroupRecognized",
+   "chabadHouses": [
+    {
+     "chabadHouseID": 80,
+     "campusID": 32,
+     "isFullTime": true,
+     "isPrimary": false,
+     "distance": "ThreeMiles",
+     "campusName": "Lynn University",
+     "chabadHouseName": "Chabad Student Center"
+    }
+   ],
+   "studyAreas": [
+    "Business",
+    "Psychology",
+    "Other"
+   ],
+   "programLevels": [
+    "Grad",
+    "Undergrad"
+   ],
+   "studentResources": [
+    {
+     "id": 4369,
+     "studentResourceID": 1,
+     "provider": "NA"
+    },
+    {
+     "id": 4370,
+     "studentResourceID": 2,
+     "provider": "NA"
+    },
+    {
+     "id": 4371,
+     "studentResourceID": 3,
+     "provider": "NA"
+    },
+    {
+     "id": 4372,
+     "studentResourceID": 4,
+     "provider": "NA"
+    },
+    {
+     "id": 4373,
+     "studentResourceID": 5,
+     "provider": "NA"
+    },
+    {
+     "id": 4374,
+     "studentResourceID": 6,
+     "provider": "NA"
+    },
+    {
+     "id": 4375,
+     "studentResourceID": 7,
+     "provider": "NA"
+    },
+    {
+     "id": 4376,
+     "studentResourceID": 8,
+     "provider": "School"
+    },
+    {
+     "id": 4377,
+     "studentResourceID": 9,
+     "provider": "Chabad"
+    },
+    {
+     "id": 4378,
+     "studentResourceID": 10,
+     "provider": "Chabad"
+    },
+    {
+     "id": 4379,
+     "studentResourceID": 11,
+     "provider": "NA"
+    }
+   ],
+   "studentGroups": [
+    "Other"
+   ]
+  },
+  "112": {
+   "jewishStudentLife": [
+    {
+     "name": "Kosher restaurant",
+     "providers": [
+      "Other"
+     ]
+    },
+    {
+     "name": "Kosher for Passover meal plan",
+     "providers": [
+      "Chabad"
+     ]
+    },
+    {
+     "name": "Shabbat and holidays minyan",
+     "providers": [
+      "Chabad"
+     ]
+    }
+   ],
+   "shliachChaplainStatusDisplay": "No",
+   "shluchaChaplainStatusDisplay": "No",
+   "chabadStudentGroupStatusDisplay": "No",
+   "id": 112,
+   "name": "Palm Beach Community College",
+   "isActive": true,
+   "nickname": "PBSC",
+   "nicknameOptOut": false,
+   "websiteURL": "",
+   "annualTuition": 5000.0,
+   "isInstitutionControlPublic": true,
+   "studentResidencyType": "Commuter",
+   "schoolCalendarType": "Semester",
+   "prestige": "CommunityCollege",
+   "graduatePopulation": null,
+   "undergradPopulation": 15000,
+   "jewishUndergradPopulation": 500,
+   "jewishGraduatePopulation": null,
+   "shliachChaplainStatus": "Unrecognized",
+   "shluchaChaplainStatus": "Unrecognized",
+   "chabadStudentGroupStatus": "Unrecognized",
+   "chabadHouses": [
+    {
+     "chabadHouseID": 80,
+     "campusID": 112,
+     "isFullTime": true,
+     "isPrimary": false,
+     "distance": "OneMile",
+     "campusName": "Palm Beach Community College",
+     "chabadHouseName": "Chabad Student Center"
+    }
+   ],
+   "studyAreas": [
+    "Business",
+    "Psychology",
+    "Other"
+   ],
+   "programLevels": [
+    "Undergrad"
+   ],
+   "studentResources": [
+    {
+     "id": 6241,
+     "studentResourceID": 1,
+     "provider": "NA"
+    },
+    {
+     "id": 4381,
+     "studentResourceID": 2,
+     "provider": "NA"
+    },
+    {
+     "id": 4382,
+     "studentResourceID": 3,
+     "provider": "NA"
+    },
+    {
+     "id": 4383,
+     "studentResourceID": 4,
+     "provider": "NA"
+    },
+    {
+     "id": 4384,
+     "studentResourceID": 5,
+     "provider": "NA"
+    },
+    {
+     "id": 6238,
+     "studentResourceID": 6,
+     "provider": "Other"
+    },
+    {
+     "id": 4386,
+     "studentResourceID": 7,
+     "provider": "NA"
+    },
+    {
+     "id": 6240,
+     "studentResourceID": 8,
+     "provider": "NA"
+    },
+    {
+     "id": 4388,
+     "studentResourceID": 9,
+     "provider": "Chabad"
+    },
+    {
+     "id": 4389,
+     "studentResourceID": 10,
+     "provider": "Chabad"
+    },
+    {
+     "id": 4390,
+     "studentResourceID": 11,
+     "provider": "NA"
+    }
+   ],
+   "studentGroups": [
+    "None"
+   ]
+  },
+  "204": {
+   "jewishStudentLife": [
+    {
+     "name": "Jewish student lounge",
+     "providers": [
+      "School"
+     ]
+    },
+    {
+     "name": "Limited Kosher meal plan (1 or 2 meals a week)",
+     "providers": [
+      "Chabad"
+     ]
+    },
+    {
+     "name": "Kosher restaurant",
+     "providers": [
+      "Other"
+     ]
+    },
+    {
+     "name": "Kosher food truck",
+     "providers": [
+      "Other"
+     ]
+    },
+    {
+     "name": "Packaged kosher food",
+     "providers": [
+      "School"
+     ]
+    },
+    {
+     "name": "Kosher for Passover meal plan",
+     "providers": [
+      "Chabad"
+     ]
+    },
+    {
+     "name": "Shabbat and holidays minyan",
+     "providers": [
+      "Chabad"
+     ]
+    },
+    {
+     "name": "Daily minyan",
+     "providers": [
+      "Other"
+     ]
+    },
+    {
+     "name": "Israel Orgs",
+     "providers": []
+    },
+    {
+     "name": "Jewish Greek life",
+     "providers": []
+    },
+    {
+     "name": "Other Jewish student groups",
+     "providers": []
+    }
+   ],
+   "shliachChaplainStatusDisplay": "No",
+   "shluchaChaplainStatusDisplay": "No",
+   "chabadStudentGroupStatusDisplay": "Chabad associated students are",
+   "id": 204,
+   "name": "Nova Southeastern University",
+   "isActive": true,
+   "nickname": "NSU",
+   "nicknameOptOut": null,
+   "websiteURL": "",
+   "annualTuition": 33000.0,
+   "isInstitutionControlPublic": false,
+   "studentResidencyType": "Residential",
+   "schoolCalendarType": "Semester",
+   "prestige": "Standard",
+   "graduatePopulation": 16000,
+   "undergradPopulation": 8000,
+   "jewishUndergradPopulation": 1000,
+   "jewishGraduatePopulation": 1500,
+   "shliachChaplainStatus": "Unrecognized",
+   "shluchaChaplainStatus": "Unrecognized",
+   "chabadStudentGroupStatus": "AssociatedGroupRecognized",
+   "chabadHouses": [
+    {
+     "chabadHouseID": 149,
+     "campusID": 204,
+     "isFullTime": true,
+     "isPrimary": true,
+     "distance": "FifthMile",
+     "campusName": "Nova Southeastern University",
+     "chabadHouseName": "Chabad at NSU"
+    }
+   ],
+   "studyAreas": [
+    "Law",
+    "Medical",
+    "Business",
+    "Psychology",
+    "PublicPolicy",
+    "Other"
+   ],
+   "programLevels": [
+    "Grad",
+    "Undergrad"
+   ],
+   "studentResources": [
+    {
+     "id": 2532,
+     "studentResourceID": 1,
+     "provider": "School"
+    },
+    {
+     "id": 2533,
+     "studentResourceID": 2,
+     "provider": "NA"
+    },
+    {
+     "id": 2534,
+     "studentResourceID": 3,
+     "provider": "NA"
+    },
+    {
+     "id": 2535,
+     "studentResourceID": 4,
+     "provider": "NA"
+    },
+    {
+     "id": 2536,
+     "studentResourceID": 5,
+     "provider": "Chabad"
+    },
+    {
+     "id": 2537,
+     "studentResourceID": 6,
+     "provider": "Other"
+    },
+    {
+     "id": 2538,
+     "studentResourceID": 7,
+     "provider": "Other"
+    },
+    {
+     "id": 2539,
+     "studentResourceID": 8,
+     "provider": "School"
+    },
+    {
+     "id": 2540,
+     "studentResourceID": 9,
+     "provider": "Chabad"
+    },
+    {
+     "id": 2541,
+     "studentResourceID": 10,
+     "provider": "Chabad"
+    },
+    {
+     "id": 2542,
+     "studentResourceID": 11,
+     "provider": "Other"
+    }
+   ],
+   "studentGroups": [
+    "IsraelOrgs",
+    "JewishGreekLife",
+    "Other"
+   ]
+  },
+  "205": {
+   "jewishStudentLife": [
+    {
+     "name": "Jewish student lounge",
+     "providers": [
+      "Chabad"
+     ]
+    },
+    {
+     "name": "Packaged kosher food",
+     "providers": [
+      "Chabad",
+      "Other"
+     ]
+    },
+    {
+     "name": "Kosher for Passover meal plan",
+     "providers": [
+      "Chabad"
+     ]
+    },
+    {
+     "name": "Shabbat and holidays minyan",
+     "providers": [
+      "Chabad"
+     ]
+    },
+    {
+     "name": "Daily minyan",
+     "providers": [
+      "Other"
+     ]
+    },
+    {
+     "name": "Other Jewish student groups",
+     "providers": []
+    }
+   ],
+   "shliachChaplainStatusDisplay": "No",
+   "shluchaChaplainStatusDisplay": "No",
+   "chabadStudentGroupStatusDisplay": "No",
+   "id": 205,
+   "name": "Broward College",
+   "isActive": true,
+   "nickname": "Broward College",
+   "nicknameOptOut": null,
+   "websiteURL": "",
+   "annualTuition": 2830.0,
+   "isInstitutionControlPublic": true,
+   "studentResidencyType": "Commuter",
+   "schoolCalendarType": "Semester",
+   "prestige": "Standard",
+   "graduatePopulation": null,
+   "undergradPopulation": 42000,
+   "jewishUndergradPopulation": 500,
+   "jewishGraduatePopulation": null,
+   "shliachChaplainStatus": "Unrecognized",
+   "shluchaChaplainStatus": "Unrecognized",
+   "chabadStudentGroupStatus": "Unrecognized",
+   "chabadHouses": [
+    {
+     "chabadHouseID": 149,
+     "campusID": 205,
+     "isFullTime": true,
+     "isPrimary": false,
+     "distance": "FifthMile",
+     "campusName": "Broward College",
+     "chabadHouseName": "Chabad at NSU"
+    }
+   ],
+   "studyAreas": [
+    "Other"
+   ],
+   "programLevels": [
+    "Undergrad"
+   ],
+   "studentResources": [
+    {
+     "id": 2543,
+     "studentResourceID": 1,
+     "provider": "Chabad"
+    },
+    {
+     "id": 2544,
+     "studentResourceID": 2,
+     "provider": "NA"
+    },
+    {
+     "id": 2545,
+     "studentResourceID": 3,
+     "provider": "NA"
+    },
+    {
+     "id": 2546,
+     "studentResourceID": 4,
+     "provider": "NA"
+    },
+    {
+     "id": 2547,
+     "studentResourceID": 5,
+     "provider": "NA"
+    },
+    {
+     "id": 2548,
+     "studentResourceID": 6,
+     "provider": "NA"
+    },
+    {
+     "id": 2549,
+     "studentResourceID": 7,
+     "provider": "NA"
+    },
+    {
+     "id": 2550,
+     "studentResourceID": 8,
+     "provider": "Chabad"
+    },
+    {
+     "id": 2552,
+     "studentResourceID": 8,
+     "provider": "Other"
+    },
+    {
+     "id": 2551,
+     "studentResourceID": 9,
+     "provider": "Chabad"
+    },
+    {
+     "id": 2553,
+     "studentResourceID": 10,
+     "provider": "Chabad"
+    },
+    {
+     "id": 2554,
+     "studentResourceID": 11,
+     "provider": "Other"
+    }
+   ],
+   "studentGroups": [
+    "Other"
+   ]
+  },
+  "772": {
+   "jewishStudentLife": [
+    {
+     "name": "Jewish student lounge",
+     "providers": [
+      "Chabad"
+     ]
+    },
+    {
+     "name": "Jewish Greek life",
+     "providers": []
+    },
+    {
+     "name": "Other Jewish student groups",
+     "providers": []
+    }
+   ],
+   "shliachChaplainStatusDisplay": "Yes, unpaid",
+   "shluchaChaplainStatusDisplay": "Yes, unpaid",
+   "chabadStudentGroupStatusDisplay": "Yes, Chabad itself",
+   "id": 772,
+   "name": "Florida Gulf Coast University - Undergrads ",
+   "isActive": true,
+   "nickname": "FGCU",
+   "nicknameOptOut": null,
+   "websiteURL": "",
+   "annualTuition": 6000.0,
+   "isInstitutionControlPublic": true,
+   "studentResidencyType": "Residential",
+   "schoolCalendarType": "Semester",
+   "prestige": "Standard",
+   "graduatePopulation": 2000,
+   "undergradPopulation": 14000,
+   "jewishUndergradPopulation": 400,
+   "jewishGraduatePopulation": 50,
+   "shliachChaplainStatus": "RecognizedUnpaid",
+   "shluchaChaplainStatus": "RecognizedUnpaid",
+   "chabadStudentGroupStatus": "ChabadRecognized",
+   "chabadHouses": [
+    {
+     "chabadHouseID": 569,
+     "campusID": 772,
+     "isFullTime": true,
+     "isPrimary": true,
+     "distance": "ThreeMiles",
+     "campusName": "Florida Gulf Coast University - Undergrads ",
+     "chabadHouseName": "Chabad at FGCU "
+    }
+   ],
+   "studyAreas": [
+    "Business",
+    "Psychology",
+    "Other"
+   ],
+   "programLevels": [
+    "Grad",
+    "Undergrad"
+   ],
+   "studentResources": [
+    {
+     "id": 3508,
+     "studentResourceID": 1,
+     "provider": "Chabad"
+    },
+    {
+     "id": 3509,
+     "studentResourceID": 2,
+     "provider": "NA"
+    },
+    {
+     "id": 3510,
+     "studentResourceID": 3,
+     "provider": "NA"
+    },
+    {
+     "id": 3511,
+     "studentResourceID": 4,
+     "provider": "NA"
+    },
+    {
+     "id": 3512,
+     "studentResourceID": 5,
+     "provider": "NA"
+    },
+    {
+     "id": 284,
+     "studentResourceID": 6,
+     "provider": "NA"
+    },
+    {
+     "id": 3513,
+     "studentResourceID": 7,
+     "provider": "NA"
+    },
+    {
+     "id": 3514,
+     "studentResourceID": 8,
+     "provider": "NA"
+    },
+    {
+     "id": 3515,
+     "studentResourceID": 9,
+     "provider": "NA"
+    },
+    {
+     "id": 3516,
+     "studentResourceID": 10,
+     "provider": "NA"
+    },
+    {
+     "id": 3517,
+     "studentResourceID": 11,
+     "provider": "NA"
+    }
+   ],
+   "studentGroups": [
+    "JewishGreekLife",
+    "Other"
+   ]
+  },
+  "1377": {
+   "jewishStudentLife": [],
+   "shliachChaplainStatusDisplay": "No",
+   "shluchaChaplainStatusDisplay": "No",
+   "chabadStudentGroupStatusDisplay": "No",
+   "id": 1377,
+   "name": "Florida SouthWestern",
+   "isActive": true,
+   "nickname": "FSW ",
+   "nicknameOptOut": null,
+   "websiteURL": "",
+   "annualTuition": null,
+   "isInstitutionControlPublic": true,
+   "studentResidencyType": "Commuter",
+   "schoolCalendarType": "Semester",
+   "prestige": "CommunityCollege",
+   "graduatePopulation": null,
+   "undergradPopulation": 14000,
+   "jewishUndergradPopulation": 50,
+   "jewishGraduatePopulation": null,
+   "shliachChaplainStatus": "Unrecognized",
+   "shluchaChaplainStatus": "Unrecognized",
+   "chabadStudentGroupStatus": "Unrecognized",
+   "chabadHouses": [
+    {
+     "chabadHouseID": 569,
+     "campusID": 1377,
+     "isFullTime": false,
+     "isPrimary": false,
+     "distance": "FivePlusMiles",
+     "campusName": "Florida SouthWestern",
+     "chabadHouseName": "Chabad at FGCU "
+    }
+   ],
+   "studyAreas": [
+    "Other"
+   ],
+   "programLevels": [
+    "Undergrad"
+   ],
+   "studentResources": [
+    {
+     "id": 3518,
+     "studentResourceID": 1,
+     "provider": "NA"
+    },
+    {
+     "id": 3519,
+     "studentResourceID": 2,
+     "provider": "NA"
+    },
+    {
+     "id": 3520,
+     "studentResourceID": 3,
+     "provider": "NA"
+    },
+    {
+     "id": 3521,
+     "studentResourceID": 4,
+     "provider": "NA"
+    },
+    {
+     "id": 3522,
+     "studentResourceID": 5,
+     "provider": "NA"
+    },
+    {
+     "id": 3523,
+     "studentResourceID": 6,
+     "provider": "NA"
+    },
+    {
+     "id": 3524,
+     "studentResourceID": 7,
+     "provider": "NA"
+    },
+    {
+     "id": 3525,
+     "studentResourceID": 8,
+     "provider": "NA"
+    },
+    {
+     "id": 3526,
+     "studentResourceID": 9,
+     "provider": "NA"
+    },
+    {
+     "id": 3527,
+     "studentResourceID": 10,
+     "provider": "NA"
+    },
+    {
+     "id": 3528,
+     "studentResourceID": 11,
+     "provider": "NA"
+    }
+   ],
+   "studentGroups": [
+    "None"
+   ]
+  },
+  "109": {
+   "jewishStudentLife": [
+    {
+     "name": "Shabbat and holidays minyan",
+     "providers": [
+      "Chabad"
+     ]
+    },
+    {
+     "name": "Other Jewish student groups",
+     "providers": []
+    }
+   ],
+   "shliachChaplainStatusDisplay": "No",
+   "shluchaChaplainStatusDisplay": "No",
+   "chabadStudentGroupStatusDisplay": "Yes, Chabad itself",
+   "id": 109,
+   "name": "Rollins College",
+   "isActive": true,
+   "nickname": "Chabad at Rollins College",
+   "nicknameOptOut": null,
+   "websiteURL": "",
+   "annualTuition": 53716.0,
+   "isInstitutionControlPublic": false,
+   "studentResidencyType": "Residential",
+   "schoolCalendarType": "Semester",
+   "prestige": "LiberalArts",
+   "graduatePopulation": 1200,
+   "undergradPopulation": 3500,
+   "jewishUndergradPopulation": 350,
+   "jewishGraduatePopulation": 100,
+   "shliachChaplainStatus": "Unrecognized",
+   "shluchaChaplainStatus": "Unrecognized",
+   "chabadStudentGroupStatus": "ChabadRecognized",
+   "chabadHouses": [
+    {
+     "chabadHouseID": 339,
+     "campusID": 109,
+     "isFullTime": true,
+     "isPrimary": true,
+     "distance": "FivePlusMiles",
+     "campusName": "Rollins College",
+     "chabadHouseName": "Chabad Student Center \u2014 Winter Park"
+    }
+   ],
+   "studyAreas": [
+    "Other"
+   ],
+   "programLevels": [
+    "Grad",
+    "Undergrad"
+   ],
+   "studentResources": [
+    {
+     "id": 4549,
+     "studentResourceID": 1,
+     "provider": "NA"
+    },
+    {
+     "id": 4550,
+     "studentResourceID": 2,
+     "provider": "NA"
+    },
+    {
+     "id": 4551,
+     "studentResourceID": 3,
+     "provider": "NA"
+    },
+    {
+     "id": 4552,
+     "studentResourceID": 4,
+     "provider": "NA"
+    },
+    {
+     "id": 4553,
+     "studentResourceID": 5,
+     "provider": "NA"
+    },
+    {
+     "id": 4554,
+     "studentResourceID": 6,
+     "provider": "NA"
+    },
+    {
+     "id": 4555,
+     "studentResourceID": 7,
+     "provider": "NA"
+    },
+    {
+     "id": 4556,
+     "studentResourceID": 8,
+     "provider": "NA"
+    },
+    {
+     "id": 4557,
+     "studentResourceID": 9,
+     "provider": "NA"
+    },
+    {
+     "id": 4558,
+     "studentResourceID": 10,
+     "provider": "Chabad"
+    },
+    {
+     "id": 4559,
+     "studentResourceID": 11,
+     "provider": "NA"
+    }
+   ],
+   "studentGroups": [
+    "Other"
+   ]
+  }
+ },
+ "housesList": [
+  {
+   "id": 7,
+   "name": "Chabad at FSU",
+   "campusID": 41,
+   "campusName": "Florida State University",
+   "address": {
+    "address1": "224 Chapel Drive",
+    "city": "Tallahassee",
+    "country": "USA",
+    "id": 512,
+    "address2": "",
+    "state": "Florida",
+    "zip": "32304",
+    "discriminator": "ChabadHouse",
+    "locationName": null
+   },
+   "location": {
+    "latitude": 30.4434839,
+    "longitude": -84.3109572
+   },
+   "buildingImageURL": "https://cocistorage.blob.core.windows.net/prod/house/eeDT2s2_O-NApWICOJGfdr.jpg"
+  },
+  {
+   "id": 80,
+   "name": "Chabad Student Center",
+   "campusID": 31,
+   "campusName": "Florida Atlantic University, Boca Raton Campus",
+   "address": {
+    "address1": "935 NW 5th Avenue",
+    "city": "Boca Raton",
+    "country": "USA",
+    "id": 255,
+    "address2": "",
+    "state": "Florida",
+    "zip": "33432",
+    "discriminator": "ChabadHouse",
+    "locationName": null
+   },
+   "location": {
+    "latitude": 26.3591641,
+    "longitude": -80.0965069
+   },
+   "buildingImageURL": "https://cocistorage.blob.core.windows.net/prod/house/0UT-Ce4LeuE_mpNnw6IHZl.jpg"
+  },
+  {
+   "id": 81,
+   "name": "Chabad at UNF",
+   "campusID": 582,
+   "campusName": "University of North Florida",
+   "address": {
+    "address1": "11271 Alumni Way",
+    "city": "Jacksonville",
+    "country": "USA",
+    "id": 269,
+    "address2": "",
+    "state": "Florida",
+    "zip": "32246-6685",
+    "discriminator": "ChabadHouse",
+    "locationName": null
+   },
+   "location": {
+    "latitude": 30.2756883,
+    "longitude": -81.5260852
+   },
+   "buildingImageURL": "https://cocistorage.blob.core.windows.net/prod/house/z_mjvPIozqRnyrcw~MYWH5.jpg"
+  },
+  {
+   "id": 124,
+   "name": "Chabad @ University of Central Florida",
+   "campusID": 70,
+   "campusName": "University of Central Florida",
+   "address": {
+    "address1": "3144 N Alafaya Trail",
+    "city": "Orlando",
+    "country": "USA",
+    "id": 44,
+    "address2": "",
+    "state": "Florida",
+    "zip": "32826",
+    "discriminator": "ChabadHouse",
+    "locationName": null
+   },
+   "location": {
+    "latitude": 28.5848676,
+    "longitude": -81.2078328
+   },
+   "buildingImageURL": "https://cocistorage.blob.core.windows.net/prod/house/tTVpgNot9k9QItLLDltZni.jpg"
+  },
+  {
+   "id": 149,
+   "name": "Chabad at NSU",
+   "campusID": 204,
+   "campusName": "Nova Southeastern University",
+   "address": {
+    "address1": "7430 SW 39th St",
+    "city": "Davie",
+    "country": "USA",
+    "id": 110,
+    "address2": "",
+    "state": "Florida",
+    "zip": "33314",
+    "discriminator": "ChabadHouse",
+    "locationName": null
+   },
+   "location": {
+    "latitude": 26.0724158,
+    "longitude": -80.2470083
+   },
+   "buildingImageURL": "https://cocistorage.blob.core.windows.net/prod/house/-Qmu2poUx4fyt0J4lHg8xM.jpg"
+  },
+  {
+   "id": 233,
+   "name": "Chabad @ University of Miami",
+   "campusID": 305,
+   "campusName": "University of Miami",
+   "address": {
+    "address1": "1251 Hardee Road",
+    "city": "Coral Gables",
+    "country": "USA",
+    "id": 228,
+    "address2": "",
+    "state": "Florida",
+    "zip": "33146-3253",
+    "discriminator": "ChabadHouse",
+    "locationName": null
+   },
+   "location": {
+    "latitude": 25.712341,
+    "longitude": -80.2774948
+   },
+   "buildingImageURL": "https://cocistorage.blob.core.windows.net/prod/house/73NGGdDJ_OCfOb8SqPuANL.png"
+  },
+  {
+   "id": 257,
+   "name": "Chabad UF",
+   "campusID": 304,
+   "campusName": "University of Florida",
+   "address": {
+    "address1": "2021 NW 5th Avenue",
+    "city": "Gainesville",
+    "country": "USA",
+    "id": 153,
+    "address2": "",
+    "state": "Florida",
+    "zip": "32603",
+    "discriminator": "ChabadHouse",
+    "locationName": null
+   },
+   "location": {
+    "latitude": 29.6557202,
+    "longitude": -82.338481
+   },
+   "buildingImageURL": "https://cocistorage.blob.core.windows.net/prod/house/SrXBKHXYkGgQrAzAfUPyBC.JPG"
+  },
+  {
+   "id": 318,
+   "name": "Chabad at University of Miami - Undergrad",
+   "campusID": 732,
+   "campusName": "University of Miami - Undergrad",
+   "address": {
+    "address1": "5800 Maynada Street",
+    "city": "Coral Gables",
+    "country": "USA",
+    "id": 490,
+    "address2": "",
+    "state": "Florida",
+    "zip": "33146",
+    "discriminator": "ChabadHouse",
+    "locationName": null
+   },
+   "location": {
+    "latitude": 25.7155041,
+    "longitude": -80.2738152
+   },
+   "buildingImageURL": "https://cocistorage.blob.core.windows.net/prod/house/z39_t-HknNf0zWRbjOVf-O.jpg"
+  },
+  {
+   "id": 339,
+   "name": "Chabad Student Center \u2014 Winter Park",
+   "campusID": 109,
+   "campusName": "Rollins College",
+   "address": {
+    "address1": "",
+    "city": "Maitland",
+    "country": "USA",
+    "id": 842,
+    "address2": "",
+    "state": "Florida",
+    "zip": "32751",
+    "discriminator": "ChabadHouse",
+    "locationName": null
+   },
+   "location": {
+    "latitude": 28.6,
+    "longitude": -81.3
+   },
+   "buildingImageURL": "https://cocistorage.blob.core.windows.net/prod/house/Qh9tr-RewIA2mxKAtC5El9.jpg"
+  },
+  {
+   "id": 445,
+   "name": "Chabad at the University of South Florida",
+   "campusID": 45,
+   "campusName": "University of South Florida",
+   "address": {
+    "address1": "12301 North 52nd Street",
+    "city": "Tampa",
+    "country": "USA",
+    "id": 886,
+    "address2": "",
+    "state": "Florida",
+    "zip": "33617",
+    "discriminator": "ChabadHouse",
+    "locationName": null
+   },
+   "location": {
+    "latitude": 28.0591634,
+    "longitude": -82.3973496
+   },
+   "buildingImageURL": "https://cocistorage.blob.core.windows.net/prod/house/p_FTkJ1DKj6nFbSrNIl4pv.jpg"
+  },
+  {
+   "id": 569,
+   "name": "Chabad at FGCU ",
+   "campusID": 772,
+   "campusName": "Florida Gulf Coast University - Undergrads ",
+   "address": {
+    "address1": "17150 Caloosa Trace Circle",
+    "city": "Fort Myers",
+    "country": "USA",
+    "id": 911,
+    "address2": "",
+    "state": "Florida",
+    "zip": "33967",
+    "discriminator": "ChabadHouse",
+    "locationName": null
+   },
+   "location": {
+    "latitude": 26.490817,
+    "longitude": -81.8164107
+   },
+   "buildingImageURL": "https://cocistorage.blob.core.windows.net/prod/house/chP53cVZBSVcH-TYOmWunP.jpg"
+  },
+  {
+   "id": 639,
+   "name": "Chabad on Campus at FIU",
+   "campusID": 44,
+   "campusName": "Florida International University",
+   "address": {
+    "address1": "",
+    "city": "Miami",
+    "country": "USA",
+    "id": 633,
+    "address2": "",
+    "state": "Florida",
+    "zip": "33174",
+    "discriminator": "ChabadHouse",
+    "locationName": null
+   },
+   "location": {
+    "latitude": 25.8,
+    "longitude": -80.4
+   },
+   "buildingImageURL": "https://cocistorage.blob.core.windows.net/prod/house/-mHKQZSH9eClkOAXNnGaHG.jpg"
+  },
+  {
+   "id": 829,
+   "name": "Chabad at University of Tampa",
+   "campusID": 1439,
+   "campusName": "University of Tampa",
+   "address": {
+    "address1": "",
+    "city": "Tampa",
+    "country": "USA",
+    "id": 902,
+    "address2": "",
+    "state": "Florida",
+    "zip": "33606",
+    "discriminator": "ChabadHouse",
+    "locationName": null
+   },
+   "location": {
+    "latitude": 27.9,
+    "longitude": -82.5
+   },
+   "buildingImageURL": ""
+  }
+ ]
+}

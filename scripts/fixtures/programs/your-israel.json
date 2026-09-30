@@ -1,0 +1,35 @@
+{
+ "numberOfRows": 59,
+ "results": [
+  {
+   "chabadHouseSlug": "ucf",
+   "numOfCourses": null,
+   "numOfCurrentCourses": null
+  },
+  {
+   "chabadHouseSlug": "chabad-at-fsu",
+   "numOfCourses": null,
+   "numOfCurrentCourses": null
+  },
+  {
+   "chabadHouseSlug": "chabad-at-the-university-of-south-florida",
+   "numOfCourses": null,
+   "numOfCurrentCourses": null
+  },
+  {
+   "chabadHouseSlug": "chabad-um-undergrad",
+   "numOfCourses": null,
+   "numOfCurrentCourses": null
+  },
+  {
+   "chabadHouseSlug": "chabad-student-center-boca",
+   "numOfCourses": null,
+   "numOfCurrentCourses": null
+  },
+  {
+   "chabadHouseSlug": "chabaduf",
+   "numOfCourses": null,
+   "numOfCurrentCourses": null
+  }
+ ]
+}

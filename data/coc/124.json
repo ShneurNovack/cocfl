@@ -1,0 +1,199 @@
+{
+  "houseId": 124,
+  "center": "ucf",
+  "hash": "c06c9a9e0c5ae62c",
+  "updatedAt": "2026-09-29T23:45:15.257Z",
+  "source": "https://api.chabadoncampus.org/api/1.0/ChabadHouses/Public/124",
+  "data": {
+    "houseId": 124,
+    "name": "Chabad @ University of Central Florida",
+    "cocSlug": "ucf",
+    "website": "https://www.jewishucf.com/",
+    "donateUrl": "https://www.jewishucf.com/Donate",
+    "logo": "https://cocistorage.blob.core.windows.net/prod/house_logo/6dZZlwMA~foJgRd6_g80hP.png",
+    "image": "https://cocistorage.blob.core.windows.net/prod/house/tTVpgNot9k9QItLLDltZni.jpg",
+    "address": {
+      "street": "3144 N Alafaya Trail",
+      "city": "Orlando",
+      "state": "Florida",
+      "zip": "32826",
+      "country": "USA"
+    },
+    "location": {
+      "lat": 28.5848676,
+      "lng": -81.2078328
+    },
+    "phone": "407-949-8838",
+    "email": "Rabbi@JewishUCF.com",
+    "region": "USA - South",
+    "timezone": "America/New_York",
+    "staff": [
+      {
+        "title": "Rabbi",
+        "name": "Chaim Boruch Lipskier",
+        "role": null,
+        "photo": "https://cocistorage.blob.core.windows.net/prod/profile/aYtYHQhXmI4ew4DVMLWECF.jpg",
+        "primary": false,
+        "photoLocal": {
+          "src": "/media/coc/6d74c28f244c6afe-staff.webp",
+          "width": 240,
+          "height": 240
+        }
+      },
+      {
+        "title": "Mrs.",
+        "name": "Rivkie Lipskier",
+        "role": "Co-Director",
+        "photo": "https://cocistorage.blob.core.windows.net/prod/profile/7RAq4w~zZTdSk9b7Lt7Uvl.jpg",
+        "primary": false,
+        "photoLocal": {
+          "src": "/media/coc/d4edeb37d474a09d-staff.webp",
+          "width": 240,
+          "height": 240
+        }
+      }
+    ],
+    "social": [
+      {
+        "type": "Instagram",
+        "url": "https://www.instagram.com/chabaducf/"
+      },
+      {
+        "type": "Twitter",
+        "url": "https://x.com/ChabadUCF"
+      },
+      {
+        "type": "Facebook",
+        "url": "https://facebook.com/ChabadUCF"
+      }
+    ],
+    "campuses": [
+      {
+        "id": 70,
+        "name": "University of Central Florida",
+        "nickname": "UCF",
+        "primary": true,
+        "fullTime": true,
+        "distance": "FifthMile",
+        "website": "https://www.ucf.edu/",
+        "publicInstitution": true,
+        "residency": "Residential",
+        "undergrad": 60000,
+        "grad": 9000,
+        "jewishUndergrad": 6000,
+        "jewishGrad": 900,
+        "chabadGroupStatus": "ChabadRecognized",
+        "studentLife": [
+          {
+            "name": "Jewish student lounge",
+            "providers": [
+              "Chabad"
+            ]
+          },
+          {
+            "name": "Limited Kosher meal plan (1 or 2 meals a week)",
+            "providers": [
+              "Chabad"
+            ]
+          },
+          {
+            "name": "Kosher for Passover meal plan",
+            "providers": [
+              "Chabad"
+            ]
+          },
+          {
+            "name": "Shabbat and holidays minyan",
+            "providers": [
+              "Chabad"
+            ]
+          },
+          {
+            "name": "Daily minyan",
+            "providers": [
+              "Chabad"
+            ]
+          },
+          {
+            "name": "Israel Orgs",
+            "providers": []
+          },
+          {
+            "name": "Jewish Greek life",
+            "providers": []
+          },
+          {
+            "name": "Other Jewish student groups",
+            "providers": []
+          }
+        ],
+        "programLevels": [
+          "Grad",
+          "Undergrad"
+        ]
+      },
+      {
+        "id": 726,
+        "name": "Valencia College",
+        "nickname": "Valencia",
+        "primary": false,
+        "fullTime": true,
+        "distance": "TwoMiles",
+        "website": "https://www.valenciacc.edu/",
+        "publicInstitution": true,
+        "residency": "Commuter",
+        "undergrad": 17000,
+        "grad": null,
+        "jewishUndergrad": 500,
+        "jewishGrad": null,
+        "chabadGroupStatus": "Unrecognized",
+        "studentLife": [
+          {
+            "name": "Jewish student lounge",
+            "providers": [
+              "Chabad"
+            ]
+          },
+          {
+            "name": "Limited Kosher meal plan (1 or 2 meals a week)",
+            "providers": [
+              "Chabad"
+            ]
+          },
+          {
+            "name": "Kosher for Passover meal plan",
+            "providers": [
+              "Chabad"
+            ]
+          },
+          {
+            "name": "Shabbat and holidays minyan",
+            "providers": [
+              "Chabad"
+            ]
+          },
+          {
+            "name": "Daily minyan",
+            "providers": [
+              "Chabad"
+            ]
+          }
+        ],
+        "programLevels": [
+          "Undergrad"
+        ]
+      }
+    ],
+    "logoLocal": {
+      "src": "/media/coc/c4e8a339f447cb06-logo.webp",
+      "width": 320,
+      "height": 189
+    },
+    "imageLocal": {
+      "src": "/media/coc/186eb230472e7ab5-w1280.webp",
+      "width": 1278,
+      "height": 1280,
+      "srcset": "/media/coc/186eb230472e7ab5-w1280.webp 1278w, /media/coc/186eb230472e7ab5-w640.webp 639w"
+    }
+  }
+}

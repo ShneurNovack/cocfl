@@ -1,0 +1,21 @@
+---
+import type { Center } from '../lib/centers';
+interface Props { center: Center; size?: number; eager?: boolean }
+const { center, size = 56, eager = false } = Astro.props;
+const initials = center.primaryCampus.abbr || center.primaryCampus.name.split(/\s+/).filter((w) => /^[A-Z]/.test(w)).map((w) => w[0]).join('').slice(0, 4);
+---
+{center.logo ? (
+  <span class="clogo" style={`width:${size}px;height:${size}px`}>
+    <img src={center.logo.src} width={center.logo.width} height={center.logo.height} alt={`${center.officialName} logo`} loading={eager ? 'eager' : 'lazy'} decoding="async" />
+  </span>
+) : (
+  <span class="clogo clogo-fallback" style={`width:${size}px;height:${size}px;font-size:${Math.round(size / (initials.length > 3 ? 4.2 : 3.4))}px`} aria-hidden="true">
+    <img src="/flame.webp" alt="" width="18" height="18" />{initials}
+  </span>
+)}
+<style>
+  .clogo { display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; background: #fff; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; padding: 4px; }
+  .clogo img { width: 100%; height: 100%; object-fit: contain; }
+  .clogo-fallback { background: var(--blue-deep); box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.35); color: #fff; font-weight: 800; flex-direction: column; gap: 1px; border: 0; letter-spacing: -0.02em; line-height: 1; }
+  .clogo-fallback img { width: 34%; height: auto; }
+</style>

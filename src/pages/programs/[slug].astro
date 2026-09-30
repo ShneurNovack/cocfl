@@ -1,0 +1,130 @@
+---
+import Base from '../../layouts/Base.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import CenterCard from '../../components/CenterCard.astro';
+import ProgramCard from '../../components/ProgramCard.astro';
+import Faq from '../../components/Faq.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { programs, programBySlug, type Program } from '../../data/programs';
+import { centers, programCenterIds } from '../../lib/centers';
+import { SITE, img } from '../../lib/site';
+
+export function getStaticPaths() {
+  return programs.map((p) => ({ params: { slug: p.slug }, props: { program: p } }));
+}
+interface Props { program: Program }
+const { program: p } = Astro.props;
+const { ids, all } = programCenterIds(p, centers.map((c) => c.id));
+const offered = centers.filter((c) => ids.includes(c.id)).sort((a, b) => a.primaryCampus.name.localeCompare(b.primaryCampus.name));
+const related = p.related.map((s) => programBySlug[s]).filter(Boolean);
+const hero = img(p.image);
+const crumbs = [
+  { name: 'Programs', href: '/programs/' },
+  { name: p.name, href: `/programs/${p.slug}/` },
+];
+const ld = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: p.metaTitle,
+    url: `${SITE.url}/programs/${p.slug}/`,
+    description: p.metaDescription,
+    isPartOf: { '@id': `${SITE.url}/#website` },
+    about: { '@type': 'Thing', name: p.name, ...(p.officialLinks[0] ? { sameAs: p.officialLinks[0].href } : {}) },
+    primaryImageOfPage: { '@type': 'ImageObject', url: `${SITE.url}${hero.src}` },
+  },
+];
+---
+<Base title={p.metaTitle} description={p.metaDescription} path={`/programs/${p.slug}/`} breadcrumbs={crumbs} jsonLd={ld} ogImage={hero.src}>
+  <section class="page-hero band-blue phero">
+    <div class="wrap hero-grid">
+      <div>
+        <Breadcrumbs items={crumbs} />
+        <span class="eyebrow">{p.category}</span>
+        <h1>{p.name}</h1>
+        <p class="lead">{p.tagline}</p>
+        <div class="btn-row">
+          <a class="btn btn-gold" href="#offered-at">Where it's offered in Florida</a>
+          {p.officialLinks[0] && <a class="btn btn-ghost" href={p.officialLinks[0].href} rel="noopener">{p.officialLinks[0].label}</a>}
+        </div>
+      </div>
+      <div class="photo hero-photo">
+        <img src={hero.src} srcset={hero.srcset} sizes="(max-width: 900px) 100vw, 520px" width={hero.width} height={hero.height} alt={p.imageAlt} fetchpriority="high" decoding="async" />
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight glance-wrap">
+    <div class="wrap glance">
+      <div><h2>Who it's for</h2><p>{p.audience}</p></div>
+      <div><h2>Format</h2><p>{p.format}</p></div>
+      <div><h2>Cost</h2><p>{p.cost}</p></div>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="wrap body">
+      <div class="prose">
+        {p.logo && <img class="plogo" src={p.logo} alt={`${p.name} logo`} width="180" height="90" loading="lazy" />}
+        {p.intro.map((t) => <p class="lead-p">{t}</p>)}
+        {p.sections.map((s) => (
+          <>
+            <h2>{s.h2}</h2>
+            {s.body.map((t) => <p>{t}</p>)}
+            {s.list && <ul>{s.list.map((li) => <li>{li}</li>)}</ul>}
+          </>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section band-cream" id="offered-at">
+    <div class="wrap">
+      <span class="eyebrow">Offered at</span>
+      <h2>{p.shortName} at Florida colleges</h2>
+      <p class="lead narrow">{p.offeredAtNote}</p>
+      {offered.length > 0 ? (
+        <div class="grid grid-3">
+          {offered.map((c) => <CenterCard center={c} compact />)}
+        </div>
+      ) : (
+        <p>Contact your campus Chabad House to ask about {p.shortName}.</p>
+      )}
+      {!all && <p class="small muted note">Don't see your school? <a href="/campuses/">Find your Chabad House</a> and ask whether {p.shortName} is coming to your campus.</p>}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap narrow">
+      <h2>{p.shortName} FAQs</h2>
+      <Faq items={p.faqs} open />
+      {p.officialLinks.length > 0 && (
+        <p class="links">Official information: {p.officialLinks.map((l, i) => <>{i > 0 && ' · '}<a href={l.href} rel="noopener">{l.label}</a></>)}</p>
+      )}
+    </div>
+  </section>
+
+  <section class="section band-cream">
+    <div class="wrap">
+      <h2>Related programs</h2>
+      <div class="grid grid-3">{related.map((r) => <ProgramCard program={r} />)}</div>
+    </div>
+  </section>
+
+  <CtaBand title={`Interested in ${p.shortName}?`} text="Your campus Chabad House is the place to start. Find yours and reach out to the rabbi and rebbetzin." />
+</Base>
+
+<style>
+  .hero-grid { display: grid; grid-template-columns: 1fr minmax(0, 520px); gap: clamp(28px, 5vw, 56px); align-items: center; }
+  @media (max-width: 900px) { .hero-grid { grid-template-columns: 1fr; } }
+  .hero-photo { aspect-ratio: 3 / 2; box-shadow: 0 18px 48px rgba(0, 0, 0, 0.25); }
+  .phero .lead { margin-bottom: 26px; }
+  .glance-wrap { border-bottom: 1px solid var(--line); }
+  .glance { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 28px; }
+  .glance h2 { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--blue); margin-bottom: 6px; }
+  .glance p { margin: 0; color: var(--ink-2); }
+  .plogo { width: auto; height: 64px; margin-bottom: 24px; }
+  .lead-p { font-size: 1.12rem; color: var(--ink-2); }
+  .note { margin-top: 18px; }
+  .links { margin-top: 20px; color: var(--muted); }
+</style>

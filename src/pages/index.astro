@@ -1,0 +1,213 @@
+---
+import Base from '../layouts/Base.astro';
+import CenterCard from '../components/CenterCard.astro';
+import ProgramCard from '../components/ProgramCard.astro';
+import Picture from '../components/Picture.astro';
+import { centers, centersByRegion, stats, allColleges } from '../lib/centers';
+import { programs } from '../data/programs';
+import { SITE, TESTIMONIALS } from '../lib/site';
+
+const regions = centersByRegion();
+const colleges = allColleges();
+const itemList = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Chabad on Campus centers in Florida',
+  itemListElement: centers.map((c, i) => ({ '@type': 'ListItem', position: i + 1, url: `${SITE.url}${c.url}`, name: `Chabad at ${c.primaryCampus.name}` })),
+};
+const offers = [
+  { title: 'Shabbat dinners every week', text: 'Home-cooked Friday night dinners with friends, open to every Jewish student.', href: '/jewish-life-on-campus/shabbat/', link: 'Shabbat on campus' },
+  { title: 'Every Jewish holiday, celebrated', text: 'High Holiday services, a sukkah on campus, Chanukah, Purim and Passover Seders.', href: '/jewish-life-on-campus/jewish-holidays/', link: 'Jewish holidays in college' },
+  { title: 'Kosher food', text: 'From weekly kosher meals to full meal plans and kosher dining, depending on your campus.', href: '/jewish-life-on-campus/kosher-food/', link: 'Kosher food on campus' },
+  { title: 'Learning your way', text: 'Short JewishU courses, the Sinai Scholars fellowship and one-on-one time with the rabbi.', href: '/programs/', link: 'Explore programs' },
+  { title: 'Israel and travel', text: 'Birthright with your campus Chabad, heritage trips and grants to study abroad.', href: '/programs/birthright-israel/', link: 'Birthright & Israel experiences' },
+  { title: 'A family away from home', text: 'A rabbi and rebbetzin who know you by name, for good days and hard ones.', href: '/about/', link: 'About Chabad on Campus' },
+];
+---
+<Base
+  title="Chabad on Campus Florida: Jewish Life at Florida Colleges"
+  description="Find Chabad at your Florida college. Shabbat dinners, Jewish holidays, kosher food, classes and Israel trips at Chabad on Campus centers serving 25+ Florida campuses."
+  path="/"
+  jsonLd={[itemList]}
+>
+  <section class="hero band-blue">
+    <div class="wrap hero-inner">
+      <h1>
+        <span class="kicker">Chabad on Campus Florida</span>
+        Serving over <span class="hl">{SITE.reported.students} Jewish students</span> on <span class="hl">{stats.campuses}+ campuses</span> throughout Florida.
+      </h1>
+      <p class="lead">We champion robust Jewish life and learning on college campuses in Florida. We seek a future where every Jewish student has a deeper affinity, connection and understanding of their faith, heritage and identity.</p>
+      <form class="hero-search" action="/campuses/" method="get" role="search">
+        <label for="hero-q">Is there a Chabad at my school?</label>
+        <div class="field">
+          <input id="hero-q" name="q" type="search" list="schools" placeholder="Type your school, like UF, FIU or Rollins" autocomplete="off" />
+          <button class="btn btn-gold" type="submit">Find my campus</button>
+        </div>
+        <datalist id="schools">
+          {colleges.map((r) => <option value={r.campus.name} />)}
+        </datalist>
+      </form>
+    </div>
+  </section>
+
+  <section class="stats band-deep" aria-label="Chabad on Campus Florida by the numbers">
+    <div class="wrap stat-grid">
+      <div><strong>{stats.centers}</strong><span>Chabad centers</span></div>
+      <div><strong>{stats.campuses}</strong><span>Campuses served</span></div>
+      <div><strong>{SITE.reported.studentsServed}</strong><span>Students served</span></div>
+      <div><strong>{SITE.reported.engagements}</strong><span>Jewish engagements in {SITE.reported.engagementsYear}</span></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="head">
+        <div>
+          <span class="eyebrow">Florida directory</span>
+          <h2>You call it college. We call it home.</h2>
+          <p class="lead">There is a Chabad House near nearly every major campus in Florida. Find yours, meet the rabbi and rebbetzin, and come for Shabbat.</p>
+        </div>
+        <a class="btn btn-ghost" href="/campuses/">Search all campuses</a>
+      </div>
+      {regions.map((r) => (
+        <div class="region">
+          <h3 class="region-title">{r.name} <span>{r.blurb}</span></h3>
+          <div class="grid grid-3">
+            {r.centers.map((c) => <CenterCard center={c} compact />)}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="section band-cream">
+    <div class="wrap split">
+      <Picture name="florida-pegisha-students" alt="Florida Jewish college students together at the Florida Regional Pegisha Shabbaton" aspect="4/3" />
+      <div>
+        <span class="eyebrow">Jewish life on campus</span>
+        <h2>Get support, find family, celebrate Judaism your own way</h2>
+        <p class="lead">Chabad on Campus is open to every Jewish student, whatever your background or level of observance. No membership, no judgment, just a warm home a few minutes from class.</p>
+        <p><a href="/jewish-life-on-campus/">Read the guide to Jewish life on campus</a> or see <a href="/jewish-life-on-campus/florida/">Jewish life at Florida colleges</a>, region by region.</p>
+      </div>
+    </div>
+    <div class="wrap">
+      <div class="grid grid-3 offers">
+        {offers.map((o) => (
+          <div class="offer">
+            <h3>{o.title}</h3>
+            <p>{o.text}</p>
+            <a href={o.href}>{o.link} &rarr;</a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="head">
+        <div>
+          <span class="eyebrow">Programs</span>
+          <h2>Learn, travel and grow with Chabad on Campus</h2>
+          <p class="lead">Florida students have access to the full range of Chabad on Campus programs, from weekly classes to Shabbatons with hundreds of students.</p>
+        </div>
+        <a class="btn btn-ghost" href="/programs/">All programs</a>
+      </div>
+      <div class="grid grid-3">
+        {programs.slice(0, 6).map((p) => <ProgramCard program={p} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section band-blue voices">
+    <div class="wrap">
+      <span class="eyebrow">Student voices</span>
+      <h2>In their words</h2>
+      <div class="quotes">
+        {TESTIMONIALS.map((t) => (
+          <figure>
+            <blockquote>&ldquo;{t.quote}&rdquo;</blockquote>
+            <figcaption><strong>{t.name}</strong><span>{t.school}</span></figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap grid grid-2 duo">
+      <div class="card">
+        <span class="eyebrow">For parents</span>
+        <h2>Sending your child to a Florida college?</h2>
+        <p>Learn what Chabad on Campus offers students, how to connect your child with the rabbi and rebbetzin before move-in, and what support looks like during the year.</p>
+        <p><a class="btn btn-blue" href="/parents/">Resources for parents</a></p>
+      </div>
+      <div class="card">
+        <span class="eyebrow">Choosing a school</span>
+        <h2>Looking for a college with Jewish life?</h2>
+        <p>What to ask on a campus tour, how to compare Jewish communities, and which Florida universities have a Chabad House nearby.</p>
+        <p><a class="btn btn-blue" href="/jewish-life-on-campus/choosing-a-college/">Choosing a college with Jewish life</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section band-cream">
+    <div class="wrap split">
+      <div>
+        <h2>Connect with your Florida Chabad on Campus</h2>
+        <p class="lead">Wherever you're studying in Florida, there's a Chabad House nearby ready to welcome you. Find yours in the directory and say hello!</p>
+        <div class="btn-row">
+          <a class="btn btn-blue" href="/campuses/">Find your Chabad House</a>
+          <a class="btn btn-ghost" href="/faq/">Questions? Read the FAQ</a>
+        </div>
+      </div>
+      <Picture name="students-friends" alt="Jewish college students smiling together at a Chabad on Campus event" aspect="3/2" />
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hero { padding: clamp(56px, 9vw, 112px) 0 clamp(48px, 7vw, 88px); }
+  .hero-inner { max-width: 980px; text-align: center; }
+  .hero h1 { font-size: clamp(2.2rem, 5.2vw, 4.4rem); line-height: 1.08; max-width: none; margin-bottom: 26px; }
+  .kicker { display: block; font-size: clamp(0.85rem, 1.2vw, 1rem); letter-spacing: 0.12em; text-transform: uppercase; color: #cfe2f0; font-weight: 700; margin-bottom: 18px; }
+  .hero .lead { max-width: 640px; margin: 0 auto 34px; }
+  .hero-search { max-width: 640px; margin: 0 auto; text-align: left; }
+  .hero-search label { display: block; font-weight: 700; margin-bottom: 10px; color: #fff; text-align: center; }
+  .field { display: flex; gap: 8px; background: #fff; padding: 6px; border-radius: var(--radius); box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18); }
+  .field input { flex: 1; min-width: 0; border: 0; font: 500 1.05rem var(--font); padding: 12px 14px; color: var(--ink); background: transparent; }
+  .field input:focus { outline: none; }
+  .field:focus-within { outline: 3px solid var(--gold); outline-offset: 2px; }
+  @media (max-width: 520px) { .field { flex-direction: column; } }
+
+  .stats { padding: clamp(36px, 5vw, 56px) 0; }
+  .stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; text-align: center; }
+  @media (max-width: 720px) { .stat-grid { grid-template-columns: 1fr 1fr; } }
+  .stat-grid strong { display: block; font-size: clamp(2.4rem, 5vw, 3.6rem); font-weight: 900; color: var(--gold); line-height: 1; letter-spacing: -0.02em; }
+  .stat-grid span { display: block; margin-top: 10px; font-weight: 600; font-size: 0.95rem; }
+
+  .head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 20px; margin-bottom: 36px; }
+  .head > div { max-width: 700px; }
+  .head .lead { margin-bottom: 0; }
+  .region + .region { margin-top: 40px; }
+  .region-title { font-size: 1rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--blue-ink); border-bottom: 2px solid var(--gold); padding-bottom: 10px; margin-bottom: 18px; display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: baseline; }
+  .region-title span { text-transform: none; letter-spacing: 0; color: var(--muted); font-weight: 500; font-size: 0.9rem; }
+
+  .offers { margin-top: clamp(40px, 6vw, 64px); }
+  .offer { border-top: 3px solid var(--blue); padding-top: 16px; }
+  .offer h3 { margin-bottom: 6px; }
+  .offer p { color: var(--ink-2); margin-bottom: 8px; }
+  .offer a { font-weight: 700; text-decoration: none; }
+  .offer a:hover { text-decoration: underline; }
+
+  .voices h2 { margin-bottom: 32px; }
+  .quotes { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 20px; }
+  figure { margin: 0; background: var(--blue-deep); padding: 28px; border-radius: var(--radius); display: flex; flex-direction: column; justify-content: space-between; gap: 18px; }
+  blockquote { margin: 0; font-size: 1.02rem; line-height: 1.65; color: #e9f2f8; }
+  figcaption strong { display: block; color: var(--gold); }
+  figcaption span { color: #bcd6e6; font-size: 0.9rem; }
+
+  .duo .card { padding: clamp(24px, 4vw, 40px); }
+  .duo h2 { font-size: clamp(1.35rem, 2.2vw, 1.7rem); }
+  .duo p:last-child { margin: 0; }
+</style>
