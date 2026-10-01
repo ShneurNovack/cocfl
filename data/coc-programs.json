@@ -19,31 +19,31 @@
           "center": "fiu",
           "slug": "chabad-fiu",
           "courses": 40,
-          "currentCourses": 7
+          "currentCourses": 6
         },
         {
           "center": "fsu",
           "slug": "chabad-at-fsu",
           "courses": 40,
-          "currentCourses": 2
+          "currentCourses": 1
         },
         {
           "center": "nsu",
           "slug": "chabad-at-nsu",
           "courses": 26,
-          "currentCourses": 7
+          "currentCourses": 6
         },
         {
           "center": "ucf",
           "slug": "ucf",
           "courses": 79,
-          "currentCourses": 3
+          "currentCourses": 2
         },
         {
           "center": "uf",
           "slug": "chabaduf",
           "courses": 74,
-          "currentCourses": 5
+          "currentCourses": 4
         },
         {
           "center": "um",
@@ -73,7 +73,7 @@
           "center": "ut",
           "slug": "chabad-at-university-of-tampa",
           "courses": 4,
-          "currentCourses": 3
+          "currentCourses": 2
         }
       ]
     },
@@ -160,5 +160,5 @@
       ]
     }
   },
-  "updatedAt": "2026-09-29T23:45:15.257Z"
+  "updatedAt": "2026-10-01T16:29:42.231Z"
 }
