@@ -12,8 +12,8 @@
         {
           "center": "fgcu",
           "slug": "chabad-at-fgcu",
-          "courses": 53,
-          "currentCourses": 3
+          "courses": 54,
+          "currentCourses": 4
         },
         {
           "center": "fiu",
@@ -160,5 +160,5 @@
       ]
     }
   },
-  "updatedAt": "2026-10-05T18:32:18.082Z"
+  "updatedAt": "2026-10-06T15:59:54.092Z"
 }
