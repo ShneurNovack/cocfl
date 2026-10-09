@@ -24,8 +24,8 @@
         {
           "center": "fsu",
           "slug": "chabad-at-fsu",
-          "courses": 40,
-          "currentCourses": 1
+          "courses": 42,
+          "currentCourses": 3
         },
         {
           "center": "nsu",
@@ -160,5 +160,5 @@
       ]
     }
   },
-  "updatedAt": "2026-10-08T16:33:50.925Z"
+  "updatedAt": "2026-10-09T16:17:20.844Z"
 }
