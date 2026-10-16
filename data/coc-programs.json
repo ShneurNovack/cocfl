@@ -42,8 +42,8 @@
         {
           "center": "uf",
           "slug": "chabaduf",
-          "courses": 75,
-          "currentCourses": 5
+          "courses": 76,
+          "currentCourses": 6
         },
         {
           "center": "um",
@@ -160,5 +160,5 @@
       ]
     }
   },
-  "updatedAt": "2026-10-15T14:13:01.567Z"
+  "updatedAt": "2026-10-16T14:00:01.034Z"
 }
