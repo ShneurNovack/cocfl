@@ -43,7 +43,7 @@
           "center": "uf",
           "slug": "chabaduf",
           "courses": 76,
-          "currentCourses": 6
+          "currentCourses": 5
         },
         {
           "center": "um",
@@ -55,7 +55,7 @@
           "center": "um-undergrad",
           "slug": "chabad-um-undergrad",
           "courses": 10,
-          "currentCourses": 4
+          "currentCourses": 3
         },
         {
           "center": "unf",
@@ -160,5 +160,5 @@
       ]
     }
   },
-  "updatedAt": "2026-10-18T13:20:58.470Z"
+  "updatedAt": "2026-10-20T14:20:56.068Z"
 }
