@@ -37,13 +37,13 @@
           "center": "ucf",
           "slug": "ucf",
           "courses": 82,
-          "currentCourses": 5
+          "currentCourses": 4
         },
         {
           "center": "uf",
           "slug": "chabaduf",
           "courses": 76,
-          "currentCourses": 5
+          "currentCourses": 4
         },
         {
           "center": "um",
@@ -160,5 +160,5 @@
       ]
     }
   },
-  "updatedAt": "2026-10-23T14:16:57.392Z"
+  "updatedAt": "2026-10-28T16:07:20.932Z"
 }
