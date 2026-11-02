@@ -37,7 +37,7 @@
           "center": "ucf",
           "slug": "ucf",
           "courses": 82,
-          "currentCourses": 3
+          "currentCourses": 2
         },
         {
           "center": "uf",
@@ -160,5 +160,5 @@
       ]
     }
   },
-  "updatedAt": "2026-10-30T15:58:34.763Z"
+  "updatedAt": "2026-11-02T19:32:55.296Z"
 }
