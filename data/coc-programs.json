@@ -7,7 +7,7 @@
           "center": "fau",
           "slug": "chabad-student-center-boca",
           "courses": 39,
-          "currentCourses": 5
+          "currentCourses": 4
         },
         {
           "center": "fgcu",
@@ -36,8 +36,8 @@
         {
           "center": "ucf",
           "slug": "ucf",
-          "courses": 82,
-          "currentCourses": 1
+          "courses": 83,
+          "currentCourses": 2
         },
         {
           "center": "uf",
@@ -160,5 +160,5 @@
       ]
     }
   },
-  "updatedAt": "2026-11-03T17:07:25.174Z"
+  "updatedAt": "2026-11-04T17:19:33.551Z"
 }
