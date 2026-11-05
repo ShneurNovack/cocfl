@@ -31,13 +31,13 @@
           "center": "nsu",
           "slug": "chabad-at-nsu",
           "courses": 30,
-          "currentCourses": 7
+          "currentCourses": 6
         },
         {
           "center": "ucf",
           "slug": "ucf",
-          "courses": 83,
-          "currentCourses": 2
+          "courses": 84,
+          "currentCourses": 3
         },
         {
           "center": "uf",
@@ -67,7 +67,7 @@
           "center": "usf",
           "slug": "chabad-at-the-university-of-south-florida",
           "courses": 49,
-          "currentCourses": 5
+          "currentCourses": 4
         },
         {
           "center": "ut",
@@ -160,5 +160,5 @@
       ]
     }
   },
-  "updatedAt": "2026-11-04T17:19:33.551Z"
+  "updatedAt": "2026-11-05T17:27:21.829Z"
 }
