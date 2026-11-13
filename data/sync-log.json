@@ -1,5 +1,31 @@
 [
   {
+    "at": "2026-11-13T17:15:18.007Z",
+    "changed": [],
+    "programChange": [
+      {
+        "program": "jewishu",
+        "centers": [
+          "fau",
+          "fgcu",
+          "fiu",
+          "fsu",
+          "nsu",
+          "ucf",
+          "uf",
+          "um",
+          "um-undergrad",
+          "unf",
+          "usf",
+          "ut"
+        ]
+      }
+    ],
+    "errors": [],
+    "warnings": [],
+    "unchanged": 13
+  },
+  {
     "at": "2026-11-12T17:37:45.578Z",
     "changed": [],
     "programChange": [
