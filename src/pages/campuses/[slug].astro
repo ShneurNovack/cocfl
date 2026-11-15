@@ -8,6 +8,7 @@ import SocialIcon from '../../components/SocialIcon.astro';
 import CtaBand from '../../components/CtaBand.astro';
 import { centers, withThe, distanceText, stateAbbr, KOSHER_KEYS, type Center } from '../../lib/centers';
 import { SITE } from '../../lib/site';
+import { schoolUrlFor } from '../../lib/schools';
 
 export function getStaticPaths() {
   return centers.map((c) => ({ params: { slug: c.slug }, props: { center: c } }));
@@ -284,6 +285,7 @@ qa.push({
                   {inf && inf.studentLife.length > 0 && (
                     <p class="slife"><strong>Jewish life on campus:</strong> {inf.studentLife.join(', ')}</p>
                   )}
+                  {schoolUrlFor(x.name) && <a class="textlink" href={schoolUrlFor(x.name)}>Jewish life at {withThe(x.name.replace(/\s*\(.*\)$/, ''))}: full college guide <Icon name="ArrowRight" size={18} /></a>}
                   {x.website && <a class="textlink" href={x.website} rel="noopener">{x.name} website <Icon name="ArrowUpRight" size={18} /></a>}
                 </div>
               </details>

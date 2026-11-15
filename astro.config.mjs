@@ -15,7 +15,7 @@ export default defineConfig({
         const u = item.url;
         if (u === 'https://chabadoncampusfl.org/') item.priority = 1.0;
         else if (u.endsWith('/campuses/') || u.endsWith('/programs/')) item.priority = 0.9;
-        else if (u.includes('/campuses/')) item.priority = 0.8;
+        else if (u.includes('/campuses/') || u.includes('/colleges/')) item.priority = 0.8;
         else item.priority = 0.7;
         return item;
       },

@@ -1,0 +1,83 @@
+---
+import Base from '../../layouts/Base.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import Icon from '../../components/Icon.astro';
+import { schools } from '../../lib/schools';
+import { REGIONS, type Region } from '../../lib/centers';
+import { SITE } from '../../lib/site';
+
+const groups = (Object.keys(REGIONS) as Region[]).map((r) => ({
+  region: r,
+  ...REGIONS[r],
+  schools: schools.filter((s) => s.served[0].center.region === r),
+}));
+const crumbs = [{ name: 'College Guide', href: '/colleges/' }];
+const ld = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: 'Florida College Guide for Jewish Students',
+    url: `${SITE.url}/colleges/`,
+    mainEntity: {
+      '@type': 'ItemList',
+      numberOfItems: schools.length,
+      itemListElement: schools.map((s, i) => ({ '@type': 'ListItem', position: i + 1, url: `${SITE.url}${s.url}`, name: `Jewish life at ${s.the}` })),
+    },
+  },
+];
+---
+<Base
+  title="Florida College Guide for Jewish Students | Jewish Life on Campus"
+  description={`Jewish life at ${schools.length} Florida colleges and universities served by Chabad: Shabbat, kosher food, Birthright, JewishU, Jewish Studies and campus facts for each school.`}
+  path="/colleges/"
+  breadcrumbs={crumbs}
+  jsonLd={ld}
+>
+  <section class="page-hero band-blue">
+    <div class="wrap">
+      <Breadcrumbs items={crumbs} />
+      <h1>Florida college guide</h1>
+      <p class="lead">Jewish life at every Florida college and university served by Chabad. Pick a school to see Shabbat, kosher food, learning, Israel trips and campus facts in one place.</p>
+    </div>
+  </section>
+
+  <div class="wrap body">
+    {groups.filter((g) => g.schools.length).map((g) => (
+      <section class="reg reveal" aria-labelledby={`r-${g.region}`}>
+        <div class="rh">
+          <h2 id={`r-${g.region}`}>{g.name}</h2>
+          <p>{g.blurb}</p>
+        </div>
+        <ul class="list">
+          {g.schools.map((s) => (
+            <li>
+              <a href={s.url}>
+                <span class="nm"><strong>{s.name}</strong><small>{s.city}{s.facts ? ` · ${s.facts.ownership}` : ''}</small></span>
+                <span class="by">{s.served.map((x) => x.center.officialName).join(' & ')}</span>
+                <Icon name="ArrowRight" size={20} />
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))}
+  </div>
+
+  <CtaBand />
+</Base>
+
+<style>
+  .body { display: grid; gap: clamp(56px, 7vw, 88px); padding-top: clamp(56px, 8vw, 96px); padding-bottom: clamp(72px, 10vw, 120px); }
+  .rh { margin-bottom: 22px; }
+  .rh h2 { margin: 0; font-size: clamp(1.6rem, 2.8vw, 2.2rem); }
+  .rh p { margin: 8px 0 0; color: var(--ink-2); }
+  .list { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+  .list a { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) auto; align-items: center; gap: 18px; padding: 20px 22px; background: var(--blue-wash); color: var(--ink); text-decoration: none; transition: background 0.2s, color 0.2s; }
+  .list a:hover { background: var(--blue); color: #fff; }
+  .list a:hover small, .list a:hover .by { color: #e3eff8; }
+  .nm strong { display: block; font-size: 1.1rem; line-height: 1.3; }
+  .nm small { color: var(--muted); }
+  .by { color: var(--ink-2); font-weight: 600; }
+  @media (max-width: 640px) { .list a { grid-template-columns: minmax(0, 1fr) auto; } .by { grid-column: 1; grid-row: 2; font-size: 0.93rem; } .list a > :global(.icon) { grid-row: 1 / span 2; grid-column: 2; } }
+</style>

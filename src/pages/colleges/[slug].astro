@@ -1,0 +1,282 @@
+---
+import Base from '../../layouts/Base.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import CenterLogo from '../../components/CenterLogo.astro';
+import Icon from '../../components/Icon.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { schools, type School } from '../../lib/schools';
+import { withThe, stateAbbr } from '../../lib/centers';
+import { SITE, img } from '../../lib/site';
+
+export function getStaticPaths() {
+  return schools.map((s) => ({ params: { slug: s.slug }, props: { school: s } }));
+}
+interface Props { school: School }
+const { school: s } = Astro.props;
+
+const f = s.facts;
+const cs = s.served.map((x) => x.center);
+const lead = cs[0];
+const short = s.short;
+const The = s.the.replace(/^the /, 'The ');
+const centerNames = cs.map((c) => c.officialName);
+const joinAnd = (a: string[]) => (a.length <= 1 ? a.join('') : `${a.slice(0, -1).join(', ')} and ${a[a.length - 1]}`);
+const servedBy = joinAnd(centerNames);
+const jewishU = s.glance.flatMap((g) => g.rows).find((r) => r.key === 'jewishu')!;
+const kosherRow = s.glance.flatMap((g) => g.rows).find((r) => r.key === 'kosher')!;
+const yesCount = s.glance.flatMap((g) => g.rows).filter((r) => r.yes).length;
+const heroImg = lead.image ? { src: lead.image.src, srcset: lead.image.srcset, width: lead.image.width, height: lead.image.height } : img('fl-students');
+const siblings = schools.filter((o) => o.slug !== s.slug && o.served.some((x) => cs.includes(x.center)));
+const sameRegion = schools.filter((o) => o.slug !== s.slug && !siblings.includes(o) && o.served[0].center.region === lead.region);
+
+const addr = (c: typeof lead) => (c.address ? [c.address.street, c.address.city, [stateAbbr(c.address.state), c.address.zip].filter(Boolean).join(' ')].filter(Boolean).join(', ') : `${c.city}, FL`);
+const quick = [
+  f && { k: f.ownership, v: f.highestDegree === 'Graduate' ? 'University' : 'College' },
+  f?.students && !f.systemWide && { k: 'Undergraduates', v: f.students.toLocaleString('en-US') },
+  { k: 'Location', v: s.city },
+  s.served.find((x) => x.distance) && { k: 'Chabad House', v: s.served.find((x) => x.distance)!.distance!.replace(/^./, (m) => m.toUpperCase()) },
+].filter(Boolean) as { k: string; v: string }[];
+
+// ---- SEO ----
+const title = `Jewish Life at ${s.abbr ? s.abbr : s.name}${s.abbr ? ` | ${s.name}` : ''} Jewish Student Guide`;
+let description = `Jewish life at ${s.the}${s.abbr ? ` (${s.abbr})` : ''}: served by ${servedBy}. Shabbat dinners, kosher food ${kosherRow.value.replace(/^Yes, /, '')}, Birthright, ${jewishU.yes ? 'JewishU courses, ' : ''}mezuzah loans and campus facts.`;
+if (description.length > 165) description = description.slice(0, 162).replace(/\s+\S*$/, '') + '...';
+const url = `${SITE.url}${s.url}`;
+
+const esc = (t: string) => t.replace(/[&<>"]/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[ch]!);
+const qa: { q: string; a: string }[] = [];
+qa.push({ q: `Is there a Chabad at ${s.the}?`, a: `Yes. Jewish students at ${s.the} are served by ${servedBy}, led by ${joinAnd(cs.map((c) => c.directorsLine).filter(Boolean))}. Every Jewish student is welcome, whatever their background.` });
+qa.push({ q: `Where can Jewish students go for Shabbat at ${short}?`, a: `${servedBy} ${cs.length > 1 ? 'host' : 'hosts'} Shabbat dinners for ${short} students every week, along with Shabbat and holiday services. There is no membership and you do not need to be observant. Just reach out and come.` });
+qa.push({ q: `Is there kosher food at ${short}?`, a: s.kosherWhere === 'campus' ? `Yes. ${short} students can find kosher food both on campus and at ${servedBy}, including Shabbat dinners and holiday meals.` : `Yes. ${servedBy} ${cs.length > 1 ? 'serve' : 'serves'} kosher Shabbat dinners and holiday meals for ${short} students, and can help with kosher options during the week.` });
+if (f?.jewishStudies) qa.push({ q: `Does ${s.the} offer Jewish Studies?`, a: `Yes. ${The} offers a ${f.jewishStudies.label}.` });
+qa.push({ q: `Are there JewishU courses at ${short}?`, a: jewishU.yes ? `Yes. ${servedBy} ${cs.length > 1 ? 'offer' : 'offers'} JewishU courses, short courses on Jewish life and ideas taught at the Chabad House, free for students and often with incentives for finishing.` : `${servedBy} does not list JewishU courses right now, but offers classes and one-on-one learning. Ask the Chabad House what is running this semester.` });
+qa.push({ q: `Can ${short} students go on Birthright Israel?`, a: `Yes. ${short} students can travel to Israel on a free Birthright trip with Chabad. Ask ${servedBy} about the next trip and registration dates.` });
+const near = s.served.find((x) => x.distance && x.center.address);
+if (near) qa.push({ q: `Where is the Chabad House near ${short}?`, a: `${near.center.officialName} is at ${addr(near.center)}, ${near.distance}.` });
+qa.push({ q: `How do I get involved with Chabad at ${short}?`, a: `Introduce yourself to ${servedBy}${lead.email ? ` by emailing ${lead.email}` : ''}${lead.phone ? `${lead.email ? ' or' : ''} calling ${lead.phone}` : ''}, or just come to a Shabbat dinner. Parents are welcome to reach out too.` });
+
+const schoolLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollegeOrUniversity',
+  '@id': `${url}#school`,
+  name: s.name,
+  ...(s.abbr ? { alternateName: s.abbr } : {}),
+  ...(f?.website ? { url: f.website, sameAs: [f.website] } : {}),
+  address: { '@type': 'PostalAddress', addressLocality: s.city, addressRegion: 'FL', addressCountry: 'US' },
+};
+const pageLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: title,
+  url,
+  about: { '@id': `${url}#school` },
+  mentions: cs.map((c) => ({ '@id': `${SITE.url}${c.url}#center` })),
+  isPartOf: { '@id': `${SITE.url}/#website` },
+};
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: qa.map((x) => ({ '@type': 'Question', name: x.q, acceptedAnswer: { '@type': 'Answer', text: x.a } })),
+};
+const crumbs = [
+  { name: 'College Guide', href: '/colleges/' },
+  { name: s.name, href: s.url },
+];
+void esc;
+---
+<Base title={title} description={description} path={s.url} jsonLd={[schoolLd, pageLd, faqLd]} breadcrumbs={crumbs} ogImage={heroImg.src}>
+  <section class="shero">
+    <div class="bg"><img src={heroImg.src} srcset={heroImg.srcset} sizes="100vw" width={heroImg.width} height={heroImg.height} alt="" fetchpriority="high" decoding="async" /></div>
+    <div class="wrap hero-in">
+      <Breadcrumbs items={crumbs} />
+      <h1>Jewish life at {s.the}</h1>
+      <p class="lead">{s.abbr ? `${s.abbr} students` : `Students at ${s.the}`} are served by {cs.map((c, i) => <>{i > 0 && (i === cs.length - 1 ? ' and ' : ', ')}<a href={c.url}>{c.officialName}</a></>)}. Here is everything a Jewish student should know before they arrive.</p>
+      {f?.formerly && <p class="formerly">Formerly {f.formerly}</p>}
+      <dl class="qstats">
+        {quick.map((q) => <div><dt>{q.k}</dt><dd>{q.v}</dd></div>)}
+      </dl>
+    </div>
+  </section>
+
+  <div class="wrap body">
+    <section class="block reveal" aria-labelledby="glance">
+      <div class="bh">
+        <h2 id="glance">Jewish life at a glance</h2>
+        <p class="sub">{yesCount} things {short} students can count on through Chabad.</p>
+      </div>
+      <div class="groups">
+        {s.glance.map((g) => (
+          <div class="group">
+            <h3>{g.group}</h3>
+            <ul class="yn">
+              {g.rows.map((r) => (
+                <li class:list={[{ no: !r.yes }]}>
+                  <Icon name={r.icon} size={22} class="ri" />
+                  <span class="rl">{r.href ? <a href={r.href}>{r.label}</a> : r.label}</span>
+                  <span class="rv"><Icon name={r.yes ? 'Check' : 'Minus'} size={18} stroke={3} /> {r.value}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="block reveal" aria-labelledby="servedby">
+      <div class="bh">
+        <h2 id="servedby">Served by</h2>
+        {cs.length > 1 && <p class="sub">{The} has {cs.length} Chabad on Campus centers.</p>}
+      </div>
+      <div class="served">
+        {s.served.map(({ center: c, distance }) => (
+          <article class="scard">
+            <div class="sid">
+              <CenterLogo center={c} size={80} />
+              <div>
+                <h3><a href={c.url}>{c.officialName}</a></h3>
+                {c.directorsLine && <p class="dir">{c.directorsLine}</p>}
+              </div>
+            </div>
+            <ul class="sfacts">
+              <li><Icon name="MapPin" size={20} /><span>{addr(c)}</span></li>
+              {distance && <li><Icon name="Navigation" size={20} /><span>{distance.charAt(0).toUpperCase() + distance.slice(1)}</span></li>}
+              {c.phone && <li><Icon name="Phone" size={20} /><a href={`tel:+1${c.phone.replace(/\D/g, '').replace(/^1/, '')}`}>{c.phone}</a></li>}
+            </ul>
+            <div class="btn-row">
+              <a class="btn btn-blue" href={c.url}>{c.shortName} <Icon name="ArrowRight" size={20} /></a>
+              {c.website && <a class="btn btn-plain" href={c.website} rel="noopener">Website <Icon name="ArrowUpRight" size={18} /></a>}
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    {s.onCampus.length > 0 && (
+      <section class="block reveal" aria-labelledby="oncampus">
+        <div class="bh">
+          <h2 id="oncampus">On campus</h2>
+          <p class="sub">More Jewish life at {s.the}, on campus and nearby.</p>
+        </div>
+        <ul class="yn wide">
+          {s.onCampus.map((r) => (
+            <li>
+              <Icon name={r.icon} size={22} class="ri" />
+              <span class="rl">{r.label}</span>
+              <span class="rv"><Icon name="Check" size={18} stroke={3} /> {r.href ? <a href={r.href} rel="noopener">{r.value}</a> : r.value}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    <section class="block reveal" aria-labelledby="campusinfo">
+      <div class="bh">
+        <h2 id="campusinfo">Campus information</h2>
+        <p class="sub">About {s.the}{f?.website ? <>, from the U.S. Department of Education College Scorecard. <a href={f.website} rel="noopener">Visit the {short} website</a>.</> : '.'}</p>
+      </div>
+      <dl class="cinfo">
+        {s.info.map((r) => <div><dt><Icon name={r.icon} size={18} /> {r.k}</dt><dd>{r.v}</dd></div>)}
+      </dl>
+      {f?.ipeds && <p class="src">Tuition is the published yearly figure before aid. Average net price is what students actually pay after grants and scholarships. <a href={`https://collegescorecard.ed.gov/school/?${f.ipeds}`} rel="noopener">See full College Scorecard data</a>.</p>}
+    </section>
+
+    <section class="block reveal" aria-labelledby="qs">
+      <div class="bh"><h2 id="qs">Questions about Jewish life at {short}</h2></div>
+      <div class="faq">
+        {qa.map((item) => (
+          <details>
+            <summary>{item.q}</summary>
+            <div class="answer"><p>{item.a}</p></div>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    {(siblings.length > 0 || sameRegion.length > 0) && (
+      <section class="block reveal" aria-labelledby="more">
+        <div class="bh"><h2 id="more">More schools nearby</h2></div>
+        <ul class="more">
+          {[...siblings, ...sameRegion].map((o) => (
+            <li><a href={o.url}><span><strong>{o.name}</strong><small>{o.city}</small></span><Icon name="ArrowRight" size={20} /></a></li>
+          ))}
+        </ul>
+        <p class="all"><a href="/colleges/">See every Florida college served by Chabad</a></p>
+      </section>
+    )}
+  </div>
+
+  <CtaBand
+    title={`Heading to ${short}?`}
+    text={`Say hello to ${cs.length > 1 ? 'Chabad' : lead.officialName} before you arrive, and your first Shabbat dinner is already planned.`}
+    primary={{ href: lead.url, label: `Meet ${lead.shortName}` }}
+    secondary={{ href: '/parents/', label: 'For parents' }}
+  />
+</Base>
+
+<style>
+  .shero { position: relative; overflow: hidden; background: var(--blue-night); color: #fff; padding: clamp(40px, 6vw, 72px) 0 clamp(56px, 8vw, 96px); }
+  .shero .bg { position: absolute; inset: 0; }
+  .shero .bg img { width: 100%; height: 100%; object-fit: cover; opacity: 0.32; }
+  .shero .bg::after { content: ''; position: absolute; inset: 0; background: rgba(12, 47, 71, 0.6); }
+  .hero-in { position: relative; }
+  .shero :global(.crumbs) { color: #cfe2f0; }
+  .shero h1 { color: #fff; max-width: 18ch; margin: clamp(24px, 4vw, 40px) 0 20px; }
+  .shero .lead { color: #e3eff8; max-width: 56ch; margin: 0; }
+  .shero .lead a { color: #fff; }
+  .formerly { color: #cfe2f0; margin: 12px 0 0; font-size: 0.95rem; }
+  .qstats { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 170px), 1fr)); gap: 4px; margin: clamp(32px, 5vw, 52px) 0 0; max-width: 900px; }
+  .qstats div { background: rgba(255, 255, 255, 0.1); padding: 16px 18px; }
+  .qstats dt { font-size: 0.85rem; color: #cfe2f0; font-weight: 650; }
+  .qstats dd { margin: 4px 0 0; font-weight: 800; font-size: 1.2rem; color: #fff; }
+
+  .body { display: grid; gap: clamp(64px, 8vw, 104px); padding-top: clamp(56px, 8vw, 96px); padding-bottom: clamp(72px, 10vw, 120px); }
+  .bh { margin-bottom: 28px; }
+  .bh h2 { font-size: clamp(1.7rem, 3vw, 2.4rem); margin: 0; }
+  .sub { margin: 10px 0 0; color: var(--ink-2); max-width: 62ch; }
+
+  .groups { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 40px 40px; }
+  .group h3 { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-2); margin: 0 0 12px; }
+  .yn { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+  .yn.wide { grid-template-columns: repeat(auto-fill, minmax(min(100%, 420px), 1fr)); }
+  .yn li { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 14px; background: var(--blue-wash); padding: 15px 18px; }
+  .yn :global(.ri) { color: var(--blue); }
+  .rl { font-weight: 700; line-height: 1.3; }
+  .rl a { color: inherit; text-decoration: none; }
+  .rl a:hover { color: var(--blue); text-decoration: underline; }
+  .rv { display: inline-flex; align-items: center; gap: 6px; font-weight: 800; text-align: right; color: var(--ink); }
+  .rv a { color: var(--ink); }
+  .rv :global(.icon) { color: var(--ink); background: var(--gold); padding: 3px; flex-shrink: 0; }
+  .yn li.no { background: #f1f2f3; }
+  .yn li.no :global(.ri) { color: var(--muted); }
+  .yn li.no .rv { color: var(--muted); }
+  .yn li.no .rv :global(.icon) { background: #d9dcdf; color: var(--muted); }
+  @media (max-width: 520px) { .yn li { grid-template-columns: auto 1fr; } .rv { grid-column: 2; text-align: left; } }
+
+  .served { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr)); gap: 20px; }
+  .scard { background: var(--gold-wash); padding: clamp(24px, 3vw, 36px); display: grid; gap: 22px; align-content: start; }
+  .sid { display: flex; align-items: center; gap: 20px; }
+  .scard h3 { margin: 0; font-size: 1.4rem; }
+  .scard h3 a { color: var(--ink); text-decoration: none; }
+  .scard h3 a:hover { color: var(--blue); }
+  .dir { margin: 6px 0 0; color: var(--ink-2); }
+  .sfacts { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+  .sfacts li { display: flex; gap: 12px; align-items: flex-start; }
+  .sfacts :global(.icon) { color: var(--blue); flex-shrink: 0; margin-top: 2px; }
+  .btn-plain { background: #fff; color: var(--ink); }
+  .btn-plain:hover { background: var(--ink); color: #fff; }
+
+  .cinfo { margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr)); gap: 4px; }
+  .cinfo div { background: var(--blue-wash); padding: 16px 18px; }
+  .cinfo dt { display: flex; align-items: center; gap: 8px; font-size: 0.86rem; color: var(--muted); font-weight: 650; }
+  .cinfo dt :global(.icon) { color: var(--blue); }
+  .cinfo dd { margin: 6px 0 0; font-weight: 800; font-size: 1.15rem; }
+  .src { margin: 18px 0 0; font-size: 0.93rem; color: var(--ink-2); max-width: 70ch; }
+
+  .more { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr)); gap: 4px; }
+  .more a { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 18px 20px; background: var(--blue-wash); color: var(--ink); text-decoration: none; transition: background 0.2s, color 0.2s; }
+  .more a:hover { background: var(--blue); color: #fff; }
+  .more a:hover small { color: #e3eff8; }
+  .more strong { display: block; line-height: 1.3; }
+  .more small { color: var(--muted); }
+  .all { margin: 22px 0 0; font-weight: 700; }
+</style>

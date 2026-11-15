@@ -38,13 +38,15 @@
         "Noles",
         "Tallahassee",
         "TCC",
+        "TSC",
+        "Tallahassee Community College",
         "FAMU",
         "Chabad of Tallahassee"
       ],
       "extraCampuses": [
         {
-          "name": "Tallahassee Community College",
-          "abbr": "TCC"
+          "name": "Tallahassee State College",
+          "abbr": "TSC"
         },
         {
           "name": "Florida A&M University",
@@ -63,7 +65,7 @@
         "website": "https://www.chabadtallahassee.com/",
         "logo": "",
         "additionalCampuses": [
-          "Tallahassee Community College",
+          "Tallahassee State College",
           "FAMU",
           "Keiser University"
         ]
