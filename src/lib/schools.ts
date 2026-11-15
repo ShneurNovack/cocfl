@@ -125,9 +125,6 @@ function finish(s: School) {
     has('Jewish Greek life') ? yes('greek', 'Users', 'Jewish Greek life') : null,
     has('Israel Orgs') ? yes('israelorgs', 'Globe', 'Israel student groups') : null,
     has('Other Jewish student groups') ? yes('groups', 'Users', 'Other Jewish student groups') : null,
-    has('Kosher restaurant') ? yes('kdining', 'ChefHat', 'Kosher dining') : null,
-    has('Packaged kosher food') ? yes('kpack', 'Package', 'Packaged kosher food') : null,
-    has('Kosher food truck') ? yes('ktruck', 'Truck', 'Kosher food truck') : null,
   ].filter(Boolean) as YesRow[];
 
   const levels = f ? (f.highestDegree === 'Graduate' ? "Bachelor's & graduate" : f.highestDegree === 'Bachelor' ? "Associate & bachelor's" : 'Associate') : null;
