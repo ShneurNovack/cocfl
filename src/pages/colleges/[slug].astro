@@ -31,7 +31,7 @@ const sameRegion = schools.filter((o) => o.slug !== s.slug && !siblings.includes
 const addr = (c: typeof lead) => (c.address ? [c.address.street, c.address.city, [stateAbbr(c.address.state), c.address.zip].filter(Boolean).join(' ')].filter(Boolean).join(', ') : `${c.city}, FL`);
 const quick = [
   f && { k: f.ownership, v: f.highestDegree === 'Graduate' ? 'University' : 'College' },
-  f?.students && !f.systemWide && { k: 'Undergraduates', v: f.students.toLocaleString('en-US') },
+  f?.totalStudents ? { k: 'Students', v: `About ${f.totalStudents.toLocaleString('en-US')}` } : f?.students && !f.systemWide && { k: 'Undergraduates', v: f.students.toLocaleString('en-US') },
   { k: 'Location', v: s.city },
   s.served.find((x) => x.distance) && { k: 'Chabad House', v: s.served.find((x) => x.distance)!.distance!.replace(/^./, (m) => m.toUpperCase()) },
 ].filter(Boolean) as { k: string; v: string }[];
@@ -171,7 +171,7 @@ void esc;
     <section class="block reveal" aria-labelledby="campusinfo">
       <div class="bh">
         <h2 id="campusinfo">Campus information</h2>
-        <p class="sub">About {s.the}{f?.website ? <>, from the U.S. Department of Education College Scorecard. <a href={f.website} rel="noopener">Visit the {short} website</a>.</> : '.'}</p>
+        <p class="sub">About {s.the}{f?.website ? <>, from the U.S. Department of Education College Scorecard{f.enrollSource && <>, with enrollment from <a href={f.enrollSource} rel="noopener">{short} ({f.enrollTerm})</a></>}. <a href={f.website} rel="noopener">Visit the {short} website</a>.</> : '.'}</p>
       </div>
       <dl class="cinfo">
         {s.info.map((r) => <div><dt><Icon name={r.icon} size={18} /> {r.k}</dt><dd>{r.v}</dd></div>)}

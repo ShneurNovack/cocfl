@@ -10,6 +10,9 @@ export type SchoolFacts = {
   highestDegree: 'Associate' | 'Bachelor' | 'Graduate';
   students?: number; // undergraduates (Scorecard "size")
   gradStudents?: number;
+  totalStudents?: number; // from the school's own latest count, when newer than Scorecard
+  enrollTerm?: string; // e.g. 'fall 2026', set when enrollment comes from the school itself
+  enrollSource?: string;
   admitRate?: number | null; // null = open admission
   tuitionIn?: number;
   tuitionOut?: number;
@@ -33,7 +36,7 @@ export const SCHOOL_FACTS: Record<string, SchoolFacts> = {
   'keiser-university': { ipeds: 13508102, city: 'Tallahassee', ownership: 'Private', highestDegree: 'Graduate', tuitionIn: 26016, tuitionOut: 26016, website: 'https://www.keiseruniversity.edu/tallahassee/' },
   'university-of-central-florida': { ipeds: 132903, city: 'Orlando', ownership: 'Public', locale: 21, highestDegree: 'Graduate', students: 59146, gradStudents: 10161, admitRate: 0.4011, tuitionIn: 6368, tuitionOut: 24076, netPrice: 11516, ratio: 28, gradRate: 0.7785, retention: 0.9235, earnings: 63483, website: 'https://www.ucf.edu/', jewishStudies: { label: 'Judaic Studies minor', url: 'https://www.ucf.edu/degree/judaic-studies-minor/' } },
   'valencia-college': { ipeds: 138187, city: 'Orlando', ownership: 'Public', locale: 11, highestDegree: 'Bachelor', students: 39486, admitRate: null, tuitionIn: 2664, tuitionOut: 9576, netPrice: 9264, ratio: 27, gradRate: 0.4951, earnings: 45388, website: 'https://valenciacollege.edu/' },
-  'university-of-north-florida': { ipeds: 136172, city: 'Jacksonville', ownership: 'Public', locale: 11, highestDegree: 'Graduate', students: 13359, gradStudents: 2419, admitRate: 0.5324, tuitionIn: 6389, tuitionOut: 20793, netPrice: 11689, ratio: 19, gradRate: 0.6851, retention: 0.8466, earnings: 59626, website: 'https://www.unf.edu/', jewishStudies: { label: 'Jewish Studies minor', url: 'https://www.unf.edu/coas/religious-studies/Jewish-Studies-Minor.html' } },
+  'university-of-north-florida': { ipeds: 136172, city: 'Jacksonville', ownership: 'Public', locale: 11, highestDegree: 'Graduate', totalStudents: 18900, gradStudents: 2831, enrollTerm: 'fall 2026', enrollSource: 'https://www.unf.edu/newsroom/2026/09/Class-of-2030.html', admitRate: 0.5324, tuitionIn: 6389, tuitionOut: 20793, netPrice: 11689, ratio: 19, gradRate: 0.6851, retention: 0.8466, earnings: 59626, website: 'https://www.unf.edu/', jewishStudies: { label: 'Jewish Studies minor', url: 'https://www.unf.edu/coas/religious-studies/Jewish-Studies-Minor.html' } },
   'florida-state-college-at-jacksonville': { ipeds: 133702, city: 'Jacksonville', ownership: 'Public', locale: 11, highestDegree: 'Bachelor', students: 19648, admitRate: null, tuitionIn: 2878, tuitionOut: 9992, netPrice: 8717, ratio: 27, gradRate: 0.383, earnings: 45388, website: 'https://www.fscj.edu/' },
   'jacksonville-university': { ipeds: 134945, city: 'Jacksonville', ownership: 'Private', locale: 11, highestDegree: 'Graduate', students: 2930, gradStudents: 1301, admitRate: 0.5694, tuitionIn: 49800, tuitionOut: 49800, netPrice: 28424, ratio: 11, gradRate: 0.4891, retention: 0.7467, earnings: 77598, website: 'https://www.ju.edu/' },
   'university-of-south-florida': { ipeds: 137351, city: 'Tampa', ownership: 'Public', locale: 11, highestDegree: 'Graduate', students: 37207, gradStudents: 11097, admitRate: 0.4319, tuitionIn: 6410, tuitionOut: 18416, netPrice: 8648, ratio: 22, gradRate: 0.7791, retention: 0.9128, earnings: 63660, website: 'https://www.usf.edu/' },

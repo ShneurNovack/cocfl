@@ -138,8 +138,9 @@ function finish(s: School) {
     f?.locale && { icon: 'Building2', k: 'Setting', v: LOCALE_TEXT[f.locale] },
     s.residency && { icon: 'House', k: 'Commuter or residential', v: s.residency },
     levels && { icon: 'GraduationCap', k: 'Degrees', v: levels },
+    f?.totalStudents && { icon: 'Users', k: `Total students${f.enrollTerm ? `, ${f.enrollTerm}` : ''}`, v: `About ${f.totalStudents.toLocaleString('en-US')}` },
     f?.students && !f.systemWide && { icon: 'Users', k: 'Undergraduates', v: f.students.toLocaleString('en-US') },
-    f?.gradStudents && { icon: 'Users', k: 'Graduate students', v: f.gradStudents.toLocaleString('en-US') },
+    f?.gradStudents && { icon: 'Users', k: `Graduate students${f.enrollTerm ? `, ${f.enrollTerm}` : ''}`, v: f.gradStudents.toLocaleString('en-US') },
     f && f.admitRate !== undefined && { icon: 'DoorOpen', k: 'Acceptance rate', v: f.admitRate === null ? 'Open admission' : pct(f.admitRate) },
     f?.tuitionIn && (f.tuitionIn === f.tuitionOut
       ? { icon: 'Wallet', k: 'Tuition', v: usd(f.tuitionIn) }
