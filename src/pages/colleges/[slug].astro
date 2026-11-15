@@ -24,7 +24,6 @@ const joinAnd = (a: string[]) => (a.length <= 1 ? a.join('') : `${a.slice(0, -1)
 const servedBy = joinAnd(centerNames);
 const jewishU = s.glance.flatMap((g) => g.rows).find((r) => r.key === 'jewishu')!;
 const kosherRow = s.glance.flatMap((g) => g.rows).find((r) => r.key === 'kosher')!;
-const yesCount = s.glance.flatMap((g) => g.rows).filter((r) => r.yes).length;
 const heroImg = lead.image ? { src: lead.image.src, srcset: lead.image.srcset, width: lead.image.width, height: lead.image.height } : img('fl-students');
 const siblings = schools.filter((o) => o.slug !== s.slug && o.served.some((x) => cs.includes(x.center)));
 const sameRegion = schools.filter((o) => o.slug !== s.slug && !siblings.includes(o) && o.served[0].center.region === lead.region);
@@ -38,9 +37,9 @@ const quick = [
 ].filter(Boolean) as { k: string; v: string }[];
 
 // ---- SEO ----
-const title = `Jewish Life at ${s.abbr ? s.abbr : s.name}${s.abbr ? ` | ${s.name}` : ''} Jewish Student Guide`;
+const title = s.abbr ? `Jewish Life at ${s.abbr} | ${s.name}` : `Jewish Life at ${s.the} | Jewish Student Guide`;
 let description = `Jewish life at ${s.the}${s.abbr ? ` (${s.abbr})` : ''}: served by ${servedBy}. Shabbat dinners, kosher food ${kosherRow.value.replace(/^Yes, /, '')}, Birthright, ${jewishU.yes ? 'JewishU courses, ' : ''}mezuzah loans and campus facts.`;
-if (description.length > 165) description = description.slice(0, 162).replace(/\s+\S*$/, '') + '...';
+if (description.length > 158) description = description.slice(0, 155).replace(/\s+\S*$/, '') + '...';
 const url = `${SITE.url}${s.url}`;
 
 const esc = (t: string) => t.replace(/[&<>"]/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[ch]!);
@@ -70,7 +69,10 @@ const pageLd = {
   name: title,
   url,
   about: { '@id': `${url}#school` },
-  mentions: cs.map((c) => ({ '@id': `${SITE.url}${c.url}#center` })),
+  mentions: cs.map((c) => ({ '@type': 'Organization', '@id': `${SITE.url}${c.url}#center`, name: c.officialName, url: `${SITE.url}${c.url}` })),
+  primaryImageOfPage: { '@type': 'ImageObject', url: `${SITE.url}${heroImg.src}` },
+  inLanguage: 'en-US',
+  ...(lead.updatedAt ? { dateModified: lead.updatedAt } : {}),
   isPartOf: { '@id': `${SITE.url}/#website` },
 };
 const faqLd = {
@@ -90,7 +92,7 @@ void esc;
     <div class="wrap hero-in">
       <Breadcrumbs items={crumbs} />
       <h1>Jewish life at {s.the}</h1>
-      <p class="lead">{s.abbr ? `${s.abbr} students` : `Students at ${s.the}`} are served by {cs.map((c, i) => <>{i > 0 && (i === cs.length - 1 ? ' and ' : ', ')}<a href={c.url}>{c.officialName}</a></>)}. Here is everything a Jewish student should know before they arrive.</p>
+      <p class="lead">Jewish {s.short} students are served by {cs.map((c, i) => <>{i > 0 && (i === cs.length - 1 ? ' and ' : ', ')}<a href={c.url}>{c.officialName}</a></>)}. Here is everything a Jewish student should know before they arrive.</p>
       {f?.formerly && <p class="formerly">Formerly {f.formerly}</p>}
       <dl class="qstats">
         {quick.map((q) => <div><dt>{q.k}</dt><dd>{q.v}</dd></div>)}
@@ -101,22 +103,20 @@ void esc;
   <div class="wrap body">
     <section class="block reveal" aria-labelledby="glance">
       <div class="bh">
-        <h2 id="glance">Jewish life at a glance</h2>
-        <p class="sub">{yesCount} things {short} students can count on through Chabad.</p>
+        <h2 id="glance">Jewish experience at {short}</h2>
       </div>
       <div class="groups">
         {s.glance.map((g) => (
           <div class="group">
             <h3>{g.group}</h3>
-            <ul class="yn">
+            <dl class="yn">
               {g.rows.map((r) => (
-                <li class:list={[{ no: !r.yes }]}>
-                  <Icon name={r.icon} size={22} class="ri" />
-                  <span class="rl">{r.href ? <a href={r.href}>{r.label}</a> : r.label}</span>
-                  <span class="rv"><Icon name={r.yes ? 'Check' : 'Minus'} size={18} stroke={3} /> {r.value}</span>
-                </li>
+                <div class:list={['row', { no: !r.yes }]}>
+                  <dt class="rl"><Icon name={r.icon} size={22} class="ri" />{r.href ? <a href={r.href}>{r.label}</a> : <span>{r.label}</span>}</dt>
+                  <dd class="rv"><Icon name={r.yes ? 'Check' : 'Minus'} size={18} stroke={3} /> {r.value}</dd>
+                </div>
               ))}
-            </ul>
+            </dl>
           </div>
         ))}
       </div>
@@ -157,15 +157,14 @@ void esc;
           <h2 id="oncampus">On campus</h2>
           <p class="sub">More Jewish life at {s.the}, on campus and nearby.</p>
         </div>
-        <ul class="yn wide">
+        <dl class="yn wide">
           {s.onCampus.map((r) => (
-            <li>
-              <Icon name={r.icon} size={22} class="ri" />
-              <span class="rl">{r.label}</span>
-              <span class="rv"><Icon name="Check" size={18} stroke={3} /> {r.href ? <a href={r.href} rel="noopener">{r.value}</a> : r.value}</span>
-            </li>
+            <div class="row">
+              <dt class="rl"><Icon name={r.icon} size={22} class="ri" /><span>{r.label}</span></dt>
+              <dd class="rv"><Icon name="Check" size={18} stroke={3} /> {r.href ? <a href={r.href} rel="noopener">{r.value}</a> : r.value}</dd>
+            </div>
           ))}
-        </ul>
+        </dl>
       </section>
     )}
 
@@ -214,43 +213,47 @@ void esc;
 </Base>
 
 <style>
-  .shero { position: relative; overflow: hidden; background: var(--blue-night); color: #fff; padding: clamp(40px, 6vw, 72px) 0 clamp(56px, 8vw, 96px); }
+  .shero { position: relative; overflow: hidden; background: var(--blue-night); color: #fff; padding: clamp(28px, 4vw, 44px) 0 clamp(36px, 5vw, 56px); }
   .shero .bg { position: absolute; inset: 0; }
   .shero .bg img { width: 100%; height: 100%; object-fit: cover; opacity: 0.32; }
   .shero .bg::after { content: ''; position: absolute; inset: 0; background: rgba(12, 47, 71, 0.6); }
   .hero-in { position: relative; }
   .shero :global(.crumbs) { color: #cfe2f0; }
-  .shero h1 { color: #fff; max-width: 18ch; margin: clamp(24px, 4vw, 40px) 0 20px; }
+  .shero h1 { color: #fff; max-width: 26ch; margin: clamp(18px, 3vw, 28px) 0 16px; font-size: clamp(2.2rem, 4.6vw, 3.6rem); }
   .shero .lead { color: #e3eff8; max-width: 56ch; margin: 0; }
   .shero .lead a { color: #fff; }
   .formerly { color: #cfe2f0; margin: 12px 0 0; font-size: 0.95rem; }
-  .qstats { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 170px), 1fr)); gap: 4px; margin: clamp(32px, 5vw, 52px) 0 0; max-width: 900px; }
+  .qstats { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr)); gap: 4px; margin: clamp(22px, 3vw, 32px) 0 0; max-width: 900px; }
+  @media (max-width: 560px) { .qstats { grid-template-columns: 1fr 1fr; } .qstats div { padding: 12px 14px; } .qstats dd { font-size: 1.05rem; } }
   .qstats div { background: rgba(255, 255, 255, 0.1); padding: 16px 18px; }
   .qstats dt { font-size: 0.85rem; color: #cfe2f0; font-weight: 650; }
   .qstats dd { margin: 4px 0 0; font-weight: 800; font-size: 1.2rem; color: #fff; }
 
-  .body { display: grid; gap: clamp(64px, 8vw, 104px); padding-top: clamp(56px, 8vw, 96px); padding-bottom: clamp(72px, 10vw, 120px); }
+  .body { display: grid; gap: clamp(64px, 8vw, 104px); padding-top: clamp(40px, 5vw, 64px); padding-bottom: clamp(72px, 10vw, 120px); }
   .bh { margin-bottom: 28px; }
   .bh h2 { font-size: clamp(1.7rem, 3vw, 2.4rem); margin: 0; }
   .sub { margin: 10px 0 0; color: var(--ink-2); max-width: 62ch; }
 
   .groups { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 40px 40px; }
   .group h3 { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-2); margin: 0 0 12px; }
-  .yn { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+  .yn { margin: 0; padding: 0; display: grid; gap: 6px; }
   .yn.wide { grid-template-columns: repeat(auto-fill, minmax(min(100%, 420px), 1fr)); }
-  .yn li { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 14px; background: var(--blue-wash); padding: 15px 18px; }
-  .yn :global(.ri) { color: var(--blue); }
-  .rl { font-weight: 700; line-height: 1.3; }
+  .row { display: flex; align-items: center; justify-content: space-between; gap: 14px; background: var(--blue-wash); padding: 16px 18px; }
+  .yn:not(.wide) .row:nth-child(even) { background: #dcebf6; }
+  .yn :global(.ri) { color: var(--blue); flex-shrink: 0; }
+  .rl { display: flex; align-items: center; gap: 14px; font-weight: 700; line-height: 1.3; }
+  .rv { margin: 0; }
   .rl a { color: inherit; text-decoration: none; }
   .rl a:hover { color: var(--blue); text-decoration: underline; }
   .rv { display: inline-flex; align-items: center; gap: 6px; font-weight: 800; text-align: right; color: var(--ink); }
   .rv a { color: var(--ink); }
   .rv :global(.icon) { color: var(--ink); background: var(--gold); padding: 3px; flex-shrink: 0; }
-  .yn li.no { background: #f1f2f3; }
-  .yn li.no :global(.ri) { color: var(--muted); }
-  .yn li.no .rv { color: var(--muted); }
-  .yn li.no .rv :global(.icon) { background: #d9dcdf; color: var(--muted); }
-  @media (max-width: 520px) { .yn li { grid-template-columns: auto 1fr; } .rv { grid-column: 2; text-align: left; } }
+  .yn .row.no { background: #eef0f1; }
+  .yn .row.no:nth-child(even) { background: #e6e8ea; }
+  .row.no :global(.ri) { color: var(--muted); }
+  .row.no .rv { color: var(--muted); }
+  .row.no .rv :global(.icon) { background: #d9dcdf; color: var(--muted); }
+  @media (max-width: 520px) { .row { flex-direction: column; align-items: flex-start; gap: 8px; } .rv { padding-left: 36px; text-align: left; } }
 
   .served { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr)); gap: 20px; }
   .scard { background: var(--gold-wash); padding: clamp(24px, 3vw, 36px); display: grid; gap: 22px; align-content: start; }
@@ -272,8 +275,9 @@ void esc;
   .cinfo dd { margin: 6px 0 0; font-weight: 800; font-size: 1.15rem; }
   .src { margin: 18px 0 0; font-size: 0.93rem; color: var(--ink-2); max-width: 70ch; }
 
-  .more { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr)); gap: 4px; }
-  .more a { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 18px 20px; background: var(--blue-wash); color: var(--ink); text-decoration: none; transition: background 0.2s, color 0.2s; }
+  .more { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); grid-auto-rows: 1fr; gap: 6px; }
+  .more li { display: flex; }
+  .more a { flex: 1; min-height: 92px; display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 18px 20px; background: var(--blue-wash); color: var(--ink); text-decoration: none; transition: background 0.2s, color 0.2s; }
   .more a:hover { background: var(--blue); color: #fff; }
   .more a:hover small { color: #e3eff8; }
   .more strong { display: block; line-height: 1.3; }

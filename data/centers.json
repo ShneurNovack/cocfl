@@ -147,6 +147,11 @@
       "id": "ut",
       "slug": "university-of-tampa",
       "cocHouseId": 829,
+      "campusOverrides": {
+        "1439": {
+          "abbr": "UT"
+        }
+      },
       "aliases": [
         "UT",
         "UTampa",

@@ -48,6 +48,7 @@ const ld = [
   <section class="section-tight">
     <div class="wrap">
       <div class="bar">
+        <p class="guide"><a href="/colleges/">Browse the Florida college guide</a> for Jewish life, kosher food and campus facts at every school.</p>
         <p class="count" id="count" aria-live="polite">{centers.length} Chabad centers serving {stats.campuses} Florida campuses</p>
         <div class="views" role="group" aria-label="View">
           <button type="button" data-view="grid" aria-pressed="true"><Icon name="LayoutGrid" size={18} /> Grid</button>
@@ -192,6 +193,7 @@ const ld = [
   .search :global(.si) { position: absolute; left: 22px; top: 50%; transform: translateY(-50%); color: var(--muted); }
   .search input { width: 100%; font: 550 1.2rem var(--font); padding: 24px 24px 24px 62px; border: 0; color: var(--ink); background: #fff; }
   .search input:focus { outline: 3px solid var(--gold); outline-offset: 0; }
+  .guide { flex-basis: 100%; margin: 0; font-weight: 650; }
   .bar { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; margin-bottom: 32px; padding-bottom: 20px; border-bottom: 2px solid var(--ink); }
   .count { font-weight: 700; margin: 0; }
   .views { display: flex; }

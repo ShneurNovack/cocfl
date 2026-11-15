@@ -76,9 +76,7 @@ function finish(s: School) {
         yes('served', 'BadgeCheck', 'Served by Chabad'),
         yes('rabbi', 'Users', 'Full-time Rabbi & Rebbetzin'),
         yes('shabbat', 'Flame', 'Shabbat dinners', 'Yes, every week'),
-        yes('services', 'BookOpen', 'Religious services', 'Yes, Shabbat & holidays'),
-        yes('holidays', 'PartyPopper', 'High Holiday services & Passover Seders'),
-        yes('talk', 'MessageCircleHeart', 'Someone to talk to'),
+        yes('services', 'BookOpen', 'Religious services'),
       ],
     },
     {
@@ -96,8 +94,6 @@ function finish(s: School) {
       rows: [
         jewishU ? yes('jewishu', 'GraduationCap', 'JewishU courses offered', 'Yes', { href: '/programs/jewishu/' }) : no('jewishu', 'GraduationCap', 'JewishU courses offered', { href: '/programs/jewishu/' }),
         hasProg('sinai-scholars') ? yes('sinai', 'ScrollText', 'Sinai Scholars Society', 'Yes', { href: '/programs/sinai-scholars/' }) : no('sinai', 'ScrollText', 'Sinai Scholars Society', { href: '/programs/sinai-scholars/' }),
-        yes('classes', 'BookOpen', 'Torah classes & one-on-one learning'),
-        yes('tefillin', 'Sparkles', 'Tefillin & Shabbat candles available'),
       ],
     },
     {
