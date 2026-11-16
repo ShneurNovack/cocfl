@@ -31,7 +31,7 @@
           "center": "nsu",
           "slug": "chabad-at-nsu",
           "courses": 30,
-          "currentCourses": 5
+          "currentCourses": 4
         },
         {
           "center": "ucf",
@@ -43,7 +43,7 @@
           "center": "uf",
           "slug": "chabaduf",
           "courses": 77,
-          "currentCourses": 4
+          "currentCourses": 3
         },
         {
           "center": "um",
@@ -55,7 +55,7 @@
           "center": "um-undergrad",
           "slug": "chabad-um-undergrad",
           "courses": 11,
-          "currentCourses": 3
+          "currentCourses": 2
         },
         {
           "center": "unf",
@@ -73,7 +73,7 @@
           "center": "ut",
           "slug": "chabad-at-university-of-tampa",
           "courses": 4,
-          "currentCourses": 2
+          "currentCourses": 1
         }
       ]
     },
@@ -160,5 +160,5 @@
       ]
     }
   },
-  "updatedAt": "2026-11-15T16:24:54.328Z"
+  "updatedAt": "2026-11-16T19:39:43.753Z"
 }
