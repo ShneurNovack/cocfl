@@ -43,7 +43,7 @@
           "center": "uf",
           "slug": "chabaduf",
           "courses": 77,
-          "currentCourses": 3
+          "currentCourses": 2
         },
         {
           "center": "um",
@@ -67,7 +67,7 @@
           "center": "usf",
           "slug": "chabad-at-the-university-of-south-florida",
           "courses": 49,
-          "currentCourses": 4
+          "currentCourses": 3
         },
         {
           "center": "ut",
@@ -160,5 +160,5 @@
       ]
     }
   },
-  "updatedAt": "2026-11-16T19:39:43.753Z"
+  "updatedAt": "2026-11-17T18:37:40.775Z"
 }
