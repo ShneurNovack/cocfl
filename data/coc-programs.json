@@ -67,7 +67,7 @@
           "center": "usf",
           "slug": "chabad-at-the-university-of-south-florida",
           "courses": 49,
-          "currentCourses": 3
+          "currentCourses": 1
         },
         {
           "center": "ut",
@@ -160,5 +160,5 @@
       ]
     }
   },
-  "updatedAt": "2026-11-17T18:37:40.775Z"
+  "updatedAt": "2026-11-18T18:08:41.430Z"
 }
