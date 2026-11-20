@@ -31,7 +31,7 @@
           "center": "nsu",
           "slug": "chabad-at-nsu",
           "courses": 30,
-          "currentCourses": 3
+          "currentCourses": 1
         },
         {
           "center": "ucf",
@@ -160,5 +160,5 @@
       ]
     }
   },
-  "updatedAt": "2026-11-19T18:20:26.251Z"
+  "updatedAt": "2026-11-20T17:51:28.260Z"
 }
