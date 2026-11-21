@@ -55,7 +55,7 @@
           "center": "um-undergrad",
           "slug": "chabad-um-undergrad",
           "courses": 11,
-          "currentCourses": 2
+          "currentCourses": 1
         },
         {
           "center": "unf",
@@ -160,5 +160,5 @@
       ]
     }
   },
-  "updatedAt": "2026-11-20T17:51:28.260Z"
+  "updatedAt": "2026-11-21T16:49:21.680Z"
 }
